@@ -67,8 +67,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     //设置事件监听
     private void initView() {
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
-        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_menu);  // 设置图标
+        setSupportActionBar(toolbar);  // 设置ActionBar
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
 
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
@@ -107,20 +107,30 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
-            case 0:
+            case 0:{
                 break;
-            case 1:
+            }
+            case 1: {
                 break;
-            case 2:
+            }
+            case 2:{
                 break;
-            case 3:
+            }
+            case 3: {
                 break;
-            case 4:
+            }
+            case 4:{
                 break;
-            case 5:
+            }
+            case 5:{
                 break;
-            case 6:
+            }
+            case 6:{
                 break;
+            }
+            default: {
+                break;
+            }
         }
 
     }
