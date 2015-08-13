@@ -72,8 +72,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
 
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
-        getSupportActionBar().setTitle("我的设备");
-//        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
 
         mNavigationDrawerFragment.setUp(
                 R.id.left_drawer,
@@ -104,7 +103,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     @Override
     public void onNavigationDrawerItemSelected(final int position) {
         mSelectPos = position;
-        Log.i(TAG, "mSelectPos=" + mSelectPos);
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
