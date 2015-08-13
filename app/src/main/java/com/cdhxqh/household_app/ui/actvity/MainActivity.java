@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
@@ -51,16 +52,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         initView();
 
 
-
-
-
-
-
     }
 
 
-
-    /**初始话界面控件**/
+    /**
+     * 初始话界面控件*
+     */
     private void findViewById() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (ViewGroup) findViewById(R.id.drawer_layout);
@@ -75,8 +72,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
 
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
-        getSupportActionBar().setTitle("我的设备");
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
 
         mNavigationDrawerFragment.setUp(
                 R.id.left_drawer,
@@ -88,10 +84,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         }
 
 
-
-
     }
-
 
 
     @Override
@@ -111,21 +104,10 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     public void onNavigationDrawerItemSelected(final int position) {
         mSelectPos = position;
 
-        Log.i(TAG, "mSelectPos=" + mSelectPos);
-
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
             case 0:
-//                if (mNewestTopicsFragment == null) {
-//                    mNewestTopicsFragment = new TopicsFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt("node_id", TopicsFragment.LatestTopics);
-//                    bundle.putBoolean("attach_main", true);
-//                    bundle.putBoolean("show_menu", false);
-//                    mNewestTopicsFragment.setArguments(bundle);
-//                }
-//                fragmentTransaction.replace(R.id.container, mNewestTopicsFragment).commit();
                 break;
             case 1:
                 break;
@@ -147,21 +129,19 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     public void restoreActionBar() {
 
         ActionBar actionBar = getSupportActionBar();
-        mTitle = mMainTitles[mSelectPos];
+        mTitle = mFavoriteTabTitles[mSelectPos];
         actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setCustomView(mActionbarCustom);
-        text.setText(mTitle);
-        actionBar.setTitle("");
+        actionBar.setTitle(mTitle);
 
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-//            restoreActionBar();
-//            return true;
-//        }
+        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            restoreActionBar();
+            return true;
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -173,7 +153,17 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             mNavigationDrawerFragment.closeDrawer();
             return;
         }
-//        exit();
+        exit();
 
+    }
+
+    private void exit() {
+
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(this, getString(R.string.try_agin_exit_text), Toast.LENGTH_LONG).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }
