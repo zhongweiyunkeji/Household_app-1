@@ -21,7 +21,7 @@ import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
 
 public class MainActivity extends BaseActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MainActivity11";
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private ViewGroup mDrawerLayout;
@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
 
         findViewById();
+
 
         initView();
 
