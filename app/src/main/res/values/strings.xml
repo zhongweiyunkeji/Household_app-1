@@ -13,5 +13,6 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="try_agin_exit_text">再按一次退出程序</string>
 
 </resources>
