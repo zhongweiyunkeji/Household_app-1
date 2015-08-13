@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+
+
+    <string-array name="title_drawers">
+        <item>我的设备</item>
+        <item>报警记录</item>
+        <item>安全服务中心</item>
+        <item>文件管理</item>
+        <item>帮助中心</item>
+        <item>常用联系人</item>
+        <item>关于我们</item>
+        <item>设置</item>
+    </string-array>
+
+
+</resources>
