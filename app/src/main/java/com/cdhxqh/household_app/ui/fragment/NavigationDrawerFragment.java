@@ -295,7 +295,7 @@ public class NavigationDrawerFragment extends BaseFragment {
         android.support.v7.app.ActionBar actionBar = getActionBarActivity().getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayShowCustomEnabled(false);
-        Log.e("AAA", "BBB");
+        // Log.e("AAA", "BBB");
     }
 
     /**
