@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cdhxqh.household_app">
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
     <application
         android:name=".app.Application"
         android:allowBackup="true"
@@ -9,9 +14,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme.Toolbar">
         <activity
-            android:name=".ui.actvity.MainActivity"
+            android:name=".ui.actvity.Load_Activity"
             android:label="@string/app_name"
-            android:theme="@style/ActivityTheme">
+            android:alwaysRetainTaskState="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme.Toolbar1"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +29,11 @@
         </activity>
         <activity
             android:name=".ui.actvity.BaseActivity"
-            android:label="@string/title_activity_base"></activity>
+            android:label="@string/title_activity_base" />
+        <activity
+            android:name=".ui.actvity.MainActivity"
+            android:label="MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -5,14 +5,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_base">BaseActivity</string>
-
-
-
     <string name="login_please_login">尚未登录</string>
-
-
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="try_agin_exit_text">再按一次退出程序</string>
+    <string name="title_activity_load_">Load_Activity</string>
 
 </resources>

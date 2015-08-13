@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.app.AppManager;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
 
 
@@ -173,7 +174,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             Toast.makeText(this, getString(R.string.try_agin_exit_text), Toast.LENGTH_LONG).show();
             exitTime = System.currentTimeMillis();
         } else {
-            finish();
+            AppManager.AppExit(MainActivity.this);
         }
     }
 }
