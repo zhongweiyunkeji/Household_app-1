@@ -52,7 +52,7 @@ public class Activity_Registry_User extends BaseActivity {
 
     SwitchButton switchButton;// 开关按钮
 
-    public static final int ACTIVITY_REGISTRY_REQUEST1 = 1011100;
+    public static final int ACTIVITY_REGISTRY_REQUEST1 = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,15 +175,18 @@ public class Activity_Registry_User extends BaseActivity {
         userTypeText.setOnClickListener(new View.OnClickListener() {// 选择用户Activity
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Activity_Registry_User.this, Activity_User_Type.class);
                 Bundle bundle = new Bundle();
                 String text = userTypeText.getText().toString();
                 if(!"".equals(text)){
                     intent.putExtras(bundle);
                     bundle.putString("text", text);
                 }
-                intent.setClass(Activity_Registry_User.this, Activity_User_Type.class);
-                startActivityForResult(intent, ACTIVITY_REGISTRY_REQUEST1);
+                try {
+                    startActivityForResult(intent, ACTIVITY_REGISTRY_REQUEST1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
