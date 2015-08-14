@@ -21,7 +21,7 @@ import java.net.URL;
  * 流媒体视频控制(放大、缩小，加大、减小以及方向控制主类)
  *
  */
-public class Activity_Video_Control extends Activity {
+public class Activity_Video_Control extends BaseActivity {
 
     LinearLayout layout;
     ScrollView   scrollView;
