@@ -10,6 +10,12 @@
 
     <color name="title_bj">#0b4da1</color>
 
-
+    <!--找回密码-->
+    <color name="font_color">#ffffff</color>
+    <color name="list_item_read">#ffb7b7b7</color>
+    <color name="hint_color">#ffb7b7b7</color>
+    <color name="text_color">#80858e</color>
+    <color name="text_color_code">#444b55</color>
+    <color name="text_color_blue">#00aeef</color>
 
 </resources>
