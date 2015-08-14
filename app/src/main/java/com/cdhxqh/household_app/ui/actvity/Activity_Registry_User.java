@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.action.impl.OnItemClickCallBackImpl;
+import com.cdhxqh.household_app.ui.widget.SwitchButton;
 
 import java.util.regex.Pattern;
 
@@ -44,6 +47,10 @@ public class Activity_Registry_User extends Activity {
     TextView writeWwd;         // 箭头框
     TextView writeSendmsg;    // 箭头框
     TextView userTypeText;    // 选择用户
+
+    EditText pewTextView;     // 密码输入框的值
+
+    SwitchButton switchButton;// 开关按钮
 
     public static final int ACTIVITY_REGISTRY_REQUEST1 = 1011100;
 
@@ -77,6 +84,11 @@ public class Activity_Registry_User extends Activity {
         phoneTextView = (EditText)findViewById(R.id.reg_phone_text);
 
         userTypeText = (EditText)findViewById(R.id.reg_repwd_input);
+
+        switchButton = (SwitchButton)findViewById(R.id.switchButton);
+
+        pewTextView = (EditText)findViewById(R.id.reg_pwd_input);
+
     }
 
     public void initView(){
@@ -174,6 +186,20 @@ public class Activity_Registry_User extends Activity {
                 startActivityForResult(intent, ACTIVITY_REGISTRY_REQUEST1);
             }
         });
+
+        switchButton.setOnChangeListener(new SwitchButton.OnChangeListener() {
+            @Override
+            public void onChange(SwitchButton sb, boolean state) {
+                if(state){
+                    //设置密码可见
+                    pewTextView.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    //设置密码不可见
+                    pewTextView.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
     }
 
     /**
