@@ -8,4 +8,7 @@
     <dimen name="dimens_20">20dp</dimen>
 
     <color name="photo_crop_highlight_color">#fff</color>
+    <dimen name="dimens_22">22dp</dimen>
+    <dimen name="dimens_30">30dp</dimen>
+    <dimen name="dimens_40">40dp</dimen>
 </resources>
