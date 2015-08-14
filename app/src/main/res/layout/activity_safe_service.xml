@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <include layout="@layout/activity_tittle"></include>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--开启监控-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/openControl"
+                android:textSize="14dp"
+                />
+
+            <com.cdhxqh.household_app.ui.widget.SwitchButton
+                android:id="@+id/wiperSwitch"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <!--开始监控时间-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/openControlTime"
+                android:textSize="14dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/week_tittle_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/setWeek"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/week_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/week_tittle_a"
+                />
+
+            <ImageView
+                android:id="@+id/selectWeek_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_right"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/time_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/setDate"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/time_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/time_tittle"
+                />
+
+            <ImageView
+                android:id="@+id/select_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_right"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <!--结束监控时间-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/closeControTime"
+                android:textSize="14dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/week_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/setWeek"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/week_value_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/week_tittle"
+                />
+
+            <ImageView
+                android:id="@+id/selectWeek_id_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_right"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/time_tittle_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/setDate"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/time_value_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/time_tittle_a"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                />
+
+            <ImageView
+                android:id="@+id/select_time_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_right"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <!--安全警告设置-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/securityWarning"
+                android:textSize="14dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/noticeType"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/notice_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <!--联系人、手机号-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginBottom="11dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/manage"
+                        android:textSize="14dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/contacts_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginBottom="11dp"
+                        android:layout_marginLeft="10dp"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/mail_line_x"></View>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginBottom="11dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/phoneNumber"
+                        android:textSize="14dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/phone_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginBottom="11dp"
+                        android:layout_marginLeft="10dp"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/contactser"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="83dp"
+                android:src="@drawable/ic_users_a"/>
+
+        </RelativeLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/role_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/roleGroup"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/role_group_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/role_group"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_right"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/isVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:text="是否录像"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/isVideo_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="11dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/isVideo"
+                />
+
+            <ImageView
+                android:id="@+id/isVideo_a_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_right"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <Button
+            android:id="@+id/restart_passworld_id"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/text_color_blue"
+            android:text="@string/save"
+            android:textColor="@color/font_color"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+            </ScrollView>
+
+            <RelativeLayout
+                android:id="@+id/select_p"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#b0000000"
+                android:clickable="true"
+                android:visibility="gone"
+                android:scaleType="fitXY">
+                <LinearLayout
+                    android:id="@+id/select_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="15dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:clickable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff"
+                        android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/create_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:text="常用联系人"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@drawable/mail_line_x"></View>
+
+                    <TextView
+                        android:id="@+id/putConnect"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_margin="10dp"
+                        android:text="手机通讯录"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@drawable/mail_line_x"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="#ffffff">
+                    <TextView
+                        android:id="@+id/cancel"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_margin="10dp"
+                        android:text="取消"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+</LinearLayout>
