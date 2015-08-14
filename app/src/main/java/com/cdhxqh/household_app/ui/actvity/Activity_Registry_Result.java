@@ -50,10 +50,11 @@ public class Activity_Registry_Result extends BaseActivity {
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity_Registry_Result.this, Activity_Registry_User.class);
+                /*Intent intent = new Intent(Activity_Registry_Result.this, Activity_Registry_User.class);
                 Bundle bundle = new Bundle();
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivity(intent);*/
+                Activity_Registry_Result.this.finish();
             }
         });
 
