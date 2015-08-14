@@ -1,4 +1,4 @@
-package com.cdhxqh.household_app.vidget;
+package com.cdhxqh.household_app.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
