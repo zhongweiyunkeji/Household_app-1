@@ -15,7 +15,9 @@ import android.view.View;
 
 import com.cdhxqh.household_app.R;
 
-
+/**
+ * 选择按钮
+ */
 public class SwitchButton extends View implements View.OnClickListener{
     private Bitmap mSwitchBottom, mSwitchThumb, mSwitchFrame, mSwitchMask;
     private float mCurrentX = 0;
