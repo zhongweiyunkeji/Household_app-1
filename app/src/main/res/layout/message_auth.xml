@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reg_layou_3"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/reg_msg_input"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="left"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/reg_phone_number_border_top"
+            android:gravity="center_vertical"
+            android:hint="验证码"
+            android:maxLength="6"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#B9B9B9"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/reg_senmsg_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignBaseline="@+id/reg_msg_input"
+            android:layout_alignRight="@+id/reg_msg_input"
+            android:layout_marginRight="10dp"
+            android:background="#F2F2F2"
+            android:padding="10dp"
+            android:text="获取验证码"
+            android:textColor="#000000"
+            android:textSize="25px" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/reg_hint_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:singleLine="true"
+        android:gravity="left|center"
+        android:text="已发送短信验证码到182****5217"
+        android:textColor="#C8D1D0"
+        android:textSize="25px" />
+
+    <Button
+        android:id="@+id/reg_msg_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/reg_phone_number_button_background"
+        android:gravity="center"
+        android:text="注册"
+        android:textColor="#FFFFFF"
+        android:textSize="40px" />
+</LinearLayout>

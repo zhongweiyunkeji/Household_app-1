@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F6FA"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/activity_title" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="15dp">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/write_phone"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="1.填写手机号"
+                android:textColor="#30BBF1"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:layout_column="1"
+                android:layout_weight="2"
+                android:src="@drawable/ic_arrow_right" />
+
+            <TextView
+                android:id="@+id/write_pwd"
+                android:layout_column="2"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="2.设置密码"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:layout_column="3"
+                android:layout_weight="2"
+                android:src="@drawable/ic_arrow_right" />
+
+            <TextView
+                android:id="@+id/write_sendmsg"
+                android:layout_column="4"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="3.短信验证"
+                android:textSize="14dp" />
+        </TableRow>
+    </TableLayout>
+
+
+    <!--  填写手机号  -->
+    <include layout="@layout/reg_phone_number_text"></include>
+
+    <!--  设置密码   -->
+    <include layout="@layout/setting_password"></include>
+
+    <!--  短信验证  -->
+    <include layout="@layout/message_auth"></include>
+
+
+</LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <!-- 背景色 -->
+    <solid android:color="#FFFFFF"/>
+    <!-- 边框色 -->
+    <stroke android:width="1dp" android:color="#D6DBDF" />
+    <corners android:radius="7dp" />
+</shape>
+
+<!--<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape>
+            &lt;!&ndash; 边框颜色值 &ndash;&gt;
+            <solid android:color="#D6DBDF" />
+        </shape>
+    </item>
+    &lt;!&ndash; 此处定义只有左、右、上这三边有边框 高度为1dp  &ndash;&gt;
+    <item android:top="1dp" android:left="1dp" android:right="1dp" >
+        <shape android:shape="rectangle">
+            &lt;!&ndash;边框里面背景颜色 白色&ndash;&gt;
+            <solid android:color="#FFFFFF" />
+            <corners android:topLeftRadius="7dp" android:topRightRadius="7dp" android:bottomLeftRadius="0dp" android:bottomRightRadius="0dp" />
+        </shape>
+    </item>
+</layer-list>-->
+
