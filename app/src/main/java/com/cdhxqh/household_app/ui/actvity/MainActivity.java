@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.actvity;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
+import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
 import com.cdhxqh.household_app.ui.fragment.ProductFragment;
 
@@ -130,7 +132,13 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             case 3: {
                 break;
             }
-            case 4:{
+            case 4:{  // 帮助中心
+                try {
+                    fragmentTransaction.replace(R.id.container, new HelpCenterFragement());
+                    fragmentTransaction.commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             }
             case 5:{
@@ -145,6 +153,44 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         }
 
     }
+
+    /**
+     * 通过类名启动Activity，并且含有Bundle数据
+     *
+     * @param pClass
+     * @param pBundle
+     */
+    protected void openActivity(Class<? extends Activity> pClass, Bundle pBundle) {
+        Intent intent = new Intent(this, pClass);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 通过Action启动Activity
+     *
+     * @param pAction
+     */
+    protected void openActivity(String pAction) {
+        openActivity(pAction, null);
+    }
+
+    /**
+     * 通过Action启动Activity，并且含有Bundle数据
+     *
+     * @param pAction
+     * @param pBundle
+     */
+    protected void openActivity(String pAction, Bundle pBundle) {
+        Intent intent = new Intent(pAction);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+        startActivity(intent);
+    }
+
 
 
     public void restoreActionBar() {
