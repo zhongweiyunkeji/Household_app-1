@@ -18,7 +18,7 @@ import com.cdhxqh.household_app.ui.adapter.UserSelectAdapter;
  */
 public class OnItemClickCallBackImpl implements OnItemClickCallBack {
 
-    public static final int ACTIVITY_REGISTRY_RESPONSE1 = 10000000;
+    public static final int ACTIVITY_REGISTRY_RESPONSE1 = 0;
 
     public OnItemClickCallBackImpl(){
 
