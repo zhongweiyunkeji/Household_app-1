@@ -1,6 +1,8 @@
 package com.cdhxqh.household_app.ui.actvity;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
+import com.cdhxqh.household_app.ui.fragment.ProductFragment;
 
 
 public class MainActivity extends BaseActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -40,6 +43,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     private String[] mMainTitles;
 
     Toolbar toolbar;
+
+    private NavigationDrawerFragment product_fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (ViewGroup) findViewById(R.id.drawer_layout);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getFragmentManager().findFragmentById(R.id.left_drawer);
+
+        product_fragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.left_drawer);
     }
 
@@ -115,6 +123,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
             case 2:{
+                fragmentTransaction.replace(R.id.container, new ProductFragment());
+                fragmentTransaction.commit();
                 break;
             }
             case 3: {
@@ -138,12 +148,10 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
 
     public void restoreActionBar() {
-
         ActionBar actionBar = getSupportActionBar();
         mTitle = mFavoriteTabTitles[mSelectPos];
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setTitle(mTitle);
-
     }
 
 
