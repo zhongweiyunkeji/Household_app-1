@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reg_layou_1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F1F6FA"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/reg_phone_text"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="left"
+        android:background="@drawable/reg_phone_number_border_top"
+        android:drawableRight="@drawable/mobile"
+        android:gravity="center_vertical"
+        android:hint="请输入11位手机号"
+        android:inputType="phone"
+        android:paddingLeft="10dp"
+        android:singleLine="true"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:maxLength="11"
+
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="left|center"
+        android:text="已同意《智慧家居安全云服务条款》，点击“下一步”"
+        android:textColor="#91969D" />
+
+    <Button
+        android:id="@+id/reg_phone_next_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/reg_phone_number_button_background"
+        android:gravity="center"
+        android:text="下一步"
+        android:textColor="#FFFFFF"
+        android:textSize="40px" />
+</LinearLayout>
