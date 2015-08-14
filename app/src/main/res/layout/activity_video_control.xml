@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/video_monitoring_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F6FA"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <include layout="@layout/activity_tittle" />
+
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="160dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+        <include layout="@layout/round_action_bar"  />.
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top|center"
+
+            android:gravity="center">
+                <TableRow>
+                    <ImageView android:background="@drawable/btn_screenshot_nol"
+                                 android:layout_width="60dp"
+                                 android:layout_height="60dp"
+                                 android:layout_margin="15dp"/>
+                    <ImageView android:background="@drawable/btn_image_nol"
+                                 android:layout_width="60dp"
+                                 android:layout_height="60dp"
+                                 android:layout_margin="15dp"/>
+                    <ImageView android:background="@drawable/btn_video_nol"
+                                 android:layout_width="60dp"
+                                 android:layout_height="60dp"
+                                 android:layout_margin="15dp" />
+                    <ImageView android:background="@drawable/btn_videocarema_nol"
+                                 android:layout_width="60dp"
+                                 android:layout_height="60dp"
+                                 android:layout_margin="15dp"/>
+                </TableRow>
+                <TableRow>
+                     <ImageView android:background="@drawable/btn_alarm_nol"
+                                  android:layout_width="60dp"
+                                  android:layout_height="60dp"
+                                  android:layout_margin="15dp"/>
+                </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+
+</LinearLayout>

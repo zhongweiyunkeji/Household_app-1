@@ -1,0 +1,29 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adapter_group"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:gravity="left|center"
+    android:background="#E2E9F2"
+    >
+
+    <ImageView
+        android:id="@+id/group_img"
+        android:layout_margin="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cameras_blue"
+        />
+
+    <TextView
+        android:id="@+id/group_text"
+        android:gravity="left|center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#112847"
+        android:text="潮流摄像头"
+        android:textSize="20sp"
+        />
+
+</LinearLayout>
