@@ -4,17 +4,14 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.ProductModel;
-import com.cdhxqh.household_app.ui.actvity.BaseActivity;
 import com.cdhxqh.household_app.ui.adapter.ProductAdapter;
-import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
-import com.cdhxqh.household_app.vidget.ItemDivider;
+import com.cdhxqh.household_app.ui.widget.ItemDivider;
 
 import java.util.ArrayList;
 
