@@ -1,6 +1,7 @@
 package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
@@ -12,6 +13,7 @@ import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,8 @@ public class Activity_Registry_Result extends BaseActivity {
 
     TextView error_code;
     TextView hint_code;
+    ImageView backImg;     // 退回按钮
+    ImageView settingImg; // 设置按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +40,23 @@ public class Activity_Registry_Result extends BaseActivity {
     public void findViewById(){
         error_code = (TextView)findViewById(R.id.error_code);
         hint_code = (TextView)findViewById(R.id.hint_code);
+        settingImg = (ImageView)findViewById(R.id.title_add_id);
+        backImg = (ImageView)findViewById(R.id.back_imageview_id);
     }
 
     public void initView(){
+        settingImg.setVisibility(View.GONE);
+
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity_Registry_Result.this, Activity_Registry_User.class);
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
         SpannableStringBuilder style=new SpannableStringBuilder("如忘记密码，请点击找回密码!");
         // style.setSpan(new ForegroundColorSpan(Color.parseColor("#06ACE0")), 9, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE );  // 不包含结尾
         style.setSpan(new ClickableSpan() {
