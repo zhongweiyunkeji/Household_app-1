@@ -20,7 +20,7 @@ import com.cdhxqh.household_app.R;
 /**
  * Created by hexian on 2015/8/14.
  */
-public class Activity_Registry_Result extends Activity {
+public class Activity_Registry_Result extends BaseActivity {
 
     TextView error_code;
     TextView hint_code;

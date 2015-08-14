@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * 选择用户类型
  */
 
-public class Activity_User_Type extends Activity {
+public class Activity_User_Type extends BaseActivity {
 
     ListView listView;
 

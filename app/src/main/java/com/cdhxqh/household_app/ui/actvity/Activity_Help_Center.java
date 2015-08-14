@@ -25,7 +25,7 @@ import java.util.TimerTask;
 /**
  * Created by hexian on 2015/8/12.
  */
-public class Activity_Help_Center extends Activity {
+public class Activity_Help_Center extends BaseActivity {
 
     ExpandableListView listView;
     HelpCenterExpandableListViewAdapter adapter;

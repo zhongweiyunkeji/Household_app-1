@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * 选择角色分组主类
  */
-public class Activity_Role_Group extends Activity {
+public class Activity_Role_Group extends BaseActivity {
 
     TextView titleTextView;
     ImageView settingImg;

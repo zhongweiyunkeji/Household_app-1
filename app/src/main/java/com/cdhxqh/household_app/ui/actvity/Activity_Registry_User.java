@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
  * Created by hexian on 2015/8/13.
  */
 
-public class Activity_Registry_User extends Activity {
+public class Activity_Registry_User extends BaseActivity {
 
     ImageView backImg;     // 退回按钮
     ImageView settingImg; // 设置按钮
@@ -187,16 +187,26 @@ public class Activity_Registry_User extends Activity {
             }
         });
 
-        switchButton.setOnChangeListener(new SwitchButton.OnChangeListener() {
+        switchButton.setOnChangeListener(new SwitchButton.OnChangeListener() {  // 注册开关按钮事件
             @Override
             public void onChange(SwitchButton sb, boolean state) {
-                if(state){
+                if (state) {
                     //设置密码可见
                     pewTextView.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
                     //设置密码不可见
                     pewTextView.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
+            }
+        });
+
+        validBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity_Registry_User.this, Activity_Registry_Result.class);
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * 手机通知方式主类
  */
-public class Activity_Notify_Mode extends Activity {
+public class Activity_Notify_Mode extends BaseActivity {
 
     TextView titleTextView;
     ImageView settingImg;
