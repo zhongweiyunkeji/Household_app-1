@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +49,15 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     Toolbar toolbar;
 
-    MenuItem searchItem;
-    MenuItem composeItem;
-    int childCount;
+    MenuItem  deviceItem;
+    MenuItem  alarmIte;
+    MenuItem  servicesItem;
+    MenuItem  helpItem;
+    MenuItem  linkItem01;
+    MenuItem  linkItem02;
+    //int childCount;
+    boolean menuCreateFlag = false;
+    Menu menuBar;  // 缓存menu
 
     TextView atnrTitle;  // actionbar中间显示的文字
 
@@ -221,24 +231,80 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_actionbar, menu);
-        searchItem = menu.findItem(R.id.action_search);
-        composeItem = menu.findItem(R.id.action_compose);
-        composeItem.setVisible(false);
-        searchItem.setVisible(false);
+        //if(!menuCreateFlag){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_actionbar, menu);
 
-        if(mSelectPos == 0){
-            searchItem.setVisible(true);
-        } else if(mSelectPos == 4){
-            composeItem.setVisible(true);
-        }
+            menuBar = menu;
+
+
+            // 我的设备
+            deviceItem = menu.findItem(R.id.menu_mydevice);
+
+
+
+            // 报警记录
+            alarmIte = menu.findItem(R.id.menu_alarm);
+
+            // 文件管理
+            servicesItem = menu.findItem(R.id.menu_security_services);
+
+            // 帮助中心
+            helpItem = menu.findItem(R.id.menu_help_center);
+
+            // 常用联系人
+            linkItem01 = menu.findItem(R.id.menu_linkman_add);
+            linkItem02 = menu.findItem(R.id.menu_linkman_del);
+
+            menuCreateFlag = true;
+        //}
+
+        //if(menuCreateFlag){
+            menu = menuBar;
+            hideMenu(); // 一开始全部隐藏,后面的判断更具需要逐个显示
+
+            if(mSelectPos == 0){ // 我的设备
+                deviceItem.setVisible(true);
+            } else if(mSelectPos == 1){ // 报警记录
+                alarmIte.setVisible(true);
+            } else
+            if(mSelectPos == 2){ // 安全服务中心
+
+            } else
+            if(mSelectPos == 3){ // 文件管理
+                servicesItem.setVisible(true);
+            } else
+            if(mSelectPos == 4){ // 帮助中心
+                helpItem.setVisible(true);
+            } else
+            if(mSelectPos == 5){// 常用联系人
+                linkItem01.setVisible(true);
+                linkItem02.setVisible(true);
+            } else
+            if(mSelectPos == 6){// 关于我们
+
+            } else
+            if(mSelectPos == 7){// 设置
+
+            }
+        //}
 
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void hideMenu() {
+        if(menuCreateFlag){
+            deviceItem.setVisible(false);
+            alarmIte.setVisible(false);
+            servicesItem.setVisible(false);
+            helpItem.setVisible(false);
+            linkItem01.setVisible(false);
+            linkItem02.setVisible(false);
+        }
     }
 
     private long exitTime = 0;
