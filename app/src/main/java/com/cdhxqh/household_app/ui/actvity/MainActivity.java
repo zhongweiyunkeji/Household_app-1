@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
 import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
+import com.cdhxqh.household_app.ui.fragment.MyDeviceFragment;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
 import com.cdhxqh.household_app.ui.fragment.ProductFragment;
 
@@ -118,10 +119,15 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
             case 0:{
+                fragmentTransaction.replace(R.id.container,new MyDeviceFragment());
+                fragmentTransaction.commit();
                 invalidateOptionsMenu();
                 break;
             }
             case 1: {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,TestActivity.class);
+                startActivity(intent);
                 break;
             }
             case 2:{

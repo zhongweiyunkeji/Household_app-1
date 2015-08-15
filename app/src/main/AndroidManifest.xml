@@ -43,6 +43,9 @@
         <activity
             android:name=".ui.actvity.TypeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.actvity.Activity_First_login"
+            android:screenOrientation="portrait" />
 
         <activity android:name=".ui.actvity.Activity_Registry_User">
         </activity>
@@ -60,7 +63,8 @@
         </activity>
         <activity android:name=".ui.actvity.Activity_Video_Control"  >
         </activity>
-
+        <activity android:name=".ui.actvity.TestActivity"  >
+        </activity>
     </application>
 
 </manifest>
