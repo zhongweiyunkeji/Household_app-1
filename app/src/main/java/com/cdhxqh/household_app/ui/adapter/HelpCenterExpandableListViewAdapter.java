@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.actvity.Activity_Help_Center;
+import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,9 +26,9 @@ public class HelpCenterExpandableListViewAdapter extends BaseExpandableListAdapt
     private ArrayList<String> group = new ArrayList<String>(0);
     private Map<String, List<String>> child = new HashMap<String, List<String>>(0);
 
-    Activity_Help_Center.ItemClickListener itemClickListener;
+    HelpCenterFragement.ItemClickListener itemClickListener;
 
-    public HelpCenterExpandableListViewAdapter(Context context, Activity_Help_Center.ItemClickListener itemClickListener) {
+    public HelpCenterExpandableListViewAdapter(Context context, HelpCenterFragement.ItemClickListener itemClickListener) {
         this.context = context;
         this.itemClickListener = itemClickListener;
         if(itemClickListener == null){
