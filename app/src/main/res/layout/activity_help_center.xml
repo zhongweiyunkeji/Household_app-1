@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#C3D4E9">
 
-    <include layout="@layout/activity_tittle"  />.
+    <!--<include layout="@layout/activity_tittle"  />.-->
 
     <LinearLayout
         android:layout_width="wrap_content"
