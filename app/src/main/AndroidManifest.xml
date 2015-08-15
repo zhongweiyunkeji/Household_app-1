@@ -34,7 +34,14 @@
             android:label="MainActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.actvity.AlarmActivity"
+            android:label="MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.actvity.SafeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.actvity.TypeActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.actvity.Activity_Registry_User">
