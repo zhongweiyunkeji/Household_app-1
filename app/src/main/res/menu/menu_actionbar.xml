@@ -4,6 +4,7 @@
         android:icon="@drawable/abc_btn_rating_star_on_mtrl_alpha"
         yourapp:showAsAction="ifRoom"
         android:title="五星"/>
+    <!--<item android:title="测试" android:actionLayout="@layout/actionbar_title" yourapp:showAsAction="ifRoom" />-->
     <item android:id="@+id/action_compose"
         android:icon="@drawable/ic_search"
         yourapp:showAsAction="ifRoom"
