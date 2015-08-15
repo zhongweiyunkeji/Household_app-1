@@ -1,18 +1,15 @@
 package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +42,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     private String[] mMainTitles;
 
     Toolbar toolbar;
+
+    MenuItem searchItem;
+    MenuItem composeItem;
 
     private NavigationDrawerFragment product_fragment;
 
@@ -81,7 +81,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         toolbar.setNavigationIcon(R.drawable.ic_menu);  // 设置图标
         setSupportActionBar(toolbar);  // 设置ActionBar
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
-
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
         getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
 
@@ -119,6 +118,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
             case 0:{
+                invalidateOptionsMenu();
                 break;
             }
             case 1: {
@@ -136,6 +136,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 try {
                     fragmentTransaction.replace(R.id.container, new HelpCenterFragement());
                     fragmentTransaction.commit();
+                    invalidateOptionsMenu();  // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -200,9 +201,20 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         actionBar.setTitle(mTitle);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_actionbar, menu);
+        searchItem = menu.findItem(R.id.action_search);
+        composeItem = menu.findItem(R.id.action_compose);
+        composeItem.setVisible(false);
+        searchItem.setVisible(false);
+        if(mSelectPos == 0){
+            searchItem.setVisible(true);
+        } else if(mSelectPos == 4){
+            composeItem.setVisible(true);
+        }
+
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
             restoreActionBar();
             return true;
@@ -231,4 +243,5 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             AppManager.AppExit(MainActivity.this);
         }
     }
+
 }
