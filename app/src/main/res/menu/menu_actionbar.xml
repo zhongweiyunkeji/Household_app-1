@@ -12,7 +12,7 @@
     <!--<item android:title="测试" android:actionLayout="@layout/actionbar_title" yourapp:showAsAction="ifRoom" />-->
 
     <!--  报警记录  -->
-    <item android:id="@+id/menu_alarm" android:actionLayout=""
+    <item android:id="@+id/menu_alarm"
         android:icon="@drawable/ic_menu_deletes"
         yourapp:showAsAction="ifRoom"
         android:title="报警记录"/>
