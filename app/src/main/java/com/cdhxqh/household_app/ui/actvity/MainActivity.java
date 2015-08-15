@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,6 +47,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     MenuItem searchItem;
     MenuItem composeItem;
+    int childCount;
+
+    TextView atnrTitle;  // actionbar中间显示的文字
 
     private NavigationDrawerFragment product_fragment;
 
@@ -82,7 +87,17 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         setSupportActionBar(toolbar);  // 设置ActionBar
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
-        getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
+        // getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
+        getSupportActionBar().setTitle("");
+
+        atnrTitle = (TextView)findViewById(R.id.actionbar_title_text);
+
+        /*ActionBar.LayoutParams lp =new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
+        View view = LayoutInflater.from(this).inflate(R.layout.actionbar_title, null);
+        centerTextViwt = (TextView)view.findViewById(R.id.actionbar_01);
+        toolbar.addView(view, lp); // 设置客户化View
+        childCount = toolbar.getChildCount();*/
+
 
         mNavigationDrawerFragment.setUp(
                 R.id.left_drawer,
@@ -136,7 +151,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 try {
                     fragmentTransaction.replace(R.id.container, new HelpCenterFragement());
                     fragmentTransaction.commit();
-                    invalidateOptionsMenu();  // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
+                    // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
+                    invalidateOptionsMenu();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -198,7 +214,10 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         ActionBar actionBar = getSupportActionBar();
         mTitle = mFavoriteTabTitles[mSelectPos];
         actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setTitle(mTitle);
+        // actionBar.setTitle(mTitle);
+        if(atnrTitle!=null){
+            atnrTitle.setText(mTitle);
+        }
     }
 
     @Override
@@ -209,6 +228,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         composeItem = menu.findItem(R.id.action_compose);
         composeItem.setVisible(false);
         searchItem.setVisible(false);
+
         if(mSelectPos == 0){
             searchItem.setVisible(true);
         } else if(mSelectPos == 4){
