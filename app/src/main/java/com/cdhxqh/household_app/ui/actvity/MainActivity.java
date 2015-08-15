@@ -7,12 +7,18 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +50,17 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     Toolbar toolbar;
 
-    MenuItem searchItem;
-    MenuItem composeItem;
+    MenuItem  deviceItem;
+    MenuItem  alarmIte;
+    MenuItem  servicesItem;
+    MenuItem  helpItem;
+    MenuItem  linkItem01;
+    MenuItem  linkItem02;
+    //int childCount;
+    boolean menuCreateFlag = false;
+    Menu menuBar;  // 缓存menu
+
+    TextView atnrTitle;  // actionbar中间显示的文字
 
     private NavigationDrawerFragment product_fragment;
 
@@ -83,7 +98,17 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         setSupportActionBar(toolbar);  // 设置ActionBar
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
-        getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
+        // getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
+        getSupportActionBar().setTitle("");
+
+        atnrTitle = (TextView)findViewById(R.id.actionbar_title_text);
+
+        /*ActionBar.LayoutParams lp =new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
+        View view = LayoutInflater.from(this).inflate(R.layout.actionbar_title, null);
+        centerTextViwt = (TextView)view.findViewById(R.id.actionbar_01);
+        toolbar.addView(view, lp); // 设置客户化View
+        childCount = toolbar.getChildCount();*/
+
 
         mNavigationDrawerFragment.setUp(
                 R.id.left_drawer,
@@ -142,7 +167,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 try {
                     fragmentTransaction.replace(R.id.container, new HelpCenterFragement());
                     fragmentTransaction.commit();
-                    invalidateOptionsMenu();  // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -158,7 +182,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
         }
-
+        // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
+        invalidateOptionsMenu();
     }
 
     /**
@@ -204,28 +229,88 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         ActionBar actionBar = getSupportActionBar();
         mTitle = mFavoriteTabTitles[mSelectPos];
         actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setTitle(mTitle);
+        // actionBar.setTitle(mTitle);
+        if(atnrTitle!=null){
+            atnrTitle.setText(mTitle);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_actionbar, menu);
-        searchItem = menu.findItem(R.id.action_search);
-        composeItem = menu.findItem(R.id.action_compose);
-        composeItem.setVisible(false);
-        searchItem.setVisible(false);
-        if(mSelectPos == 0){
-            searchItem.setVisible(true);
-        } else if(mSelectPos == 4){
-            composeItem.setVisible(true);
-        }
+        //if(!menuCreateFlag){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_actionbar, menu);
+
+            menuBar = menu;
+
+
+            // 我的设备
+            deviceItem = menu.findItem(R.id.menu_mydevice);
+
+
+
+            // 报警记录
+            alarmIte = menu.findItem(R.id.menu_alarm);
+
+            // 文件管理
+            servicesItem = menu.findItem(R.id.menu_security_services);
+
+            // 帮助中心
+            helpItem = menu.findItem(R.id.menu_help_center);
+
+            // 常用联系人
+            linkItem01 = menu.findItem(R.id.menu_linkman_add);
+            linkItem02 = menu.findItem(R.id.menu_linkman_del);
+
+            menuCreateFlag = true;
+        //}
+
+        //if(menuCreateFlag){
+            menu = menuBar;
+            hideMenu(); // 一开始全部隐藏,后面的判断更具需要逐个显示
+
+            if(mSelectPos == 0){ // 我的设备
+                deviceItem.setVisible(true);
+            } else if(mSelectPos == 1){ // 报警记录
+                alarmIte.setVisible(true);
+            } else
+            if(mSelectPos == 2){ // 安全服务中心
+
+            } else
+            if(mSelectPos == 3){ // 文件管理
+                servicesItem.setVisible(true);
+            } else
+            if(mSelectPos == 4){ // 帮助中心
+                helpItem.setVisible(true);
+            } else
+            if(mSelectPos == 5){// 常用联系人
+                linkItem01.setVisible(true);
+                linkItem02.setVisible(true);
+            } else
+            if(mSelectPos == 6){// 关于我们
+
+            } else
+            if(mSelectPos == 7){// 设置
+
+            }
+        //}
 
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void hideMenu() {
+        if(menuCreateFlag){
+            deviceItem.setVisible(false);
+            alarmIte.setVisible(false);
+            servicesItem.setVisible(false);
+            helpItem.setVisible(false);
+            linkItem01.setVisible(false);
+            linkItem02.setVisible(false);
+        }
     }
 
     private long exitTime = 0;
