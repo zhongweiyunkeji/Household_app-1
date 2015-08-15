@@ -151,8 +151,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 try {
                     fragmentTransaction.replace(R.id.container, new HelpCenterFragement());
                     fragmentTransaction.commit();
-                    // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
-                    invalidateOptionsMenu();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -168,7 +166,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
         }
-
+        // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
+        invalidateOptionsMenu();
     }
 
     /**
