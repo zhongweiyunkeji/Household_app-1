@@ -5,8 +5,8 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
-    <app.hxqh.popmenu.WrapWidthListView
-        android:layout_marginTop="10dp"
+    <com.cdhxqh.household_app.ui.widget.listview.WrapWidthListView
+        android:layout_marginTop="0dp"
         android:id="@+id/menu_listview"
         android:padding="3dp"
         android:focusable="true"
@@ -19,13 +19,15 @@
 
 
     <ImageView
+        android:background="#ff0000"
         android:id="@+id/head_hint_img"
         android:src="@drawable/dropdown_menu_topbg"
         android:layout_width="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_gravity="right|top"
         android:layout_height="wrap_content"/>
-    <!--android:layout_gravity="right|top"-->
+    <!---->
     <!--<LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
