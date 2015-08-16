@@ -68,6 +68,11 @@ public class ViewUserActivity extends BaseActivity {
      */
     private LinearLayout select_user;
 
+    /**
+     *全选栏目
+     */
+    LinearLayout top_check;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_user);
@@ -91,6 +96,8 @@ public class ViewUserActivity extends BaseActivity {
        cancel = (LinearLayout) findViewById(R.id.cancel);
 
        select_user = (LinearLayout) findViewById(R.id.select_user);
+
+       top_check = (LinearLayout) findViewById(R.id.top_check);
     }
 
     private void initView() {
@@ -152,6 +159,10 @@ public class ViewUserActivity extends BaseActivity {
             viewUserAdapter.dataChanged();
             new CartoonDisplay(activity, 1, "删除联系人").display();
             checkbox_all.setChecked(false);
+            contactersList  = contactersListUpdate;
+            if(contactersListUpdate.size()<=0){
+                top_check.setVisibility(View.GONE);
+            }
         }
     };
 

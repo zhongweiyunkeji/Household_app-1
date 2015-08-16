@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
@@ -45,7 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             /**
              * 设置监控
              */
-            viewHolder.safe_manage.setOnClickListener(new View.OnClickListener() {
+            viewHolder.isVideo_listbg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent();
@@ -91,6 +92,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
          */
         private ImageView safe_manage;
 
+        /**
+         * 测试
+         */
+        private LinearLayout isVideo_listbg;
+
+
         public ViewHolder(View itemView) {
             super(itemView);
             icon_id = (ImageView) itemView.findViewById(R.id.icon_id);
@@ -99,6 +106,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             position_id = (TextView) itemView.findViewById(R.id.position_id);
             monitor_time_id = (TextView) itemView.findViewById(R.id.monitor_time_id);
             safe_manage = (ImageView) itemView.findViewById(R.id.safe_manage);
+            isVideo_listbg = (LinearLayout) itemView.findViewById(R.id.isVideo_listbg);
         }
     }
 }

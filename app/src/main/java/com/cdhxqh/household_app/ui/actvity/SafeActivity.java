@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.DatePicker;
@@ -19,7 +21,7 @@ import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
-import com.cdhxqh.household_app.ui.widget.SwitchButton;
+import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class SafeActivity extends BaseActivity {
     /**
      * 滑动按钮
      */
-    SwitchButton sb;
+    SwitchButtonIs sb;
 
     /**
      *显示日期
@@ -118,7 +120,7 @@ public class SafeActivity extends BaseActivity {
         time_value = (TextView) findViewById(R.id.time_value);
         time_value_a = (TextView) findViewById(R.id.time_value_a);
 
-        sb = (SwitchButton) findViewById(R.id.wiperSwitch);
+        sb = (SwitchButtonIs) findViewById(R.id.wiperSwitch);
 
         week_value = (TextView) findViewById(R.id.week_value);
         week_value_a = (TextView) findViewById(R.id.week_value_a);
@@ -191,10 +193,10 @@ public class SafeActivity extends BaseActivity {
 //         */
 //        putConnect.setOnClickListener(connectOnClickListener);
 
-        sb.setOnChangeListener(new SwitchButton.OnChangeListener() {
+        sb.setOnChangeListener(new SwitchButtonIs.OnChangeListener() {
 
             @Override
-            public void onChange(SwitchButton sb, boolean state) {
+            public void onChange(SwitchButtonIs sb, boolean state) {
                 // TODO Auto-generated method stub
                 Log.d("switchButton", state ? "验票员" : "用户");
                 Toast.makeText(SafeActivity.this, state ? "验票员" : "用户", Toast.LENGTH_SHORT).show();
@@ -223,15 +225,15 @@ public class SafeActivity extends BaseActivity {
         }
     };
 
-//    /**
-//     * 导入通讯录
-//     */
+    /**
+     * 导入通讯录
+     */
 //    final Context a = this;
 //    private View.OnClickListener connectOnClickListener = new View.OnClickListener() {
 //        @Override
 //        public void onClick(View v) {
-////            ContactsTool contactsTool = new ContactsTool();
-////            contactsTool.testGetContacts(a);
+//            ContactsTool contactsTool = new ContactsTool();
+//            contactsTool.testGetContacts(a);
 //            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 //            startActivityForResult(intent, PICK_CONTACT);
 //        }
@@ -444,5 +446,14 @@ public class SafeActivity extends BaseActivity {
             timeValue.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
         }
     };
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            AlarmActivity.contacts = null;
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }
