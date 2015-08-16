@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.ui.actvity.Activity_Help_Center_Datail;
 import com.cdhxqh.household_app.ui.adapter.HelpCenterExpandableListViewAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,10 +102,20 @@ public class HelpCenterFragement extends BaseFragment {
         adapter = new HelpCenterExpandableListViewAdapter(this.getActivity(), new HelpCenterFragement.ItemClickListener() {
             @Override
             public void onItemClick(ViewGroup parent, View convertView, ImageView imageView, int groupPosition, int childPosition, boolean isLastChild) {
-                if (onoff) {
-                    Log.e("TAG", "------------------------------------------------------------>" + onoff);
-                } else {
-                    Log.e("TAG", "------------------------------------------------------------>" + onoff);
+                if (onoff) { // 产品说明
+                    //Log.e("TAG", "------------------------------------------------------------>" + onoff);
+                    Intent intent = new Intent(getActivity(), Activity_Help_Center_Datail.class);
+                    Bundle bundle = new Bundle();
+                    intent.putExtras(bundle);
+                    bundle.putString("url", "https://www.baidu.com/");
+                    getActivity().startActivity(intent);
+                } else {  // 操作说明
+                    //Log.e("TAG", "------------------------------------------------------------>" + onoff);
+                    Intent intent = new Intent(getActivity(), Activity_Help_Center_Datail.class);
+                    Bundle bundle = new Bundle();
+                    intent.putExtras(bundle);
+                    bundle.putString("url", "http://blog.csdn.net/z1074971432/article/details/7547783");
+                    getActivity().startActivity(intent);
                 }
             }
         });

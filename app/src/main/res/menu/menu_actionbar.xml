@@ -1,14 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:yourapp="http://schemas.android.com/apk/res-auto">
     <!--  我的设备  -->
-    <item android:id="@+id/menu_mydevice" android:icon="@drawable/ic_menu_dropdown" android:title="我的设备" yourapp:showAsAction="ifRoom" >
+    <!--<item android:id="@+id/menu_mydevice" android:icon="@drawable/ic_menu_dropdown" android:title="我的设备" yourapp:showAsAction="ifRoom" >
         <menu>
             <item android:title="添加" android:icon="@drawable/ic_menu_add" yourapp:showAsAction="always|withText" />
             <item android:title="删除" android:icon="@drawable/ic_menu_deletes" yourapp:showAsAction="always|withText" />
             <item android:title="编辑" android:icon="@drawable/ic_menu_eidt" yourapp:showAsAction="always|withText" />
         </menu>
     </item>
-
+     -->
     <!--<item android:title="测试" android:actionLayout="@layout/actionbar_title" yourapp:showAsAction="ifRoom" />-->
 
     <!--  报警记录  -->
@@ -32,7 +32,7 @@
         android:title="帮助中心"/>
 
     <!--  常用联系人  -->
-    <item android:id="@+id/menu_linkman_add" android:icon="@drawable/ic_menu_add" android:title="常用联系人" yourapp:showAsAction="ifRoom" >
+    <!--<item android:id="@+id/menu_linkman_add" android:icon="@drawable/ic_menu_add" android:title="常用联系人" yourapp:showAsAction="ifRoom" >
         <menu>
             <item android:title="直接添加" android:icon="@drawable/ic_menu_add" yourapp:showAsAction="always|withText" />
             <item android:title="选择联系人" android:icon="@drawable/ic_menu_users" yourapp:showAsAction="always|withText" />
@@ -41,7 +41,7 @@
     <item android:id="@+id/menu_linkman_del"
         android:icon="@drawable/ic_menu_delete"
         yourapp:showAsAction="ifRoom"
-        android:title="常用联系人"/>
+        android:title="常用联系人"/>-->
 
     <!--  关于我们  无  -->
 
