@@ -19,7 +19,6 @@
 
 
     <ImageView
-        android:background="#ff0000"
         android:id="@+id/head_hint_img"
         android:src="@drawable/dropdown_menu_topbg"
         android:layout_width="wrap_content"
