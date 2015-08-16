@@ -39,7 +39,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/mail_line_x"></View>
+        android:background="@drawable/list_line_x"></View>
 
     <TextView
         android:id="@+id/type_introduce"
@@ -76,7 +76,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/mail_line_x"></View>
+        android:background="@drawable/list_line_x"></View>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -112,14 +112,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right"/>
+            android:src="@drawable/ic_list_view"/>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/mail_line_x"></View>
+        android:background="@drawable/list_line_x"></View>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -155,14 +155,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right"/>
+            android:src="@drawable/ic_list_view"/>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/mail_line_x"></View>
+        android:background="@drawable/list_line_x"></View>
 
     <!--结束录像事件-->
     <LinearLayout
@@ -186,7 +186,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/mail_line_x"></View>
+        android:background="@drawable/list_line_x"></View>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -222,14 +222,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right"/>
+            android:src="@drawable/ic_list_view"/>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/mail_line_x"></View>
+        android:background="@drawable/list_line_x"></View>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -265,14 +265,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right"/>
+            android:src="@drawable/ic_list_view"/>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/mail_line_x"></View>
+        android:background="@drawable/list_line_x"></View>
 
         <Button
             android:id="@+id/restart_passworld_id"

@@ -15,7 +15,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/mail_line_x"></View>
+            android:background="@drawable/list_line_x"></View>
 
         <TableRow>
             <TextView
@@ -41,7 +41,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/mail_line_x"></View>
+            android:background="@drawable/list_line_x"></View>
 
         <TableRow>
             <TextView
@@ -66,7 +66,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/mail_line_x"></View>
+            android:background="@drawable/list_line_x"></View>
             <TableRow>
             <TextView
                 android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
                 android:id="@+id/select_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_right"/>
+                android:src="@drawable/ic_list_view"/>
             </TableRow>
 
     </TableLayout>
@@ -99,7 +99,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/mail_line_x"></View>
+        android:background="@drawable/list_line_x"></View>
 
     <Button
         android:id="@+id/commit_id"

@@ -48,7 +48,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@drawable/mail_line_x"></View>
+                    android:background="@drawable/list_line_x"></View>
 
                 <TextView
                     android:id="@+id/putConnect"
@@ -65,7 +65,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/mail_line_x"></View>
+                android:background="@drawable/list_line_x"></View>
 
             <!--取消-->
             <LinearLayout
