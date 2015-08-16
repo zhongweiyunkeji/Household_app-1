@@ -53,6 +53,9 @@
             android:name=".ui.actvity.Activity_User_Type"
             android:label="MainActivity"  >
         </activity>
+        <activity
+            android:name=".ui.actvity.AddContacterActivity"
+            android:label="MainActivity"  />
         <activity android:name=".ui.actvity.Activity_Registry_Result"  >
         </activity>
         <activity android:name=".ui.actvity.Activity_Help_Center"  >
