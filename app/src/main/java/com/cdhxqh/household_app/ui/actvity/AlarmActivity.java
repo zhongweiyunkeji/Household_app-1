@@ -53,7 +53,7 @@ public class AlarmActivity extends Activity{
      * 联系人信息
      */
     private static ArrayList<Contacters> contactsMessage = new ArrayList<Contacters>();
-    static ArrayList<Contacters> contacts;
+    static ArrayList<Contacters> contacts  = new ArrayList<Contacters>();;
 
     /**
      *添加联系人
@@ -91,8 +91,6 @@ public class AlarmActivity extends Activity{
          * 添加联系人
          */
         addContacts = (ImageView) findViewById(R.id.title_add_id);
-
-        contacts = new ArrayList<Contacters>();
     }
 
 
@@ -147,6 +145,10 @@ public class AlarmActivity extends Activity{
     }
 
     public void getData() {
+        if(contacts == null) {
+            contacts = new ArrayList<Contacters>();
+        }
+
         if(contacts.size() > 0) {
             contacts = (ArrayList<Contacters>) getIntent().getSerializableExtra("contactList");
         }

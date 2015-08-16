@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_margin="9dp"
-            android:src="@drawable/ic_back_a"
+            android:src="@drawable/ic_menu_back"
             />
 
         <TextView
