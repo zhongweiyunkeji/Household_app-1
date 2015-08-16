@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import com.cdhxqh.household_app.model.Item;
-
 import java.util.ArrayList;
 
 /**
@@ -43,11 +42,11 @@ public abstract class PopMenu {
      */
     private PopupWindow mPopupWindow;
 
-    protected int popWinRes;
-
-    protected  int listItemRes;
-    View headView;
-    View footerView;
+    protected int popWinRes;      // 弹出窗口布局文件
+    protected int listItemRes;    // 弹出窗菜单项ListView布局文件
+    protected int hintRes;        // 上方提示三角形的ID
+    protected View headView;
+    protected View footerView;
 
     public PopMenu(Context context, View headView, View footerView) {
         this.mContext = context;

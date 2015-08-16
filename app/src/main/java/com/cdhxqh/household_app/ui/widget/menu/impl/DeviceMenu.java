@@ -19,10 +19,12 @@ public class DeviceMenu extends PopMenu {
 
     ImageView hintImg;
 
-    public DeviceMenu(Context context, View headView, View footerView,int popWinRes, int listItemRes) {
+
+    public DeviceMenu(Context context, View headView, View footerView,int popWinRes, int listItemRes, int hintRes) {
         super(context, headView, footerView);
         this.popWinRes = popWinRes;
         this.listItemRes = listItemRes;
+        this.hintRes = hintRes;
         init();
     }
 
@@ -35,7 +37,7 @@ public class DeviceMenu extends PopMenu {
     protected View onCreateView(Context context) {
         // R.layout.menu_mydevice 是popupmenu的布局文件   R.layout.menu_mydevice
         View view = LayoutInflater.from(context).inflate(popWinRes, null);
-        hintImg = (ImageView)view.findViewById(R.id.head_hint_img);
+        hintImg = (ImageView)view.findViewById(hintRes);  // R.id.head_hint_img
 
         return view;
     }
