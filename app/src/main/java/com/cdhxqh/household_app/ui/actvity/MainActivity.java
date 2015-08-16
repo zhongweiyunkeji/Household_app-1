@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
+import com.cdhxqh.household_app.ui.fragment.CommonContactFragment;
 import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 import com.cdhxqh.household_app.ui.fragment.MyDeviceFragment;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
@@ -173,6 +174,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
             case 5:{
+                fragmentTransaction.replace(R.id.container, new CommonContactFragment());
+                fragmentTransaction.commit();
                 break;
             }
             case 6:{
