@@ -22,6 +22,8 @@
                 android:minHeight="?attr/actionBarSize"
                 android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
             <!--app:theme="@style/NoIconActionbar"-->
+
+            <!--  中间标题  -->
             <TextView
                 android:id="@+id/actionbar_title_text"
                 android:layout_width="wrap_content"
@@ -31,6 +33,45 @@
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
                 />
+
+            <!--  我的设备  -->
+            <ImageView
+                android:id="@+id/menu_mydevice"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right|center"
+                android:layout_gravity="right|center"
+                android:src="@drawable/ic_menu_dropdown"
+                android:visibility="gone"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center"
+                android:gravity="right|center"
+                android:orientation="horizontal">
+                <!--  常用联系人  -->
+                <ImageView
+                    android:id="@+id/menu_linkman_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center"
+                    android:layout_gravity="right|center"
+                    android:src="@drawable/ic_menu_add"
+                    android:visibility="gone"
+                    />
+                <ImageView
+                    android:id="@+id/menu_linkman_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center"
+                    android:layout_gravity="right|center"
+                    android:src="@drawable/ic_menu_delete"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+
         </FrameLayout>
 
         <FrameLayout

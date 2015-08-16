@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
@@ -26,11 +27,15 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
 import com.cdhxqh.household_app.model.Contacters;
+import com.cdhxqh.household_app.model.Item;
 import com.cdhxqh.household_app.ui.fragment.CommonContactFragment;
 import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 import com.cdhxqh.household_app.ui.fragment.MyDeviceFragment;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
 import com.cdhxqh.household_app.ui.fragment.ProductFragment;
+import com.cdhxqh.household_app.ui.widget.listview.WrapWidthListView;
+import com.cdhxqh.household_app.ui.widget.menu.PopMenu;
+import com.cdhxqh.household_app.ui.widget.menu.impl.DeviceMenu;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -56,12 +61,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     Toolbar toolbar;
 
-    MenuItem  deviceItem;
+    ImageView deviceItem;
     MenuItem  alarmIte;
     MenuItem  servicesItem;
     MenuItem  helpItem;
-    MenuItem  linkItem01;
-    MenuItem  linkItem02;
+    ImageView  linkItem01;
+    ImageView  linkItem02;
     //int childCount;
     boolean menuCreateFlag = false;
     Menu menuBar;  // 缓存menu
@@ -71,6 +76,15 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     private NavigationDrawerFragment product_fragment;
 
     static Intent intent;
+
+    DeviceMenu myDie; // 我的设备
+    static final int  DEVICEM_ADD = 0;
+    static final int  DEVICEM_DEL = 1;
+    static final int  DEVICEM_EDIT = 2;
+
+    DeviceMenu likMan; // 我的设备
+    static final int  LINK_MAN_ADD = 3;
+    static final int  DEVICEM_SEARCH = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +97,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
         initView();
 
+        initMenu();
 
     }
 
@@ -127,6 +142,33 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
         }
 
+        // 我的设备
+        deviceItem = (ImageView)findViewById(R.id.menu_mydevice);
+        // 常用联系人
+        linkItem01 = (ImageView)findViewById(R.id.menu_linkman_add);
+        linkItem02 = (ImageView)findViewById(R.id.menu_linkman_del);
+
+        deviceItem.setOnClickListener(new View.OnClickListener() {  // 注册点击事件
+            @Override
+            public void onClick(View v) {
+                myDie.showAsDropDown(deviceItem);
+                WrapWidthListView listView = (WrapWidthListView) myDie.getListView();
+                ImageView img = myDie.getHintImg();
+                int width = listView.getWidth(0);
+                img.measure(width, img.getMeasuredHeight());
+            }
+        });
+
+        linkItem01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {  // 注册点击事件
+                likMan.showAsDropDown(linkItem01);
+                WrapWidthListView listView = (WrapWidthListView) likMan.getListView();
+                ImageView img = likMan.getHintImg();
+                int width = listView.getWidth(0);
+                img.measure(width, img.getMeasuredHeight());
+            }
+        });
 
     }
 
@@ -267,12 +309,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
             menuBar = menu;
 
-
-            // 我的设备
-            deviceItem = menu.findItem(R.id.menu_mydevice);
-
-
-
             // 报警记录
             alarmIte = menu.findItem(R.id.menu_alarm);
 
@@ -282,9 +318,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             // 帮助中心
             helpItem = menu.findItem(R.id.menu_help_center);
 
-            // 常用联系人
-            linkItem01 = menu.findItem(R.id.menu_linkman_add);
-            linkItem02 = menu.findItem(R.id.menu_linkman_del);
+
 
             menuCreateFlag = true;
         //}
@@ -294,7 +328,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             hideMenu(); // 一开始全部隐藏,后面的判断更具需要逐个显示
 
             if(mSelectPos == 0){ // 我的设备
-                deviceItem.setVisible(true);
+                deviceItem.setVisibility(View.VISIBLE);
             } else if(mSelectPos == 1){ // 报警记录
                 alarmIte.setVisible(true);
             } else
@@ -308,8 +342,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 helpItem.setVisible(true);
             } else
             if(mSelectPos == 5){// 常用联系人
-                linkItem01.setVisible(true);
-                linkItem02.setVisible(true);
+                linkItem01.setVisibility(View.VISIBLE);
+                linkItem02.setVisibility(View.VISIBLE);
             } else
             if(mSelectPos == 6){// 关于我们
 
@@ -328,12 +362,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     private void hideMenu() {
         if(menuCreateFlag){
-            deviceItem.setVisible(false);
+            deviceItem.setVisibility(View.GONE);
             alarmIte.setVisible(false);
             servicesItem.setVisible(false);
             helpItem.setVisible(false);
-            linkItem01.setVisible(false);
-            linkItem02.setVisible(false);
+            linkItem01.setVisibility(View.GONE);
+            linkItem02.setVisibility(View.GONE);
         }
     }
 
@@ -357,6 +391,63 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         } else {
             AppManager.AppExit(MainActivity.this);
         }
+    }
+
+    private void initMenu() {
+        // 我的设备
+        myDie = new DeviceMenu(this, null, null);
+        myDie.addItem("添加", DEVICEM_ADD, R.drawable.ic_menu_add);
+        myDie.addItem("删除", DEVICEM_DEL, R.drawable.ic_menu_delete);
+        myDie.addItem("编辑", DEVICEM_EDIT, R.drawable.ic_menu_eidt);
+        myDie.update();
+        myDie.setOnItemSelectedListener(new PopMenu.OnItemSelectedListener() {
+            @Override
+            public void selected(View view, Item item, int position) {
+                switch (item.id) {
+                    case DEVICEM_ADD: {
+                        Toast.makeText(MainActivity.this, "添加", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                    case DEVICEM_DEL: {
+                        Toast.makeText(MainActivity.this, "删除", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                    case DEVICEM_EDIT: {
+                        Toast.makeText(MainActivity.this, "编辑", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                }
+            }
+        });
+
+        // 常用联系人
+        likMan = new DeviceMenu(this, null, null);
+        likMan.addItem("直接添加", LINK_MAN_ADD, R.drawable.ic_menu_add);
+        likMan.addItem("选择联系人", DEVICEM_SEARCH, R.drawable.ic_menu_delete);
+        likMan.update();
+        likMan.setOnItemSelectedListener(new PopMenu.OnItemSelectedListener() {
+            @Override
+            public void selected(View view, Item item, int position) {
+                switch (item.id) {
+                    case LINK_MAN_ADD: {
+                        Toast.makeText(MainActivity.this, "直接添加", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                    case DEVICEM_SEARCH: {
+                        Toast.makeText(MainActivity.this, "选择联系人", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                }
+            }
+        });
+
+        linkItem02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "常用联系人", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 }
