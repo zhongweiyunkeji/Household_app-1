@@ -269,7 +269,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
 
             // 我的设备
-            deviceItem = menu.findItem(R.id.menu_mydevice);
+            //deviceItem = menu.findItem(R.id.menu_mydevice);
 
 
 
@@ -283,8 +283,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             helpItem = menu.findItem(R.id.menu_help_center);
 
             // 常用联系人
-            linkItem01 = menu.findItem(R.id.menu_linkman_add);
-            linkItem02 = menu.findItem(R.id.menu_linkman_del);
+            //linkItem01 = menu.findItem(R.id.menu_linkman_add);
+            //linkItem02 = menu.findItem(R.id.menu_linkman_del);
 
             menuCreateFlag = true;
         //}
