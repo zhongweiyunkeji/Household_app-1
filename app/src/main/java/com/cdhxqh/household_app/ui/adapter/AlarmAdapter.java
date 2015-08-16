@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
+import com.cdhxqh.household_app.ui.actvity.AlarmActivity;
 
 import java.util.ArrayList;
 
@@ -50,7 +51,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
         holder.contacts_name.setText(contacts.get(i).getName() + "\u3000(" + contacts.get(i).getType() + ")");
-        holder.contacts_phone.setText("手机号:"  + contacts.get(i).getPhone());
+        holder.contacts_phone.setText("手机号:" + contacts.get(i).getPhone());
         holder.checkbox_single.setChecked(contacts.get(i).isFlag());
         final int item = i;
 //        final ViewHolder holders = holder;
@@ -68,13 +69,14 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
 //            }
 //        });
 
-            holder.checkbox_single.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.checkbox_single.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    contacts.get(item).setFlag(isChecked);
-                }
-            });
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                contacts.get(item).setFlag(isChecked);
+                AlarmActivity.update(contacts);
+            }
+        });
     }
 
 
