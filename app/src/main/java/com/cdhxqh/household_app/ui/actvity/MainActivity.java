@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     //设置事件监听
     private void initView() {
-        toolbar.setNavigationIcon(R.drawable.ic_menu);  // 设置图标
+        toolbar.setNavigationIcon(R.drawable.ic_menu_list);  // 设置图标
         setSupportActionBar(toolbar);  // 设置ActionBar
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
