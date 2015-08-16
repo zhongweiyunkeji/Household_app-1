@@ -19,8 +19,13 @@ public class DeviceMenu extends PopMenu {
 
     ImageView hintImg;
 
-    public DeviceMenu(Context context, View headView, View footerView) {
+
+    public DeviceMenu(Context context, View headView, View footerView,int popWinRes, int listItemRes, int hintRes) {
         super(context, headView, footerView);
+        this.popWinRes = popWinRes;
+        this.listItemRes = listItemRes;
+        this.hintRes = hintRes;
+        init();
     }
 
     @Override
@@ -30,17 +35,17 @@ public class DeviceMenu extends PopMenu {
 
     @Override
     protected View onCreateView(Context context) {
-        // R.layout.menu_mydevice 是popupmenu的布局文件
-        View view = LayoutInflater.from(context).inflate(R.layout.menu_mydevice, null);
-        hintImg = (ImageView)view.findViewById(R.id.head_hint_img);
+        // R.layout.menu_mydevice 是popupmenu的布局文件   R.layout.menu_mydevice
+        View view = LayoutInflater.from(context).inflate(popWinRes, null);
+        hintImg = (ImageView)view.findViewById(hintRes);  // R.id.head_hint_img
 
         return view;
     }
 
     @Override
     protected PopuoMenuAdapter<Item> onCreateAdapter(Context context, ArrayList<Item> items) {
-        // R.layout.menu_mydevice_item 是item的布局文件
-        return new PopuoMenuAdapter<Item>(context, R.layout.menu_mydevice_item, items);
+        // R.layout.menu_mydevice_item 是item的布局文件  R.layout.menu_mydevice_item
+        return new PopuoMenuAdapter<Item>(context,listItemRes , items);
     }
 
     public ImageView getHintImg() {

@@ -9,23 +9,20 @@
         android:id="@+id/popmenu_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_help"
         android:layout_gravity="center"
-        android:padding="10dp"
-        android:layout_weight="1"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:singleLine="true"
         />
 
     <TextView
         android:id="@+id/popmenu_content"
-        android:textSize="15dp"
+        android:textSize="18dp"
         android:textColor="#969AA2"
         android:gravity="left|center"
         android:layout_gravity="left|center"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:singleLine="true"
+        android:paddingRight="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

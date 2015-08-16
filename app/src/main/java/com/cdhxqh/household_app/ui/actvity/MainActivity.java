@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     //设置事件监听
     private void initView() {
-        toolbar.setNavigationIcon(R.drawable.ic_menu);  // 设置图标
+        toolbar.setNavigationIcon(R.drawable.ic_menu_list);  // 设置图标
         setSupportActionBar(toolbar);  // 设置ActionBar
         toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
@@ -395,7 +395,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     private void initMenu() {
         // 我的设备
-        myDie = new DeviceMenu(this, null, null);
+        myDie = new DeviceMenu(this, null, null, R.layout.menu_mydevice, R.layout.menu_mydevice_item, R.id.head_hint_img);
         myDie.addItem("添加", DEVICEM_ADD, R.drawable.ic_menu_add);
         myDie.addItem("删除", DEVICEM_DEL, R.drawable.ic_menu_delete);
         myDie.addItem("编辑", DEVICEM_EDIT, R.drawable.ic_menu_eidt);
@@ -421,7 +421,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         });
 
         // 常用联系人
-        likMan = new DeviceMenu(this, null, null);
+        likMan = new DeviceMenu(this, null, null, R.layout.menu_mydevice, R.layout.menu_mydevice_item, R.id.head_hint_img);
         likMan.addItem("直接添加", LINK_MAN_ADD, R.drawable.ic_menu_add);
         likMan.addItem("选择联系人", DEVICEM_SEARCH, R.drawable.ic_menu_delete);
         likMan.update();

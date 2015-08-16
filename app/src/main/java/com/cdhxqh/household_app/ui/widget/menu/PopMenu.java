@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import com.cdhxqh.household_app.model.Item;
-
 import java.util.ArrayList;
 
 /**
@@ -43,12 +42,23 @@ public abstract class PopMenu {
      */
     private PopupWindow mPopupWindow;
 
+    protected int popWinRes;      // 弹出窗口布局文件
+    protected int listItemRes;    // 弹出窗菜单项ListView布局文件
+    protected int hintRes;        // 上方提示三角形的ID
+    protected View headView;
+    protected View footerView;
+
     public PopMenu(Context context, View headView, View footerView) {
-        mContext = context;
+        this.mContext = context;
+        this.headView = headView;
+        this.footerView = footerView;
+    }
+
+    public void init(){
         mItemList = new ArrayList<Item>(2);
-        View view = onCreateView(context);
+        View view = onCreateView(mContext);
         view.setFocusableInTouchMode(true);
-        mAdapter = onCreateAdapter(context, mItemList);
+        mAdapter = onCreateAdapter(mContext, mItemList);
         mListView = findListView(view);
         addHeader(headView);
         addFooter(footerView);
