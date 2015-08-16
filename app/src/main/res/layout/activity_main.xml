@@ -38,7 +38,7 @@
             <ImageView
                 android:id="@+id/menu_mydevice"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="right|center"
                 android:layout_gravity="right|center"
                 android:src="@drawable/ic_menu_dropdown"
@@ -47,7 +47,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
                 android:gravity="right|center"
                 android:orientation="horizontal">
@@ -55,7 +55,7 @@
                 <ImageView
                     android:id="@+id/menu_linkman_add"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="right|center"
                     android:layout_gravity="right|center"
                     android:src="@drawable/ic_menu_add"
@@ -64,7 +64,7 @@
                 <ImageView
                     android:id="@+id/menu_linkman_del"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="right|center"
                     android:layout_gravity="right|center"
                     android:src="@drawable/ic_menu_delete"
