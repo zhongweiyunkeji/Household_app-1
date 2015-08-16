@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,14 +9,14 @@
 
         <TableRow
             >
-            <TextView
-                android:id="@+id/id"
+            <CheckBox
+                android:id="@+id/check_id"
+                android:button="@drawable/checkbox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
                 />
 
             <TextView
@@ -29,18 +28,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:textColor="#000000"
-                android:text="aaa"
                 android:textSize="19sp"
                 />
 
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/ic_trash_a"/>
         </TableRow>
 
         <TableRow>
@@ -48,7 +38,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="10dp"
                 android:layout_marginBottom="7dp"
                 />
 
@@ -59,16 +48,13 @@
                 android:layout_weight="7"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="7dp"
-                android:text="dede"
                 />
-
             <TextView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
-
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="7dp"
+                />
         </TableRow>
 
     </TableLayout>

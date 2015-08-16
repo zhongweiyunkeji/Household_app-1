@@ -12,7 +12,7 @@
             >
             <CheckBox
                 android:id="@+id/checkbox_single"
-                android:button="@drawable/check_box_a"
+                android:button="@drawable/checkbox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
