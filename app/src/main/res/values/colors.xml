@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--AA指定透明度。 00是完全透明。 FF是完全不透明。超出取值范围的值将被恢复为默认值。-->
+
     <color name="primary">#009688</color>
     <color name="primaryDark">#00796b</color>
     <color name="accent">#eeff41</color>
     <color name="accentLight">#F4FF81</color>
 
 
+    <color name="title_bj">#0c4da2</color><!--Action bar Background Color/Dark blue操作栏背景颜色、深蓝色-->
+    <color name="text_color_blue">#00aeef</color><!--Light blue按钮背景颜色、浅蓝色-->
+    <color name="text_color_code">#444b55</color><!--Context Title Font Color Dark Gary内容标题颜色、深灰色-->
+    <color name="text_color">#80858e</color><!--ConText/Select Font Color Gary内容字体颜色、灰色-->
+    <color name="edit_color">#b2bac5</color><!--EditView Font Color Light Gary内容添写文本框提示字体颜色、浅灰色-->
 
+    <color name="black">#000000</color><!--black黑色-->
+    <color name="red">#ff6668</color><!--red西瓜红-->
+    <color name="orange">#ff9900</color><!--orange桔黄色-->
+    <color name="list_pressed_bgcolor">#fff6f7</color><!--List Pressed Color Background Color列表点击的颜色-->
+    <color name="list_title_bgcolor">#e2e9f2</color><!--List Title Background Color列表标题背景颜色-->
+    <color name="bgcolor">#f1f6fb</color><!--Body Background Color整体背景颜色-->
 
-    <color name="title_bj">#0b4da1</color>
 
     <!--找回密码-->
-    <color name="font_color">#ffffff</color>
+    <color name="font_color">#ffffff</color><!--Font Color White白色-->
     <color name="list_item_read">#ffb7b7b7</color>
     <color name="hint_color">#ffb7b7b7</color>
-    <color name="text_color">#80858e</color>
-    <color name="text_color_code">#444b55</color>
-    <color name="text_color_blue">#00aeef</color>
 
 </resources>

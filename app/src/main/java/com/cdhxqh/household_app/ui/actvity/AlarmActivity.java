@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -20,6 +21,7 @@ import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.adapter.AlarmAdapter;
 import com.cdhxqh.household_app.ui.widget.ItemDivider;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -50,8 +52,8 @@ public class AlarmActivity extends Activity{
     /**
      * 联系人信息
      */
-    private ArrayList<Contacters> contactsMessage;
-    ArrayList<Contacters> contacts = new ArrayList<Contacters>();
+    private static ArrayList<Contacters> contactsMessage = new ArrayList<Contacters>();
+    static ArrayList<Contacters> contacts;
 
     /**
      *添加联系人
@@ -66,6 +68,7 @@ public class AlarmActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_of_alarm);
         findViewById();
+        getData();
         initView();
     }
 
@@ -88,6 +91,8 @@ public class AlarmActivity extends Activity{
          * 添加联系人
          */
         addContacts = (ImageView) findViewById(R.id.title_add_id);
+
+        contacts = new ArrayList<Contacters>();
     }
 
 
@@ -98,8 +103,6 @@ public class AlarmActivity extends Activity{
 
 //        addContacts.setOnClickListener(addContactOnClickListener);
 
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -108,13 +111,15 @@ public class AlarmActivity extends Activity{
         alarm_contacts.setLayoutManager(layoutManager);
         alarm_contacts.setItemAnimator(new DefaultItemAnimator());
 
-        for(int i = 0; i < 15; i++) {
-            Contacters c = new Contacters();
-            c.setName("张思");
-            c.setType("老师");
-            c.setPhone("15467656784");
-            c.setFlag(false);
-            contacts.add(c);
+        if(contacts.size()<=0) {
+            for (int i = 0; i < 15; i++) {
+                Contacters c = new Contacters();
+                c.setName("张思");
+                c.setType("老师");
+                c.setPhone("15467656784");
+                c.setFlag(false);
+                contacts.add(c);
+            }
         }
 
         alarmAdapter = new AlarmAdapter(this, contacts);
@@ -137,28 +142,42 @@ public class AlarmActivity extends Activity{
         }
     };
 
+    public static void update(ArrayList<Contacters> contactersList_a) {
+        contactsMessage = contactersList_a;
+    }
+
+    public void getData() {
+        if(contacts.size() > 0) {
+            contacts = (ArrayList<Contacters>) getIntent().getSerializableExtra("contactList");
+        }
+    }
     /**
      * 确定
      */
     private View.OnClickListener itemOnClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
-            contactsMessage = new ArrayList<Contacters>();
-            ArrayList<Contacters> contacts = alarmAdapter.getContacts();
-            for(int i = 0; i<contacts.size(); i++) {
-                if(contacts.get(i).isFlag() == true) {
-                    Contacters context = new Contacters();
-                    context = contacts.get(i);
-                    contactsMessage.add(context);
-                }
-            }
             if(contactsMessage.size() <= 0) {
-                new  AlertDialog.Builder(AlarmActivity.this).setTitle("标题").setMessage("请选择联系人").setPositiveButton("确定", null).show();
+//                new  AlertDialog.Builder(AlarmActivity.this).setTitle("标题").setMessage("请选择联系人").setPositiveButton("确定", null).show();
+                finish();
             }else {
-                Intent intent = new Intent();
-                intent.setClass(AlarmActivity.this, SafeActivity.class);
-                startActivity(intent);
+                Intent intent=new Intent();
+                intent.putExtra("contactList", (Serializable) contactsMessage);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }
     };
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            Intent intent=new Intent();
+            intent.putExtra("contactList", (Serializable) contactsMessage);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

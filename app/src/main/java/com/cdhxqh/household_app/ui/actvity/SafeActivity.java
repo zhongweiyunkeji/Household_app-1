@@ -4,30 +4,25 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.ui.fragment.CartoonDisplay;
+import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.widget.SwitchButton;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -90,10 +85,26 @@ public class SafeActivity extends BaseActivity {
 
 //    private RelativeLayout select_p;
 
+    /**
+     *已选择联系人
+     */
+    ArrayList<Contacters> contactersList;
+
+    /**
+     *显示已选择联系人
+     */
+    TextView user_num;
+
+    /**
+     *察看联系人
+     */
+    LinearLayout view_user;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safe_service);
         findViewById();
+//        getData();
         initView();
     }
 
@@ -138,8 +149,6 @@ public class SafeActivity extends BaseActivity {
          */
         create_user = (TextView) findViewById(R.id.create_user);
 
-        phone_num = (TextView) findViewById(R.id.phone_num);
-
         /**
          * 添加联系人图片
          */
@@ -149,6 +158,9 @@ public class SafeActivity extends BaseActivity {
 //         * 联系人灰色界面
 //         */
 //        select_p = (RelativeLayout) findViewById(R.id.select_p);
+        user_num = (TextView)findViewById(R.id.user_num);
+
+//        view_user = (LinearLayout) findViewById(R.id.view_user);
     }
 
     protected void initView() {
@@ -165,6 +177,10 @@ public class SafeActivity extends BaseActivity {
 //        create_user.setOnClickListener(createOnClickListener);
 
         isVideo_a_b.setOnClickListener(videoOnClickListener);
+
+//        view_user.setOnClickListener(viewOnClickListener);
+
+        user_num.setText("可选择多人");
 
 //        cancel.setOnClickListener(cancelOnClickListener);
 
@@ -258,6 +274,51 @@ public class SafeActivity extends BaseActivity {
 //
 //        }
 
+//    /**
+//     * 察看联系人
+//     */
+//    private View.OnClickListener viewOnClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            if(contactersList != null) {
+//                if(contactersList.size() > 0) {
+//                    Intent intent = new Intent();
+//                    intent.setClass(SafeActivity.this, ViewUserActivity.class);
+//                    intent.putExtra("contactList", (Serializable) contactersList);
+//                    startActivityForResult(intent, PICK_CONTACT);
+//                }
+//            }
+//        }
+//    };
+
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        contactersList = (ArrayList<Contacters>) data.getSerializableExtra("contactList");
+        ArrayList<Contacters> contactersLists = new ArrayList<Contacters>();
+        for(int i = 0; i<contactersList.size(); i++) {
+            if(contactersList.get(i).isFlag() == true) {
+                Contacters context = new Contacters();
+                context = contactersList.get(i);
+                contactersLists.add(context);
+            }
+        }
+        super.onActivityResult(reqCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if(contactersLists.size() > 0) {
+                user_num.setText("已选择" + contactersLists.size() + "人");
+            }else {
+                user_num.setText("可选择多人");
+            }
+        }
+//        if(resultCode == Activity.RESULT_FIRST_USER) {
+//            if(contactersLists.size() > 0) {
+//                user_num.setText("已选择" + contactersLists.size() + "人");
+//            }else {
+//                user_num.setText("可选择多人");
+//            }
+//        }
+    }
+
     /**
      * 添加联系人
      */
@@ -265,8 +326,9 @@ public class SafeActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent intent=new Intent();
-            intent.setClass(SafeActivity.this,AlarmActivity.class);
-            startActivity(intent);
+            intent.setClass(SafeActivity.this, AlarmActivity.class);
+            intent.putExtra("contactList", (Serializable) contactersList);
+            startActivityForResult(intent, PICK_CONTACT);
         }
     };
 
@@ -311,12 +373,12 @@ public class SafeActivity extends BaseActivity {
      * 出行时间
      */
     private View.OnClickListener outTimeOnClickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showDialog(1);
-                    setTime(time_value);
-                }
-            };
+        @Override
+        public void onClick(View v) {
+            showDialog(1);
+            setTime(time_value);
+        }
+    };
 
     /**
      * 出行时间

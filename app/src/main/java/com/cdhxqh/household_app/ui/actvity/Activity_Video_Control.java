@@ -25,6 +25,7 @@ public class Activity_Video_Control extends BaseActivity {
 
     LinearLayout layout;
     ScrollView   scrollView;
+    private TextView titlename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,13 @@ public class Activity_Video_Control extends BaseActivity {
     private void findViewById(){
         layout = (LinearLayout)findViewById(R.id.video_monitoring_layout);
         scrollView = (ScrollView)findViewById(R.id.scrollView);
+        titlename = (TextView) findViewById(R.id.title_text_id);
         // linearLayout = (FixGridLayout)findViewById(R.id.linearLayout);
     }
 
     private void initView(){
+
+        titlename.setText(getIntent().getExtras().getString("device_name"));
         /*linearLayout.setmCellHeight(200);
         linearLayout.setmCellWidth(200);*/
 

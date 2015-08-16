@@ -1,9 +1,11 @@
 package com.cdhxqh.household_app.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/8/10.
  */
-public class Contacters {
+public class Contacters implements Serializable {
     /**
      * 姓名
      */
