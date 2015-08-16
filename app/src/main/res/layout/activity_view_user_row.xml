@@ -10,18 +10,18 @@
 
         <TableRow
             >
-            <CheckBox
-                android:id="@+id/checkbox_single"
-                android:button="@drawable/check_box_a"
+            <TextView
+                android:id="@+id/id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
                 />
 
             <TextView
-                android:id="@+id/contacts_name"
+                android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
@@ -29,17 +29,18 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:textColor="#000000"
+                android:text="aaa"
                 android:textSize="19sp"
                 />
 
             <ImageView
-                android:id="@+id/edit"
+                android:id="@+id/delete"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/ic_eidt_a"/>
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_trash_a"/>
         </TableRow>
 
         <TableRow>
@@ -47,23 +48,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:layout_marginBottom="7dp"
                 />
 
             <TextView
-                android:id="@+id/contacts_phone"
+                android:id="@+id/phone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="7dp"
+                android:text="dede"
                 />
+
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginBottom="7dp"
-                />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
+
         </TableRow>
 
     </TableLayout>
