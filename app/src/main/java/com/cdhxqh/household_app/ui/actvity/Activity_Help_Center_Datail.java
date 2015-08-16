@@ -2,6 +2,7 @@ package com.cdhxqh.household_app.ui.actvity;
 
 import android.net.http.SslError;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
@@ -28,7 +29,7 @@ public class Activity_Help_Center_Datail extends BaseActivity {
     }
 
     public void findViewById(){
-        webView = (WebView)findViewById(R.id.help_center_detail);
+        // webView = (WebView)findViewById(R.id.help_center_detail);
         backImg = (ImageView)findViewById(R.id.back_imageview_id);
     }
 
@@ -55,6 +56,7 @@ public class Activity_Help_Center_Datail extends BaseActivity {
                 webView.loadUrl(url);  //  "https://www.baidu.com/"
             } catch (Exception e) {
                 e.printStackTrace();
+                Log.e("AAAA", "");
             }
         }
 
