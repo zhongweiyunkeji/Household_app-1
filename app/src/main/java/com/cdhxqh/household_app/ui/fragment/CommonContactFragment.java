@@ -16,9 +16,11 @@ import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
+import com.cdhxqh.household_app.ui.actvity.MainActivity;
 import com.cdhxqh.household_app.ui.adapter.CommonContactAdapter;
 import com.cdhxqh.household_app.ui.widget.ItemDivider;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -64,6 +66,9 @@ public class CommonContactFragment extends BaseFragment {
     private RelativeLayout select_p;
 
     private TextView putConnect;
+
+    NavigationDrawerFragment.NavigationDrawerCallbacks navigationDrawerCallbacks = new MainActivity();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -71,6 +76,10 @@ public class CommonContactFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.activity_common_contact, container, false);
         findViewById(view);
         initView();
+        Intent intent = new Intent();
+        intent.putExtra("contactList", (Serializable) contacts);
+        intent.putExtra("FragmentName", "CommonContactFragment");
+        navigationDrawerCallbacks.callbackFun(intent);
         return view;
     }
 

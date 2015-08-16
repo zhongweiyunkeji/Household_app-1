@@ -2,6 +2,7 @@ package com.cdhxqh.household_app.ui.fragment;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -306,5 +307,7 @@ public class NavigationDrawerFragment extends BaseFragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+
+        public void callbackFun(Intent arg);
     }
 }

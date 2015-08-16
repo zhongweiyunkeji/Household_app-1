@@ -5,11 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
+import com.cdhxqh.household_app.ui.actvity.AlarmActivity;
 import com.cdhxqh.household_app.ui.actvity.ViewUserActivity;
 
 import java.util.ArrayList;
@@ -33,26 +36,39 @@ public class ViewUserAdapter extends RecyclerView.Adapter<ViewUserAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewUserAdapter.ViewHolder holder, int position) {
-        if(contactersList.get(position).isFlag() == true) {
-            holder.id.setText("*" + String.valueOf(position + 1));
-            holder.name.setText(contactersList.get(position).getName());
-            holder.phone.setText(contactersList.get(position).getPhone());
-        }
+    public void onBindViewHolder(ViewUserAdapter.ViewHolder holder, final int position) {
+//            holder.id.setText("*" + String.valueOf(position + 1));
+        holder.name.setText(contactersList.get(position).getName());
+        holder.phone.setText(contactersList.get(position).getPhone());
+        holder.check_id.setChecked(contactersList.get(position).isFlag());
 
-        final int i = position;
-        holder.delete.setOnClickListener(new View.OnClickListener() {
+        holder.check_id.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View v) {
-                contactersList.remove(i);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                contactersList.get(position).setFlag(isChecked);
                 ViewUserActivity.update(contactersList);
-                dataChanged();
             }
         });
+//        final int i = position;
+//        holder.delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                contactersList.remove(i);
+//                ViewUserActivity.update(contactersList);
+//                dataChanged();
+//            }
+//        });
     }
 
+    /**
+     * 更新数据
+     */
+    public void update(ArrayList<Contacters> contactersList) {
+        this.contactersList = contactersList;
+    }
     // 刷新list
-    private void dataChanged() {
+    public void dataChanged() {
         // 通知listView刷新
         notifyDataSetChanged();
     }
@@ -62,11 +78,25 @@ public class ViewUserAdapter extends RecyclerView.Adapter<ViewUserAdapter.ViewHo
         return contactersList.size();
     }
 
+    public void setIsSelected() {
+        for(int i = 0; i<contactersList.size(); i++) {
+            contactersList.get(i).setFlag(true);
+        }
+        dataChanged();
+    }
+
+    public void inverseSelected() {
+        for(int i = 0; i<contactersList.size(); i++) {
+            contactersList.get(i).setFlag(false);
+        }
+        dataChanged();
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         /**
          * id
          */
-        private TextView id;
+        private CheckBox check_id;
 
         /**
          * name
@@ -78,17 +108,11 @@ public class ViewUserAdapter extends RecyclerView.Adapter<ViewUserAdapter.ViewHo
          */
         private TextView phone;
 
-        /**
-         *删除
-         */
-        private ImageView delete;
-
         public ViewHolder(View itemView) {
             super(itemView);
-            id = (TextView) itemView.findViewById(R.id.id);
+            check_id = (CheckBox) itemView.findViewById(R.id.check_id);
             name = (TextView) itemView.findViewById(R.id.name);
             phone = (TextView) itemView.findViewById(R.id.phone);
-            delete = (ImageView) itemView.findViewById(R.id.delete);
         }
     }
 }
