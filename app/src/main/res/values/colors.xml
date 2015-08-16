@@ -6,8 +6,10 @@
     <color name="primaryDark">#00796b</color>
     <color name="accent">#eeff41</color>
     <color name="accentLight">#F4FF81</color>
-
-
+	<color name="transparent">#00ffffff</color><!--透明-->
+	<color name="disabled_bg">#cccccc</color><!--disabled禁用时-->
+	<color name="transition_bg">#ffffff</color><!--transition过渡时-->
+	
     <color name="title_bj">#0c4da2</color><!--Action bar Background Color/Dark blue操作栏背景颜色、深蓝色-->
     <color name="text_color_blue">#00aeef</color><!--Light blue按钮背景颜色、浅蓝色-->
     <color name="text_color_code">#444b55</color><!--Context Title Font Color Dark Gary内容标题颜色、深灰色-->
