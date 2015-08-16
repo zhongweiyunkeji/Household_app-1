@@ -43,12 +43,23 @@ public abstract class PopMenu {
      */
     private PopupWindow mPopupWindow;
 
+    protected int popWinRes;
+
+    protected  int listItemRes;
+    View headView;
+    View footerView;
+
     public PopMenu(Context context, View headView, View footerView) {
-        mContext = context;
+        this.mContext = context;
+        this.headView = headView;
+        this.footerView = footerView;
+    }
+
+    public void init(){
         mItemList = new ArrayList<Item>(2);
-        View view = onCreateView(context);
+        View view = onCreateView(mContext);
         view.setFocusableInTouchMode(true);
-        mAdapter = onCreateAdapter(context, mItemList);
+        mAdapter = onCreateAdapter(mContext, mItemList);
         mListView = findListView(view);
         addHeader(headView);
         addFooter(footerView);
