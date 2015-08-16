@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,11 +25,15 @@ import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
+import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.fragment.CommonContactFragment;
 import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 import com.cdhxqh.household_app.ui.fragment.MyDeviceFragment;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
 import com.cdhxqh.household_app.ui.fragment.ProductFragment;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class MainActivity extends BaseActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -64,6 +69,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     TextView atnrTitle;  // actionbar中间显示的文字
 
     private NavigationDrawerFragment product_fragment;
+
+    static Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +135,15 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        if(id == 2131296460) {
+            if(intent.getStringExtra("FragmentName").equals("CommonContactFragment")) {
+                Intent intents=new Intent();
+                intents.putExtra("contactList", (ArrayList<Contacters>) intent.getSerializableExtra("contactList"));
+                intents.setClass(MainActivity.this, ViewUserActivity.class);
+                startActivity(intents);
+            }
+        }
+
         if (id == R.id.action_settings) {
             return false;
         }
@@ -187,6 +203,11 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         }
         // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
         invalidateOptionsMenu();
+    }
+
+    @Override
+    public void callbackFun(Intent arg) {
+        intent = arg;
     }
 
     /**

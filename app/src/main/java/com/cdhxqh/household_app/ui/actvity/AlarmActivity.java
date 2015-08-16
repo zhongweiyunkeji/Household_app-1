@@ -53,7 +53,7 @@ public class AlarmActivity extends Activity{
      * 联系人信息
      */
     private static ArrayList<Contacters> contactsMessage = new ArrayList<Contacters>();
-    static ArrayList<Contacters> contacts = new ArrayList<Contacters>();
+    static ArrayList<Contacters> contacts;
 
     /**
      *添加联系人
@@ -91,6 +91,8 @@ public class AlarmActivity extends Activity{
          * 添加联系人
          */
         addContacts = (ImageView) findViewById(R.id.title_add_id);
+
+        contacts = new ArrayList<Contacters>();
     }
 
 
@@ -100,8 +102,6 @@ public class AlarmActivity extends Activity{
         edit.setOnClickListener(itemOnClickListener);
 
 //        addContacts.setOnClickListener(addContactOnClickListener);
-
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
