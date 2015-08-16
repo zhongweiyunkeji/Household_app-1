@@ -56,7 +56,7 @@ public class Activity_Help_Center_Datail extends BaseActivity {
                 webView.loadUrl(url);  //  "https://www.baidu.com/"
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.e("AAAA", "");
+                // Log.e("AAAA", "");
             }
         }
 
