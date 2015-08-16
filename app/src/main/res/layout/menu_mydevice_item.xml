@@ -9,7 +9,6 @@
         android:id="@+id/popmenu_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_help"
         android:layout_gravity="center"
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
