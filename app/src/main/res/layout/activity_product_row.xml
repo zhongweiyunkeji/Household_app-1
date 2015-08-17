@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_arrow_right"/>
+                    android:src="@drawable/ic_list_view"/>
 
             </RelativeLayout>
 
