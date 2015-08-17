@@ -40,7 +40,7 @@ public class Activity_First_login extends BaseActivity implements OnClickListene
 
     private int lastX = 0;
 
-    private static final int[] pics = {R.drawable.front_cover,R.drawable.front_cover, R.drawable.front_cover };//改为添加自己的图片
+    private static final int[] pics = {R.drawable.welcom1,R.drawable.welcom2, R.drawable.welcom3,  R.drawable.welcom4};//改为添加自己的图片
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
