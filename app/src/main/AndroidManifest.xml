@@ -46,7 +46,9 @@
         <activity
             android:name=".ui.actvity.Activity_First_login"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".ui.actvity.Activity_Login"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.actvity.Activity_Registry_User">
         </activity>
         <activity
