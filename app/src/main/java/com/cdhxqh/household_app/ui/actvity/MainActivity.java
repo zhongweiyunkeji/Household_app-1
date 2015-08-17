@@ -194,6 +194,15 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
         if (id == R.id.action_settings) {
             return false;
+        } else
+        if(id == R.id.menu_help_center){
+            HelpCenterFragement fragement = (HelpCenterFragement)this.getFragmentManager().findFragmentByTag("HelpCenterFragement");
+            boolean flag = fragement.onoff;
+            Intent intents=new Intent(MainActivity.this, Activity_Help_Center_Search.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("FLAG", flag);
+            intents.putExtras(bundle);
+            startActivity(intents);
         }
 
         return super.onOptionsItemSelected(item);
@@ -230,7 +239,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             }
             case 4: {  // 帮助中心
                 try {
-                    fragmentTransaction.replace(R.id.container, new HelpCenterFragement());
+                    HelpCenterFragement fragement = new HelpCenterFragement();
+                    fragmentTransaction.replace(R.id.container,fragement, "HelpCenterFragement" );
                     fragmentTransaction.commit();
                 } catch (Exception e) {
                     e.printStackTrace();
