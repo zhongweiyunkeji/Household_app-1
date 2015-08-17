@@ -72,6 +72,8 @@
         </activity>
         <activity android:name=".ui.actvity.Activity_Help_Center_Datail"  >
         </activity>
+        <activity android:name=".ui.actvity.Activity_Help_Center_Search"  >
+        </activity>
     </application>
 
 </manifest>
