@@ -62,6 +62,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     private static final int TYPE_CONTACT = 1;
 
+    private static final int EDIT_CONTACT = 3;
+
 
     private String[] mFavoriteTabTitles;
     private String[] mFavoriteTabPaths;
@@ -240,7 +242,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 fragmentTransaction.commit();
                 break;
             }
-            case 6:{
+            case 6: {
                 break;
             }
             default: {
@@ -294,13 +296,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     }
 
 
-
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         mTitle = mFavoriteTabTitles[mSelectPos];
         actionBar.setDisplayShowCustomEnabled(true);
         // actionBar.setTitle(mTitle);
-        if(atnrTitle!=null){
+        if (atnrTitle != null) {
             atnrTitle.setText(mTitle);
         }
     }
@@ -308,53 +309,46 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //if(!menuCreateFlag){
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_actionbar, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_actionbar, menu);
 
-            menuBar = menu;
+        menuBar = menu;
 
-            // 报警记录
-            alarmIte = menu.findItem(R.id.menu_alarm);
+        // 报警记录
+        alarmIte = menu.findItem(R.id.menu_alarm);
 
-            // 文件管理
-            servicesItem = menu.findItem(R.id.menu_security_services);
+        // 文件管理
+        servicesItem = menu.findItem(R.id.menu_security_services);
 
-            // 帮助中心
-            helpItem = menu.findItem(R.id.menu_help_center);
+        // 帮助中心
+        helpItem = menu.findItem(R.id.menu_help_center);
 
 
-
-            menuCreateFlag = true;
+        menuCreateFlag = true;
         //}
 
         //if(menuCreateFlag){
-            menu = menuBar;
-            hideMenu(); // 一开始全部隐藏,后面的判断更具需要逐个显示
+        menu = menuBar;
+        hideMenu(); // 一开始全部隐藏,后面的判断更具需要逐个显示
 
-            if(mSelectPos == 0){ // 我的设备
-                deviceItem.setVisibility(View.VISIBLE);
-            } else if(mSelectPos == 1){ // 报警记录
-                alarmIte.setVisible(true);
-            } else
-            if(mSelectPos == 2){ // 安全服务中心
+        if (mSelectPos == 0) { // 我的设备
+            deviceItem.setVisibility(View.VISIBLE);
+        } else if (mSelectPos == 1) { // 报警记录
+            alarmIte.setVisible(true);
+        } else if (mSelectPos == 2) { // 安全服务中心
 
-            } else
-            if(mSelectPos == 3){ // 文件管理
-                servicesItem.setVisible(true);
-            } else
-            if(mSelectPos == 4){ // 帮助中心
-                helpItem.setVisible(true);
-            } else
-            if(mSelectPos == 5){// 常用联系人
-                linkItem01.setVisibility(View.VISIBLE);
-                linkItem02.setVisibility(View.VISIBLE);
-            } else
-            if(mSelectPos == 6){// 关于我们
+        } else if (mSelectPos == 3) { // 文件管理
+            servicesItem.setVisible(true);
+        } else if (mSelectPos == 4) { // 帮助中心
+            helpItem.setVisible(true);
+        } else if (mSelectPos == 5) {// 常用联系人
+            linkItem01.setVisibility(View.VISIBLE);
+            linkItem02.setVisibility(View.VISIBLE);
+        } else if (mSelectPos == 6) {// 关于我们
 
-            } else
-            if(mSelectPos == 7){// 设置
+        } else if (mSelectPos == 7) {// 设置
 
-            }
+        }
         //}
 
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -365,7 +359,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     }
 
     private void hideMenu() {
-        if(menuCreateFlag){
+        if (menuCreateFlag) {
             deviceItem.setVisibility(View.GONE);
             alarmIte.setVisible(false);
             servicesItem.setVisible(false);
@@ -435,11 +429,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             public void selected(View view, Item item, int position) {
                 switch (item.id) {
                     case LINK_MAN_ADD: {
-                        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                        Intent intent = new Intent(activity, AddContacterActivity.class);
                         startActivityForResult(intent, TYPE_CONTACT);
+                        break;
                     }
                     case DEVICEM_SEARCH: {
-                        Intent intent = new Intent(activity, AddContacterActivity.class);
+                        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                         startActivityForResult(intent, PICK_CONTACT);
                         break;
                     }
@@ -462,16 +457,16 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     }
 
-        @Override
+    @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
         Contacters contacters = new Contacters();
 
         switch (reqCode) {
-            case (PICK_CONTACT) :
+            case (PICK_CONTACT): {
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();
-                    Cursor c =  managedQuery(contactData, null, null, null, null);
+                    Cursor c = managedQuery(contactData, null, null, null, null);
                     if (c.moveToFirst()) {
                         ContentResolver reContentResolverol = getContentResolver();
                         String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
@@ -484,14 +479,26 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                                 null,
                                 null);
                         while (phone.moveToNext()) {
-                           String usernumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                            String usernumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                             contacters.setPhone(usernumber);
                         }
                     }
-                    }
-                break;
                 }
+                break;
+            }
+            case (TYPE_CONTACT): {
+                if (resultCode == Activity.RESULT_OK) {
+                    contacters = (Contacters) data.getSerializableExtra("contactList");
+                }
+                break;
+            }
+        }
+        if (contacters.getName() != null && contacters.getPhone() != null) {
+            if (contacters.getType() == null || contacters.getType().toString().trim().equals("")) {
+                contacters.setType("未分类");
+            }
             commonContactFragment.setData(contacters);
         }
+    }
 
 }
