@@ -68,7 +68,7 @@
             android:layout_height="1dp"
             android:background="@drawable/list_line_x"></View>
             <TableRow
-                android:id="@+id/select_group">
+                >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,12 +83,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_toRightOf="@+id/role_group"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@android:color/transparent"
                 android:hint="选择所添加人的角色分组"/>
 
             <ImageView
+                android:id="@+id/select_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_list_view"/>

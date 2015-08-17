@@ -440,6 +440,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 switch (item.id) {
                     case LINK_MAN_ADD: {
                         Intent intent = new Intent(activity, AddContacterActivity.class);
+                        intent.putExtra("edit", "edit");
                         startActivityForResult(intent, TYPE_CONTACT);
                         break;
                     }
@@ -502,7 +503,14 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 }
                 break;
             }
+            case (EDIT_CONTACT): {
+                if (resultCode == RESULT_OK) {
+                    contacters = (Contacters) data.getSerializableExtra("contactList");
+                }
+                break;
+            }
         }
+
         if (contacters.getName() != null && contacters.getPhone() != null) {
             if (contacters.getType() == null || contacters.getType().toString().trim().equals("")) {
                 contacters.setType("未分类");

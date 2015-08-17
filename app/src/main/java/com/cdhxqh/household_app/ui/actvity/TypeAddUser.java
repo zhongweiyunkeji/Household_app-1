@@ -1,10 +1,7 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.action.impl.OnItemClickCallBackImpl;
@@ -13,11 +10,9 @@ import com.cdhxqh.household_app.ui.adapter.UserSelectAdapter;
 import java.util.ArrayList;
 
 /**
- * Created by hexian on 2015/8/10.
- * 选择用户类型
+ * Created by Administrator on 2015/8/17.
  */
-
-public class Activity_User_Type extends BaseActivity {
+public class TypeAddUser extends BaseActivity{
 
     ListView listView;
 
@@ -52,6 +47,4 @@ public class Activity_User_Type extends BaseActivity {
 
         return list;
     }
-
-
 }
