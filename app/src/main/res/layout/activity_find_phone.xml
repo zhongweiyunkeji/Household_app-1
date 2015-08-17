@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center|center_horizontal"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/through_phone"
+            android:textColor="@color/font_color" />
+
+        <TextView
+            android:id="@+id/TextViewMail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/through_mail"
+            android:textColor="@color/text_color"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/login_edit_text"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/registered_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/ic_mobile_m"
+            android:hint="@string/register_phone_number"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:cursorVisible="true"
+            android:inputType="phone"
+            android:textColorHint="@color/hint_color"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/mail_line_x"></View>
+
+        <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/sms_verification_code"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@android:color/transparent"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:hint="@string/sms_verification_code"
+                android:textColorHint="@color/hint_color"/>
+
+            <Button
+                android:id="@+id/get_verification_code"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:text="@string/get_verification_code"
+                android:textSize="12dp"
+                android:textColor="@color/text_color_code"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/hint_password"
+        android:textSize="11sp"
+        android:textColor="@color/text_color"/>
+
+    <Button
+        android:id="@+id/restart_passworld_id"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/text_color_blue"
+        android:text="@string/find_password"
+        android:textColor="@color/font_color"
+        android:textSize="20sp" />
+
+</LinearLayout>
