@@ -68,7 +68,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="家里门口"
                     android:textSize="16dp"
-                    android:textColor="#444b55"
+                    android:textColor="@color/text_color_code"
                     />
 
             </RelativeLayout>
@@ -88,7 +88,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="监控时间：星期一00:00至 星期六 23:59"
                     android:textSize="12dp"
-                    android:textColor="#b2bac5"
+                    android:textColor="@color/edit_color"
                     />
 
                 <ImageView
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_arrow_right"/>
+                    android:src="@drawable/ic_list_view"/>
 
             </RelativeLayout>
 
