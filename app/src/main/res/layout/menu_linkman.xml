@@ -23,7 +23,7 @@
         android:src="@drawable/dropdown_menu_topbg"
         android:layout_width="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="13dp"
+        android:layout_marginRight="57dp"
         android:layout_gravity="right|top"
         android:layout_height="wrap_content"/>
     <!---->

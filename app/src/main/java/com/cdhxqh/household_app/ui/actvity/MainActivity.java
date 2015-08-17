@@ -421,7 +421,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         });
 
         // 常用联系人
-        likMan = new DeviceMenu(this, null, null, R.layout.menu_mydevice, R.layout.menu_mydevice_item, R.id.head_hint_img);
+        likMan = new DeviceMenu(this, null, null, R.layout.menu_linkman, R.layout.menu_mydevice_item, R.id.head_hint_img);
         likMan.addItem("直接添加", LINK_MAN_ADD, R.drawable.ic_menu_add);
         likMan.addItem("选择联系人", DEVICEM_SEARCH, R.drawable.ic_menu_delete);
         likMan.update();
