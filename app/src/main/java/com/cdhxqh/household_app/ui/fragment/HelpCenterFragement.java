@@ -33,7 +33,7 @@ public class HelpCenterFragement extends BaseFragment {
     HelpCenterExpandableListViewAdapter adapter;
     TextView tabsLeft;
     TextView tabsRight;
-    boolean onoff = false;   // true表示选中“产品说明”, false表示选中"操作说明"
+    public boolean onoff = false;   // true表示选中“产品说明”, false表示选中"操作说明"
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

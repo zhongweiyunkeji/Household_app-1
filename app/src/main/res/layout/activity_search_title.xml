@@ -16,7 +16,7 @@
         android:src="@drawable/ic_menu_back"
         android:visibility="visible" />
 
-    <TextView
+    <EditText
         android:id="@+id/title_text_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +27,9 @@
         android:layout_marginRight="60dp"
         android:layout_marginTop="15dp"
         android:padding="5dp"
+        android:focusable="true"
+        android:background="@color/search_textview_background"
+        android:textCursorDrawable="@drawable/cursor_white"
         android:drawableLeft="@drawable/ic_tab_search"
         android:textColor="#ffffff"
         android:textSize="@dimen/dimens_22" />

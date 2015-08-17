@@ -118,7 +118,7 @@ public class HelpCenterExpandableListViewAdapter extends BaseExpandableListAdapt
         holder.rightView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(itemClickListener != null){
+                if (itemClickListener != null) {
                     itemClickListener.onItemClick(parent, view, rightView, groupIndex, childIndex, hasLastChild);
                 }
             }
@@ -144,6 +144,24 @@ public class HelpCenterExpandableListViewAdapter extends BaseExpandableListAdapt
 
         notifyDataSetChanged();
     }
+
+    /**
+     * 清除ListView数据
+     */
+    public void clear(){
+        group.clear();
+        child.clear();
+    }
+
+    /**
+     *
+     */
+    public void reloadDate(List<String> glist, Map<String, List<String>> ilist){
+        clear();
+        update(glist, ilist);
+    }
+
+
 
     public ArrayList<String> getGroup() {
         return group;
