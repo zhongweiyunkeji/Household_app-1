@@ -82,8 +82,12 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
         }
     }
 
+    public void updata(ArrayList<Contacters> contacters) {
+         this.contacts = contacters;
+    }
+
     // 刷新list
-    private void dataChanged() {
+    public void dataChanged() {
         // 通知listView刷新
         notifyDataSetChanged();
     }
