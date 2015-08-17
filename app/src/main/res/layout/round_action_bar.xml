@@ -35,7 +35,7 @@
     <GridLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:columnCount="3"
         android:rowCount="3">
         <!--  左上方图片:   在圆心的上方,与左边图片右对齐,同时与上边图片下对齐   -->
