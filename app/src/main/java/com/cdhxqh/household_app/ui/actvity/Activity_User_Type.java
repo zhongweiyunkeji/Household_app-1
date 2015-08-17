@@ -41,9 +41,14 @@ public class Activity_User_Type extends BaseActivity {
 
     public ArrayList<String> getData(){
         ArrayList<String> list = new ArrayList<String>(0);
-        list.add("家庭用户");
-        list.add("社区物业");
-        list.add("保安公司");
+        list.add("家人");
+        list.add("物业");
+        list.add("朋友");
+        list.add("邻居");
+        list.add("公安");
+        list.add("消防");
+        list.add("安保");
+        list.add("其他");
 
         return list;
     }
