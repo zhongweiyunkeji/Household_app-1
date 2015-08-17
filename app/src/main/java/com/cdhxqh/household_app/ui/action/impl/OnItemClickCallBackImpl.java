@@ -11,6 +11,9 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.ui.action.OnItemClickCallBack;
 import com.cdhxqh.household_app.ui.actvity.Activity_Registry_User;
 import com.cdhxqh.household_app.ui.actvity.Activity_User_Type;
+import com.cdhxqh.household_app.ui.actvity.AddContacterActivity;
+import com.cdhxqh.household_app.ui.actvity.TypeActivity;
+import com.cdhxqh.household_app.ui.actvity.TypeAddUser;
 import com.cdhxqh.household_app.ui.adapter.UserSelectAdapter;
 
 /**
@@ -41,6 +44,21 @@ public class OnItemClickCallBackImpl implements OnItemClickCallBack {
             ((Activity_User_Type)ctx).finish();
 
             return;
+        } else if(ctx instanceof Activity_User_Type){
+                adapter.setIndex(position);      // 关键代码
+                adapter.notifyDataSetChanged(); // 关键代码
+                Toast.makeText(adapter.getContext(), "您选择的是：" + adapter.getList().get(position), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                String text =  ((TextView)((ViewGroup)view).getChildAt(0)).getText().toString();
+                bundle.putString("text", text);
+                intent.putExtras(bundle);
+                intent.setClass(ctx, AddContacterActivity.class);
+                ((Activity_User_Type)ctx).setResult(ACTIVITY_REGISTRY_RESPONSE1, intent);
+                ((Activity_User_Type)ctx).finish();
+
+                return;
         }
         adapter.setIndex(position);      // 关键代码
         adapter.notifyDataSetChanged(); // 关键代码

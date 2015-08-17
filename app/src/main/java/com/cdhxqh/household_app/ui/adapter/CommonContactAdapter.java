@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.actvity.AddContacterActivity;
+import com.cdhxqh.household_app.ui.fragment.CommonContactFragment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
 public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdapter.ViewHolder> {
     Context mContext;
     ArrayList<Contacters> contacts;
+
+    private static final int EDIT_CONTACT = 3;
 
     public CommonContactAdapter(Context paramContext, ArrayList<Contacters> contacts) {
         this.mContext = paramContext;
@@ -42,13 +46,15 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setClass(mContext, AddContacterActivity.class);
                 intent.putExtra("contactList", (Serializable) contacts.get(item));
-                mContext.startActivity(intent);
+                intent.putExtra("edit", "edit");
+                contacts.remove(contacts.get(item));
+                ((Activity) mContext).startActivityForResult(intent, EDIT_CONTACT);
+
             }
         });
-
     }
 
 
