@@ -1,5 +1,7 @@
 package com.cdhxqh.household_app.ui.actvity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +42,8 @@ public class AddContacterActivity extends BaseActivity {
 
     TextView role_group;
 
+    private static final int PICK_CONTACT = 1;
+
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_add_contacter);
@@ -78,17 +82,19 @@ public class AddContacterActivity extends BaseActivity {
             name.setText(contacts.getName());
             phone.setText(contacts.getPhone());
             role_group.setText(contacts.getType());
-//            select_group.setOnClickListener(selectGroupOnClickListener);
+            select_group.setOnClickListener(selectGroupOnClickListener);
 //            commit_id.setOnClickListener(commitOnClickListener);
         }
 
         /**
          * 分组
          */
+        final Activity activity = this;
         private View.OnClickListener selectGroupOnClickListener = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(activity, Activity_Role_Group.class);
+                startActivityForResult(intent, PICK_CONTACT);
                 }
             };
 

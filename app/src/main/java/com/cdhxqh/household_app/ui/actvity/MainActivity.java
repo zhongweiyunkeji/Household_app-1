@@ -2,9 +2,13 @@ package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.internal.widget.AdapterViewCompat;
@@ -54,6 +58,10 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     private TextView text;
 
+    private static final int PICK_CONTACT = 2;
+
+    private static final int TYPE_CONTACT = 1;
+
 
     private String[] mFavoriteTabTitles;
     private String[] mFavoriteTabPaths;
@@ -62,11 +70,11 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     Toolbar toolbar;
 
     ImageView deviceItem;
-    MenuItem  alarmIte;
-    MenuItem  servicesItem;
-    MenuItem  helpItem;
-    ImageView  linkItem01;
-    ImageView  linkItem02;
+    MenuItem alarmIte;
+    MenuItem servicesItem;
+    MenuItem helpItem;
+    ImageView linkItem01;
+    ImageView linkItem02;
     //int childCount;
     boolean menuCreateFlag = false;
     Menu menuBar;  // 缓存menu
@@ -78,13 +86,17 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     static Intent intent;
 
     DeviceMenu myDie; // 我的设备
-    static final int  DEVICEM_ADD = 0;
-    static final int  DEVICEM_DEL = 1;
-    static final int  DEVICEM_EDIT = 2;
+    static final int DEVICEM_ADD = 0;
+    static final int DEVICEM_DEL = 1;
+    static final int DEVICEM_EDIT = 2;
 
     DeviceMenu likMan; // 我的设备
-    static final int  LINK_MAN_ADD = 3;
-    static final int  DEVICEM_SEARCH = 4;
+    static final int LINK_MAN_ADD = 3;
+    static final int DEVICEM_SEARCH = 4;
+
+    FragmentTransaction fragmentTransaction;
+
+    CommonContactFragment commonContactFragment = new CommonContactFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +136,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         // getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
         getSupportActionBar().setTitle("");
 
-        atnrTitle = (TextView)findViewById(R.id.actionbar_title_text);
+        atnrTitle = (TextView) findViewById(R.id.actionbar_title_text);
 
         /*ActionBar.LayoutParams lp =new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
         View view = LayoutInflater.from(this).inflate(R.layout.actionbar_title, null);
@@ -143,10 +155,10 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         }
 
         // 我的设备
-        deviceItem = (ImageView)findViewById(R.id.menu_mydevice);
+        deviceItem = (ImageView) findViewById(R.id.menu_mydevice);
         // 常用联系人
-        linkItem01 = (ImageView)findViewById(R.id.menu_linkman_add);
-        linkItem02 = (ImageView)findViewById(R.id.menu_linkman_del);
+        linkItem01 = (ImageView) findViewById(R.id.menu_linkman_add);
+        linkItem02 = (ImageView) findViewById(R.id.menu_linkman_del);
 
         deviceItem.setOnClickListener(new View.OnClickListener() {  // 注册点击事件
             @Override
@@ -172,19 +184,11 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == 2131296460) {
-            if(intent.getStringExtra("FragmentName").equals("CommonContactFragment")) {
-                Intent intents=new Intent();
-                intents.putExtra("contactList", (ArrayList<Contacters>) intent.getSerializableExtra("contactList"));
-                intents.setClass(MainActivity.this, ViewUserActivity.class);
-                startActivity(intents);
-            }
-        }
+        Log.d("switchButton", String.valueOf(id));
 
         if (id == R.id.action_settings) {
             return false;
@@ -199,22 +203,22 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     public void onNavigationDrawerItemSelected(final int position) {
         mSelectPos = position;
 
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
-            case 0:{
-                fragmentTransaction.replace(R.id.container,new MyDeviceFragment());
+            case 0: {
+                fragmentTransaction.replace(R.id.container, new MyDeviceFragment());
                 fragmentTransaction.commit();
                 invalidateOptionsMenu();
                 break;
             }
             case 1: {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,TestActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this,TestActivity.class);
+//                startActivity(intent);
                 break;
             }
-            case 2:{
+            case 2: {
                 fragmentTransaction.replace(R.id.container, new ProductFragment());
                 fragmentTransaction.commit();
                 break;
@@ -222,7 +226,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             case 3: {
                 break;
             }
-            case 4:{  // 帮助中心
+            case 4: {  // 帮助中心
                 try {
                     fragmentTransaction.replace(R.id.container, new HelpCenterFragement());
                     fragmentTransaction.commit();
@@ -231,8 +235,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 }
                 break;
             }
-            case 5:{
-                fragmentTransaction.replace(R.id.container, new CommonContactFragment());
+            case 5: {
+                fragmentTransaction.replace(R.id.container, commonContactFragment);
                 fragmentTransaction.commit();
                 break;
             }
@@ -420,6 +424,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             }
         });
 
+        final Activity activity = this;
         // 常用联系人
         likMan = new DeviceMenu(this, null, null, R.layout.menu_linkman, R.layout.menu_mydevice_item, R.id.head_hint_img);
         likMan.addItem("直接添加", LINK_MAN_ADD, R.drawable.ic_menu_add);
@@ -430,11 +435,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             public void selected(View view, Item item, int position) {
                 switch (item.id) {
                     case LINK_MAN_ADD: {
-                        Toast.makeText(MainActivity.this, "直接添加", Toast.LENGTH_LONG).show();
-                        break;
+                        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                        startActivityForResult(intent, TYPE_CONTACT);
                     }
                     case DEVICEM_SEARCH: {
-                        Toast.makeText(MainActivity.this, "选择联系人", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(activity, AddContacterActivity.class);
+                        startActivityForResult(intent, PICK_CONTACT);
                         break;
                     }
                 }
@@ -444,10 +450,48 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         linkItem02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (intent.getStringExtra("FragmentName").equals("CommonContactFragment")) {
+                    Intent intents = new Intent();
+                    intents.putExtra("contactList", (ArrayList<Contacters>) intent.getSerializableExtra("contactList"));
+                    intents.setClass(MainActivity.this, ViewUserActivity.class);
+                    startActivity(intents);
+                }
                 Toast.makeText(MainActivity.this, "常用联系人", Toast.LENGTH_LONG).show();
             }
         });
 
     }
+
+        @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+        Contacters contacters = new Contacters();
+
+        switch (reqCode) {
+            case (PICK_CONTACT) :
+                if (resultCode == Activity.RESULT_OK) {
+                    Uri contactData = data.getData();
+                    Cursor c =  managedQuery(contactData, null, null, null, null);
+                    if (c.moveToFirst()) {
+                        ContentResolver reContentResolverol = getContentResolver();
+                        String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                        contacters.setName(name);
+                        //条件为联系人ID
+                        String contactId = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
+                        Cursor phone = reContentResolverol.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                                null,
+                                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId,
+                                null,
+                                null);
+                        while (phone.moveToNext()) {
+                           String usernumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                            contacters.setPhone(usernumber);
+                        }
+                    }
+                    }
+                break;
+                }
+            commonContactFragment.setData(contacters);
+        }
 
 }
