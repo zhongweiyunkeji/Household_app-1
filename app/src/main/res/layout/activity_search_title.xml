@@ -29,7 +29,7 @@
         android:padding="5dp"
         android:focusable="true"
         android:background="@color/search_textview_background"
-        android:textCursorDrawable="@drawable/color_cursor"
+        android:textCursorDrawable="@drawable/cursor_white"
         android:drawableLeft="@drawable/ic_tab_search"
         android:textColor="#ffffff"
         android:textSize="@dimen/dimens_22" />
