@@ -26,7 +26,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/not_search"/>
+                android:background="@drawable/face_sad"/>
             <TextView
                 android:id="@+id/error_code"
                 android:layout_width="wrap_content"
