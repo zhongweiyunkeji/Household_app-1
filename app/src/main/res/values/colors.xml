@@ -15,6 +15,7 @@
     <color name="text_color_code">#444b55</color><!--Context Title Font Color Dark Gary内容标题颜色、深灰色-->
     <color name="text_color">#80858e</color><!--ConText/Select Font Color Gary内容字体颜色、灰色-->
     <color name="edit_color">#b2bac5</color><!--EditView Font Color Light Gary内容添写文本框提示字体颜色、浅灰色-->
+    <color name="search_textview_background">#0A3C7E</color>
 
     <color name="black">#000000</color><!--black黑色-->
     <color name="red">#ff6668</color><!--red西瓜红-->
