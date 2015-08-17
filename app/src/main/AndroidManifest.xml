@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cdhxqh.household_app">
 
+    <uses-permission android:name="android.permission.READ_CONTACTS"/><!-- 读取通讯录权限 -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/><!-- 写入通讯录权限 -->
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -43,6 +45,10 @@
         <activity
             android:name=".ui.actvity.TypeActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.actvity.ViewUserActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.actvity.Activity_First_login"
             android:screenOrientation="portrait" />
