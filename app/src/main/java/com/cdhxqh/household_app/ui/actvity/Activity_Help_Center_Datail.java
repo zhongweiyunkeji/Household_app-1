@@ -52,7 +52,7 @@ public class Activity_Help_Center_Datail extends BaseActivity {
         if(bundle!=null){
             String url = bundle.getString("url");
             try {
-                webView.loadUrl("https://www.baidu.com/");  //  "https://www.baidu.com/"    //  webView.loadUrl(url);
+                webView.loadUrl(url);  //  "https://www.baidu.com/"    //  webView.loadUrl(url);
             } catch (Exception e) {
                 e.printStackTrace();
             }

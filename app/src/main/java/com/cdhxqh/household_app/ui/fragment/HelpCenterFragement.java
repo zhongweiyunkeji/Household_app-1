@@ -104,18 +104,17 @@ public class HelpCenterFragement extends BaseFragment {
             public void onItemClick(ViewGroup parent, View convertView, ImageView imageView, int groupPosition, int childPosition, boolean isLastChild) {
                 if (onoff) { // 产品说明
                     //Log.e("TAG", "------------------------------------------------------------>" + onoff);
-                    Intent intent = new Intent();
+                    Intent intent = new Intent(getActivity(), Activity_Help_Center_Datail.class);
                     Bundle bundle = new Bundle();
-                    intent.putExtras(bundle);
                     bundle.putString("url", "https://www.baidu.com/");
+                    intent.putExtras(bundle);
                     getActivity().startActivity(intent);
-                    intent.setClass(getActivity(), Activity_Help_Center_Datail.class);
                 } else {  // 操作说明
                     //Log.e("TAG", "------------------------------------------------------------>" + onoff);
                     Intent intent = new Intent(getActivity(), Activity_Help_Center_Datail.class);
                     Bundle bundle = new Bundle();
-                    intent.putExtras(bundle);
                     bundle.putString("url", "http://blog.csdn.net/z1074971432/article/details/7547783");
+                    intent.putExtras(bundle);
                     getActivity().startActivity(intent);
                 }
             }
