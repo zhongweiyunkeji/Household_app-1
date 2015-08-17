@@ -67,7 +67,9 @@ public class CommonContactFragment extends BaseFragment {
 
     private TextView putConnect;
 
-    NavigationDrawerFragment.NavigationDrawerCallbacks navigationDrawerCallbacks = new MainActivity();
+    Contacters contacters = new Contacters();
+
+    NavigationDrawerFragment.NavigationDrawerCallbacks navigationDrawerCallbacks;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,6 +85,18 @@ public class CommonContactFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        // TODO Auto-generated method stub
+        super.onAttach(activity);
+        navigationDrawerCallbacks = (MainActivity)activity;
+    }
+
+    public void setData(Contacters c) {
+        contacts.add(0, c);
+        commonContactAdapter.updata(contacts);
+        commonContactAdapter.dataChanged();
+    }
 //    @Override
 //    public void onActivityResult(int reqCode, int resultCode, Intent data) {
 //        contacts = (ArrayList<Contacters>) data.getSerializableExtra("contactList");
