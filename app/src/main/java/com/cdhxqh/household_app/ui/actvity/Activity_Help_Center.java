@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.adapter.HelpCenterExpandableListViewAdapter;
+import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,7 +105,7 @@ public class Activity_Help_Center extends BaseActivity {
         ArrayList<String> group = new ArrayList<String>(0);
         Map<String, List<String>> child = new HashMap<String, List<String>>(0);
 
-       /* adapter = new HelpCenterExpandableListViewAdapter(this, new ItemClickListener() {
+        adapter = new HelpCenterExpandableListViewAdapter(this, new HelpCenterFragement.ItemClickListener() {
             @Override
             public void onItemClick(ViewGroup parent, View convertView, ImageView imageView, int groupPosition, int childPosition, boolean isLastChild) {
                 if (onoff) {
@@ -113,7 +114,7 @@ public class Activity_Help_Center extends BaseActivity {
                     Log.e("TAG", "------------------------------------------------------------>" + onoff);
                 }
             }
-        });*/
+        });
         listView.setAdapter(adapter);
 
         for (int i = 0; i < 2; i++) {
