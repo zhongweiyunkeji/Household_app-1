@@ -53,8 +53,9 @@ public class Load_Activity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 Intent intent = new Intent();
-                intent.setClass(Load_Activity.this, MainActivity.class);
+                intent.setClass(Load_Activity.this, Activity_Login.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

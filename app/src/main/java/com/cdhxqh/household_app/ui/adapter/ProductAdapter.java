@@ -106,7 +106,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             position_id = (TextView) itemView.findViewById(R.id.position_id);
             monitor_time_id = (TextView) itemView.findViewById(R.id.monitor_time_id);
             safe_manage = (ImageView) itemView.findViewById(R.id.safe_manage);
-            isVideo_listbg = (LinearLayout) itemView.findViewById(R.id.isVideo_listbg);
+//            isVideo_listbg = (LinearLayout) itemView.findViewById(R.id.isVideo_listbg);
         }
     }
 }

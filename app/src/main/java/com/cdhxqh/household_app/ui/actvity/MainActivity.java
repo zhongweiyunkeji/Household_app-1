@@ -209,9 +209,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
             case 1: {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,TestActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this,TestActivity.class);
+//                startActivity(intent);
                 break;
             }
             case 2:{
