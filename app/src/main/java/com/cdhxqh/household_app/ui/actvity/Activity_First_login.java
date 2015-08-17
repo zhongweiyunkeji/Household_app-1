@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -17,13 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.adapter.ViewPagerAdapter;
 
 
 /**
  * Created by think on 2015/8/15.
  */
-public class Activity_First_login extends Activity implements OnClickListener,
+public class Activity_First_login extends BaseActivity implements OnClickListener,
         OnPageChangeListener ,OnTouchListener{
 
     private ViewPager viewPager;
@@ -123,8 +125,11 @@ public class Activity_First_login extends Activity implements OnClickListener,
                 break;
             case MotionEvent.ACTION_MOVE:
                 if((lastX - event.getX()) >100 && (currentIndex == views.size() -1)){
+                    SharedPreferences.Editor editor = myshared.edit();
+                    editor.putBoolean(Constants.ISFIRST, false);
+                    editor.commit();
                     Intent intent = new Intent();
-//                    intent.setClass(Activity_First_login.this,XXX.class);//XXX指定跳转的页面
+                    intent.setClass(Activity_First_login.this,Activity_Login.class);
                     startActivity(intent);
                     this.finish();
                 }
