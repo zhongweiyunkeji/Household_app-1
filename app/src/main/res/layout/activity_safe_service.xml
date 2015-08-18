@@ -41,7 +41,7 @@
                         android:text="@string/openControl"
                         android:textSize="16sp" />
 
-                    <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+                    <com.cdhxqh.household_app.ui.widget.SwitchButton
                         android:id="@+id/wiperSwitch"
                         android:layout_width="10dp"
                         android:layout_height="10dp"

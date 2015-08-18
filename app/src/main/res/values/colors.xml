@@ -9,7 +9,7 @@
 	<color name="transparent">#00ffffff</color><!--透明-->
 	<color name="disabled_bg">#cccccc</color><!--disabled禁用时-->
 	<color name="transition_bg">#ffffff</color><!--transition过渡时-->
-	
+
     <color name="title_bj">#0c4da2</color><!--Action bar Background Color/Dark blue操作栏背景颜色、深蓝色-->
     <color name="text_color_blue">#00aeef</color><!--Light blue按钮背景颜色、浅蓝色-->
     <color name="text_color_code">#444b55</color><!--Context Title Font Color Dark Gary内容标题颜色、深灰色-->
@@ -20,10 +20,15 @@
     <color name="black">#000000</color><!--black黑色-->
     <color name="red">#ff6668</color><!--red西瓜红-->
     <color name="orange">#ff9900</color><!--orange桔黄色-->
+    <color name="list_title_color">#0f2747</color><!--List Title Color列表标题颜色-->
     <color name="list_pressed_bgcolor">#FF0000</color><!--List Pressed Color Background Color列表点击的颜色fff6f7-->
     <color name="list_title_bgcolor">#e2e9f2</color><!--List Title Background Color列表标题背景颜色-->
     <color name="bgcolor">#f1f6fb</color><!--Body Background Color整体背景颜色-->
 
+    <color name="welcomebg1">#00aeef</color><!--Welcome Background Color欢迎页背景颜色-->
+    <color name="welcomebg2">#1cc965</color><!--Welcome Background Color欢迎页背景颜色-->
+    <color name="welcomebg3">#ee5859</color><!--Welcome Background Color欢迎页背景颜色-->
+    <color name="welcomebg4">#49dcd0</color><!--Welcome Background Color欢迎页背景颜色-->
 
     <!--找回密码-->
     <color name="font_color">#ffffff</color><!--Font Color White白色-->

@@ -19,9 +19,22 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="#000000"
-                    android:textSize="19sp"
-                    android:text="老婆 （家人）"
+                    android:textColor="@color/list_title_color"
+                    android:textSize="18sp"
+                    android:text="老婆"
+                    />
+
+                <TextView
+                    android:id="@+id/contacts_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/text_color_code"
+                    android:textSize="16sp"
+                    android:text="（家人）"
                     />
 
                 <ImageView
@@ -42,7 +55,8 @@
                     android:layout_weight="7"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="7dp"
-                    android:text="手机号：12345677542"
+                    android:textSize="14sp"
+                    android:text="手机号：18911339266"
                     />
                 <TextView
                     android:layout_width="0dp"

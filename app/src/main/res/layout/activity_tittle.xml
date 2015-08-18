@@ -8,14 +8,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#0c4da2">
+        android:background="@color/title_bj">
 
         <ImageView
             android:id="@+id/back_imageview_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_margin="9dp"
             android:src="@drawable/ic_menu_back"
             />
 
@@ -27,14 +26,13 @@
             android:layout_centerVertical="true"
             android:text="标题"
             android:textColor="@color/font_color"
-            android:textSize="27sp"/>
+            android:textSize="28sp"/>
 
         <ImageView
             android:id="@+id/title_add_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="9dp"
-            android:src="@drawable/ic_enlarge_i"
+            android:src="@drawable/ic_menu_add"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true" />
 
