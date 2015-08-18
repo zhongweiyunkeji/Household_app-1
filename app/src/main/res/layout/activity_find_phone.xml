@@ -16,6 +16,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:background="@drawable/tabs_left_sel"
             android:text="@string/through_phone"
             android:textColor="@color/font_color" />
 
@@ -25,6 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:paddingBottom="9dp"
+            android:paddingTop="9dp"
+            android:background="@drawable/tabs_right_nol"
             android:text="@string/through_mail"
             android:textColor="@color/text_color"/>
 
@@ -43,19 +49,20 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_from_mobile"
             android:hint="@string/register_phone_number"
             android:textCursorDrawable="@drawable/color_cursor"
             android:cursorVisible="true"
             android:inputType="phone"
-            android:textColorHint="@color/hint_color"/>
+            android:textSize="18dp"
+            android:textColorHint="@color/edit_color"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/mail_line_x"></View>
+            android:background="@drawable/list_line_x"></View>
 
         <FrameLayout
         android:layout_width="match_parent"
@@ -66,22 +73,26 @@
                 android:id="@+id/sms_verification_code"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:background="@android:color/transparent"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:hint="@string/sms_verification_code"
-                android:textColorHint="@color/hint_color"/>
+                android:textSize="18dp"
+                android:textColorHint="@color/edit_color" />
 
             <Button
                 android:id="@+id/get_verification_code"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:text="@string/get_verification_code"
-                android:textSize="12dp"
-                android:textColor="@color/text_color_code"/>
+                android:textSize="12sp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@drawable/btn_lightgray"
+                android:textColor="@color/text_color"/>
         </FrameLayout>
 
     </LinearLayout>
@@ -92,7 +103,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:text="@string/hint_password"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:textColor="@color/text_color"/>
 
     <Button
@@ -101,8 +112,8 @@
         android:layout_height="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="40dp"
-        android:background="@color/text_color_blue"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_lightblue"
         android:text="@string/find_password"
         android:textColor="@color/font_color"
         android:textSize="20sp" />

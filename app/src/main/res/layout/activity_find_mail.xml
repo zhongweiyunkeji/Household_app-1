@@ -25,14 +25,20 @@
                 android:layout_gravity="center|center_horizontal"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:paddingBottom="9dp"
+                android:paddingTop="9dp"
+                android:background="@drawable/tabs_left_nol"
                 android:text="@string/through_phone"
                 android:textColor="@color/text_color"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
+                android:layout_weight="1"
+                android:paddingBottom="9dp"
+                android:paddingTop="9dp"
+                android:background="@drawable/tabs_right_sel"
                 android:text="@string/through_mail"
                 android:textColor="@color/font_color" />
 
@@ -43,23 +49,22 @@
             android:layout_height="45dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/input_text_bg"
+            android:background="@drawable/edit_text_bg"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/EditTextMail"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:textCursorDrawable="@drawable/color_cursor"
-                android:drawableRight="@drawable/mail_icon_s"
+                android:drawableRight="@drawable/ic_menu_mail"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:hint="注册邮箱号"
-                android:textColorHint="@color/hint_color"/>
+                android:textColorHint="@color/edit_color"/>
 
         </LinearLayout>
 
@@ -67,10 +72,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
+            android:paddingTop="15dp"
             android:background="@android:color/transparent"
             android:text="新密码以短信形式发送到该手机号，请注意查收"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textColor="@color/text_color"/>
 
         <Button
@@ -79,8 +84,8 @@
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="40dp"
-            android:background="#00aeef"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_lightblue"
             android:text="获取新密码"
             android:textColor="@color/font_color"
             android:textSize="20sp" />
