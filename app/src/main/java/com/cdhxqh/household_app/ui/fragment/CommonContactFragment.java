@@ -92,6 +92,12 @@ public class CommonContactFragment extends BaseFragment {
         navigationDrawerCallbacks = (MainActivity)activity;
     }
 
+    public void updateList(ArrayList<Contacters> contacterseList)  {
+        this.contacts = contacterseList;
+        commonContactAdapter.updata(contacts);
+        commonContactAdapter.dataChanged();
+    }
+
     public void setData(Contacters c) {
         contacts.add(0, c);
         commonContactAdapter.updata(contacts);

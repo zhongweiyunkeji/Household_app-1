@@ -34,9 +34,11 @@ public class CartoonDisplay {
      */
     private static boolean is = false;
 
-    private TextView create_user, putConnect;
+    private TextView  putConnect, write_user;
 
-    public CartoonDisplay(Activity activity, int item, String value)
+    private LinearLayout address_book, create_user;
+
+    public CartoonDisplay(Activity activity, int item, String[] value)
     {
         animation1 = AnimationUtils.loadAnimation(activity,
                 R.anim.activity_open);
@@ -53,19 +55,27 @@ public class CartoonDisplay {
          */
         select_p = (RelativeLayout) activity.findViewById(R.id.select_p);
 
-        create_user = (TextView) activity.findViewById(R.id.create_user);
+        create_user = (LinearLayout) activity.findViewById(R.id.create_user);
+
+        write_user = (TextView) activity.findViewById(R.id.write_user);
 
         /**
          * 手机通讯录
          */
         putConnect = (TextView) activity.findViewById(R.id.putConnect);
+        address_book = (LinearLayout) activity.findViewById(R.id.address_book);
 
         /**
          * 选择模式
          */
         if(item == 1) {
             create_user.setVisibility(View.VISIBLE);
-            create_user.setText(value);
+            write_user.setText(value[0]);
+        }else if(item == 2) {
+            create_user.setVisibility(View.VISIBLE);
+            address_book.setVisibility(View.VISIBLE);
+            write_user.setText(value[0]);
+            putConnect.setText(value[1]);
         }
     }
 

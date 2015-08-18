@@ -66,7 +66,7 @@ public class ViewUserActivity extends BaseActivity {
     /**
      *删除联系人
      */
-    private LinearLayout select_user;
+    private LinearLayout create_user;
 
     /**
      *全选栏目
@@ -95,7 +95,7 @@ public class ViewUserActivity extends BaseActivity {
 
        cancel = (LinearLayout) findViewById(R.id.cancel);
 
-       select_user = (LinearLayout) findViewById(R.id.select_user);
+       create_user = (LinearLayout) findViewById(R.id.create_user);
 
        top_check = (LinearLayout) findViewById(R.id.top_check);
     }
@@ -109,7 +109,7 @@ public class ViewUserActivity extends BaseActivity {
 
         cancel.setOnClickListener(cancelOnClickListener);
 
-        select_user.setOnClickListener(selectUserOnClickListener);
+        create_user.setOnClickListener(selectUserOnClickListener);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -134,7 +134,7 @@ public class ViewUserActivity extends BaseActivity {
 
             for(int i = 0; i<contactersList.size(); i++) {
                 if (contactersList.get(i).isFlag() == true) {
-                    new CartoonDisplay(activity, 1, "删除联系人").display();
+                    new CartoonDisplay(activity, 1, new String[]{"删除联系人"}).display();
                     return;
                 }
             }
@@ -157,7 +157,7 @@ public class ViewUserActivity extends BaseActivity {
             }
             viewUserAdapter.update(contactersListUpdate);
             viewUserAdapter.dataChanged();
-            new CartoonDisplay(activity, 1, "删除联系人").display();
+            new CartoonDisplay(activity, 1, new String[]{"删除联系人"}).display();
             checkbox_all.setChecked(false);
             contactersList  = contactersListUpdate;
             if(contactersListUpdate.size()<=0){
@@ -172,7 +172,7 @@ public class ViewUserActivity extends BaseActivity {
     private View.OnClickListener cancelOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            new CartoonDisplay(activity, 1, "删除联系人").display();
+            new CartoonDisplay(activity, 1, new String[]{"删除联系人"}).display();
         }
     };
 
@@ -182,7 +182,7 @@ public class ViewUserActivity extends BaseActivity {
     private View.OnClickListener selectOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            new CartoonDisplay(activity, 1, "删除联系人").display();
+            new CartoonDisplay(activity, 1, new String[]{"删除联系人"}).display();
         }
     };
 
@@ -215,7 +215,7 @@ public class ViewUserActivity extends BaseActivity {
                 && event.getRepeatCount() == 0) {
             Intent intent=new Intent();
             intent.putExtra("contactList", (Serializable) contactersList);
-            setResult(RESULT_FIRST_USER, intent);
+            setResult(RESULT_OK, intent);
             finish();
         }
         return super.onKeyDown(keyCode, event);

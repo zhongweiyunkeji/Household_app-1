@@ -28,14 +28,24 @@
                 android:orientation="vertical">
 
                 <!--常用联系人-->
-                <TextView
+                <LinearLayout
                     android:id="@+id/create_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                <TextView
+                    android:id="@+id/write_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center"
-                    android:visibility="gone"
                     android:text="常用联系人"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/list_line_x"></View>
 
                 <!--手机通讯录-->
                 <LinearLayout
@@ -44,11 +54,6 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@drawable/list_line_x"></View>
 
                 <TextView
                     android:id="@+id/putConnect"
