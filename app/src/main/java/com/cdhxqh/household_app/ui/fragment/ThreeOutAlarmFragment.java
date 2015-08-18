@@ -102,6 +102,9 @@ public class ThreeOutAlarmFragment extends BaseFragment {
                     }
                 }
                 adapter.reload(clonList);
+                if(adapter.getList().size() == 0){
+                    checkdAll.setChecked(false);
+                }
             }
         });
 

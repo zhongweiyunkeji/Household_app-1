@@ -98,16 +98,20 @@ public class ThreeInAlarmFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 ArrayList<Alarm> list = adapter.getList();
-                ArrayList<Alarm> clonList = (ArrayList<Alarm>)list.clone();
+                ArrayList<Alarm> clonList = (ArrayList<Alarm>) list.clone();
                 int size = list.size();
-                for(int index=0; index<size; index++){
+                for (int index = 0; index < size; index++) {
                     Alarm alarm = list.get(index);
                     boolean flag = alarm.isStatus();
-                    if(flag){
+                    if (flag) {
                         clonList.remove(alarm);
                     }
                 }
                 adapter.reload(clonList);
+                adapter.reload(clonList);
+                if(adapter.getList().size() == 0){
+                    checkdAll.setChecked(false);
+                }
             }
         });
 
