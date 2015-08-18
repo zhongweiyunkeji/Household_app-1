@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:layout_gravity="left"
-        android:background="@drawable/reg_phone_number_border_top"
+        android:background="@drawable/edit_text_bg"
         android:drawableRight="@drawable/ic_from_mobile"
         android:gravity="center_vertical"
         android:hint="请输入11位手机号"
