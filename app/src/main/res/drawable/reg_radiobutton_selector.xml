@@ -1,9 +1,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--  选中时的按钮 -->
-    <item android:state_checked="true" android:drawable="@drawable/radio_sel" />
-
-    <!-- 取消选中时的按钮 -->
-    <item android:state_checked="false" android:drawable="@drawable/radio_nol" />
-
+    <item android:state_checked="true" android:drawable="@drawable/radio_sel" /><!--  选中时的按钮 -->
+    <item android:state_checked="false" android:drawable="@drawable/radio_nol" /><!-- 取消选中时的按钮 -->
 </selector>
