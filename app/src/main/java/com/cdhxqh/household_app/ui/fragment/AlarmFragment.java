@@ -19,7 +19,6 @@ public class AlarmFragment extends BaseFragment {
 
     TextView leftTab;
     TextView rightTab;
-    RelativeLayout relativeLayout;
     public boolean flag = false;
 
     @Override
@@ -34,7 +33,6 @@ public class AlarmFragment extends BaseFragment {
     public void findViewById(View view) {
         leftTab =  (TextView)view.findViewById(R.id.tabs_left);
         rightTab = (TextView)view.findViewById(R.id.tabs_right);
-        relativeLayout = (RelativeLayout)view.findViewById(R.id.operate_area);
     }
 
     public void initView() {
@@ -48,15 +46,13 @@ public class AlarmFragment extends BaseFragment {
         final int tabsRightPadding_right = rightTab.getPaddingRight();
         final int tabsBottomPadding_right = rightTab.getPaddingBottom();
 
-        relativeLayout.setVisibility(View.GONE);
-
         leftTab.setOnClickListener(new View.OnClickListener() {  // 三个月内
             @Override
             public void onClick(View v) {
                 leftTab.setBackgroundResource(R.drawable.tabs_left_sel);
                 leftTab.setTextColor(Color.parseColor("#FFFFFF"));
                 rightTab.setBackgroundResource(R.drawable.tabs_right_nol);
-                rightTab.setTextColor(Color.parseColor("#80858e"));
+                rightTab.setTextColor(Color.parseColor("#7C8586"));
                 leftTab.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);
                 rightTab.setPadding(tabsLeftPadding_right, tabsTopPadding_right, tabsRightPadding_right, tabsBottomPadding_right);
                 if(flag){
@@ -71,7 +67,7 @@ public class AlarmFragment extends BaseFragment {
             @Override
             public void onClick(View v) {// 三个月钱前
                 leftTab.setBackgroundResource(R.drawable.tabs_left_nol);
-                leftTab.setTextColor(Color.parseColor("#80858e"));
+                leftTab.setTextColor(Color.parseColor("#7C8586"));
                 rightTab.setBackgroundResource(R.drawable.tabs_right_sel);
                 rightTab.setTextColor(Color.parseColor("#FFFFFF"));
                 leftTab.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);
@@ -94,6 +90,7 @@ public class AlarmFragment extends BaseFragment {
         ThreeInAlarmFragment in = new ThreeInAlarmFragment();
         Bundle bundle = new Bundle();
         bundle.putBoolean("showCheckBox", false);
+        bundle.putBoolean("hideToolBar", true);
         in.setArguments(bundle);
         transaction.replace(R.id.alarm_container, in, "ThreeInAlarmFragment");
         transaction.commit();
@@ -105,6 +102,7 @@ public class AlarmFragment extends BaseFragment {
         ThreeOutAlarmFragment out = new ThreeOutAlarmFragment();
         Bundle bundle = new Bundle();
         bundle.putBoolean("showCheckBox", false);
+        bundle.putBoolean("hideToolBar", true);
         out.setArguments(bundle);
         transaction.replace(R.id.alarm_container, out, "ThreeOutAlarmFragment");
         transaction.commit();
