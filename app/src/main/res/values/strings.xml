@@ -64,4 +64,9 @@
     <string name="site_photo">地点照片</string>
     <string name="sele_site_photo">拍摄或选择安装地点照片</string>
     <string name="next">下一步</string>
+
+    <!--设置-->
+    <string name="install_flow_title">省流量</string>
+    <string name="install_flow_describute">2G/3G下不显示图片</string>
+    <string name="cache_title">清除缓存</string>
 </resources>
