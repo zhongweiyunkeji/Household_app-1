@@ -23,10 +23,15 @@ public class ThreeOutAlarmFragment extends BaseFragment {
     SwipeRefreshLayout swipeRefreshLayout;
     ListView listView;
     AlarmItemAdapter adapter;
+    boolean showCheckBox = false;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            showCheckBox = bundle.getBoolean("showCheckBox");
+        }
         View view = inflater.inflate(R.layout.three_in_alarm, container, false);
         findViewById(view);
         initView();
@@ -48,7 +53,7 @@ public class ThreeOutAlarmFragment extends BaseFragment {
                     Toast.makeText(getActivity(), "" + fragment.flag, Toast.LENGTH_SHORT).show();
                 }
             }
-        }, false);
+        }, showCheckBox);
         listView.setAdapter(adapter);
 
         ArrayList<Alarm> list = new ArrayList<Alarm>(0);

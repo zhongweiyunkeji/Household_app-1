@@ -104,6 +104,18 @@ public class AlarmItemAdapter extends BaseAdapter {
         }
     }
 
+    public void clear(){
+        this.list.clear();;
+    }
+
+    /**
+     * 重新加载数据
+     */
+    public void reload(ArrayList<Alarm> list){
+        clear();
+        update(list);
+    }
+
     public static final class ItemHolder {
 
         CheckBox checkbox;

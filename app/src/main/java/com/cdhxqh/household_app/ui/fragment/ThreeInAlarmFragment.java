@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.fragment;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -26,10 +27,18 @@ public class ThreeInAlarmFragment extends BaseFragment {
     SwipeRefreshLayout swipeRefreshLayout;
     ListView listView;
     AlarmItemAdapter adapter;
+    boolean showCheckBox = false;
 
+    public ThreeInAlarmFragment(){
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            showCheckBox = bundle.getBoolean("showCheckBox");
+        }
         View view = inflater.inflate(R.layout.three_in_alarm, container, false);
         findViewById(view);
         initView();
@@ -51,7 +60,7 @@ public class ThreeInAlarmFragment extends BaseFragment {
                     Toast.makeText(getActivity(), "" + fragment.flag, Toast.LENGTH_SHORT).show();
                 }
             }
-        }, false);
+        }, showCheckBox);
         listView.setAdapter(adapter);
 
         ArrayList<Alarm> list = new ArrayList<Alarm>(0);
