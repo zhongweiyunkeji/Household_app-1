@@ -64,7 +64,7 @@ public class SafeActivity extends BaseActivity {
     /**
      * 创建联系人
      */
-    private TextView create_user;
+    private LinearLayout create_user;
 
     private TextView putConnect;
 
@@ -149,7 +149,7 @@ public class SafeActivity extends BaseActivity {
         /**
          * 常用联系人
          */
-        create_user = (TextView) findViewById(R.id.create_user);
+        create_user = (LinearLayout) findViewById(R.id.create_user);
 
         /**
          * 添加联系人图片
