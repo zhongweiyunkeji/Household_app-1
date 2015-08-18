@@ -2,7 +2,7 @@
     android:id="@+id/reg_layou_1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F1F6FA"
+    android:background="@color/bgcolor"
     android:layout_marginTop="30dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"

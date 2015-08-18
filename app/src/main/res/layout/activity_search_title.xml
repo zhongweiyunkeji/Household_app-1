@@ -31,7 +31,7 @@
         android:background="@color/search_textview_background"
         android:textCursorDrawable="@drawable/cursor_white"
         android:drawableLeft="@drawable/ic_tab_search"
-        android:textColor="#ffffff"
+        android:textColor="@color/font_color"
         android:textSize="@dimen/dimens_22" />
 
     <ImageView
