@@ -204,6 +204,10 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             bundle.putBoolean("FLAG", flag);
             intents.putExtras(bundle);
             startActivity(intents);
+        } else
+        if(id == R.id.menu_alarm){
+            Bundle bundle = new Bundle();
+            openActivity(Activity_Alarm_Del.class, bundle);
         }
 
         return super.onOptionsItemSelected(item);
