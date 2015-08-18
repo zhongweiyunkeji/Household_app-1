@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -16,6 +17,9 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
+import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_Del;
+import com.cdhxqh.household_app.ui.actvity.Activity_alarm_play;
+import com.cdhxqh.household_app.ui.actvity.MainActivity;
 import com.cdhxqh.household_app.ui.adapter.AlarmItemAdapter;
 
 import java.util.ArrayList;
@@ -66,9 +70,27 @@ public class ThreeInAlarmFragment extends BaseFragment {
         adapter = new AlarmItemAdapter(getActivity(), new AlarmOnClickCallBack() {
             @Override
             public void onClick(int position, View convertView, Alarm alarm) {
-                AlarmFragment fragment = (AlarmFragment)getFragmentManager().findFragmentByTag("AlarmFragment");
-                if(fragment!=null){
-                    Toast.makeText(getActivity(), "" + fragment.flag, Toast.LENGTH_SHORT).show();
+                if(getActivity() instanceof MainActivity){
+                    ThreeInAlarmFragment inFragment = (ThreeInAlarmFragment)getFragmentManager().findFragmentByTag("ThreeInAlarmFragment");
+                    if(inFragment!=null){
+                        Intent intent = new Intent(getActivity(),  Activity_alarm_play.class);
+                        Bundle bundle = new Bundle();
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        Toast.makeText(getActivity(), "" + getActivity().getClass().getName(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } else
+                if(getActivity() instanceof Activity_Alarm_Del){
+                    ThreeInAlarmFragment inFragment = (ThreeInAlarmFragment)getFragmentManager().findFragmentByTag("ThreeInAlarmFragment");
+                    if(inFragment!=null){
+                        Intent intent = new Intent(getActivity(),  Activity_alarm_play.class);
+                        Bundle bundle = new Bundle();
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        Toast.makeText(getActivity(), "" + getActivity().getClass().getName(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
             }
         }, showCheckBox);
