@@ -41,6 +41,7 @@
     <string name="setDate">设置时间</string>
     <string name="securityWarning">安全警告设置</string>
     <string name="noticeType">通知方式</string>
+    <string name="shortMessage">手机短信</string>
     <string name="manage">联系人</string>
     <string name="phoneNumber">联系人</string>
     <string name="roleGroup">角色分组</string>
@@ -59,8 +60,8 @@
     <string name="equipment_password">设备密码</string>
     <string name="write_equipment_password">填写设备密码</string>
     <string name="installation_site">安装地点</string>
-    <string name="write_installation_site">填写设备安装地点，以备后期查看</string>
-    <string name="site_photo">设备照片</string>
-    <string name="sele_site_photo">拍摄或选择设备安装地点照片</string>
+    <string name="write_installation_site">填写安装地点，以备后期查看</string>
+    <string name="site_photo">地点照片</string>
+    <string name="sele_site_photo">拍摄或选择安装地点照片</string>
     <string name="next">下一步</string>
 </resources>
