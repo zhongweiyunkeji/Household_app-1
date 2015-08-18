@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bgcolor">
 
-    <include
-        android:id="@+id/include_title"
-        layout="@layout/activity_tittle"></include>
+    <include android:id="@+id/include_title" layout="@layout/activity_tittle"></include>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include_title">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/include_title"
-            android:background="#e2e9f2"
             android:orientation="vertical">
 
             <!--设备信息-->
@@ -28,19 +26,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/font_color"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
 
                 <TextView
                     android:id="@+id/week_tittle_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="@color/list_title_color"
                     android:paddingBottom="14dp"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingRight="20dp"
                     android:paddingTop="14dp"
-                    android:text="@string/equipment_brand"
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:text="@string/equipment_brand" />
 
                 <TextView
                     android:id="@+id/equipment_brand"
@@ -48,10 +48,10 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/week_tittle_a"
                     android:hint="@string/select_brand"
+                    android:textColor="@color/text_color"
                     android:paddingBottom="14dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="14dp" />
+                    android:paddingTop="14dp"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/selectWeek_id"
@@ -79,12 +79,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="@color/list_title_color"
                     android:paddingBottom="14dp"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingRight="20dp"
                     android:paddingTop="14dp"
-                    android:text="@string/equipment_model"
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:text="@string/equipment_model" />
 
                 <TextView
                     android:id="@+id/equipment_model"
@@ -92,10 +93,10 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/time_tittle"
                     android:hint="@string/select_model"
+                    android:textColor="@color/text_color"
                     android:paddingBottom="14dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="14dp" />
+                    android:paddingTop="14dp"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/select_time"
@@ -122,12 +123,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="@color/list_title_color"
                     android:paddingBottom="14dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="14dp"
-                    android:text="@string/equipment_UID"
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:text="@string/equipment_UID" />
 
                 <EditText
                     android:id="@+id/equipment_UID"
@@ -135,10 +137,10 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:hint="@string/write_UID"
+                    android:textColorHint="@color/edit_color"
                     android:paddingBottom="14dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:paddingTop="14dp"
+                    android:textSize="16sp"
                     android:textCursorDrawable="@drawable/color_cursor" />
 
             </LinearLayout>
@@ -148,6 +150,11 @@
                 android:layout_height="1dp"
                 android:background="@drawable/list_line_x"></View>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/list_line_x"></View>
             <!--设备账号密码-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -159,12 +166,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="@color/list_title_color"
                     android:paddingBottom="14dp"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingRight="20dp"
                     android:paddingTop="14dp"
-                    android:text="@string/equipment_name"
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:text="@string/equipment_name" />
 
                 <EditText
                     android:id="@+id/equipment_name"
@@ -172,10 +180,10 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:hint="@string/write_equipment_name"
+                    android:textColorHint="@color/edit_color"
                     android:paddingBottom="14dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:paddingTop="14dp"
+                    android:textSize="16sp"
                     android:textCursorDrawable="@drawable/color_cursor" />
 
             </LinearLayout>
@@ -195,12 +203,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="@color/list_title_color"
                     android:paddingBottom="14dp"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingRight="20dp"
                     android:paddingTop="14dp"
-                    android:text="@string/equipment_password"
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:text="@string/equipment_password" />
 
                 <EditText
                     android:id="@+id/equipment_password"
@@ -208,10 +217,10 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:hint="@string/write_equipment_password"
+                    android:textColorHint="@color/edit_color"
                     android:paddingBottom="14dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:paddingTop="14dp"
+                    android:textSize="16sp"
                     android:textCursorDrawable="@drawable/color_cursor" />
 
             </LinearLayout>
@@ -221,6 +230,11 @@
                 android:layout_height="1dp"
                 android:background="@drawable/list_line_x"></View>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/list_line_x"></View>
             <!-- 安装地点-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -232,12 +246,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="@color/list_title_color"
                     android:paddingBottom="14dp"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingRight="20dp"
                     android:paddingTop="14dp"
-                    android:text="@string/installation_site"
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:text="@string/installation_site" />
 
                 <EditText
                     android:id="@+id/installation_site"
@@ -245,10 +260,10 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:hint="@string/write_installation_site"
+                    android:textColorHint="@color/edit_color"
                     android:paddingBottom="14dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:paddingTop="14dp"
+                    android:textSize="16sp"
                     android:textCursorDrawable="@drawable/color_cursor" />
 
             </LinearLayout>
@@ -271,15 +286,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:text="@string/site_photo"
-                    android:textSize="16sp" />
+                    android:textColor="@color/list_title_color"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="14dp"
+                    android:textSize="18sp"
+                    android:text="@string/site_photo" />
 
                 <TextView
                     android:id="@+id/site_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:textColor="@color/text_color"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="14dp"
+                    android:textSize="16sp"
                     android:layout_toRightOf="@+id/time_tittle_a"
                     android:hint="@string/sele_site_photo" />
 
@@ -288,10 +310,10 @@
                     android:id="@+id/view_photo"
                     android:layout_width="100dp"
                     android:layout_height="200dp"
-                    android:layout_margin="10dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
                     android:visibility="gone"
-                    android:layout_toRightOf="@+id/time_tittle_a"
-                     />
+                    android:layout_toRightOf="@+id/time_tittle_a" />
 
 
                 <ImageView
@@ -321,7 +343,6 @@
                 android:text="@string/next"
                 android:textColor="@color/font_color"
                 android:textSize="20sp" />
-
         </LinearLayout>
     </ScrollView>
 
