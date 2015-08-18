@@ -470,7 +470,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                     Intent intents = new Intent();
                     intents.putExtra("contactList", (ArrayList<Contacters>) intent.getSerializableExtra("contactList"));
                     intents.setClass(MainActivity.this, ViewUserActivity.class);
-                    startActivityForResult(intent, DELE_CONTACT);
+                    startActivityForResult(intents, DELE_CONTACT);
                 }
                 Toast.makeText(MainActivity.this, "常用联系人", Toast.LENGTH_LONG).show();
             }
