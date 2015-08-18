@@ -32,6 +32,7 @@ import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.model.Item;
+import com.cdhxqh.household_app.ui.fragment.AlarmFragment;
 import com.cdhxqh.household_app.ui.fragment.CommonContactFragment;
 import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 import com.cdhxqh.household_app.ui.fragment.MyDeviceFragment;
@@ -224,9 +225,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
             case 1: {
-//                Intent intent = new Intent();
-//                intent.setClass(MainActivity.this,TestActivity.class);
-//                startActivity(intent);
+                AlarmFragment fragement = new AlarmFragment();
+                fragmentTransaction.replace(R.id.container,fragement, "AlarmFragment" );
+                fragmentTransaction.commit();
                 break;
             }
             case 2: {
