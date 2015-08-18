@@ -48,7 +48,7 @@ public class ThreeOutAlarmFragment extends BaseFragment {
                     Toast.makeText(getActivity(), "" + fragment.flag, Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        }, false);
         listView.setAdapter(adapter);
 
         ArrayList<Alarm> list = new ArrayList<Alarm>(0);
