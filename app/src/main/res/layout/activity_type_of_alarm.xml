@@ -18,10 +18,10 @@
 
             <CheckBox
                 android:id="@+id/checkbox_all"
-                android:button="@drawable/checkbox"
                 android:layout_width="4dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:button="@drawable/checkbox"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"

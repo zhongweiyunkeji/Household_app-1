@@ -8,7 +8,7 @@
         android:id="@+id/item_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/img1"
+        android:src="@drawable/face_sad"
         android:layout_weight="1"
         />
 

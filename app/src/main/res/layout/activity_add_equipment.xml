@@ -249,6 +249,7 @@
             android:background="@drawable/list_line_x"></View>
 
         <RelativeLayout
+            android:id="@+id/shot_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/font_color"
@@ -272,7 +273,6 @@
                 android:layout_toRightOf="@+id/time_tittle_a" />
 
             <ImageView
-                android:id="@+id/shot_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

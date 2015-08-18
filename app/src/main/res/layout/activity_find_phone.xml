@@ -45,7 +45,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:background="@android:color/transparent"
-            android:drawableRight="@drawable/ic_mobile_m"
+            android:drawableRight="@drawable/ic_from_mobile"
             android:hint="@string/register_phone_number"
             android:textCursorDrawable="@drawable/color_cursor"
             android:cursorVisible="true"
