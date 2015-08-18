@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
-import com.cdhxqh.household_app.ui.action.impl.AlarmOnClickCallBack;
+import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.adapter.AlarmItemAdapter;
 
 import java.util.ArrayList;
