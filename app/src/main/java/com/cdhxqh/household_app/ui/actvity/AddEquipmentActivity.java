@@ -2,14 +2,18 @@ package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
@@ -60,6 +64,36 @@ public class AddEquipmentActivity extends BaseActivity {
      */
     private LinearLayout cancel;
 
+    /**
+     *灰色屏幕
+     */
+    private RelativeLayout select_p;
+
+    /**
+     *拍照
+     */
+    private static final int ITEM_1 = 1;
+
+    /**
+     *从相册中查找
+     */
+    private static final int ITEM_2 = 2;
+
+    /**
+     * 显示相片
+     */
+    private ImageView view_photo;
+
+    /**
+     *拍摄或选择图片
+     */
+    private TextView site_photo;
+
+    /**
+     *下一步
+     */
+    private Button next;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_equipment);
@@ -76,6 +110,10 @@ public class AddEquipmentActivity extends BaseActivity {
         cancel = (LinearLayout) findViewById(R.id.cancel);
         create_user = (LinearLayout) findViewById(R.id.create_user);
         address_book = (LinearLayout) findViewById(R.id.address_book);
+        select_p = (RelativeLayout) findViewById(R.id.select_p);
+        view_photo = (ImageView) findViewById(R.id.view_photo);
+        site_photo = (TextView) findViewById(R.id.site_photo);
+        next = (Button) findViewById(R.id.next);
     }
 
     public void initView() {
@@ -95,6 +133,16 @@ public class AddEquipmentActivity extends BaseActivity {
          * 第二栏从相册中选择
          */
         address_book.setOnClickListener(addressOnClickListener);
+
+        /**
+         *灰色屏幕
+         */
+        select_p.setOnClickListener(selectOnClickListener);
+
+        /**
+         * 下一步
+         */
+        next.setOnClickListener(nextOnClickListener);
     }
 
     /**
@@ -119,19 +167,26 @@ public class AddEquipmentActivity extends BaseActivity {
     };
 
     /**
+     * 取消灰色屏幕
+     */
+    private View.OnClickListener selectOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new CartoonDisplay(activity, 2, new String[]{"拍照", "从相册选择"}).display();
+        }
+    };
+
+    /**
      * 第一栏拍照
      */
     private View.OnClickListener createOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             new CartoonDisplay(activity, 2, new String[]{"拍照", "从相册选择"}).display();
-            Intent intent = new Intent();
-            intent.setAction("android.media.action.IMAGE_CAPTURE");
-            intent.addCategory("android.intent.category.DEFAULT");
-            File file = new File(Environment.getExternalStorageDirectory() + "/000.jpg");
-            Uri uri = Uri.fromFile(file);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            activity.startActivity(intent);
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            startActivityForResult(intent, ITEM_1);
         }
     };
 
@@ -142,6 +197,72 @@ public class AddEquipmentActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             new CartoonDisplay(activity, 2, new String[]{"拍照", "从相册选择"}).display();
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent, ITEM_1);
+        }
+    };
+
+    /**
+     * 相册的回调方法
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case (ITEM_1):
+                if(resultCode == RESULT_OK) {
+                    if (data != null) {
+                        //取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意
+                        Uri mImageCaptureUri = data.getData();
+                        //返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取
+                        if (mImageCaptureUri != null) {
+                            Bitmap image;
+                            try {
+                                //这个方法是根据Uri获取Bitmap图片的静态方法
+                                image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageCaptureUri);
+                                if (image != null) {
+                                    view_photo.setVisibility(View.VISIBLE);
+                                    view_photo.setImageBitmap(image);
+                                    site_photo.setVisibility(View.GONE);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Bundle extras = data.getExtras();
+                            if (extras != null) {
+                                //这里是有些拍照后的图片是直接存放到Bundle中的所以我们可以从这里面获取Bitmap图片
+                                Bitmap image = extras.getParcelable("data");
+                                if (image != null) {
+                                    view_photo.setVisibility(View.VISIBLE);
+                                    view_photo.setImageBitmap(image);
+                                    site_photo.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+
+                    }
+                }
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    /**
+     * 下一步
+     */
+    private View.OnClickListener nextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent();
+            intent.setClass(AddEquipmentActivity.this, SafeActivity.class);
+            startActivity(intent);
         }
     };
 }
