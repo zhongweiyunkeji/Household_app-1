@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C3D4E9">
+
+    <!--<include layout="@layout/activity_tittle"  />.-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:id="@+id/tabs_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="三个月内"
+            android:paddingLeft="60dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/tabs_left_sel"
+            />
+
+        <TextView
+            android:id="@+id/tabs_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="三个月前"
+            android:paddingLeft="10dp"
+            android:paddingRight="60dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="#7C8586"
+            android:background="@drawable/tabs_right_nol"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/alarm_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
