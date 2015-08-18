@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
@@ -18,6 +19,7 @@ public class AlarmFragment extends BaseFragment {
 
     TextView leftTab;
     TextView rightTab;
+    RelativeLayout relativeLayout;
     public boolean flag = false;
 
     @Override
@@ -32,10 +34,10 @@ public class AlarmFragment extends BaseFragment {
     public void findViewById(View view) {
         leftTab =  (TextView)view.findViewById(R.id.tabs_left);
         rightTab = (TextView)view.findViewById(R.id.tabs_right);
+        relativeLayout = (RelativeLayout)view.findViewById(R.id.operate_area);
     }
 
     public void initView() {
-
         final int tabsLeftPadding_left = leftTab.getPaddingLeft();
         final int tabsTopPadding_left = leftTab.getPaddingTop();
         final int tabsRightPadding_left = leftTab.getPaddingRight();
@@ -45,6 +47,8 @@ public class AlarmFragment extends BaseFragment {
         final int tabsTopPadding_right = rightTab.getPaddingTop();
         final int tabsRightPadding_right = rightTab.getPaddingRight();
         final int tabsBottomPadding_right = rightTab.getPaddingBottom();
+
+        relativeLayout.setVisibility(View.GONE);
 
         leftTab.setOnClickListener(new View.OnClickListener() {  // 三个月内
             @Override
@@ -88,6 +92,9 @@ public class AlarmFragment extends BaseFragment {
     public void initThreeInFragment() {
         FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
         ThreeInAlarmFragment in = new ThreeInAlarmFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("showCheckBox", false);
+        in.setArguments(bundle);
         transaction.replace(R.id.alarm_container, in, "ThreeInAlarmFragment");
         transaction.commit();
         flag = true;
@@ -96,6 +103,9 @@ public class AlarmFragment extends BaseFragment {
     public void initThreeOutFragment() {
         FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
         ThreeOutAlarmFragment out = new ThreeOutAlarmFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("showCheckBox", false);
+        out.setArguments(bundle);
         transaction.replace(R.id.alarm_container, out, "ThreeOutAlarmFragment");
         transaction.commit();
         flag = false;
