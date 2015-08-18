@@ -12,6 +12,7 @@ public class Alarm implements Serializable {
     private String msg;
     private String date;
     private int icon;
+    private boolean status = false;  // 保存复选框的选中状态
 
     public Alarm() {
     }
@@ -62,5 +63,13 @@ public class Alarm implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

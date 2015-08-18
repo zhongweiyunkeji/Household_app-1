@@ -5,12 +5,16 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
-import com.cdhxqh.household_app.ui.action.impl.AlarmOnClickCallBack;
+import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.adapter.AlarmItemAdapter;
 
 import java.util.ArrayList;
@@ -24,13 +28,18 @@ public class ThreeOutAlarmFragment extends BaseFragment {
     ListView listView;
     AlarmItemAdapter adapter;
     boolean showCheckBox = false;
+    boolean hideToolBar = false;
+    RelativeLayout relativeLayout;
 
+    CheckBox checkdAll;
+    ImageView delBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         if(bundle!=null){
             showCheckBox = bundle.getBoolean("showCheckBox");
+            hideToolBar = bundle.getBoolean("hideToolBar");
         }
         View view = inflater.inflate(R.layout.three_in_alarm, container, false);
         findViewById(view);
@@ -41,6 +50,9 @@ public class ThreeOutAlarmFragment extends BaseFragment {
     public void findViewById(View view) {
         swipeRefreshLayout =  (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
         listView = (ListView)view.findViewById(R.id.three_in_alarm_listview);
+        relativeLayout = (RelativeLayout)view.findViewById(R.id.operate_area);
+        checkdAll = (CheckBox)view.findViewById(R.id.checkd_all);
+        delBtn = (ImageView)view.findViewById(R.id.del_btn);
     }
 
     public void initView() {
@@ -55,6 +67,43 @@ public class ThreeOutAlarmFragment extends BaseFragment {
             }
         }, showCheckBox);
         listView.setAdapter(adapter);
+
+        if(hideToolBar){
+            relativeLayout.setVisibility(View.GONE);
+        } else {
+            relativeLayout.setVisibility(View.VISIBLE);
+        }
+
+        checkdAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {  // 全选按钮事件
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(adapter!=null){
+                    if(isChecked){
+                        adapter.selectAll();
+                    } else {
+                        adapter.unselectAll();
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        delBtn.setOnClickListener(new View.OnClickListener() { // 删除按钮事件
+            @Override
+            public void onClick(View v) {
+                ArrayList<Alarm> list = adapter.getList();
+                ArrayList<Alarm> clonList = (ArrayList<Alarm>)list.clone();
+                int size = list.size();
+                for(int index=0; index<size; index++){
+                    Alarm alarm = list.get(index);
+                    boolean flag = alarm.isStatus();
+                    if(flag){
+                        clonList.remove(alarm);
+                    }
+                }
+                adapter.reload(clonList);
+            }
+        });
 
         ArrayList<Alarm> list = new ArrayList<Alarm>(0);
         for(int i=0; i<10; i++){

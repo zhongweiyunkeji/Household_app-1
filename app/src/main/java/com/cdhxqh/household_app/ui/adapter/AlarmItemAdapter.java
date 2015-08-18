@@ -1,11 +1,13 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,15 +60,12 @@ public class AlarmItemAdapter extends BaseAdapter {
             holder = (ItemHolder)convertView.getTag();
         }
 
-        Alarm alarm = list.get(position);
+        final Alarm alarm = list.get(position);
         ImageLoader.getInstance().displayImage(alarm.getImg(), holder.img);
         holder.title.setText(alarm.getTitle());
         holder.msg.setText(alarm.getMsg());
         holder.date.setText(alarm.getDate());
         holder.icon.setImageResource(alarm.getIcon());
-        if(showCheckBox){
-            holder.checkbox.setVisibility(View.VISIBLE);
-        }
 
         final Alarm a = alarm;
         final int p = position;
@@ -78,7 +77,49 @@ public class AlarmItemAdapter extends BaseAdapter {
             }
         });
 
+        if(showCheckBox){
+            holder.checkbox.setVisibility(View.VISIBLE);
+            if(alarm.isStatus()){
+                holder.checkbox.setChecked(true);
+            } else {
+                holder.checkbox.setChecked(false);
+            }
+        }
+
+        /*holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                alarm.setStatus(isChecked);  // 记住选中状态
+                Log.i("TAG", "-----------p = " + p + "----------->" + isChecked);
+            }
+        });*/
+
+        final CheckBox box = holder.checkbox;
+        holder.checkbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = box.isChecked();  // 注意：此处取得的状态是变化后的值！
+                alarm.setStatus(isChecked);  // 记住选中状态
+                Log.e("TAG", "-----------p = " + p + "----------->" + isChecked);
+            }
+        });
+
         return convertView;
+    }
+
+    public void selectAll(){
+        select(true);
+    }
+
+    public void unselectAll(){
+        select(false);
+    }
+
+    private void select(boolean flag){
+        int size = list.size();
+        for(int i=0; i<size; i++){
+            list.get(i).setStatus(flag);
+        }
     }
 
     public void update(ArrayList<Alarm> iistItem) {
@@ -105,6 +146,14 @@ public class AlarmItemAdapter extends BaseAdapter {
 
     public void clear(){
         this.list.clear();;
+    }
+
+    public ArrayList<Alarm> getList() {
+        if(list == null){
+            return new ArrayList<Alarm>(0);
+        }
+
+        return list;
     }
 
     /**

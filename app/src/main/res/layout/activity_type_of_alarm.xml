@@ -18,10 +18,10 @@
 
             <CheckBox
                 android:id="@+id/checkbox_all"
-                android:button="@drawable/checkbox"
                 android:layout_width="4dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:button="@drawable/checkbox"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"
@@ -35,9 +35,9 @@
                 android:layout_marginTop="9dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="5dp"
-                android:textColor="#000000"
+                android:textColor="@color/list_title_color"
                 android:text="全选"
-                android:textSize="19sp"/>
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/edit"
@@ -47,7 +47,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="13dp"
                 android:text="@string/confrim"
-                android:textSize="19sp"/>
+                android:textSize="18sp"/>
 
         </LinearLayout>
 

@@ -72,7 +72,7 @@ public class HelpCenterFragement extends BaseFragment {
                 tabsLeft.setTextColor(Color.parseColor("#FFFFFF"));
 
                 tabsRight.setBackgroundResource(R.drawable.tabs_right_nol);
-                tabsRight.setTextColor(Color.parseColor("#7C8586"));
+                tabsRight.setTextColor(Color.parseColor("#80858e"));
 
                 tabsLeft.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);
                 tabsRight.setPadding(tabsLeftPadding_right, tabsTopPadding_right, tabsRightPadding_right, tabsBottomPadding_right);
@@ -84,7 +84,7 @@ public class HelpCenterFragement extends BaseFragment {
             @Override
             public void onClick(View v) {
                 tabsLeft.setBackgroundResource(R.drawable.tabs_left_nol);
-                tabsLeft.setTextColor(Color.parseColor("#7C8586"));
+                tabsLeft.setTextColor(Color.parseColor("#80858e"));
 
                 tabsRight.setBackgroundResource(R.drawable.tabs_right_sel);
                 tabsRight.setTextColor(Color.parseColor("#FFFFFF"));

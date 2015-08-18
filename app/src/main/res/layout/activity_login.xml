@@ -31,19 +31,19 @@
         android:id="@+id/linearlayout_1"
         android:layout_width="fill_parent"
         android:layout_height="120dp"
-        android:background="@drawable/login_edit_text"
+        android:background="@drawable/edit_text_bg"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/user_edittext_id"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
             android:textCursorDrawable="@drawable/color_cursor"
             android:singleLine="true"
-            android:background="@color/font_color"
-            android:drawableRight="@drawable/registed_a_mobile"
+            android:background="@android:color/transparent"
+            android:textColorHint="@color/edit_color"
+            android:drawableRight="@drawable/ic_from_mobile"
             android:hint="@string/please_user_name_text" />
 
         <View
@@ -59,9 +59,10 @@
             android:id="@+id/passworld_edittext_id"
             android:layout_width="220dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:background="@color/font_color"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/transparent"
+            android:textColorHint="@color/edit_color"
             android:textCursorDrawable="@drawable/color_cursor"
             android:singleLine="true"
             android:inputType="textPassword"
@@ -89,18 +90,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:button="@drawable/checkbox"
             android:text="@string/remenber_pass"
-            android:textSize="15sp"
-            android:textColor="@color/list_item_read"/>
+            android:textSize="16sp"
+            android:textColor="@color/text_color"/>
         <TextView
             android:id="@+id/TextViewPassWord"
-            android:layout_width="70dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="@string/forget_pass_word"
-            android:textColor="@color/list_item_read"
-            android:textSize="15sp" />
+            android:textColor="@color/text_color"
+            android:textSize="16sp" />
     </RelativeLayout>
 
 
@@ -115,7 +117,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:layout_marginRight="20dp"
-            android:background="@drawable/button_reg_static"
+            android:background="@drawable/btn_darkblue"
+            android:text="@string/registered_new_user"
             android:textColor="@color/font_color"
             android:textSize="20dp" />
 
@@ -124,7 +127,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:background="@drawable/button_login_static"
+            android:background="@drawable/btn_lightblue"
+            android:text="@string/login_text"
             android:textColor="@color/font_color"
             android:textSize="20dp" />
 

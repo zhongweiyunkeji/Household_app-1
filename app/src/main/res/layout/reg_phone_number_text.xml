@@ -2,7 +2,7 @@
     android:id="@+id/reg_layou_1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F1F6FA"
+    android:background="@color/bgcolor"
     android:layout_marginTop="30dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
@@ -13,8 +13,8 @@
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:layout_gravity="left"
-        android:background="@drawable/reg_phone_number_border_top"
-        android:drawableRight="@drawable/mobile"
+        android:background="@drawable/edit_text_bg"
+        android:drawableRight="@drawable/ic_from_mobile"
         android:gravity="center_vertical"
         android:hint="请输入11位手机号"
         android:inputType="phone"
@@ -32,15 +32,15 @@
         android:layout_marginTop="20dp"
         android:gravity="left|center"
         android:text="已同意《智慧家居安全云服务条款》，点击“下一步”"
-        android:textColor="#91969D" />
+        android:textColor="@color/text_color" />
 
     <Button
         android:id="@+id/reg_phone_next_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/reg_phone_number_button_background"
+        android:background="@drawable/btn_lightblue"
         android:gravity="center"
         android:text="下一步"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/font_color"
         android:textSize="40px" />
 </LinearLayout>

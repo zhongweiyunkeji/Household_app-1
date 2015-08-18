@@ -24,7 +24,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
+                android:background="@color/font_color"
                 android:orientation="vertical">
 
                 <!--常用联系人-->
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="#ffffff">
+                android:background="@color/font_color">
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

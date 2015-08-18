@@ -1,41 +1,67 @@
-package com.cdhxqh.household_app.ui.fragment;
+package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ExpandableListView;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.ui.fragment.ThreeInAlarmFragment;
+import com.cdhxqh.household_app.ui.fragment.ThreeOutAlarmFragment;
 
 /**
- * Created by hexian on 2015/8/17.
+ * Created by hexian on 2015/8/18.
  */
-public class AlarmFragment extends BaseFragment {
+public class Activity_Alarm_Del extends BaseActivity {
 
     TextView leftTab;
     TextView rightTab;
+    //RelativeLayout relativeLayout;
     public boolean flag = false;
 
+    ImageView backImg;
+    TextView titleTextView;
+    ImageView addImg;
+
+    CheckBox checkdAll;
+    ImageView delBtn;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         flag = false;
-        View view = inflater.inflate(R.layout.fragment_alarm_list, container, false);
-        findViewById(view);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_alarm_list);
+        findViewById();
         initView();
-        return view;
     }
 
-    public void findViewById(View view) {
-        leftTab =  (TextView)view.findViewById(R.id.tabs_left);
-        rightTab = (TextView)view.findViewById(R.id.tabs_right);
+    public void findViewById(){
+        backImg =  (ImageView)findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView)findViewById(R.id.title_text_id);
+
+        addImg =  (ImageView)findViewById(R.id.title_add_id);
+        leftTab =  (TextView)findViewById(R.id.tabs_left);
+        rightTab = (TextView)findViewById(R.id.tabs_right);
     }
 
-    public void initView() {
+    public void initView(){
+
+        titleTextView.setText("±®æØº«¬º");
+        addImg.setVisibility(View.GONE);
+
+        backImg.setOnClickListener(new View.OnClickListener() {  // ÕÀªÿ∞¥≈• ¬º˛
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         final int tabsLeftPadding_left = leftTab.getPaddingLeft();
         final int tabsTopPadding_left = leftTab.getPaddingTop();
         final int tabsRightPadding_left = leftTab.getPaddingRight();
@@ -46,7 +72,7 @@ public class AlarmFragment extends BaseFragment {
         final int tabsRightPadding_right = rightTab.getPaddingRight();
         final int tabsBottomPadding_right = rightTab.getPaddingBottom();
 
-        leftTab.setOnClickListener(new View.OnClickListener() {  // ‰∏â‰∏™ÊúàÂÜÖ
+        leftTab.setOnClickListener(new View.OnClickListener() {  // »˝∏ˆ‘¬ƒ⁄
             @Override
             public void onClick(View v) {
                 leftTab.setBackgroundResource(R.drawable.tabs_left_sel);
@@ -63,9 +89,9 @@ public class AlarmFragment extends BaseFragment {
             }
         });
 
-        rightTab.setOnClickListener(new View.OnClickListener() {  // ‰∏â‰∏™ÊúàÂâç
+        rightTab.setOnClickListener(new View.OnClickListener() {  // »˝∏ˆ‘¬«∞
             @Override
-            public void onClick(View v) {// ‰∏â‰∏™ÊúàÈí±Ââç
+            public void onClick(View v) {// »˝∏ˆ‘¬«Æ«∞
                 leftTab.setBackgroundResource(R.drawable.tabs_left_nol);
                 leftTab.setTextColor(Color.parseColor("#7C8586"));
                 rightTab.setBackgroundResource(R.drawable.tabs_right_sel);
@@ -86,11 +112,11 @@ public class AlarmFragment extends BaseFragment {
     }
 
     public void initThreeInFragment() {
-        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         ThreeInAlarmFragment in = new ThreeInAlarmFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean("showCheckBox", false);
-        bundle.putBoolean("hideToolBar", true);
+        bundle.putBoolean("showCheckBox", true);
+        bundle.putBoolean("hideToolBar", false);
         in.setArguments(bundle);
         transaction.replace(R.id.alarm_container, in, "ThreeInAlarmFragment");
         transaction.commit();
@@ -98,17 +124,16 @@ public class AlarmFragment extends BaseFragment {
     }
 
     public void initThreeOutFragment() {
-        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         ThreeOutAlarmFragment out = new ThreeOutAlarmFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean("showCheckBox", false);
-        bundle.putBoolean("hideToolBar", true);
+        bundle.putBoolean("showCheckBox", true);
+        bundle.putBoolean("hideToolBar", false);
         out.setArguments(bundle);
         transaction.replace(R.id.alarm_container, out, "ThreeOutAlarmFragment");
         transaction.commit();
         flag = false;
     }
-
 
 
 
