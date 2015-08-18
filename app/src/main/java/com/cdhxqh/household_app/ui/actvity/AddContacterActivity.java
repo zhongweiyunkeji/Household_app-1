@@ -165,9 +165,14 @@ public class AddContacterActivity extends BaseActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((OnItemClickCallBackImpl.ACTIVITY_REGISTRY_RESPONSE1 == resultCode) && (Activity_Registry_User.ACTIVITY_REGISTRY_REQUEST1 == requestCode)) {
-            Bundle bundle = data.getExtras();
-            String text = bundle.getString("text");
-            role_group.setText(text);
+            String text = role_group.getText().toString();
+            if(data!=null){
+                Bundle bundle = data.getExtras();
+                text = bundle.getString("text");
+            }
+                role_group.setText(text);
+
+
             Log.i("", "----------------------->" + text);
         }
     }

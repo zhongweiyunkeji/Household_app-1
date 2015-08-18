@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
-import com.cdhxqh.household_app.ui.action.impl.AlarmOnClickCallBack;
+import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -24,10 +24,12 @@ public class AlarmItemAdapter extends BaseAdapter {
     Context context;
     AlarmOnClickCallBack callBack;
     ArrayList<Alarm> list = new ArrayList<Alarm>();
+    boolean showCheckBox;
 
-    public AlarmItemAdapter(Context context, AlarmOnClickCallBack callBack){
+    public AlarmItemAdapter(Context context, AlarmOnClickCallBack callBack, boolean showCheckBox){
         this.context = context;
         this.callBack = callBack;
+        this.showCheckBox = showCheckBox;
     }
 
     @Override
@@ -62,6 +64,9 @@ public class AlarmItemAdapter extends BaseAdapter {
         holder.msg.setText(alarm.getMsg());
         holder.date.setText(alarm.getDate());
         holder.icon.setImageResource(alarm.getIcon());
+        if(showCheckBox){
+            holder.checkbox.setVisibility(View.VISIBLE);
+        }
 
         final Alarm a = alarm;
         final int p = position;
@@ -98,8 +103,21 @@ public class AlarmItemAdapter extends BaseAdapter {
         }
     }
 
+    public void clear(){
+        this.list.clear();;
+    }
+
+    /**
+     * 重新加载数据
+     */
+    public void reload(ArrayList<Alarm> list){
+        clear();
+        update(list);
+    }
+
     public static final class ItemHolder {
 
+        CheckBox checkbox;
         ImageView img;
         TextView title;
         TextView msg;
@@ -107,6 +125,7 @@ public class AlarmItemAdapter extends BaseAdapter {
         ImageView icon;
 
         public ItemHolder(View view){
+            checkbox = (CheckBox)view.findViewById(R.id.checkbox);
             img = (ImageView)view.findViewById(R.id.item_img);
             title = (TextView)view.findViewById(R.id.item_title);
             msg = (TextView)view.findViewById(R.id.item_msg);

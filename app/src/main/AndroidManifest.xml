@@ -32,6 +32,10 @@
             android:name=".ui.actvity.BaseActivity"
             android:label="@string/title_activity_base" />
         <activity
+            android:name=".ui.actvity.AddEquipmentActivity"
+            android:label="@string/title_activity_base"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.actvity.MainActivity"
             android:label="MainActivity"
             android:screenOrientation="portrait" />
