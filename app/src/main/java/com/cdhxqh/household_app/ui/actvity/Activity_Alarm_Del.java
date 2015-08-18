@@ -52,10 +52,10 @@ public class Activity_Alarm_Del extends BaseActivity {
 
     public void initView(){
 
-        titleTextView.setText("±¨¾¯¼ÇÂ¼");
+        titleTextView.setText("æŠ¥è­¦è®°å½•");
         addImg.setVisibility(View.GONE);
 
-        backImg.setOnClickListener(new View.OnClickListener() {  // ÍË»Ø°´Å¥ÊÂ¼ş
+        backImg.setOnClickListener(new View.OnClickListener() {  // é€€å›æŒ‰é’®äº‹ä»¶
             @Override
             public void onClick(View v) {
                 finish();
@@ -72,7 +72,7 @@ public class Activity_Alarm_Del extends BaseActivity {
         final int tabsRightPadding_right = rightTab.getPaddingRight();
         final int tabsBottomPadding_right = rightTab.getPaddingBottom();
 
-        leftTab.setOnClickListener(new View.OnClickListener() {  // Èı¸öÔÂÄÚ
+        leftTab.setOnClickListener(new View.OnClickListener() {  // ä¸‰ä¸ªæœˆå†…
             @Override
             public void onClick(View v) {
                 leftTab.setBackgroundResource(R.drawable.tabs_left_sel);
@@ -89,9 +89,9 @@ public class Activity_Alarm_Del extends BaseActivity {
             }
         });
 
-        rightTab.setOnClickListener(new View.OnClickListener() {  // Èı¸öÔÂÇ°
+        rightTab.setOnClickListener(new View.OnClickListener() {  // ä¸‰ä¸ªæœˆå‰
             @Override
-            public void onClick(View v) {// Èı¸öÔÂÇ®Ç°
+            public void onClick(View v) {// ä¸‰ä¸ªæœˆé’±å‰
                 leftTab.setBackgroundResource(R.drawable.tabs_left_nol);
                 leftTab.setTextColor(Color.parseColor("#7C8586"));
                 rightTab.setBackgroundResource(R.drawable.tabs_right_sel);
