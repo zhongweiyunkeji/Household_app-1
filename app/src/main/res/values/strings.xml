@@ -47,4 +47,20 @@
     <string name="save">保存</string>
     <string name="commit">提交</string>
 
+    <!--添加设备-->
+    <string name="equipment_brand">设备品牌</string>
+    <string name="select_brand">选择设备品牌</string>
+    <string name="equipment_model">设备型号</string>
+    <string name="select_model">选择设备型号</string>
+    <string name="equipment_UID">设备UID号</string>
+    <string name="write_UID">填写设备UID号</string>
+    <string name="equipment_name">设备账号</string>
+    <string name="write_equipment_name">填写设备账号</string>
+    <string name="equipment_password">设备密码</string>
+    <string name="write_equipment_password">填写设备密码</string>
+    <string name="installation_site">安装地点</string>
+    <string name="write_installation_site">填写设备安装地点，以备后期查看</string>
+    <string name="site_photo">设备照片</string>
+    <string name="sele_site_photo">拍摄或选择设备安装地点照片</string>
+    <string name="next">下一步</string>
 </resources>
