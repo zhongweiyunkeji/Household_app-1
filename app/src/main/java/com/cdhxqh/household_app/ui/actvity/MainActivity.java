@@ -38,6 +38,7 @@ import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 import com.cdhxqh.household_app.ui.fragment.MyDeviceFragment;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
 import com.cdhxqh.household_app.ui.fragment.ProductFragment;
+import com.cdhxqh.household_app.ui.fragment.SettingFragment;
 import com.cdhxqh.household_app.ui.widget.listview.WrapWidthListView;
 import com.cdhxqh.household_app.ui.widget.menu.PopMenu;
 import com.cdhxqh.household_app.ui.widget.menu.impl.DeviceMenu;
@@ -261,6 +262,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
             default: {
+                fragmentTransaction.replace(R.id.container, new SettingFragment());
+                fragmentTransaction.commit();
                 break;
             }
         }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:longClickable="true">
 
     <include
         android:id="@+id/include_title"
@@ -21,20 +22,25 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="60dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
+                android:paddingRight="60dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/list_title_color"
+                android:textSize="18sp"
                 android:text="姓名"/>
 
             <EditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textColorHint="@color/edit_color"
+                android:textSize="16sp"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@android:color/transparent"
+                android:layout_weight="1"
                 android:hint="填写姓名"/>
         </TableRow>
 
@@ -47,19 +53,24 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/list_title_color"
+                android:textSize="18sp"
                 android:text="手机号"/>
 
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@android:color/transparent"
+                android:textColorHint="@color/edit_color"
+                android:textSize="16sp"
+                android:layout_weight="1"
                 android:hint="填写手机号"/>
         </TableRow>
 
@@ -67,39 +78,39 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/list_line_x"></View>
-            <TableRow
-                >
+
+        <TableRow>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/list_title_color"
+                android:textSize="18sp"
                 android:text="角色分组"/>
 
             <TextView
                 android:id="@+id/role_group"
-                android:layout_width="208dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:background="@android:color/transparent"
-                android:hint="选择所添加人的角色分组"/>
-
-            <ImageView
-                android:id="@+id/select_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_list_view"/>
-            </TableRow>
+                android:layout_weight="1"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@android:color/transparent"
+                android:hint="选择所添加人的角色分组"
+                android:textColorHint="@color/text_color"
+                android:textSize="16sp"
+                android:drawableRight="@drawable/ic_list_view"/>
+        </TableRow>
+        <!--android:id="@+id/select_group"-->
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/list_line_x"></View>
     </TableLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/list_line_x"></View>
 
     <Button
         android:id="@+id/commit_id"
@@ -109,9 +120,9 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/btn_lightblue_nol"
+        android:background="@drawable/btn_lightblue"
         android:text="@string/commit"
         android:textColor="@color/font_color"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>
