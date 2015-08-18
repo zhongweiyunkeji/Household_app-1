@@ -1,308 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/activity_tittle"></include>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#e2e9f2"
-        android:orientation="vertical">
-
-        <!--设备信息-->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/week_tittle_a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="14dp"
-                android:text="@string/equipment_brand"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/equipment_brand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="14dp"
-                android:hint="@string/select_brand"
-                android:layout_toRightOf="@+id/week_tittle_a" />
-
-            <ImageView
-                android:id="@+id/selectWeek_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_list_view" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/time_tittle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="14dp"
-                android:text="@string/equipment_model"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/equipment_model"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="14dp"
-                android:hint="@string/select_model"
-                android:layout_toRightOf="@+id/time_tittle" />
-
-            <ImageView
-                android:id="@+id/select_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_list_view" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
+            android:layout_below="@+id/include_title"
+            android:background="#e2e9f2"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="14dp"
-                android:text="@string/equipment_UID"
-                android:textSize="16sp" />
+            <!--设备信息-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
 
-            <EditText
-                android:id="@+id/equipment_UID"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:hint="@string/write_UID"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:background="@android:color/transparent"
-                android:paddingTop="14dp" />
+                android:background="@color/font_color"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/week_tittle_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:text="@string/equipment_brand"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/equipment_brand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/week_tittle_a"
+                    android:hint="@string/select_brand"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp" />
+
+                <ImageView
+                    android:id="@+id/selectWeek_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_list_view" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/font_color"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/time_tittle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:text="@string/equipment_model"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/equipment_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/time_tittle"
+                    android:hint="@string/select_model"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp" />
+
+                <ImageView
+                    android:id="@+id/select_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_list_view" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/font_color"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:text="@string/equipment_UID"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/equipment_UID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/write_UID"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:textCursorDrawable="@drawable/color_cursor" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
+
+            <!--设备账号密码-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/font_color"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:text="@string/equipment_name"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/equipment_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/write_equipment_name"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:textCursorDrawable="@drawable/color_cursor" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/font_color"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:text="@string/equipment_password"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/equipment_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/write_equipment_password"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:textCursorDrawable="@drawable/color_cursor" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
+
+            <!-- 安装地点-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/font_color"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:text="@string/installation_site"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/installation_site"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/write_installation_site"
+                    android:paddingBottom="14dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:textCursorDrawable="@drawable/color_cursor" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
+
+            <RelativeLayout
+                android:id="@+id/shot_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/font_color"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/time_tittle_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="@string/site_photo"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/site_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@+id/time_tittle_a"
+                    android:hint="@string/sele_site_photo" />
+
+
+                <ImageView
+                    android:id="@+id/view_photo"
+                    android:layout_width="100dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/time_tittle_a"
+                     />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_list_view" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
+
+            <!--下一步-->
+            <Button
+                android:id="@+id/next"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_lightblue"
+                android:text="@string/next"
+                android:textColor="@color/font_color"
+                android:textSize="20sp" />
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <!--设备账号密码-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="14dp"
-                android:text="@string/equipment_name"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/equipment_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:hint="@string/write_equipment_name"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:background="@android:color/transparent"
-                android:paddingTop="14dp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="14dp"
-                android:text="@string/equipment_password"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/equipment_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:hint="@string/write_equipment_password"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:background="@android:color/transparent"
-                android:paddingTop="14dp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <!-- 安装地点-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="14dp"
-                android:text="@string/installation_site"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/installation_site"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="14dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:hint="@string/write_installation_site"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:background="@android:color/transparent"
-                android:paddingTop="14dp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <RelativeLayout
-            android:id="@+id/shot_photo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/time_tittle_a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:text="@string/site_photo"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/site_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="@string/sele_site_photo"
-                android:layout_toRightOf="@+id/time_tittle_a" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_list_view" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <!--下一步-->
-        <Button
-            android:id="@+id/next"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/btn_lightblue"
-            android:text="@string/next"
-            android:textColor="@color/font_color"
-            android:textSize="20sp" />
-
-    </LinearLayout>
+    </ScrollView>
 
     <include layout="@layout/activity_select_display"></include>
 
-</LinearLayout>
+</RelativeLayout>
