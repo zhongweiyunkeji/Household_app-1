@@ -56,7 +56,7 @@ public class AlarmFragment extends BaseFragment {
                 leftTab.setBackgroundResource(R.drawable.tabs_left_sel);
                 leftTab.setTextColor(Color.parseColor("#FFFFFF"));
                 rightTab.setBackgroundResource(R.drawable.tabs_right_nol);
-                rightTab.setTextColor(Color.parseColor("#7C8586"));
+                rightTab.setTextColor(Color.parseColor("#80858e"));
                 leftTab.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);
                 rightTab.setPadding(tabsLeftPadding_right, tabsTopPadding_right, tabsRightPadding_right, tabsBottomPadding_right);
                 if(flag){
@@ -71,7 +71,7 @@ public class AlarmFragment extends BaseFragment {
             @Override
             public void onClick(View v) {// 三个月钱前
                 leftTab.setBackgroundResource(R.drawable.tabs_left_nol);
-                leftTab.setTextColor(Color.parseColor("#7C8586"));
+                leftTab.setTextColor(Color.parseColor("#80858e"));
                 rightTab.setBackgroundResource(R.drawable.tabs_right_sel);
                 rightTab.setTextColor(Color.parseColor("#FFFFFF"));
                 leftTab.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);

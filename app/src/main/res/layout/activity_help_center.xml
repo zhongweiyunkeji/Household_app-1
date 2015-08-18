@@ -26,7 +26,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:gravity="center"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/font_color"
                 android:background="@drawable/tabs_left_sel"
                 />
 
@@ -39,7 +39,7 @@
                 android:paddingRight="60dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textColor="#7C8586"
+                android:textColor="@color/text_color"
                 android:background="@drawable/tabs_right_nol"
                 android:gravity="center" />
 
