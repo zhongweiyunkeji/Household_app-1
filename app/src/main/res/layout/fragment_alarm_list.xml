@@ -44,27 +44,7 @@
             android:background="@drawable/tabs_right_nol"
             android:gravity="center"
             />
-
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/operate_area"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#E2E9F2">
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="全选"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_trash_a"/>
-    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/alarm_container"
