@@ -33,11 +33,6 @@ public class AddContacterActivity extends BaseActivity {
     TextView phone;
 
     /**
-     * 分组
-     */
-    ImageView select_group;
-
-    /**
      * 提交
      */
     Button commit_id;
@@ -80,10 +75,6 @@ public class AddContacterActivity extends BaseActivity {
         phone = (TextView) findViewById(R.id.phone);
 
         /**
-         * 分组
-         */
-        select_group = (ImageView) findViewById(R.id.select_group);
-        /**
          * 添加联系人
          */
         commit_id = (Button) findViewById(R.id.commit_id);
@@ -100,7 +91,7 @@ public class AddContacterActivity extends BaseActivity {
             phone.setText(contacts.getPhone());
             role_group.setText(contacts.getType());
         }
-        select_group.setOnClickListener(selectGroupOnClickListener);
+        role_group.setOnClickListener(selectGroupOnClickListener);
         commit_id.setOnClickListener(commitOnClickListener);
     }
 
