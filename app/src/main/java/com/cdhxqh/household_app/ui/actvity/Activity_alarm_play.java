@@ -46,7 +46,7 @@ public class Activity_alarm_play extends BaseActivity {
 
     public void initView(){
         titleImg.setVisibility(View.GONE);
-        titleText.setText("±¨¾¯»Ø·Å");
+        titleText.setText("æŠ¥è­¦å›žæ”¾");
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

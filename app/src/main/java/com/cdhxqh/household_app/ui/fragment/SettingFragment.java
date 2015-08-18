@@ -17,17 +17,17 @@ import java.util.ArrayList;
  */
 public class SettingFragment extends BaseFragment{
     /**
-     * Ê¡Á÷Á¿
+     * çœæµé‡
      */
     private RelativeLayout install_flow;
 
     /**
-     *Çå³ı»º´æ
+     *æ¸…é™¤ç¼“å­˜
      */
     private RelativeLayout catchs;
 
     /**
-     * Çå³ı»º´æ
+     * æ¸…é™¤ç¼“å­˜
      */
     DataCleanManager dataCleanManager;
 
@@ -52,15 +52,15 @@ public class SettingFragment extends BaseFragment{
     }
 
     /**
-     * Çå³ı»º´æ
+     * æ¸…é™¤ç¼“å­˜
      */
     final Activity activity = this.getActivity();
     private View.OnClickListener catchsOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            DataCleanManager.cleanInternalCache(activity);//Çå³ı±¾Ó¦ÓÃÄÚ²¿»º´æ
-//            DataCleanManager.cleanDatabases(activity);//Çå³ı±¾Ó¦ÓÃËùÓĞÊı¾İ¿â
-//            DataCleanManager.cleanSharedPreference(activity);//Çå³ı±¾Ó¦ÓÃSharedPreference
+//            DataCleanManager.cleanInternalCache(activity);//æ¸…é™¤æœ¬åº”ç”¨å†…éƒ¨ç¼“å­˜
+//            DataCleanManager.cleanDatabases(activity);//æ¸…é™¤æœ¬åº”ç”¨æ‰€æœ‰æ•°æ®åº“
+//            DataCleanManager.cleanSharedPreference(activity);//æ¸…é™¤æœ¬åº”ç”¨SharedPreference
         }
     };
 
