@@ -66,6 +66,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     private static final int EDIT_CONTACT = 3;
 
+    private static final int DELE_CONTACT = 4;
+
 
     private String[] mFavoriteTabTitles;
     private String[] mFavoriteTabPaths;
@@ -468,7 +470,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                     Intent intents = new Intent();
                     intents.putExtra("contactList", (ArrayList<Contacters>) intent.getSerializableExtra("contactList"));
                     intents.setClass(MainActivity.this, ViewUserActivity.class);
-                    startActivity(intents);
+                    startActivityForResult(intent, DELE_CONTACT);
                 }
                 Toast.makeText(MainActivity.this, "常用联系人", Toast.LENGTH_LONG).show();
             }
@@ -517,6 +519,14 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 }
                 break;
             }
+            case (DELE_CONTACT): {
+                if (resultCode == RESULT_OK) {
+                    ArrayList<Contacters> contacterses = (ArrayList<Contacters>)data.getSerializableExtra("contactList");
+                    commonContactFragment.updateList(contacterses);
+                }
+                break;
+            }
+
         }
 
         if (contacters.getName() != null && contacters.getPhone() != null) {
