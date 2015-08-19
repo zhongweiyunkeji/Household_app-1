@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/edit_text_bg"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="发现新版本"
+            android:gravity="center"
+            android:paddingBottom="15dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/list_line_x"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:textSize="15sp"
+            android:lineSpacingMultiplier="1.5"
+            android:text="最新版本:1.0.5"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:textSize="15sp"
+            android:lineSpacingMultiplier="1.5"
+            android:text="最新版本已下载是否安装?"/>
+
+    </LinearLayout>
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--/>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/list_line_x"
+        />
+
+    <!--  android:layout_marginTop="30dp"  -->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       >
+
+       <Button
+           android:id="@+id/cancelBtn"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:text="以后再说"
+           android:textColor="@color/text_color"
+           android:background="@drawable/button_bg_left"
+           />
+       <View
+           android:layout_width="1dp"
+           android:layout_height="match_parent"
+           android:background="#C1D2E7"/>
+       <Button
+           android:id="@+id/okBtn"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:text="确定更新"
+           android:textColor="@color/text_color_blue"
+           android:background="@drawable/button_bg_right"
+           />
+
+   </LinearLayout>
+
+
+
+</LinearLayout>

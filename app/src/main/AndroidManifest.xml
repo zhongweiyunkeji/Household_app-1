@@ -94,6 +94,8 @@
         </activity>
         <activity android:name=".ui.actvity.Activity_company_introduce"  >
         </activity>
+        <activity android:name=".ui.actvity.Activity_soft_suggest"  >
+        </activity>
     </application>
 
 </manifest>

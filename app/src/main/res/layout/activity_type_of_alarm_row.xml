@@ -26,19 +26,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
                 android:layout_marginTop="7dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:textColor="@color/list_title_color"
                 android:textSize="18sp"
                 />
 
             <ImageView
                 android:id="@+id/edit"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/ic_menu_eidt"/>
         </TableRow>
 
@@ -55,7 +50,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
-                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="7dp"
                 />
             <TextView
