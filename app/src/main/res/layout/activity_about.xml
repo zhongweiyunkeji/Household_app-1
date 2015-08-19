@@ -22,13 +22,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="智能家居云客户端Android版本"
+            android:textSize="20dp"
+            android:paddingTop="15dp"
+            android:text="智慧家居云客户端Android版"
             android:lineSpacingExtra="5dp"
-            android:textColor="@color/text_color"
+            android:textColor="@color/list_title_color"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16dp"
             android:text="版本号1.0.2"
             android:lineSpacingExtra="5dp"
             android:textColor="@color/text_color"
@@ -44,16 +47,19 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/list_line_x"
-            />.
+            />
         <TextView
             android:id="@+id/soft_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="版本更新"
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color"
             android:drawableLeft="@drawable/ic_menu_update"
-            android:background="@drawable/list_bg"
+            android:background="@color/font_color"
             android:gravity="left|center"
-            android:paddingLeft="20dp"
+            android:padding="10dp"
+            android:drawableRight="@drawable/ic_list_view"
             />
         <View
             android:layout_width="match_parent"
@@ -65,11 +71,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="功能介绍"
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color"
             android:drawableLeft="@drawable/ic_menu_function"
-            android:background="@drawable/list_bg"
+            android:background="@color/font_color"
             android:gravity="left|center"
-            android:paddingLeft="20dp"
-            />
+            android:padding="10dp"
+            android:drawableRight="@drawable/ic_list_view" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -80,26 +88,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="给我评分"
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color"
             android:drawableLeft="@drawable/ic_menu_evaluation"
-            android:background="@drawable/list_bg"
+            android:background="@color/font_color"
             android:gravity="left|center"
-            android:paddingLeft="20dp"
+            android:padding="10dp"
+            android:drawableRight="@drawable/ic_list_view" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/list_line_x"
             />
         <View
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/list_line_x"
-            />.
+            />
         <TextView
             android:id="@+id/company_introduction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="公司介绍"
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color"
             android:drawableLeft="@drawable/ic_menu_about"
-            android:background="@drawable/list_bg"
+            android:background="@color/font_color"
             android:gravity="left|center"
-            android:paddingLeft="20dp"
-            />
+            android:padding="10dp"
+            android:drawableRight="@drawable/ic_list_view" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -111,10 +129,12 @@
             android:layout_height="wrap_content"
             android:text="欢迎页"
             android:drawableLeft="@drawable/ic_menu_welcom"
-            android:background="@drawable/list_bg"
+            android:background="@color/font_color"
             android:gravity="left|center"
-            android:paddingLeft="20dp"
-            />
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color"
+            android:padding="10dp"
+            android:drawableRight="@drawable/ic_list_view" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -125,16 +145,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="意见反馈"
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color"
             android:drawableLeft="@drawable/ic_menu_mail"
-            android:background="@drawable/list_bg"
+            android:background="@color/font_color"
             android:gravity="left|center"
-            android:paddingLeft="20dp"
-            />
+            android:padding="10dp"
+            android:drawableRight="@drawable/ic_list_view" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/list_line_x"
-            />.
+            />
     </LinearLayout>
 
 </LinearLayout>
