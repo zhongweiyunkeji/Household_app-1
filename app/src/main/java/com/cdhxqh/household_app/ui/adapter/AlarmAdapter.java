@@ -89,20 +89,22 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("contactList", (Serializable) contacts.get(item));
-                intent.setClass(mContext,AddContacterActivity.class);
+                intent.setClass(mContext, AddContacterActivity.class);
                 intent.putExtra("edit", "edit");
                 contacts.remove(contacts.get(item));
-                ((Activity)mContext).startActivityForResult(intent, EDIT_CONTACT);
+                ((Activity) mContext).startActivityForResult(intent, EDIT_CONTACT);
             }
         });
 
-        holder.checkbox_single.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        final ViewHolder h = holder;
+        holder.checkbox_single.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                contacts.get(item).setFlag(isChecked);
+            public void onClick(View v) {
+                contacts.get(item).setFlag(h.checkbox_single.isChecked());
                 AlarmActivity.update(contacts);
             }
+
         });
     }
 
