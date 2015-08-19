@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.actvity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -46,7 +47,10 @@ public class ActivityAbout extends BaseActivity {
         softGuide.setOnClickListener(new View.OnClickListener() {// 功能介绍
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ActivityAbout.this, Activity_use_guide.class);
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
