@@ -225,24 +225,24 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
-            case 0: {
+            case 0: {// 我的设备
                 fragmentTransaction.replace(R.id.container, new MyDeviceFragment());
                 fragmentTransaction.commit();
                 invalidateOptionsMenu();
                 break;
             }
-            case 1: {
+            case 1: {// 报警记录
                 AlarmFragment fragement = new AlarmFragment();
                 fragmentTransaction.replace(R.id.container,fragement, "AlarmFragment" );
                 fragmentTransaction.commit();
                 break;
             }
-            case 2: {
+            case 2: {// 安全服务中心
                 fragmentTransaction.replace(R.id.container, new ProductFragment());
                 fragmentTransaction.commit();
                 break;
             }
-            case 3: {
+            case 3: {// 文件管理
                 break;
             }
             case 4: {  // 帮助中心
@@ -255,15 +255,17 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 }
                 break;
             }
-            case 5: {
+            case 5: {// 常用联系人
                 fragmentTransaction.replace(R.id.container, commonContactFragment);
                 fragmentTransaction.commit();
                 break;
             }
-            case 6: {
+            case 6: {// 关于我们
+                Bundle bundle = new Bundle();
+                openActivity(ActivityAbout.class, bundle);
                 break;
             }
-            default: {
+            default: {// 设置
                 fragmentTransaction.replace(R.id.container, new SettingFragment());
                 fragmentTransaction.commit();
                 break;
