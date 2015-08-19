@@ -1,7 +1,7 @@
 package com.cdhxqh.household_app.ui.widget;
 
-/*  * ÎÄ ¼ş Ãû:  DataCleanManager.java
- * * Ãè    Êö:  Ö÷Òª¹¦ÄÜÓĞÇå³ıÄÚ/Íâ»º´æ£¬Çå³ıÊı¾İ¿â£¬Çå³ısharedPreference£¬Çå³ıfilesºÍÇå³ı×Ô¶¨ÒåÄ¿Â¼
+/*  * æ–‡ ä»¶ å:  DataCleanManager.java
+ * * æ    è¿°:  ä¸»è¦åŠŸèƒ½æœ‰æ¸…é™¤å†…/å¤–ç¼“å­˜ï¼Œæ¸…é™¤æ•°æ®åº“ï¼Œæ¸…é™¤sharedPreferenceï¼Œæ¸…é™¤fileså’Œæ¸…é™¤è‡ªå®šä¹‰ç›®å½•
  * */
 
 import java.io.File;
@@ -11,10 +11,10 @@ import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 
-/** * ±¾Ó¦ÓÃÊı¾İÇå³ı¹ÜÀíÆ÷ */
+/** * æœ¬åº”ç”¨æ•°æ®æ¸…é™¤ç®¡ç†å™¨ */
 public class DataCleanManager {
     /**
-     * * Çå³ı±¾Ó¦ÓÃÄÚ²¿»º´æ(/data/data/com.xxx.xxx/cache) * *
+     * * æ¸…é™¤æœ¬åº”ç”¨å†…éƒ¨ç¼“å­˜(/data/data/com.xxx.xxx/cache) * *
      *
      * @param context
      */
@@ -23,7 +23,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * Çå³ı±¾Ó¦ÓÃËùÓĞÊı¾İ¿â(/data/data/com.xxx.xxx/databases) * *
+     * * æ¸…é™¤æœ¬åº”ç”¨æ‰€æœ‰æ•°æ®åº“(/data/data/com.xxx.xxx/databases) * *
      *
      * @param context
      */
@@ -33,7 +33,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * Çå³ı±¾Ó¦ÓÃSharedPreference(/data/data/com.xxx.xxx/shared_prefs) *
+     * * æ¸…é™¤æœ¬åº”ç”¨SharedPreference(/data/data/com.xxx.xxx/shared_prefs) *
      *
      * @param context
      */
@@ -43,7 +43,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * °´Ãû×ÖÇå³ı±¾Ó¦ÓÃÊı¾İ¿â * *
+     * * æŒ‰åå­—æ¸…é™¤æœ¬åº”ç”¨æ•°æ®åº“ * *
      *
      * @param context
      * @param dbName
@@ -53,7 +53,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * Çå³ı/data/data/com.xxx.xxx/filesÏÂµÄÄÚÈİ * *
+     * * æ¸…é™¤/data/data/com.xxx.xxx/filesä¸‹çš„å†…å®¹ * *
      *
      * @param context
      */
@@ -62,7 +62,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * Çå³ıÍâ²¿cacheÏÂµÄÄÚÈİ(/mnt/sdcard/android/data/com.xxx.xxx/cache)
+     * * æ¸…é™¤å¤–éƒ¨cacheä¸‹çš„å†…å®¹(/mnt/sdcard/android/data/com.xxx.xxx/cache)
      *
      * @param context
      */
@@ -73,7 +73,7 @@ public class DataCleanManager {
         }
     }
     /**
-     * * Çå³ı×Ô¶¨ÒåÂ·¾¶ÏÂµÄÎÄ¼ş£¬Ê¹ÓÃĞèĞ¡ĞÄ£¬Çë²»ÒªÎóÉ¾¡£¶øÇÒÖ»Ö§³ÖÄ¿Â¼ÏÂµÄÎÄ¼şÉ¾³ı * *
+     * * æ¸…é™¤è‡ªå®šä¹‰è·¯å¾„ä¸‹çš„æ–‡ä»¶ï¼Œä½¿ç”¨éœ€å°å¿ƒï¼Œè¯·ä¸è¦è¯¯åˆ ã€‚è€Œä¸”åªæ”¯æŒç›®å½•ä¸‹çš„æ–‡ä»¶åˆ é™¤ * *
      *
      * @param filePath
      * */
@@ -82,7 +82,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * Çå³ı±¾Ó¦ÓÃËùÓĞµÄÊı¾İ * *
+     * * æ¸…é™¤æœ¬åº”ç”¨æ‰€æœ‰çš„æ•°æ® * *
      *
      * @param context
      * @param filepath
@@ -102,7 +102,7 @@ public class DataCleanManager {
     }
 
     /**
-     * * É¾³ı·½·¨ ÕâÀïÖ»»áÉ¾³ıÄ³¸öÎÄ¼ş¼ĞÏÂµÄÎÄ¼ş£¬Èç¹û´«ÈëµÄdirectoryÊÇ¸öÎÄ¼ş£¬½«²»×ö´¦Àí * *
+     * * åˆ é™¤æ–¹æ³• è¿™é‡Œåªä¼šåˆ é™¤æŸä¸ªæ–‡ä»¶å¤¹ä¸‹çš„æ–‡ä»¶ï¼Œå¦‚æœä¼ å…¥çš„directoryæ˜¯ä¸ªæ–‡ä»¶ï¼Œå°†ä¸åšå¤„ç† * *
      *
      * @param directory
      */
@@ -114,15 +114,15 @@ public class DataCleanManager {
         }
     }
 
-    // »ñÈ¡ÎÄ¼ş
-    //Context.getExternalFilesDir() --> SDCard/Android/data/ÄãµÄÓ¦ÓÃµÄ°üÃû/files/ Ä¿Â¼£¬Ò»°ã·ÅÒ»Ğ©³¤Ê±¼ä±£´æµÄÊı¾İ
-    //Context.getExternalCacheDir() --> SDCard/Android/data/ÄãµÄÓ¦ÓÃ°üÃû/cache/Ä¿Â¼£¬Ò»°ã´æ·ÅÁÙÊ±»º´æÊı¾İ
+    // è·å–æ–‡ä»¶
+    //Context.getExternalFilesDir() --> SDCard/Android/data/ä½ çš„åº”ç”¨çš„åŒ…å/files/ ç›®å½•ï¼Œä¸€èˆ¬æ”¾ä¸€äº›é•¿æ—¶é—´ä¿å­˜çš„æ•°æ®
+    //Context.getExternalCacheDir() --> SDCard/Android/data/ä½ çš„åº”ç”¨åŒ…å/cache/ç›®å½•ï¼Œä¸€èˆ¬å­˜æ”¾ä¸´æ—¶ç¼“å­˜æ•°æ®
     public static long getFolderSize(File file) throws Exception {
         long size = 0;
         try {
             File[] fileList = file.listFiles();
             for (int i = 0; i < fileList.length; i++) {
-                // Èç¹ûÏÂÃæ»¹ÓĞÎÄ¼ş
+                // å¦‚æœä¸‹é¢è¿˜æœ‰æ–‡ä»¶
                 if (fileList[i].isDirectory()) {
                     size = size + getFolderSize(fileList[i]);
                 } else {
@@ -136,7 +136,7 @@ public class DataCleanManager {
     }
 
     /**
-     * É¾³ıÖ¸¶¨Ä¿Â¼ÏÂÎÄ¼ş¼°Ä¿Â¼
+     * åˆ é™¤æŒ‡å®šç›®å½•ä¸‹æ–‡ä»¶åŠç›®å½•
      *
      * @param deleteThisPath
      * @param filepath
@@ -146,17 +146,17 @@ public class DataCleanManager {
         if (!TextUtils.isEmpty(filePath)) {
             try {
                 File file = new File(filePath);
-                if (file.isDirectory()) {// Èç¹ûÏÂÃæ»¹ÓĞÎÄ¼ş
+                if (file.isDirectory()) {// å¦‚æœä¸‹é¢è¿˜æœ‰æ–‡ä»¶
                     File files[] = file.listFiles();
                     for (int i = 0; i < files.length; i++) {
                         deleteFolderFile(files[i].getAbsolutePath(), true);
                     }
                 }
                 if (deleteThisPath) {
-                    if (!file.isDirectory()) {// Èç¹ûÊÇÎÄ¼ş£¬É¾³ı
+                    if (!file.isDirectory()) {// å¦‚æœæ˜¯æ–‡ä»¶ï¼Œåˆ é™¤
                         file.delete();
-                    } else {// Ä¿Â¼
-                        if (file.listFiles().length == 0) {// Ä¿Â¼ÏÂÃ»ÓĞÎÄ¼ş»òÕßÄ¿Â¼£¬É¾³ı
+                    } else {// ç›®å½•
+                        if (file.listFiles().length == 0) {// ç›®å½•ä¸‹æ²¡æœ‰æ–‡ä»¶æˆ–è€…ç›®å½•ï¼Œåˆ é™¤
                             file.delete();
                         }
                     }
@@ -169,7 +169,7 @@ public class DataCleanManager {
     }
 
     /**
-     * ¸ñÊ½»¯µ¥Î»
+     * æ ¼å¼åŒ–å•ä½
      *
      * @param size
      * @return
