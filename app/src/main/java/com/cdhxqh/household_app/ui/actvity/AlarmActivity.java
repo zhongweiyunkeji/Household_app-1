@@ -64,6 +64,8 @@ public class AlarmActivity extends Activity{
 
     private TextView putConnect;
 
+    private static final int EDIT_CONTACT = 3;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_of_alarm);
@@ -171,6 +173,41 @@ public class AlarmActivity extends Activity{
         }
     };
 
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+        Contacters contacters = new Contacters();
+
+        switch (reqCode) {
+            case (EDIT_CONTACT): {
+                if (resultCode == Activity.RESULT_OK) {
+                    contacters = (Contacters) data.getSerializableExtra("contactList");
+                }
+                break;
+            }
+
+        }
+
+        if (contacters.getName() != null && contacters.getPhone() != null) {
+            if (contacters.getType() == null || contacters.getType().toString().trim().equals("")) {
+                contacters.setType("未分类");
+            }
+            updateData(contacters);
+        }
+    }
+
+    public void updateData(Contacters c) {
+        contacts.add(0, c);
+        alarmAdapter.updata(contacts);
+        alarmAdapter.dataChanged();
+    }
+
+    /**后退键
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK
