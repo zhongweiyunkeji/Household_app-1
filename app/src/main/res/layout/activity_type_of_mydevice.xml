@@ -6,52 +6,53 @@
     <include layout="@layout/activity_tittle"></include>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/top_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/list_title_bgcolor">
 
             <CheckBox
                 android:id="@+id/checkbox_all"
-                android:layout_width="4dp"
+                android:layout_width="5dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@drawable/checkbox"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                />
+                android:paddingTop="14dp"
+                android:layout_marginLeft="10dp"
+                android:paddingBottom="14dp" />
 
             <TextView
                 android:id="@+id/mydevice_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
-                android:layout_marginTop="9dp"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="5dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
                 android:textColor="@color/list_title_color"
                 android:text="全选"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
+
 
             <TextView
                 android:id="@+id/edit"
-                android:layout_width="10dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="13dp"
-                android:text="@string/confrim"
+                android:paddingTop="14dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="14dp"
                 android:textColor="@color/list_title_color"
+                android:text="@string/confrim"
                 android:textSize="20sp"/>
 
         </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/list_line_x"
+        />
         <android.support.v7.widget.RecyclerView
             android:layout_below="@+id/top_check"
             android:id="@+id/mydevice_list"
@@ -60,7 +61,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"></android.support.v7.widget.RecyclerView>
 
-    </RelativeLayout>
 
 
 </LinearLayout>

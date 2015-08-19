@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingTop="10dp">
 
     <CheckBox
         android:id="@+id/checkbox"
@@ -17,9 +18,9 @@
 
     <ImageView
         android:id="@+id/item_img"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/img1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/img2"
         android:gravity="center"
         android:layout_gravity="center"
         />
@@ -27,32 +28,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="7"
         android:orientation="vertical"
+        android:paddingLeft="10dp"
         >
         <TextView
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lineSpacingMultiplier="1.5"
             android:gravity="center"
             android:layout_gravity="left|center"
+            android:paddingTop="5dp"
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color"
             android:text="海康DS-2CD2412F"/>
         <TextView
             android:id="@+id/item_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lineSpacingMultiplier="1.5"
             android:gravity="center"
             android:layout_gravity="left|center"
+            android:paddingTop="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_color"
             android:text="家里门口 - 有可疑人员移动"/>
         <TextView
             android:id="@+id/item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:lineSpacingMultiplier="1.5"
             android:gravity="center"
             android:layout_gravity="left|center"
+            android:paddingTop="5dp"
+            android:textSize="14sp"
+            android:textColor="@color/edit_color"
             android:text="2015-08-17 18:51:22"/>
     </LinearLayout>
 
@@ -61,7 +69,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_menu_alarm_orange"
-        android:gravity="top|right"
-        android:layout_marginRight="20dp"/>
+        android:gravity="top|right"/>
 
 </LinearLayout>

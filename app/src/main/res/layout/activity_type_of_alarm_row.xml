@@ -6,10 +6,9 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@color/list_title_bgcolor">
 
-        <TableRow
-            >
+        <TableRow>
             <CheckBox
                 android:id="@+id/checkbox_single"
                 android:button="@drawable/checkbox"
@@ -17,8 +16,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                />
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:id="@+id/contacts_name"
