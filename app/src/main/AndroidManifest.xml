@@ -92,6 +92,8 @@
         </activity>
         <activity android:name=".ui.actvity.Activity_use_guide"  >
         </activity>
+        <activity android:name=".ui.actvity.Activity_company_introduce"  >
+        </activity>
     </application>
 
 </manifest>
