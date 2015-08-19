@@ -4,22 +4,23 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#7E7E7E">
+    android:background="@drawable/edit_text_bg"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="30dp"
-        android:background="@drawable/edit_text_bg">
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="发现新版本"
             android:gravity="center"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:textSize="25sp"
+            android:paddingBottom="15dp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             />
@@ -28,17 +29,15 @@
             android:layout_height="1dp"
             android:background="@drawable/list_line_x"
             />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="        "/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="30dp"
             android:textSize="15sp"
             android:lineSpacingMultiplier="1.5"
-            android:text="最新版本:1.0.5"/>
+            android:text="最新版本:1.0.5"
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,23 +45,27 @@
             android:textSize="15sp"
             android:lineSpacingMultiplier="1.5"
             android:text="最新版本已下载是否安装?"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="        "/>
+
     </LinearLayout>
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--/>-->
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@android:color/transparent"
+        android:layout_height="1dp"
+        android:background="@drawable/list_line_x"
         />
 
+    <!--  android:layout_marginTop="30dp"  -->
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:background="@drawable/edit_text_bg">
+       >
 
        <Button
            android:id="@+id/cancelBtn"
@@ -70,16 +73,22 @@
            android:layout_height="wrap_content"
            android:layout_weight="1"
            android:text="以后再说"
-           android:background="#FFFFFF"
+           android:textColor="@color/text_color"
+           android:background="@drawable/button_bg_left"
            />
+       <View
+           android:layout_width="1dp"
+           android:layout_height="match_parent"
+           android:background="#C1D2E7"/>
        <Button
            android:id="@+id/okBtn"
            android:layout_width="0dp"
            android:layout_height="wrap_content"
            android:layout_weight="1"
-           android:textColor="#25B6F0"
            android:text="确定更新"
-           android:background="#FFFFFF"/>
+           android:textColor="@color/text_color_blue"
+           android:background="@drawable/button_bg_right"
+           />
 
    </LinearLayout>
 
