@@ -9,6 +9,7 @@
     <include layout="@layout/activity_tittle"  />
 
     <ImageView
+        android:layout_marginTop="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -22,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/text_color"
-        android:textSize="10sp"
+        android:textSize="16sp"
         android:lineSpacingMultiplier="1.5"
         android:text="宁夏中云科技股份有限公司成立于2015年年初，注册资金1000万元人民币，是中卫从事信息技术专业研发、咨询和实施服务的高新技术企业。公司一直专注于为智慧旅游、智慧城市云平台提供集成化、定制化、全方位、高品质的系统性解决方案。"/>
 
