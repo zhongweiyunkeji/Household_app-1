@@ -174,6 +174,7 @@ public class ActivityForgetPassword extends BaseActivity{
                 /*
                 发送请求获取密码
                  */
+            String a;
             String str = registered_phone_number.getText().toString();
             String code = sms_verification_code.getText().toString();
             if (str == null || "".equals(str)) {
