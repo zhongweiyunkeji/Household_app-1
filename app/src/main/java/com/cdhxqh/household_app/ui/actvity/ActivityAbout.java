@@ -27,51 +27,51 @@ public class ActivityAbout extends BaseActivity {
     }
 
     public void findViewById(){
-         softUpdate = (TextView)findViewById(R.id.soft_update);                     // °æ±¾¸üĞÂ
-         softGuide = (TextView)findViewById(R.id.soft_guide);                       // ¹¦ÄÜ½éÉÜ
-         softCriticism = (TextView)findViewById(R.id.soft_criticism);              // ¸øÎÒÆÀ·Ö
-         companyIntrodution = (TextView)findViewById(R.id.company_introduction);  // ¹«Ë¾½éÉÜ
-         welcomePage = (TextView)findViewById(R.id.welcome_page);                  // »¶Ó­Ò³
-         softFeedback = (TextView)findViewById(R.id.soft_feedback);                // Òâ¼û·´À¡
+         softUpdate = (TextView)findViewById(R.id.soft_update);                     // ç‰ˆæœ¬æ›´æ–°
+         softGuide = (TextView)findViewById(R.id.soft_guide);                       // åŠŸèƒ½ä»‹ç»
+         softCriticism = (TextView)findViewById(R.id.soft_criticism);              // ç»™æˆ‘è¯„åˆ†
+         companyIntrodution = (TextView)findViewById(R.id.company_introduction);  // å…¬å¸ä»‹ç»
+         welcomePage = (TextView)findViewById(R.id.welcome_page);                  // æ¬¢è¿é¡µ
+         softFeedback = (TextView)findViewById(R.id.soft_feedback);                // æ„è§åé¦ˆ
     }
 
     public void initView(){
-        softUpdate.setOnClickListener(new View.OnClickListener() {// °æ±¾¸üĞÂ
+        softUpdate.setOnClickListener(new View.OnClickListener() {// ç‰ˆæœ¬æ›´æ–°
             @Override
             public void onClick(View v) {
 
             }
         });
 
-        softGuide.setOnClickListener(new View.OnClickListener() {// ¹¦ÄÜ½éÉÜ
+        softGuide.setOnClickListener(new View.OnClickListener() {// åŠŸèƒ½ä»‹ç»
             @Override
             public void onClick(View v) {
 
             }
         });
 
-        softCriticism.setOnClickListener(new View.OnClickListener() {// ¸øÎÒÆÀ·Ö
+        softCriticism.setOnClickListener(new View.OnClickListener() {// ç»™æˆ‘è¯„åˆ†
             @Override
             public void onClick(View v) {
 
             }
         });
 
-        companyIntrodution.setOnClickListener(new View.OnClickListener() {// ¹«Ë¾½éÉÜ
+        companyIntrodution.setOnClickListener(new View.OnClickListener() {// å…¬å¸ä»‹ç»
             @Override
             public void onClick(View v) {
 
             }
         });
 
-        welcomePage.setOnClickListener(new View.OnClickListener() {// »¶Ó­Ò³
+        welcomePage.setOnClickListener(new View.OnClickListener() {// æ¬¢è¿é¡µ
             @Override
             public void onClick(View v) {
 
             }
         });
 
-        softFeedback.setOnClickListener(new View.OnClickListener() { // Òâ¼û·´À¡
+        softFeedback.setOnClickListener(new View.OnClickListener() { // æ„è§åé¦ˆ
             @Override
             public void onClick(View v) {
 
