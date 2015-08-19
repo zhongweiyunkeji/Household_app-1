@@ -34,6 +34,7 @@ import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.model.Item;
 import com.cdhxqh.household_app.ui.fragment.AlarmFragment;
 import com.cdhxqh.household_app.ui.fragment.CommonContactFragment;
+import com.cdhxqh.household_app.ui.fragment.FileManagementFragment;
 import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 import com.cdhxqh.household_app.ui.fragment.MyDeviceFragment;
 import com.cdhxqh.household_app.ui.fragment.NavigationDrawerFragment;
@@ -243,6 +244,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
             case 3: {// 文件管理
+                fragmentTransaction.replace(R.id.container, new FileManagementFragment());
+                fragmentTransaction.commit();
                 break;
             }
             case 4: {  // 帮助中心
