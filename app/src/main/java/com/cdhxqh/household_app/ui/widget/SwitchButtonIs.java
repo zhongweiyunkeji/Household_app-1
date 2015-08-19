@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.widget;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,13 +13,14 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Switch;
 
 import com.cdhxqh.household_app.R;
 
 /**
  * 选择按钮
  */
-public class SwitchButtonIs extends View implements View.OnClickListener{
+public class SwitchButtonIs extends Switch implements View.OnClickListener{
     private Bitmap mSwitchBottom, mSwitchThumb, mSwitchFrame, mSwitchMask;
     private float mCurrentX = 0;
     private boolean mSwitchOn = false;//开关默认是开着的
@@ -46,6 +48,10 @@ public class SwitchButtonIs extends View implements View.OnClickListener{
         super(context, attrs, defStyle);
         // TODO Auto-generated constructor stub
         init();
+    }
+
+    public void setState(boolean falg) {
+        mSwitchOn = falg;
     }
 
     /**
@@ -80,7 +86,7 @@ public class SwitchButtonIs extends View implements View.OnClickListener{
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // TODO Auto-generated method stub
         setMeasuredDimension(mSwitchFrame.getWidth(), mSwitchFrame.getHeight());
     }

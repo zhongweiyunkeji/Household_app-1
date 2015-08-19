@@ -2,16 +2,23 @@ package com.cdhxqh.household_app.ui.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.ui.actvity.Activity_Login;
 import com.cdhxqh.household_app.ui.widget.DataCleanManager;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
+import com.cdhxqh.household_app.ui.widget.SwitchButton;
+import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
 
 import java.util.ArrayList;
 
@@ -31,10 +38,20 @@ public class SettingFragment extends BaseFragment {
 
     Activity activity;
 
+    /**
+     * 是否的滑动开关
+     */
+    SwitchButtonIs wiperSwitch;
+
 //    /**
-//     * 清除缓存
+//     *
 //     */
 //    DataCleanManager dataCleanManager;
+
+    /**
+     *回退
+     */
+    Button back_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,11 +65,20 @@ public class SettingFragment extends BaseFragment {
     protected void findViewById(View view) {
         install_flow = (RelativeLayout) view.findViewById(R.id.install_flow);
         catchs = (RelativeLayout) view.findViewById(R.id.catchs);
+        wiperSwitch = (SwitchButtonIs) view.findViewById(R.id.wiperSwitch);
+        back_id = (Button) view.findViewById(R.id.back_id);
     }
 
     protected void initView() {
-        install_flow.setOnClickListener(installFlowOnClickListener);
         catchs.setOnClickListener(catchsOnClickListener);
+        back_id.setOnClickListener(backOnClickListener);
+        wiperSwitch.setOnClickListener(new SwitchButtonIs.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Dialog();
+            }
+        });
 
         activity = this.getActivity();
     }
@@ -72,16 +98,45 @@ public class SettingFragment extends BaseFragment {
     /**
      * 2G或3G模式
      */
-    private View.OnClickListener installFlowOnClickListener = new View.OnClickListener() {
+    public void getNetWork() {
+        String type = NetWorkUtil.getCurrentNetworkType(activity);
+        if (type.equals("2G") || type.equals("3G")) {
+            Dialog();
+        }
+    }
+
+    /**
+     * 回退按钮
+     */
+    private View.OnClickListener backOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String type = NetWorkUtil.getCurrentNetworkType(activity);
-            if (type.equals("Wi-Fi") || type.equals("4G")) {
-                new AlertDialog.Builder(activity).setMessage("wife网络环境").setPositiveButton("确定", null).show();
-            } else if (type.equals("2G") || type.equals("3G")) {
-                new AlertDialog.Builder(activity).setMessage("打开后非wife网络环境下将不显示图片喔，确定打开吗？").setPositiveButton("确定", null).show();
-            }
+            Intent intent = new Intent();
+            intent.setClass(activity,Activity_Login.class);
+            startActivity(intent);
+            activity.finish();
         }
     };
+
+    /**
+     * 确认或取消框
+     */
+    private void Dialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("打开后非wife网络环境下将不显示图片喔，确定打开吗？");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //这里添加点击确定后的逻辑
+//                showDialog("你选择了确定");
+                wiperSwitch.setState(true);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                wiperSwitch.setState(false);
+            }
+        });
+        builder.create().show();
+    }
 
 }
