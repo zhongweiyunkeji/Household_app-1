@@ -9,21 +9,19 @@
     <include layout="@layout/activity_tittle"  />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="20dp"
         >
         <TextView
             android:id="@+id/tabs_left"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="三个月内"
-            android:paddingLeft="60dp"
-            android:paddingRight="10dp"
+            android:layout_weight="1"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:gravity="center"
@@ -33,11 +31,10 @@
 
         <TextView
             android:id="@+id/tabs_right"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="三个月前"
-            android:paddingLeft="10dp"
-            android:paddingRight="60dp"
+            android:layout_weight="1"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textColor="#7C8586"
