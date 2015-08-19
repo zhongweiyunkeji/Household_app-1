@@ -1,12 +1,11 @@
 package com.cdhxqh.household_app.ui.widget;
 
-/*  * 文 件 名:  DataCleanManager.java
- * * 描    述:  主要功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录
- * */
-
+/*
+*  * 文 件 名:  DataCleanManager.java
+* * 描    述:  主要功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录
+* */
 import java.io.File;
 import java.math.BigDecimal;
-
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -22,6 +21,7 @@ public class DataCleanManager {
         deleteFilesByDirectory(context.getCacheDir());
     }
 
+
     /**
      * * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) * *
      *
@@ -31,6 +31,7 @@ public class DataCleanManager {
         deleteFilesByDirectory(new File("/data/data/"
                 + context.getPackageName() + "/databases"));
     }
+
 
     /**
      * * 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) *
@@ -42,6 +43,7 @@ public class DataCleanManager {
                 + context.getPackageName() + "/shared_prefs"));
     }
 
+
     /**
      * * 按名字清除本应用数据库 * *
      *
@@ -52,6 +54,7 @@ public class DataCleanManager {
         context.deleteDatabase(dbName);
     }
 
+
     /**
      * * 清除/data/data/com.xxx.xxx/files下的内容 * *
      *
@@ -60,6 +63,7 @@ public class DataCleanManager {
     public static void cleanFiles(Context context) {
         deleteFilesByDirectory(context.getFilesDir());
     }
+
 
     /**
      * * 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache)
@@ -81,6 +85,7 @@ public class DataCleanManager {
         deleteFilesByDirectory(new File(filePath));
     }
 
+
     /**
      * * 清除本应用所有的数据 * *
      *
@@ -101,6 +106,7 @@ public class DataCleanManager {
         }
     }
 
+
     /**
      * * 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理 * *
      *
@@ -113,6 +119,7 @@ public class DataCleanManager {
             }
         }
     }
+
 
     // 获取文件
     //Context.getExternalFilesDir() --> SDCard/Android/data/你的应用的包名/files/ 目录，一般放一些长时间保存的数据
@@ -135,11 +142,12 @@ public class DataCleanManager {
         return size;
     }
 
+
     /**
      * 删除指定目录下文件及目录
      *
      * @param deleteThisPath
-     * @param filepath
+     * @param filePath
      * @return
      */
     public static void deleteFolderFile(String filePath, boolean deleteThisPath) {
@@ -168,6 +176,7 @@ public class DataCleanManager {
         }
     }
 
+
     /**
      * 格式化单位
      *
@@ -180,6 +189,7 @@ public class DataCleanManager {
             return size + "Byte";
         }
 
+
         double megaByte = kiloByte / 1024;
         if (megaByte < 1) {
             BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
@@ -187,12 +197,14 @@ public class DataCleanManager {
                     .toPlainString() + "KB";
         }
 
+
         double gigaByte = megaByte / 1024;
         if (gigaByte < 1) {
             BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
             return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
                     .toPlainString() + "MB";
         }
+
 
         double teraBytes = gigaByte / 1024;
         if (teraBytes < 1) {
@@ -206,8 +218,11 @@ public class DataCleanManager {
     }
 
 
+
+
     public static String getCacheSize(File file) throws Exception {
         return getFormatSize(getFolderSize(file));
     }
+
 
 }

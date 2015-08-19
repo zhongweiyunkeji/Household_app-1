@@ -12,13 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/logo_a_b" />
+        android:src="@drawable/logo" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:text="智慧家居安全云"
+        android:textColor="@color/list_title_color"
         android:textSize="24sp"/>
 <LinearLayout
     android:layout_width="match_parent"
@@ -49,7 +50,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/mail_line_x"></View>
+            android:background="@drawable/list_line_x"></View>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -83,7 +84,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="25dp">
         <CheckBox
             android:id="@+id/isremenber_password"

@@ -43,6 +43,8 @@ public class Activity_First_login extends BaseActivity implements OnClickListene
     private static final int[] pics = {R.drawable.welcom1,R.drawable.welcom2, R.drawable.welcom3,  R.drawable.welcom4};//改为添加自己的图片
     private static final int[] colors = {R.color.welcomebg1, R.color.welcomebg2, R.color.welcomebg3, R.color.welcomebg4};
 
+    boolean flag = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,10 @@ public class Activity_First_login extends BaseActivity implements OnClickListene
         viewPager.setOnTouchListener(this);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOnPageChangeListener(this);
-
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null){
+            flag = bundle.getBoolean("ActivityAbout");
+        }
         initBottomDots();
 
     }
@@ -127,6 +132,10 @@ public class Activity_First_login extends BaseActivity implements OnClickListene
                 break;
             case MotionEvent.ACTION_MOVE:
                 if((lastX - event.getX()) >100 && (currentIndex == views.size() -1)){
+                    if(flag){  // 如果是从设置页面过来
+                        finish();
+                        break;
+                    }
                     SharedPreferences.Editor editor = myshared.edit();
                     editor.putBoolean(Constants.ISFIRST, false);
                     editor.commit();

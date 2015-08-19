@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
+    android:background="@color/bgcolor"
     >
 
     <LinearLayout
@@ -16,16 +17,22 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/logo"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="智能家居云客户端Android版本"/>
+            android:text="智能家居云客户端Android版本"
+            android:lineSpacingExtra="5dp"
+            android:textColor="@color/text_color"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="版本号1.0.2"/>
+            android:text="版本号1.0.2"
+            android:lineSpacingExtra="5dp"
+            android:textColor="@color/text_color"
+            />
 
     </LinearLayout>
     <LinearLayout
