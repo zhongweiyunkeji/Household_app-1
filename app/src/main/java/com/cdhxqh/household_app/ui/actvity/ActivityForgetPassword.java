@@ -21,46 +21,46 @@ import com.cdhxqh.household_app.utils.MessageUtils;
  */
 public class ActivityForgetPassword extends BaseActivity{
     /**
-     *»ñÈ¡ÑéÖ¤Âë
+     *è·å–éªŒè¯ç 
      */
     Button get_verification_code;
 
     /**
-     *ÊÖ»úºÅ
+     *æ‰‹æœºå·
      */
     EditText registered_phone_number;
 
     /**
-     * ÑéÖ¤ÂëºÅ
+     * éªŒè¯ç å·
      */
     EditText sms_verification_code;
 
     /**
-     * »ñÈ¡ÑéÖ¤Âë°´Å¥
+     * è·å–éªŒè¯ç æŒ‰é’®
      */
     Button restart_passworld_id;
 
     /**
-     * ÓÊÏäÕÒ»Ø
+     * é‚®ç®±æ‰¾å›
      */
     TextView TextViewMail;
 
     /**
-     * ÊÖ»úºÅÕÒ»Ø
+     * æ‰‹æœºå·æ‰¾å›
      */
     TextView TextViewPhone;
 
     /**
-     * ÊÖ»ú
+     * æ‰‹æœº
      */
     LinearLayout phone;
 
     /**
-     * ÓÊÏä
+     * é‚®ç®±
      */
     LinearLayout mail;
 
-    private static final String TAG = "ImageButton";  //ÌáÊ¾¿ò
+    private static final String TAG = "ImageButton";  //æç¤ºæ¡†
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,20 +82,20 @@ public class ActivityForgetPassword extends BaseActivity{
 
     public void initView() {
         /**
-         * »ñÈ¡ÑéÖ¤Âë
+         * è·å–éªŒè¯ç 
          */
         get_verification_code.setOnClickListener(codeOnClickListener);
         /**
-         * »ñÈ¡ÃÜÂë
+         * è·å–å¯†ç 
          */
         restart_passworld_id.setOnClickListener(getPhonePassClickListener);
-        //Ìø×ªÖÁÓÊÏäÕÒ»Ø½çÃæÊÂ¼ş
+        //è·³è½¬è‡³é‚®ç®±æ‰¾å›ç•Œé¢äº‹ä»¶
         TextViewMail.setOnClickListener(backImageMailOnTouchListener);
-        //Ìø×ªÖÁÊÖ»úÕÒ»Ø½çÃæÊÂ¼ş
+        //è·³è½¬è‡³æ‰‹æœºæ‰¾å›ç•Œé¢äº‹ä»¶
         TextViewPhone.setOnClickListener(backImagephoneClickListener);
     }
 
-    //Ìø×ªÖÁÓÊÏäÕÒ»Ø½çÃæÊÂ¼ş
+    //è·³è½¬è‡³é‚®ç®±æ‰¾å›ç•Œé¢äº‹ä»¶
     private View.OnClickListener backImageMailOnTouchListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -104,7 +104,7 @@ public class ActivityForgetPassword extends BaseActivity{
         }
     };
 
-    //ÊÖ»úÕÒ»Ø±êÇ©Ò³
+    //æ‰‹æœºæ‰¾å›æ ‡ç­¾é¡µ
     private View.OnClickListener backImagephoneClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -113,12 +113,12 @@ public class ActivityForgetPassword extends BaseActivity{
         }
     };
 
-    //»ñÈ¡ÑéÖ¤Âë
+    //è·å–éªŒè¯ç 
     private View.OnClickListener codeOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
                 /*
-                ·¢ËÍÇëÇó»ñÈ¡ÑéÖ¤Âë
+                å‘é€è¯·æ±‚è·å–éªŒè¯ç 
                  */
             String str = registered_phone_number.getText().toString();
             if (str == null || "".equals(str)) {
@@ -134,11 +134,11 @@ public class ActivityForgetPassword extends BaseActivity{
     };
 
     //    /**
-//     * ¸ù¾İÊÖ»úºÅ»ñÈ¡ÑéÖ¤Âë
+//     * æ ¹æ®æ‰‹æœºå·è·å–éªŒè¯ç 
 //     */
 //    private void getPhoneCode () {
 //        /**
-//         * ¼ÓÔØÖĞ
+//         * åŠ è½½ä¸­
 //         */
 //        TestClass.loading(this, getString(R.string.phone_get_err));
 //
@@ -147,7 +147,7 @@ public class ActivityForgetPassword extends BaseActivity{
 //                new HttpRequestHandler<Integer>() {
 //                    @Override
 //                    public void onSuccess(Integer data) {
-//                        MessageUtils.showMiddleToast(PhoneActivity.this, "ÑéÖ¤Âë·¢ËÍ³É¹¦");
+//                        MessageUtils.showMiddleToast(PhoneActivity.this, "éªŒè¯ç å‘é€æˆåŠŸ");
 //                        TestClass.closeLoading();
 //                        TimeCountUtil timeCountUtil = new TimeCountUtil(PhoneActivity.this, 60000, 1000, info_button_id, R.drawable.phone_test_on);
 //                        timeCountUtil.start();
@@ -167,12 +167,12 @@ public class ActivityForgetPassword extends BaseActivity{
 //    }
 
 
-    //ÊÖ»ú»ñÈ¡ÃÜÂë
+    //æ‰‹æœºè·å–å¯†ç 
     private View.OnClickListener getPhonePassClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
                 /*
-                ·¢ËÍÇëÇó»ñÈ¡ÃÜÂë
+                å‘é€è¯·æ±‚è·å–å¯†ç 
                  */
             String str = registered_phone_number.getText().toString();
             String code = sms_verification_code.getText().toString();
@@ -193,11 +193,11 @@ public class ActivityForgetPassword extends BaseActivity{
     };
 
 //    /**
-//     * ¸ù¾İÊÖ»úºÅÖØÖÃÃÜÂë
+//     * æ ¹æ®æ‰‹æœºå·é‡ç½®å¯†ç 
 //     */
 //    private void getPhonePass () {
 //        /**
-//         * ¼ÓÔØÖĞ
+//         * åŠ è½½ä¸­
 //         */
 //        TestClass.loading(this, getString(R.string.phone_get_err));
 //
@@ -206,7 +206,7 @@ public class ActivityForgetPassword extends BaseActivity{
 //                new HttpRequestHandler<Integer>() {
 //                    @Override
 //                    public void onSuccess(Integer data) {
-//                        MessageUtils.showMiddleToast(ActivityForgetPassword.this, "ÃÜÂëÖØÖÃ³É¹¦");
+//                        MessageUtils.showMiddleToast(ActivityForgetPassword.this, "å¯†ç é‡ç½®æˆåŠŸ");
 //                        TestClass.closeLoading();
 //                        finish();
 //                    }
