@@ -74,7 +74,12 @@ public class ActivityAbout extends BaseActivity {
         welcomePage.setOnClickListener(new View.OnClickListener() {// 欢迎页
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("ActivityAbout", true);
+                intent.putExtras(bundle);
+                intent.setClass(ActivityAbout.this, Activity_First_login.class);
+                startActivity(intent);
             }
         });
 
