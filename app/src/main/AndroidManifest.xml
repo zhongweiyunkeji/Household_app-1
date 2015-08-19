@@ -36,6 +36,10 @@
             android:label="@string/title_activity_base"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.actvity.ActivityForgetPassword"
+            android:label="@string/title_activity_base"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.actvity.MainActivity"
             android:label="MainActivity"
             android:screenOrientation="portrait" />
