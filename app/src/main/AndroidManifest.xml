@@ -90,6 +90,8 @@
         </activity>
         <activity android:name=".ui.actvity.ActivityAbout"  >
         </activity>
+        <activity android:name=".ui.actvity.Activity_use_guide"  >
+        </activity>
     </application>
 
 </manifest>
