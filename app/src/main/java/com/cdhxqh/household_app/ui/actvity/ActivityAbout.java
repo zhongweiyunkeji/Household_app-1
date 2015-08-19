@@ -95,7 +95,11 @@ public class ActivityAbout extends BaseActivity {
         softFeedback.setOnClickListener(new View.OnClickListener() { // 意见反馈
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                intent.setClass(ActivityAbout.this, Activity_soft_suggest.class);
+                startActivity(intent);
             }
         });
     }
