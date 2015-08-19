@@ -1,11 +1,17 @@
 package com.cdhxqh.household_app.ui.actvity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.view.Window;
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.ui.widget.dialog.CustomDialog;
 
 /**
  * Created by hexian on 2015/8/19.
@@ -40,7 +46,10 @@ public class ActivityAbout extends BaseActivity {
         softUpdate.setOnClickListener(new View.OnClickListener() {// 版本更新
             @Override
             public void onClick(View v) {
-
+                CustomDialog dialog = new CustomDialog(ActivityAbout.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 去掉标题
+                dialog.setCancelable(false);// 设置模态对话框
+                dialog.show();  // 显示对话框
             }
         });
 
