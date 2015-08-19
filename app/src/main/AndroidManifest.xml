@@ -96,6 +96,10 @@
         </activity>
         <activity android:name=".ui.actvity.Activity_soft_suggest"  >
         </activity>
+        <activity android:name=".ui.actvity.Activity_File_Detail_img"  >
+        </activity>
+        <activity android:name=".ui.actvity.Activity_File_Detail_video"  >
+        </activity>
     </application>
 
 </manifest>

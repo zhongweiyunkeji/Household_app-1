@@ -20,8 +20,7 @@
                 android:button="@drawable/checkbox"
                 android:paddingTop="14dp"
                 android:layout_marginLeft="10dp"
-                android:paddingBottom="14dp"
-                />
+                android:paddingBottom="14dp" />
 
             <TextView
                 android:id="@+id/contacts_name"
@@ -33,6 +32,7 @@
                 android:textColor="@color/list_title_color"
                 android:text="全选"
                 android:textSize="20sp" />
+
 
             <TextView
                 android:id="@+id/edit"
@@ -51,12 +51,12 @@
             android:layout_height="1dp"
             android:background="@drawable/list_line_x"
             />
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:layout_below="@+id/top_check"-->
-            <!--android:id="@+id/alarm_contacts"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginRight="8dp"></android.support.v7.widget.RecyclerView>-->
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/top_check"
+            android:id="@+id/alarm_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

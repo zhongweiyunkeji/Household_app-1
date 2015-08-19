@@ -26,6 +26,7 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
+            android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/font_color"
             android:background="@drawable/tabs_left_sel"
@@ -42,6 +43,7 @@
             android:paddingBottom="10dp"
             android:textColor="@color/text_color"
             android:background="@drawable/tabs_right_nol"
+            android:layout_gravity="center"
             android:gravity="center"
             />
     </LinearLayout>
