@@ -22,8 +22,7 @@
             android:paddingLeft="10dp"
             android:text="是否录像"
             android:textSize="20sp"
-            android:textColor="@color/list_title_color"
-            />
+            android:textColor="@color/list_title_color" />
 
         <com.cdhxqh.household_app.ui.widget.SwitchButton
             android:id="@+id/wiperSwitch"
@@ -32,8 +31,7 @@
             android:paddingBottom="14dp"
             android:paddingLeft="10dp"
             android:layout_width="10dp"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp" />
 
     </LinearLayout>
 
