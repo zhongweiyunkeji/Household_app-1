@@ -42,6 +42,7 @@
             android:padding="10dp"
             android:text="获取验证码"
             android:textColor="@color/list_title_color"
+            android:layout_centerVertical="true"
             android:textSize="18sp" />
     </RelativeLayout>
 
@@ -49,13 +50,13 @@
         android:id="@+id/reg_hint_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:paddingTop="15dp"
+        android:layout_marginBottom="30dp"
         android:singleLine="true"
         android:gravity="left|center"
         android:text="已发送短信验证码到"
         android:textColor="@color/text_color"
-        android:textSize="18sp" />
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/reg_msg_btn"

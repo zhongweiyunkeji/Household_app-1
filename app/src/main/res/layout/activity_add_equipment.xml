@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:background="@color/bgcolor">
 
-    <include android:id="@+id/include_title" layout="@layout/activity_tittle"></include>
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/activity_tittle"></include>
 
     <ScrollView
         android:layout_width="match_parent"
