@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.actvity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.config.Constants;
@@ -19,6 +21,7 @@ public class Activity_Login extends BaseActivity{
     private EditText password;
     private CheckBox isremenber;
     private Button login;
+    private TextView TextViewPassWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class Activity_Login extends BaseActivity{
         password = (EditText) findViewById(R.id.passworld_edittext_id);
         isremenber = (CheckBox) findViewById(R.id.isremenber_password);
         login = (Button) findViewById(R.id.login_btn_id);
+        TextViewPassWord = (TextView) findViewById(R.id.TextViewPassWord);
     }
 
     protected void initView() {
@@ -47,6 +51,7 @@ public class Activity_Login extends BaseActivity{
         password.setText(myshared.getString(Constants.PASS_KEY, ""));
         isremenber.setChecked(myshared.getBoolean(Constants.ISREMENBER, false));
         login.setOnClickListener(loginonclick);
+        TextViewPassWord.setOnClickListener(passWordOnClickListener);
     }
 
     private View.OnClickListener loginonclick = new View.OnClickListener() {
@@ -62,6 +67,15 @@ public class Activity_Login extends BaseActivity{
             editor.putBoolean(Constants.ISREMENBER,isremenber.isChecked());
             editor.commit();
             logon();
+        }
+    };
+
+    private View.OnClickListener passWordOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(Activity_Login.this,ActivityForgetPassword.class);
+            startActivity(intent);
         }
     };
 

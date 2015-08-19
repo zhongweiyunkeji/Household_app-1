@@ -42,12 +42,13 @@ public class ViewUserAdapter extends RecyclerView.Adapter<ViewUserAdapter.ViewHo
         holder.phone.setText(contactersList.get(position).getPhone());
         holder.check_id.setChecked(contactersList.get(position).isFlag());
 
-        holder.check_id.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        final ViewHolder h = holder;
+        holder.check_id.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                contactersList.get(position).setFlag(isChecked);
-                ViewUserActivity.update(contactersList);
+            public void onClick(View v) {
+                contactersList.get(position).setFlag(h.check_id.isChecked());
+                AlarmActivity.update(contactersList);
             }
         });
 //        final int i = position;

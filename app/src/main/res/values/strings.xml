@@ -70,4 +70,19 @@
     <string name="install_flow_title">省流量</string>
     <string name="install_flow_describute">2G/3G下不显示图片</string>
     <string name="cache_title">清除缓存</string>
+
+    <!-- 找回密码界面 -->
+    <string name="find_pwd_text">找回密码</string>
+    <string name="phone_find_back_text">手机找回</string>
+    <string name="email_find_back_text">邮箱找回</string>
+    <string name="email_style_err">邮箱格式不正确</string>
+    <string name="email_code_null">请输入邮箱号</string>
+    <string name="please_in_phone_number_text">请输入手机号</string>
+    <string name="please_in_phone_code_text">请输入验证码</string>
+    <string name="phone_get_err">手机号格式不正确</string>
+    <string name="error_title">错误</string>
+
+    <!--验证码-->
+    <string name="phone_send_number">秒后可重新发送</string>
+    <string name="phone_get_number">重新获取验证码</string>
 </resources>
