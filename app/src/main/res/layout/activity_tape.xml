@@ -16,23 +16,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginLeft="10dp"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
             android:text="是否录像"
-            android:textSize="14dp"
-            />
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color" />
 
         <com.cdhxqh.household_app.ui.widget.SwitchButton
             android:id="@+id/wiperSwitch"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginLeft="6dp"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
             android:layout_width="10dp"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp" />
 
     </LinearLayout>
 
@@ -45,9 +44,13 @@
         android:id="@+id/type_introduce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="升级为智能家居会员，摄像头即可将指定时间段的录像保存到云端，方便牛随时查看及下载"/>
+        android:paddingTop="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:lineSpacingExtra="5dp"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        android:text="升级为智能家居会员，摄像头即可将指定时间段的录像保存到云端，方便您随时查看及下载。"/>
 
     <LinearLayout
         android:id="@+id/set_up_tape"
@@ -64,12 +67,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="14dp"
-            android:layout_marginLeft="10dp"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
             android:text="开始录像时间"
-            android:textSize="14dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/list_title_color" />
 
     </LinearLayout>
 
@@ -88,23 +92,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="11dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="11dp"
-            android:layout_marginLeft="10dp"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
             android:text="设置星期"
-            android:textSize="14dp"
+            android:textSize="18sp"
+            android:textColor="@color/list_title_color"
             />
 
         <TextView
             android:id="@+id/week_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="11dp"
-            android:layout_marginLeft="10dp"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
             android:layout_toRightOf="@+id/week_tittle_a"
+            android:textSize="16sp"
+            android:textColor="@color/text_color"
             />
 
         <ImageView
@@ -131,23 +138,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="11dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="11dp"
-            android:layout_marginLeft="10dp"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
             android:text="设置时间"
-            android:textSize="14dp"
+            android:textSize="18sp"
+            android:textColor="@color/list_title_color"
             />
 
         <TextView
             android:id="@+id/time_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="11dp"
-            android:layout_marginLeft="10dp"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
             android:layout_toRightOf="@+id/time_tittle"
+            android:textSize="16sp"
+            android:textColor="@color/text_color"
             />
 
         <ImageView
@@ -174,12 +184,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="14dp"
-            android:layout_marginLeft="10dp"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
             android:text="结束录像时间"
-            android:textSize="16sp"/>
+            android:textSize="20sp"
+            android:textColor="@color/list_title_color"/>
 
     </LinearLayout>
 
@@ -198,23 +209,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
             android:paddingBottom="14dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="14dp"
             android:text="设置星期"
             android:textSize="18sp"
+            android:textColor="@color/list_title_color"
             />
 
         <TextView
             android:id="@+id/week_value_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="14dp"
+            android:paddingRight="10dp"
             android:paddingBottom="14dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="14dp"
             android:layout_toRightOf="@+id/week_tittle"
+            android:textSize="16sp"
+            android:textColor="@color/text_color"
             />
 
         <ImageView
@@ -247,6 +261,7 @@
             android:paddingTop="14dp"
             android:text="设置时间"
             android:textSize="18sp"
+            android:textColor="@color/list_title_color"
             />
 
         <TextView
@@ -258,7 +273,8 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="14dp"
-            />
+            android:textSize="16sp"
+            android:textColor="@color/text_color"/>
 
         <ImageView
             android:id="@+id/select_time_a"
