@@ -64,7 +64,10 @@ public class ActivityAbout extends BaseActivity {
         companyIntrodution.setOnClickListener(new View.OnClickListener() {// 公司介绍
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ActivityAbout.this, Activity_company_introduce.class);
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
