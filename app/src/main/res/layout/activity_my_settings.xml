@@ -34,12 +34,12 @@
             android:text="@string/install_flow_describute"
             android:layout_toRightOf="@+id/install_flow_title" />
 
-        <!--<com.cdhxqh.household_app.ui.widget.SwitchButtonIs-->
-            <!--android:id="@+id/wiperSwitch"-->
-            <!--android:layout_width="10dp"-->
-            <!--android:layout_height="10dp"-->
-            <!--android:layout_margin="6dp"-->
-            <!--android:layout_alignParentRight="true"/>-->
+        <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+            android:id="@+id/wiperSwitch"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="6dp"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
@@ -71,5 +71,18 @@
             android:src="@drawable/ic_list_view" />
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/back_id"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_lightblue"
+        android:text="@string/back"
+        android:textColor="@color/font_color"
+        android:textSize="20sp" />
 
 </LinearLayout>

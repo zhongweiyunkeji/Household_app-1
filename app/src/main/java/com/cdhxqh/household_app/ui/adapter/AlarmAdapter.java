@@ -1,19 +1,29 @@
 package com.cdhxqh.household_app.ui.adapter;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
+import com.cdhxqh.household_app.ui.actvity.Activity_Login;
+import com.cdhxqh.household_app.ui.actvity.AddContacterActivity;
 import com.cdhxqh.household_app.ui.actvity.AlarmActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -22,10 +32,15 @@ import java.util.ArrayList;
 public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> {
     Context mContext;
     ArrayList<Contacters> contacts;
+    private static final int EDIT_CONTACT = 3;
 
     public AlarmAdapter(Context paramContext, ArrayList<Contacters> contacts) {
         this.mContext = paramContext;
         this.contacts = contacts;
+    }
+
+    public void updata(ArrayList<Contacters> cList) {
+        contacts = cList;
     }
 
     public void setIsSelected() {
@@ -69,6 +84,18 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
 //            }
 //        });
 
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("contactList", (Serializable) contacts.get(item));
+                intent.setClass(mContext,AddContacterActivity.class);
+                intent.putExtra("edit", "edit");
+                contacts.remove(contacts.get(item));
+                ((Activity)mContext).startActivityForResult(intent, EDIT_CONTACT);
+            }
+        });
+
         holder.checkbox_single.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -78,7 +105,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -102,16 +128,19 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
          */
         private CheckBox checkbox_single;
 
+        private ImageView edit;
+
         public ViewHolder(View view) {
             super(view);
             contacts_name = (TextView) view.findViewById(R.id.contacts_name);
             contacts_phone = (TextView) view.findViewById(R.id.contacts_phone);
             checkbox_single = (CheckBox) view.findViewById(R.id.checkbox_single);
+            edit = (ImageView) view.findViewById(R.id.edit);
         }
     }
 
     // 刷新list
-    private void dataChanged() {
+    public void dataChanged() {
         // 通知listView刷新
         notifyDataSetChanged();
     }
