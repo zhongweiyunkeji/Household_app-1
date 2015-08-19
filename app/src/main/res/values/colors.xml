@@ -19,6 +19,8 @@
 
     <color name="black">#000000</color><!--black黑色-->
     <color name="red">#ff6668</color><!--red西瓜红-->
+    <color name="green">#33cc00</color><!--green绿色-->
+
     <color name="orange">#ff9900</color><!--orange桔黄色-->
     <color name="list_title_color">#0f2747</color><!--List Title Color列表标题颜色-->
     <color name="list_pressed_bgcolor">#FF0000</color><!--List Pressed Color Background Color列表点击的颜色fff6f7-->
