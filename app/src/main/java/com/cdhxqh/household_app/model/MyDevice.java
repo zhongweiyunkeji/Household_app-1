@@ -2,10 +2,12 @@ package com.cdhxqh.household_app.model;
 
 import android.content.Intent;
 
+import java.io.Serializable;
+
 /**
  * Created by think on 2015/8/15.
  */
-public class MyDevice {
+public class MyDevice implements Serializable{
     /**
      * 设备名称
      */
