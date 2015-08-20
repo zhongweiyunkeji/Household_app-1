@@ -1,8 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bgcolor"
+    style="@style/bodyBackground"
     android:orientation="vertical">
 
 
@@ -25,7 +23,6 @@
     android:layout_height="match_parent"
     android:layout_margin="30dp"
     android:orientation="vertical">
-
 
     <LinearLayout
         android:id="@+id/linearlayout_1"
@@ -68,14 +65,14 @@
             android:inputType="textPassword"
             android:hint="@string/please_pass_word_text" />
 
-        <!--<com.cdhxqh.household_app.ui.widget.SwitchButtonIs-->
-            <!--android:id="@+id/wiperSwitch1"-->
-            <!--android:layout_gravity="right|center_vertical"-->
-            <!--android:layout_marginRight="15dp"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_width="10dp"-->
-            <!--android:layout_height="10dp"-->
-            <!--/>-->
+        <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+            android:id="@+id/wiperSwitch1"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            />
         </FrameLayout>
     </LinearLayout>
 
