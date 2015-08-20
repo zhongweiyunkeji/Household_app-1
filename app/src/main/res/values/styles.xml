@@ -48,19 +48,19 @@
         <item name="android:paddingRight">5dp</item>
     </style>
 
-    <style name="ActionBarFont" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <style name="ActionBarFont">
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/font_color</item>
     </style>
 
-    <style name="bodyBackground" parent="">
+    <style name="bodyBackground">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/bgcolor</item>
     </style>
 
     <!--List Padding-->
-    <style name="ListPadding" parent="ListPadding">
+    <style name="ListPadding">
         <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">14dp</item>
         <item name="android:paddingLeft">10dp</item>
@@ -68,14 +68,16 @@
     </style>
 
     <!--List Level 1-->
-    <style name="ListPadding.ListLevel1" parent="ListPadding.ListLevel1">
+    <style name="ListPadding.ListLevel1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/list_title_bgcolor</item>
         <item name="android:textColor">@color/list_title_color</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <!--List Level 2-->
-    <style name="ListPadding.ListLevel2" parent="ListPadding.ListLevel2">
+    <style name="ListPadding.ListLevel2">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <!--<item name="layout_gravity">center</item>-->
@@ -85,7 +87,7 @@
     </style>
 
     <!--List Level 3-->
-    <style name="ListPadding.ListLevel3" parent="ListPadding.ListLevel3">
+    <style name="ListPadding.ListLevel3">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textColor">@color/text_color</item>
@@ -95,7 +97,7 @@
 
 
     <!--Button Color Is Light Blue-->
-    <style name="btnLightBlue" parent="btnLightBlue">
+    <style name="btnLightBlue">
         <item name="android:background">@drawable/btn_lightblue</item>
         <item name="android:textColor">@color/font_color</item>
         <item name="android:textSize">20sp</item>
@@ -103,7 +105,6 @@
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_margin">30dp</item>
     </style>
-
 
 
 </resources>
