@@ -23,6 +23,8 @@ public class MyDevice {
      */
     private String number;
 
+    private boolean status;
+
     public String getName() {
         return name;
     }
@@ -53,5 +55,13 @@ public class MyDevice {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
