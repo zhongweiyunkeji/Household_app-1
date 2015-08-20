@@ -304,7 +304,7 @@ public class AddEquipmentActivity extends BaseActivity {
             case QRCODE : {
                 if (resultCode == RESULT_OK) {
                     String result = data.getExtras().getString("result");
-                    Toast.makeText(AddEquipmentActivity.this, result, Toast.LENGTH_LONG);
+                    Toast.makeText(AddEquipmentActivity.this, result, Toast.LENGTH_LONG).show();
                     // 调用接口验票
                 }
             }
