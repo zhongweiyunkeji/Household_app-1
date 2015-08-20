@@ -1,19 +1,19 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.api.HttpRequestHandler;
 import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.api.Message;
 import com.cdhxqh.household_app.ui.widget.TestClass;
+import com.cdhxqh.household_app.ui.widget.TimeCountUtil;
 import com.cdhxqh.household_app.utils.MessageUtils;
 
 /**
@@ -60,6 +60,16 @@ public class ActivityForgetPassword extends BaseActivity{
      */
     LinearLayout mail;
 
+    /**
+     * 邮箱号
+     */
+    EditText EditTextMail;
+
+    /**
+     * 根据邮箱号获取密码
+     */
+    Button restart_passworld_mail;
+
     private static final String TAG = "ImageButton";  //提示框
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +88,8 @@ public class ActivityForgetPassword extends BaseActivity{
         TextViewPhone = (TextView) findViewById(R.id.TextViewPhone);
         phone = (LinearLayout) findViewById(R.id.phone);
         mail = (LinearLayout) findViewById(R.id.mail);
+        EditTextMail = (EditText) findViewById(R.id.EditTextMail);
+        restart_passworld_mail = (Button) findViewById(R.id.restart_passworld_mail);
     }
 
     public void initView() {
@@ -93,6 +105,10 @@ public class ActivityForgetPassword extends BaseActivity{
         TextViewMail.setOnClickListener(backImageMailOnTouchListener);
         //跳转至手机找回界面事件
         TextViewPhone.setOnClickListener(backImagephoneClickListener);
+        /**
+         * 根据邮箱号获取密码
+          */
+        restart_passworld_mail.setOnClickListener(getMailPassClickListener);
     }
 
     //跳转至邮箱找回界面事件
@@ -113,6 +129,23 @@ public class ActivityForgetPassword extends BaseActivity{
         }
     };
 
+    //根据邮箱号获取新密码
+    private View.OnClickListener getMailPassClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String str = EditTextMail.getText().toString();
+            if (str == null || "".equals(str)) {
+                EditTextMail.setError(getString(R.string.email_code_null));
+                EditTextMail.requestFocus();
+            } else if(!TestClass.isMailNo(str)) {
+                EditTextMail.setError(getString(R.string.email_style_err));
+                EditTextMail.requestFocus();
+            } else {
+                getHttpUtil(1);
+            }
+        }
+    };
+
     //获取验证码
     private View.OnClickListener codeOnClickListener = new View.OnClickListener() {
         @Override
@@ -128,44 +161,10 @@ public class ActivityForgetPassword extends BaseActivity{
                 registered_phone_number.setError(getString(R.string.phone_get_err));
                 registered_phone_number.requestFocus();
             }else {
-//                getPhoneCode();
+                getHttpUtil(2);
             }
         }
     };
-
-    //    /**
-//     * 根据手机号获取验证码
-//     */
-//    private void getPhoneCode () {
-//        /**
-//         * 加载中
-//         */
-//        TestClass.loading(this, getString(R.string.phone_get_err));
-//
-//        HttpManager.getPhoneCode(this,
-//                EditText1.getText().toString(),
-//                new HttpRequestHandler<Integer>() {
-//                    @Override
-//                    public void onSuccess(Integer data) {
-//                        MessageUtils.showMiddleToast(PhoneActivity.this, "验证码发送成功");
-//                        TestClass.closeLoading();
-//                        TimeCountUtil timeCountUtil = new TimeCountUtil(PhoneActivity.this, 60000, 1000, info_button_id, R.drawable.phone_test_on);
-//                        timeCountUtil.start();
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Integer data, int totalPages, int currentPage) {
-//                        Log.i(TAG, "22222");
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String error) {
-//                        MessageUtils.showErrorMessage(PhoneActivity.this, error);
-//                        TestClass.closeLoading();
-//                    }
-//                });
-//    }
-
 
     //手机获取密码
     private View.OnClickListener getPhonePassClickListener = new View.OnClickListener() {
@@ -177,53 +176,88 @@ public class ActivityForgetPassword extends BaseActivity{
             String a;
             String str = registered_phone_number.getText().toString();
             String code = sms_verification_code.getText().toString();
-            if (str == null || "".equals(str)) {
-                registered_phone_number.setError(getString(R.string.please_in_phone_number_text));
-                registered_phone_number.requestFocus();
-            }else  if (!TestClass.isMobileNO(str)) {
-                registered_phone_number.setError(getString(R.string.phone_get_err));
-                registered_phone_number.requestFocus();
-            }else if(code == null || "".equals(code)){
+            if(code == null || "".equals(code)){
                 sms_verification_code.setError(getString(R.string.please_in_phone_code_text));
                 sms_verification_code.requestFocus();
             }else
             {
-//                getPhonePass ();
+                getHttpUtil(3);
             }
         }
     };
 
-//    /**
-//     * 根据手机号重置密码
-//     */
-//    private void getPhonePass () {
-//        /**
-//         * 加载中
-//         */
-//        TestClass.loading(this, getString(R.string.phone_get_err));
-//
-//        HttpManager.getPhonePass(this,
-//                registered_phone_number.getText().toString(),
-//                new HttpRequestHandler<Integer>() {
-//                    @Override
-//                    public void onSuccess(Integer data) {
-//                        MessageUtils.showMiddleToast(ActivityForgetPassword.this, "密码重置成功");
-//                        TestClass.closeLoading();
-//                        finish();
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Integer data, int totalPages, int currentPage) {
-//                        Log.i(TAG, "22222");
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String error) {
-//                        MessageUtils.showErrorMessage(PhoneActivity.this, error);
-//                        TestClass.closeLoading();
-//                    }
-//                });
-//    }
+    /**
+     * 访问网络
+     * @param i
+     */
+    private void getHttpUtil (int i) {
+        /**
+         * 加载中
+         */
+        TestClass.loading(this, getString(R.string.loading));
+
+        if(i == 1) {
+            /**
+             * 邮箱获取密码
+             */
+            HttpManager.filterManager(this, true, handler, Message.PHONEPASS_URL, "email", EditTextMail.getText().toString());
+        }else if(i == 2){
+            /**
+             * 手机获取验证码
+             */
+            HttpManager.filterManager(this, true, handler1, Message.PHONEPASS_URL, "mobile", registered_phone_number.getText().toString());
+        }
+        else if(i == 3){
+            /**
+             * 手机获取验证码
+             */
+            HttpManager.filterManager(this, true, handler, Message.PHONELINE_URL, "authstring", sms_verification_code.getText().toString());
+        }
+    }
+    /**
+     * 根据手机号获取验证码
+     */
+
+    HttpRequestHandler<Integer> handler1 = new HttpRequestHandler<Integer>() {
+                    @Override
+                    public void onSuccess(String data) {
+                        MessageUtils.showMiddleToast(ActivityForgetPassword.this, data);
+                        TestClass.closeLoading();
+                        TimeCountUtil timeCountUtil = new TimeCountUtil(ActivityForgetPassword.this, 60000, 1000, restart_passworld_id, R.drawable.phone_test_on);
+                        timeCountUtil.start();
+                    }
+
+                    @Override
+                    public void onSuccess(Integer data, int totalPages, int currentPage) {
+                        Log.i(TAG, "22222");
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        MessageUtils.showErrorMessage(ActivityForgetPassword.this, error);
+                        TestClass.closeLoading();
+                    }
+                };
+
+    HttpRequestHandler<Integer> handler =  new HttpRequestHandler<Integer>() {
+        @Override
+        public void onSuccess(String data) {
+            MessageUtils.showMiddleToast(ActivityForgetPassword.this, data);
+            TestClass.closeLoading();
+            finish();
+        }
+
+        @Override
+        public void onSuccess(Integer data, int totalPages, int currentPage) {
+            Log.i(TAG, "22222");
+        }
+
+        @Override
+        public void onFailure(String error) {
+            MessageUtils.showErrorMessage(ActivityForgetPassword.this, error);
+            TestClass.closeLoading();
+        }
+    };
 }
 
 
