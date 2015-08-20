@@ -14,7 +14,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * This thread does all the heavy lifting of decoding the images.
- * ½âÂëÏß³Ì
+ * è§£ç çº¿ç¨‹
  */
 final class DecodeThread extends Thread {
 

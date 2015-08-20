@@ -72,12 +72,12 @@ public final class ViewfinderView extends View {
 
     /**
      * public void drawRect (float left, float top, float right, float bottom, Paint paint)
-     * ²ÎÊıËµÃ÷
-     * left£º  ¾ØĞÎµÄ×ó±ßÎ»ÖÃ¡£
-     * top£º   ¾ØĞÎµÄÉÏ±ßÎ»ÖÃ¡£
-     * right£º ¾ØĞÎµÄÓÒ±ßÎ»ÖÃ¡£
-     * bottom£º¾ØĞÎµÄÏÂ±ßÎ»ÖÃ¡£
-     * paint£º »æÖÆÊ±ËùÊ¹ÓÃµÄ»­±Ê¡£
+     * å‚æ•°è¯´æ˜
+     * leftï¼š  çŸ©å½¢çš„å·¦è¾¹ä½ç½®ã€‚
+     * topï¼š   çŸ©å½¢çš„ä¸Šè¾¹ä½ç½®ã€‚
+     * rightï¼š çŸ©å½¢çš„å³è¾¹ä½ç½®ã€‚
+     * bottomï¼šçŸ©å½¢çš„ä¸‹è¾¹ä½ç½®ã€‚
+     * paintï¼š ç»˜åˆ¶æ—¶æ‰€ä½¿ç”¨çš„ç”»ç¬”ã€‚
      */
     canvas.drawRect(0, 0, width, frame.top, paint);
     canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, paint);
