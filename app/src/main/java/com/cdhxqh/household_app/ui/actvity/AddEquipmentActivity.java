@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +20,11 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
+import com.cdhxqh.household_app.zxing.activity.CaptureActivity;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/18.
@@ -80,6 +84,8 @@ public class AddEquipmentActivity extends BaseActivity {
      *从相册中查找
      */
     private static final int ITEM_2 = 2;
+
+    private static final int QRCODE = 3;
 
     /**
      * 显示相片
@@ -181,6 +187,8 @@ public class AddEquipmentActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // 弹出扫描二维码的界面
+                Intent openCameraIntent = new Intent(AddEquipmentActivity.this, CaptureActivity.class);
+                startActivityForResult(openCameraIntent, QRCODE);
             }
         });
 
@@ -293,6 +301,13 @@ public class AddEquipmentActivity extends BaseActivity {
                     }
                 }
                 break;
+            case QRCODE : {
+                if (resultCode == RESULT_OK) {
+                    String result = data.getExtras().getString("result");
+                    Toast.makeText(AddEquipmentActivity.this, result, Toast.LENGTH_LONG);
+                    // 调用接口验票
+                }
+            }
             default:
                 break;
 
