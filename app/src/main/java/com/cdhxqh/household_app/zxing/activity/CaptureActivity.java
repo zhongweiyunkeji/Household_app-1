@@ -16,6 +16,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
@@ -45,7 +47,10 @@ public class CaptureActivity extends Activity implements Callback {
     private boolean playBeep;
     private static final float BEEP_VOLUME = 0.10f;
     private boolean vibrate;
-    private Button cancelScanButton;
+    ImageView backImg;
+    ImageView settingImg;
+    TextView titleView;
+    // private Button cancelScanButton;
 
     /** Called when the activity is first created. */
     @Override
@@ -55,11 +60,23 @@ public class CaptureActivity extends Activity implements Callback {
         //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-        cancelScanButton = (Button) this.findViewById(R.id.btn_cancel_scan);
+        // cancelScanButton = (Button) this.findViewById(R.id.btn_cancel_scan);
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
 
 
+        backImg = (ImageView) findViewById(R.id.back_imageview_id);
+        backImg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CaptureActivity.this.finish();
+            }
+        });
+
+        settingImg = (ImageView) findViewById(R.id.title_add_id);
+        settingImg.setVisibility(View.GONE);
+        titleView = (TextView)findViewById(R.id.title_text_id);
+        titleView.setText("扫描二维码");
     }
 
     @Override
@@ -85,13 +102,13 @@ public class CaptureActivity extends Activity implements Callback {
         vibrate = true;
 
         //quit the scan view
-        cancelScanButton.setOnClickListener(new OnClickListener() {
+        /*cancelScanButton.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 CaptureActivity.this.finish();
             }
-        });
+        });*/
     }
 
     @Override
