@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.actvity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
@@ -10,36 +11,30 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.adapter.EquipDelAdapter;
+import com.cdhxqh.household_app.ui.adapter.EquipEditAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Created by hexian on 2015/8/20.
  */
-public class Activity_Equip_delete extends BaseActivity {
+public class Activity_Equip_edit extends BaseActivity {
 
     ImageView backImg;    // 返回按钮
     TextView titleView;   // 状态栏提示文字
     ImageView settingImg; // 设置按钮文字
     ListView listView;
 
-    EquipDelAdapter adapter;  // 适配器
+    EquipEditAdapter adapter;  // 适配器
 
     SwipeRefreshLayout swipeRefreshLayout; // 刷新控件
-
-    CheckBox checkdAll;  // 全选按钮
-
-    ImageView delBtn; // 删除按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_equip_delete);
+        setContentView(R.layout.activity_equip_edit);
         findViewById();
         initView();
     }
@@ -50,11 +45,9 @@ public class Activity_Equip_delete extends BaseActivity {
         settingImg = (ImageView)findViewById(R.id.title_add_id);
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
         listView = (ListView)findViewById(R.id.listview);
-        checkdAll = (CheckBox)findViewById(R.id.checkd_all);
-        delBtn = (ImageView)findViewById(R.id.del_btn);
     }
 
-    public void initView(){
+    public void initView() {
         titleView.setText("我的设备");
         settingImg.setVisibility(View.GONE);
         backImg.setOnClickListener(new View.OnClickListener() {
@@ -64,46 +57,21 @@ public class Activity_Equip_delete extends BaseActivity {
             }
         });
 
-        adapter = new EquipDelAdapter(this);
+        adapter = new EquipEditAdapter(this, new OnListViewItemClick() {
+            @Override
+            public void click(MyDevice myDevice, int position) {
+                Intent intent = new Intent(Activity_Equip_edit.this, AddEquipmentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("action", "edit");
+                bundle.putSerializable("entity", myDevice);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         listView.setAdapter(adapter);
 
         ArrayList<MyDevice> list = getData();
         adapter.update(list);
-
-        checkdAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {  // 全选按钮事件
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (adapter != null) {
-                    if (isChecked) {
-                        adapter.selectAll();
-                    } else {
-                        adapter.unselectAll();
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-            }
-        });
-
-        delBtn.setOnClickListener(new View.OnClickListener() { // 删除按钮事件
-            @Override
-            public void onClick(View v) {
-                ArrayList<MyDevice> list = adapter.getList();
-                ArrayList<MyDevice> clonList = (ArrayList<MyDevice>) list.clone();
-                int size = list.size();
-                for (int index = 0; index < size; index++) {
-                    MyDevice alarm = list.get(index);
-                    boolean flag = alarm.isStatus();
-                    if (flag) {
-                        clonList.remove(alarm);
-                    }
-                }
-                Collections.reverse(clonList);
-                adapter.reload(clonList);
-                if (adapter.getList().size() == 0) {
-                    checkdAll.setChecked(false);
-                }
-            }
-        });
 
     }
 
@@ -111,7 +79,6 @@ public class Activity_Equip_delete extends BaseActivity {
         ArrayList<MyDevice> list = new ArrayList<MyDevice>(0);
         for(int i=0; i<20; i++){
             MyDevice divice = new MyDevice();
-            // divice.setStatus(true);                    // 设备状态
             divice.setName("海康DS-2CD2412F " + i);  // 设备名称
             divice.setNumber("2317635" + i);          // 设备编号
             divice.setSize(i);                         // 交表
@@ -120,6 +87,11 @@ public class Activity_Equip_delete extends BaseActivity {
         }
 
         return list;
+    }
+
+
+    public interface OnListViewItemClick {
+        public void click(MyDevice myDevice, int position);
     }
 
 }
