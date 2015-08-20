@@ -29,9 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:paddingTop="15dp"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:gravity="left|center"
-        android:text="已同意《智慧家居安全云服务条款》，点击“下一步”"
+        android:text="已同意《智慧家居云服务条款》，点击“下一步”"
         android:textColor="@color/text_color" />
 
     <Button
