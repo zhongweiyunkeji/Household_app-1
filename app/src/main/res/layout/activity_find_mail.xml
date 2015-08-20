@@ -2,18 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/mail"
-    android:visibility="gone"
-    >
+    android:visibility="gone">
     <LinearLayout
         android:id="@+id/reg_layou_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
         <!--android:visibility="invisible"-->
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="50dp"
             android:layout_gravity="center|center_horizontal"
             android:layout_margin="30dp"
@@ -27,8 +25,8 @@
                 android:layout_gravity="center|center_horizontal"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:paddingBottom="9dp"
-                android:paddingTop="9dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:background="@drawable/tabs_left_nol"
                 android:text="@string/through_phone"
                 android:textColor="@color/text_color"/>
@@ -38,8 +36,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:paddingBottom="9dp"
-                android:paddingTop="9dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:background="@drawable/tabs_right_sel"
                 android:text="@string/through_mail"
                 android:textColor="@color/font_color" />
@@ -48,7 +46,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/edit_text_bg"
@@ -77,7 +75,7 @@
             android:paddingTop="15dp"
             android:background="@android:color/transparent"
             android:text="新密码以短信形式发送到该手机号，请注意查收"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/text_color"/>
 
         <Button
