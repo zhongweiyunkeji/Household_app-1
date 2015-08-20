@@ -37,4 +37,11 @@
     <color name="list_item_read">#ffb7b7b7</color>
     <color name="hint_color">#ffb7b7b7</color>
 
+    <!--  二维码颜色   -->
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
 </resources>
