@@ -81,8 +81,32 @@
     <string name="please_in_phone_code_text">请输入验证码</string>
     <string name="phone_get_err">手机号格式不正确</string>
     <string name="error_title">错误</string>
+    <string name="loading">正在加载</string>
 
     <!--验证码-->
     <string name="phone_send_number">秒后可重新发送</string>
     <string name="phone_get_number">重新获取验证码</string>
+
+    <!-- 用户提示 -->
+    <string name="error_network_exception">网络通信异常，请稍后重试</string>
+    <string name="error_network_disconnect">网络不可达,请开启Wifi或者移动数据网络</string>
+    <string name="error_reply">无法回复</string>
+    <string name="error_create_topic">无法点评</string>
+    <string name="error_login">无法登录</string>
+    <string name="error_fav_nodes">无法收藏</string>
+    <string name="error_fav_topic">无法连接服务器</string>
+    <string name="error_get_profile">无法获取用户个人资料</string>
+    <string name="error_unknown">未知错误</string>
+    <string name="error_obtain_once">无法获取ONCE</string>
+    <string name="get_info_mation_text">获取信息失败</string>
+    <string name="title_activity_scenic__tickets_">Scenic_Tickets_Activity</string>
+    <string name="reg_loaing">正在努力加载...</string>
+    <string name="please_loading_hint">请稍后...</string>
+    <string name="title_activity_scenic_map">ScenicMapActivity</string>
+    <string name="fill_in_the_phone_number_text">1.填写手机号</string>
+    <string name="seting_passwprd_text">2.设置密码</string>
+    <string name="message_auth_text">3.短信验证</string>
+    <string name="please_input_phone_number_text">请输入11位手机号</string>
+    <string name="next_button_text">下一步</string>
+    <string name="login_time_out">已与服务器断开连接,请重新登录</string>
 </resources>
