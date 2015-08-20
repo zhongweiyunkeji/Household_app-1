@@ -94,6 +94,11 @@ public class AddEquipmentActivity extends BaseActivity {
      */
     private Button next;
 
+    ImageView backImg;  // 返回按钮
+    TextView titleTextView;  // 标题栏标题
+    ImageView addIcon;        // 标题栏添加按钮
+    ImageView scanIcpn;     // 标题栏扫描二维码按钮
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_equipment);
@@ -114,6 +119,13 @@ public class AddEquipmentActivity extends BaseActivity {
         view_photo = (ImageView) findViewById(R.id.view_photo);
         site_photo = (TextView) findViewById(R.id.site_photo);
         next = (Button) findViewById(R.id.next);
+
+        backImg = (ImageView)findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView)findViewById(R.id.title_text_id);
+        addIcon = (ImageView)findViewById(R.id.title_add_id);
+        scanIcpn = (ImageView)findViewById(R.id.title_scan_id);
+
+
     }
 
     public void initView() {
@@ -138,6 +150,24 @@ public class AddEquipmentActivity extends BaseActivity {
          *灰色屏幕
          */
         select_p.setOnClickListener(selectOnClickListener);
+
+        backImg.setOnClickListener(new View.OnClickListener() { // 注册返回按钮事件
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        titleTextView.setText("添加设备");
+        addIcon.setVisibility(View.GONE);
+        scanIcpn.setVisibility(View.VISIBLE);
+
+        scanIcpn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 弹出扫描二维码的界面
+            }
+        });
 
         /**
          * 下一步
