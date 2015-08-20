@@ -22,6 +22,7 @@ public class Activity_Login extends BaseActivity{
     private CheckBox isremenber;
     private Button login;
     private TextView TextViewPassWord;
+    Button regBtn;  // 注册按钮
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ public class Activity_Login extends BaseActivity{
         isremenber = (CheckBox) findViewById(R.id.isremenber_password);
         login = (Button) findViewById(R.id.login_btn_id);
         TextViewPassWord = (TextView) findViewById(R.id.TextViewPassWord);
+
+        regBtn = (Button)findViewById(R.id.registered_btn_id);
     }
 
     protected void initView() {
@@ -52,6 +55,15 @@ public class Activity_Login extends BaseActivity{
         isremenber.setChecked(myshared.getBoolean(Constants.ISREMENBER, false));
         login.setOnClickListener(loginonclick);
         TextViewPassWord.setOnClickListener(passWordOnClickListener);
+        regBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity_Login.this, Activity_Registry_User.class);
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     private View.OnClickListener loginonclick = new View.OnClickListener() {

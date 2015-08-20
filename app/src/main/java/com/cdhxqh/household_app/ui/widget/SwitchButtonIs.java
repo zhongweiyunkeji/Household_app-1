@@ -20,7 +20,7 @@ import com.cdhxqh.household_app.R;
 /**
  * 选择按钮
  */
-public class SwitchButtonIs extends Switch implements View.OnClickListener{
+public class SwitchButtonIs extends View implements View.OnClickListener{
     private Bitmap mSwitchBottom, mSwitchThumb, mSwitchFrame, mSwitchMask;
     private float mCurrentX = 0;
     private boolean mSwitchOn = false;//开关默认是开着的

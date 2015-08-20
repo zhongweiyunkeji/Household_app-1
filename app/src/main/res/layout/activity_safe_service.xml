@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bgcolor">
+    style="@style/bodyBackground">
 
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
 
@@ -24,20 +22,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/font_color"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/openControl"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel2"
+                        android:text="@string/openControl" />
 
                     <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
                         android:id="@+id/wiperSwitch"
@@ -60,16 +49,8 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/openControlTime"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel1"
+                        android:text="@string/openControlTime" />
 
                 </LinearLayout>
 
@@ -86,26 +67,12 @@
 
                     <TextView
                         android:id="@+id/week_tittle_a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/setWeek"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel2"
+                        android:text="@string/setWeek" />
 
                     <TextView
                         android:id="@+id/week_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/text_color"
+                        style="@style/ListPadding.ListLevel3"
                         android:textSize="16sp"
                         android:layout_toRightOf="@+id/week_tittle_a" />
 
@@ -133,26 +100,12 @@
 
                     <TextView
                         android:id="@+id/time_tittle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/setDate"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel2"
+                        android:text="@string/setDate" />
 
                     <TextView
                         android:id="@+id/time_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/text_color"
+                        style="@style/ListPadding.ListLevel3"
                         android:textSize="16sp"
                         android:layout_toRightOf="@+id/time_tittle" />
 
@@ -176,20 +129,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/list_title_bgcolor"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/closeControTime"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel1"
+                        android:text="@string/closeControTime" />
 
                 </LinearLayout>
 
@@ -206,26 +150,12 @@
 
                     <TextView
                         android:id="@+id/week_tittle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/setWeek"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel2"
+                        android:text="@string/setWeek" />
 
                     <TextView
                         android:id="@+id/week_value_a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/text_color"
+                        style="@style/ListPadding.ListLevel3"
                         android:textSize="16sp"
                         android:layout_toRightOf="@+id/week_tittle" />
 
@@ -253,26 +183,12 @@
 
                     <TextView
                         android:id="@+id/time_tittle_a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingTop="14dp"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/setDate"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel2"
+                        android:text="@string/setDate" />
 
                     <TextView
                         android:id="@+id/time_value_a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="14dp"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:textColor="@color/text_color"
+                        style="@style/ListPadding.ListLevel3"
                         android:textSize="16sp"
                         android:layout_toRightOf="@+id/time_tittle_a" />
 
@@ -300,16 +216,8 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/securityWarning"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel1"
+                        android:text="@string/securityWarning" />
 
                 </LinearLayout>
 
@@ -325,27 +233,12 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/list_title_color"
-                        android:text="@string/noticeType"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel2"
+                        android:text="@string/noticeType" />
 
                     <TextView
                         android:id="@+id/notice_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="14dp"
-                        android:textColor="@color/text_color"
-                        android:textSize="16sp"
+                        style="@style/ListPadding.ListLevel3"
                         android:text="@string/shortMessage"/>
 
                 </LinearLayout>
@@ -367,27 +260,14 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingBottom="14dp"
-							android:paddingLeft="10dp"
-							android:paddingRight="10dp"
-							android:paddingTop="14dp"
-                            android:textColor="@color/list_title_color"
+                            style="@style/ListPadding.ListLevel2"
                             android:text="@string/phoneNumber"
-                            android:textSize="18sp"
 							android:layout_centerVertical="true" />
 
                         <TextView
                             android:id="@+id/user_num"
+                            style="@style/ListPadding.ListLevel2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="14dp"
-							android:paddingLeft="10dp"
-							android:paddingRight="10dp"
-							android:paddingTop="14dp"
-                            android:textColor="@color/text_color"
                             android:textSize="16sp"
 							android:layout_centerVertical="true"  />
 
@@ -426,13 +306,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:paddingTop="14dp"
-                        android:paddingBottom="14dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="是否录像"
-                        android:textColor="@color/list_title_color"
-                        android:textSize="18sp" />
+                        style="@style/ListPadding.ListLevel2"
+                        android:text="是否录像" />
 
 
                     <ImageView
@@ -453,16 +328,8 @@
 
                 <Button
                     android:id="@+id/restart_passworld_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/btn_lightblue"
-                    android:text="@string/save"
-                    android:textColor="@color/font_color"
-                    android:textSize="20sp" />
+                    style="@style/btnLightBlue"
+                    android:text="@string/save" />
 
             </LinearLayout>
 
@@ -472,6 +339,5 @@
             android:id="@+id/select_display_title"
             layout="@layout/activity_select_display"></include>
     </RelativeLayout>
-
 
 </LinearLayout>

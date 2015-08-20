@@ -50,7 +50,7 @@ public class Activity_use_guide extends BaseActivity {
         });
 
         //打开本包内asset目录下的index.html文件
-        webView.loadUrl(" file:///android_assets/function.html");
+        webView.loadUrl(" file:///android_asset/function.html");
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {

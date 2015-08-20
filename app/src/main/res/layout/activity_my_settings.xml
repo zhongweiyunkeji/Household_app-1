@@ -36,9 +36,8 @@
 
         <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
             android:id="@+id/wiperSwitch"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_margin="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>

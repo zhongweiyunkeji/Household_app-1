@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,11 +15,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
+import com.cdhxqh.household_app.zxing.activity.CaptureActivity;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/8/18.
@@ -79,6 +85,8 @@ public class AddEquipmentActivity extends BaseActivity {
      */
     private static final int ITEM_2 = 2;
 
+    private static final int QRCODE = 3;
+
     /**
      * 显示相片
      */
@@ -93,6 +101,12 @@ public class AddEquipmentActivity extends BaseActivity {
      *下一步
      */
     private Button next;
+
+    ImageView backImg;  // 返回按钮
+    TextView titleTextView;  // 标题栏标题
+    ImageView addIcon;        // 标题栏添加按钮
+    ImageView scanIcpn;     // 标题栏扫描二维码按钮
+    String action;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,9 +128,29 @@ public class AddEquipmentActivity extends BaseActivity {
         view_photo = (ImageView) findViewById(R.id.view_photo);
         site_photo = (TextView) findViewById(R.id.site_photo);
         next = (Button) findViewById(R.id.next);
+
+        backImg = (ImageView)findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView)findViewById(R.id.title_text_id);
+        addIcon = (ImageView)findViewById(R.id.title_add_id);
+        scanIcpn = (ImageView)findViewById(R.id.title_scan_id);
+
+
     }
 
     public void initView() {
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null){
+            action = bundle.getString("action");
+            MyDevice myDevice = (MyDevice)bundle.getSerializable("entity");
+            if("edit".equals(action)){
+                titleTextView.setText("修改设备");
+                if(myDevice!=null){
+                    Toast.makeText(this, myDevice.getName(), Toast.LENGTH_SHORT);
+                }
+            }
+        } else {
+            titleTextView.setText("添加设备");
+        }
         /**
          * 拍摄照片监听
          */
@@ -138,6 +172,25 @@ public class AddEquipmentActivity extends BaseActivity {
          *灰色屏幕
          */
         select_p.setOnClickListener(selectOnClickListener);
+
+        backImg.setOnClickListener(new View.OnClickListener() { // 注册返回按钮事件
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        addIcon.setVisibility(View.GONE);
+        scanIcpn.setVisibility(View.VISIBLE);
+
+        scanIcpn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 弹出扫描二维码的界面
+                Intent openCameraIntent = new Intent(AddEquipmentActivity.this, CaptureActivity.class);
+                startActivityForResult(openCameraIntent, QRCODE);
+            }
+        });
 
         /**
          * 下一步
@@ -248,6 +301,13 @@ public class AddEquipmentActivity extends BaseActivity {
                     }
                 }
                 break;
+            case QRCODE : {
+                if (resultCode == RESULT_OK) {
+                    String result = data.getExtras().getString("result");
+                    Toast.makeText(AddEquipmentActivity.this, result, Toast.LENGTH_LONG).show();
+                    // 调用接口验票
+                }
+            }
             default:
                 break;
 

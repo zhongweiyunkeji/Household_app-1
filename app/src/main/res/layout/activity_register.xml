@@ -18,18 +18,18 @@
             <TextView
                 android:id="@+id/write_phone"
                 android:layout_column="0"
-                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="1.填写手机号"
-                android:textColor="#30BBF1"
-                android:textSize="14dp" />
+                android:textColor="@color/text_color_blue"
+                android:textSize="16sp"
+                android:text="1.填写手机号" />
 
             <ImageView
                 android:layout_column="1"
                 android:layout_weight="2"
-                android:src="@drawable/ic_list_view" />
+                android:src="@drawable/ic_tab_arrow_right" />
 
             <TextView
                 android:id="@+id/write_pwd"
@@ -37,13 +37,15 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
                 android:text="2.设置密码"
-                android:textSize="14dp" />
+                 />
 
             <ImageView
                 android:layout_column="3"
                 android:layout_weight="2"
-                android:src="@drawable/ic_list_view" />
+                android:src="@drawable/ic_tab_arrow_right" />
 
             <TextView
                 android:id="@+id/write_sendmsg"
@@ -52,8 +54,10 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="2"
                 android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/text_color"
                 android:text="3.短信验证"
-                android:textSize="14dp" />
+                 />
         </TableRow>
     </TableLayout>
 
