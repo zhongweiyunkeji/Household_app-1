@@ -43,17 +43,17 @@
 
 
     <!--何莉萍定义的样式-->
-    <style name="ActionBarBackground" parent="ActionBarBackground">
+    <style name="ActionBarBackground" parent="AppTheme.Toolbar">
         <item name="android:background">@color/title_bj</item>
         <item name="android:paddingRight">5dp</item>
     </style>
 
-    <style name="ActionBarFont">
+    <style name="ActionBarFont" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/font_color</item>
     </style>
 
-    <style name="bodyBackground" parent="bodyBackground">
+    <style name="bodyBackground" parent="">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/bgcolor</item>
