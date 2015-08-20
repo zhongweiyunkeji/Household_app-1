@@ -108,6 +108,9 @@
         </activity>
         <activity android:name=".ui.actvity.Activity_Equip_edit"  >
         </activity>
+        <activity
+            android:name=".zxing.activity.CaptureActivity"  >
+        </activity>
     </application>
 
 </manifest>
