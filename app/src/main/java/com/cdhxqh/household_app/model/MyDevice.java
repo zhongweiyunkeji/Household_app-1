@@ -2,10 +2,12 @@ package com.cdhxqh.household_app.model;
 
 import android.content.Intent;
 
+import java.io.Serializable;
+
 /**
  * Created by think on 2015/8/15.
  */
-public class MyDevice {
+public class MyDevice implements Serializable{
     /**
      * 设备名称
      */
@@ -22,6 +24,8 @@ public class MyDevice {
      * 编号
      */
     private String number;
+
+    private boolean status;
 
     public String getName() {
         return name;
@@ -53,5 +57,13 @@ public class MyDevice {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

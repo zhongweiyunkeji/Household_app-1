@@ -23,6 +23,7 @@ import com.cdhxqh.household_app.ui.actvity.MainActivity;
 import com.cdhxqh.household_app.ui.adapter.AlarmItemAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -129,7 +130,7 @@ public class ThreeInAlarmFragment extends BaseFragment {
                         clonList.remove(alarm);
                     }
                 }
-                adapter.reload(clonList);
+                Collections.reverse(clonList);
                 adapter.reload(clonList);
                 if(adapter.getList().size() == 0){
                     checkdAll.setChecked(false);

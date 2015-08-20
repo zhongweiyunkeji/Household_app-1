@@ -434,10 +434,14 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                         break;
                     }
                     case DEVICEM_DEL: {
-                        Toast.makeText(MainActivity.this, "删除", Toast.LENGTH_LONG).show();
+                        // Toast.makeText(MainActivity.this, "删除", Toast.LENGTH_LONG).show();
+                        Bundle bundle = new Bundle();
+                        openActivity(Activity_Equip_delete.class, bundle);
                         break;
                     }
                     case DEVICEM_EDIT: {
+                        Bundle bundle = new Bundle();
+                        openActivity(Activity_Equip_edit.class, bundle);
                         Toast.makeText(MainActivity.this, "编辑", Toast.LENGTH_LONG).show();
                         break;
                     }

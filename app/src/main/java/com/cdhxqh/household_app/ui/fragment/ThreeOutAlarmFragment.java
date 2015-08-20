@@ -22,6 +22,7 @@ import com.cdhxqh.household_app.ui.actvity.MainActivity;
 import com.cdhxqh.household_app.ui.adapter.AlarmItemAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by hexian on 2015/8/17.
@@ -123,6 +124,7 @@ public class ThreeOutAlarmFragment extends BaseFragment {
                         clonList.remove(alarm);
                     }
                 }
+                Collections.reverse(clonList);
                 adapter.reload(clonList);
                 if(adapter.getList().size() == 0){
                     checkdAll.setChecked(false);

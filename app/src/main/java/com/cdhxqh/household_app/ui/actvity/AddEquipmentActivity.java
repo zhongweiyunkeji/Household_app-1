@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
 
 import java.io.File;
@@ -98,6 +100,7 @@ public class AddEquipmentActivity extends BaseActivity {
     TextView titleTextView;  // 标题栏标题
     ImageView addIcon;        // 标题栏添加按钮
     ImageView scanIcpn;     // 标题栏扫描二维码按钮
+    String action;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +132,19 @@ public class AddEquipmentActivity extends BaseActivity {
     }
 
     public void initView() {
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null){
+            action = bundle.getString("action");
+            MyDevice myDevice = (MyDevice)bundle.getSerializable("entity");
+            if("edit".equals(action)){
+                titleTextView.setText("修改设备");
+                if(myDevice!=null){
+                    Toast.makeText(this, myDevice.getName(), Toast.LENGTH_SHORT);
+                }
+            }
+        } else {
+            titleTextView.setText("添加设备");
+        }
         /**
          * 拍摄照片监听
          */
@@ -158,7 +174,6 @@ public class AddEquipmentActivity extends BaseActivity {
             }
         });
 
-        titleTextView.setText("添加设备");
         addIcon.setVisibility(View.GONE);
         scanIcpn.setVisibility(View.VISIBLE);
 
