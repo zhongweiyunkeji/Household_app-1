@@ -78,23 +78,28 @@
 
     <!--List Level 2-->
     <style name="ListPadding.ListLevel2">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <!--<item name="layout_gravity">center</item>-->
-        <item name="android:background">@color/font_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/list_title_color</item>
         <item name="android:textSize">18sp</item>
     </style>
 
     <!--List Level 3-->
     <style name="ListPadding.ListLevel3">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-
+    <!--List Level 4-->
+    <style name="ListPadding.ListLevel4">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/edit_color</item>
+        <item name="android:background">@color/font_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
     <!--Button Color Is Light Blue-->
     <style name="btnLightBlue">
