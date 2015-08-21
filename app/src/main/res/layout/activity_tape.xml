@@ -26,10 +26,7 @@
 
         <com.cdhxqh.household_app.ui.widget.SwitchButton
             android:id="@+id/wiperSwitch"
-            android:paddingTop="14dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="14dp"
-            android:paddingLeft="10dp"
+            style="@style/ListPadding"
             android:layout_width="10dp"
             android:layout_height="10dp" />
 
