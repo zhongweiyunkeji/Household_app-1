@@ -3,68 +3,75 @@
     android:id="@+id/reg_layou_3"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:visibility="visible"
-    android:layout_marginTop="30dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp">
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center|center_horizontal"
+        android:background="@drawable/edit_text_bg"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/reg_msg_input"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_gravity="left"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/reg_phone_number_border_top"
+            android:background="@android:color/transparent"
+            android:textCursorDrawable="@drawable/color_cursor"
             android:gravity="center_vertical"
             android:hint="验证码"
-            android:maxLength="6"
             android:paddingLeft="10dp"
-            android:singleLine="true"
-            android:text=""
-            android:textColor="@color/text_color"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:textSize="16sp" />
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:textColor="@color/edit_color" />
 
         <Button
             android:id="@+id/reg_senmsg_btn"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignBaseline="@+id/reg_msg_input"
-            android:layout_alignRight="@+id/reg_msg_input"
+            android:layout_height="28dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btn_lightgray"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
             android:layout_marginRight="10dp"
-            android:background="#F2F2F2"
-            android:padding="10dp"
-            android:text="获取验证码"
-            android:textColor="@color/list_title_color"
-            android:layout_centerVertical="true"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/reg_hint_text"
-        android:layout_width="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/get_verification_code" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:layout_marginBottom="30dp"
-        android:singleLine="true"
-        android:gravity="left|center"
-        android:text="已发送短信验证码到"
-        android:textColor="@color/text_color"
-        android:textSize="12sp" />
-
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/reg_hint_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:singleLine="true"
+            android:gravity="left|center"
+            android:text="已发送短信验证码到"
+            android:textColor="@color/text_color"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:singleLine="true"
+            android:gravity="left|center"
+            android:text="189****4567"
+            android:textColor="@color/text_color_blue"
+            android:textSize="14sp" />
+    </LinearLayout>
     <Button
         android:id="@+id/reg_msg_btn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_lightblue"
-        android:gravity="center"
-        android:text="注册"
-        android:textColor="@color/font_color"
-        android:textSize="20sp" />
+        style="@style/btnLightBlue"
+        android:text="注册" />
+
 </LinearLayout>
