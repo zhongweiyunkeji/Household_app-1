@@ -20,7 +20,7 @@ public class Message {
     public static final String BASE_URL = "http://192.168.1.99:8080/security/";  //  "http://182.92.158.158:8080/qdm/"
 
     /**登录用户接口**/
-    public static final String LOGIN_URL = BASE_URL+"ecsusers/login";
+    public static final String LOGIN_URL = BASE_URL+"user/login";
 
     /**邮箱获取密码接口**/
     public static final String PHONEPASS_URL = BASE_URL+"user/reset";
@@ -162,8 +162,7 @@ public class Message {
      */
 
     //登录成功
-
-    public static final String SUCCESS_LOGIN = "ZWTICKET-USER-S-101";
+    public static final String SUCCESS_LOGIN = "SECURITY-USER-S-101";
 
     // 登录超时
     public static final String LOGIN_TIMEOUT = "ZWTICKET-GLOBAL-E-4";

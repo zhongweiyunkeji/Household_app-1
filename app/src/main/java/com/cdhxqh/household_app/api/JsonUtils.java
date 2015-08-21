@@ -1,6 +1,10 @@
 package com.cdhxqh.household_app.api;
 
 import android.content.Context;
+import android.util.Log;
+
+import com.cdhxqh.household_app.model.Ec_user;
+import com.cdhxqh.household_app.utils.AccountUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,6 +70,39 @@ public class JsonUtils {
         } catch (JSONException e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    /**
+     * 解析登陆信息*
+     * data json数据
+     * isChecked 是否保存密码
+     */
+    public static boolean parsingAuthStr(final Context cxt, String data) {
+        try {
+            JSONObject json = new JSONObject(data);
+            String errcode = json.getString("errcode");
+            if (errcode.equals(Message.SUCCESS_LOGIN)) {
+                JSONObject result = json.getJSONObject("result");
+                Ec_user ec_user = new Ec_user();
+                int userId = result.getInt("id");
+                ec_user.setUserId(userId);
+                ec_user.setEmail(result.getString("email"));
+                ec_user.setUserName(result.getString("username"));
+                ec_user.setPassword(result.getString("password"));
+                ec_user.setMobilePhone(result.getString("mobile"));
+//                PersistenceHelper.saveModel(cxt, ec_user, Constants.USER_CACHE+userId);
+                AccountUtils.writeLoginMember(cxt, ec_user);
+
+                return true;
+            } else {
+                return false;
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

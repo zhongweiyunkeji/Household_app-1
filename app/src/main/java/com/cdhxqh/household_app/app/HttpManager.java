@@ -130,6 +130,31 @@ public class HttpManager {
                         }
                     }
                 });
+                break;
+
+            /**
+             * 用户登录
+             */
+            case (Message.LOGIN_URL) :
+                client.post(url, maps, new TextHttpResponseHandler() {
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        ErrorType.SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        //解析返回的Json数据
+                            boolean flag = JsonUtils.parsingAuthStr(cxt, responseString);
+                            if (flag == true) {
+                                ErrorType.SafeHandler.onSuccess(handler, "登录成功");
+                            } else if (flag == false) {
+                                ErrorType.SafeHandler.onFailure(handler, "登录失败");
+                            }
+                    }
+                });
+                break;
         }
     }
 }
