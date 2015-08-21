@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
@@ -51,7 +52,7 @@ public class ViewUserActivity extends BaseActivity {
     /**
      *删除
      */
-    private ImageView delete;
+    private TextView delete;
 
     /**
      *灰色屏幕
@@ -89,7 +90,7 @@ public class ViewUserActivity extends BaseActivity {
         */
        checkbox_all = (CheckBox) findViewById(R.id.checkbox_all);
 
-       delete = (ImageView) findViewById(R.id.delete);
+       delete = (TextView) findViewById(R.id.delete);
 
        select_p = (RelativeLayout) findViewById(R.id.select_p);
 
