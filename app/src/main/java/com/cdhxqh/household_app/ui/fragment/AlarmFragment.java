@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,7 +37,10 @@ public class AlarmFragment extends BaseFragment {
     }
 
     public void initView() {
-        final int tabsLeftPadding_left = leftTab.getPaddingLeft();
+        leftTab.measure(0, 0);
+        rightTab.measure(0, 0);
+
+        /*final int tabsLeftPadding_left = leftTab.getPaddingLeft();
         final int tabsTopPadding_left = leftTab.getPaddingTop();
         final int tabsRightPadding_left = leftTab.getPaddingRight();
         final int tabsBottomPadding_left = leftTab.getPaddingBottom();
@@ -44,17 +48,33 @@ public class AlarmFragment extends BaseFragment {
         final int tabsLeftPadding_right = rightTab.getPaddingLeft();
         final int tabsTopPadding_right = rightTab.getPaddingTop();
         final int tabsRightPadding_right = rightTab.getPaddingRight();
-        final int tabsBottomPadding_right = rightTab.getPaddingBottom();
+        final int tabsBottomPadding_right = rightTab.getPaddingBottom();*/
+
+        final int leftWidth = leftTab.getMeasuredWidth();
+        final int leftHeight = leftTab.getMeasuredHeight();
+        final int rightWidth = rightTab.getMeasuredWidth();
+        final int rightHeight = rightTab.getMeasuredHeight();
+
 
         leftTab.setOnClickListener(new View.OnClickListener() {  // 三个月内
             @Override
             public void onClick(View v) {
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)leftTab.getLayoutParams();
+                params.weight = leftWidth;
+                params.height = leftHeight;
+                params.weight = 1;
+
+                params = (LinearLayout.LayoutParams)rightTab.getLayoutParams();
+                params.weight = rightWidth;
+                params.height = rightHeight;
+                params.weight = 1;
+
                 leftTab.setBackgroundResource(R.drawable.tabs_left_sel);
                 leftTab.setTextColor(Color.parseColor("#FFFFFF"));
                 rightTab.setBackgroundResource(R.drawable.tabs_right_nol);
                 rightTab.setTextColor(Color.parseColor("#7C8586"));
-                leftTab.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);
-                rightTab.setPadding(tabsLeftPadding_right, tabsTopPadding_right, tabsRightPadding_right, tabsBottomPadding_right);
+                /*leftTab.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);
+                rightTab.setPadding(tabsLeftPadding_right, tabsTopPadding_right, tabsRightPadding_right, tabsBottomPadding_right);*/
                 if(flag){
                     return;
                 }
@@ -65,13 +85,23 @@ public class AlarmFragment extends BaseFragment {
 
         rightTab.setOnClickListener(new View.OnClickListener() {  // 三个月前
             @Override
-            public void onClick(View v) {// 三个月钱前
+            public void onClick(View v) {// 三个月前
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)leftTab.getLayoutParams();
+                params.weight = leftWidth;
+                params.height = leftHeight;
+                params.weight = 1;
+
+                params = (LinearLayout.LayoutParams)rightTab.getLayoutParams();
+                params.weight = rightWidth;
+                params.height = rightHeight;
+                params.weight = 1;
+
                 leftTab.setBackgroundResource(R.drawable.tabs_left_nol);
                 leftTab.setTextColor(Color.parseColor("#7C8586"));
                 rightTab.setBackgroundResource(R.drawable.tabs_right_sel);
                 rightTab.setTextColor(Color.parseColor("#FFFFFF"));
-                leftTab.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);
-                rightTab.setPadding(tabsLeftPadding_right, tabsTopPadding_right, tabsRightPadding_right, tabsBottomPadding_right);
+                /*leftTab.setPadding(tabsLeftPadding_left, tabsTopPadding_left, tabsRightPadding_left, tabsBottomPadding_left);
+                rightTab.setPadding(tabsLeftPadding_right, tabsTopPadding_right, tabsRightPadding_right, tabsBottomPadding_right);*/
                 if(!flag){
                     return;
                 }

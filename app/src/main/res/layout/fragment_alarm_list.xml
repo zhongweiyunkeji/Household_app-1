@@ -20,13 +20,13 @@
         <TextView
             android:id="@+id/tabs_left"
             android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="三个月内"
-            android:layout_weight="1"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:layout_gravity="center"
             android:gravity="center"
+            android:layout_gravity="center"
             android:textColor="@color/font_color"
             android:background="@drawable/tabs_left_sel"
             />
@@ -35,13 +35,13 @@
             android:id="@+id/tabs_right"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="三个月前"
             android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="三个月前"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textColor="@color/text_color"
             android:background="@drawable/tabs_right_nol"
-            android:layout_gravity="center"
             android:gravity="center"
             />
     </LinearLayout>
