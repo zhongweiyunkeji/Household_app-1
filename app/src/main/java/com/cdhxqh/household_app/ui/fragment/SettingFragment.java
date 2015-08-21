@@ -92,7 +92,7 @@ public class SettingFragment extends BaseFragment {
     private View.OnClickListener catchsOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            DataCleanManager.cleanInternalCache(activity);
+            DataCleanManager.cleanInternalCache(activity);
 //            DataCleanManager.cleanDatabases(activity);
 //            DataCleanManager.cleanSharedPreference(activity);
         }
