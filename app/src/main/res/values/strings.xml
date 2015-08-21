@@ -43,7 +43,7 @@
     <string name="noticeType">通知方式</string>
     <string name="shortMessage">手机短信</string>
     <string name="manage">联系人</string>
-    <string name="phoneNumber">联系人</string>
+    <string name="phoneNumber">手机号</string>
     <string name="roleGroup">角色分组</string>
     <string name="save">保存</string>
     <string name="commit">提交</string>

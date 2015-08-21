@@ -78,9 +78,8 @@
 
     <!--List Level 2-->
     <style name="ListPadding.ListLevel2">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/font_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/list_title_color</item>
         <item name="android:textSize">18sp</item>
     </style>
