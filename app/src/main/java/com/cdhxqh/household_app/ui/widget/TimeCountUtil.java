@@ -15,32 +15,33 @@ import com.cdhxqh.household_app.R;
  * Created by Administrator on 2015/7/24.
  */
 public class TimeCountUtil extends CountDownTimer {
-    private Activity phoneActivity;
-    private Button info_button_id;
+    private Activity ActivityForgetPassword;
+    private Button restart_passworld_id;
     private int img;
 
-    public TimeCountUtil(Activity phoneActivity, long millisInFuture, long countDownInterval, Button info_button_id, int img) {
+    public TimeCountUtil(Activity ActivityForgetPassword, long millisInFuture, long countDownInterval, Button restart_passworld_id, int img) {
         super(millisInFuture, countDownInterval);
-        this.phoneActivity = phoneActivity;
-        this.info_button_id = info_button_id;
+        this.ActivityForgetPassword = ActivityForgetPassword;
+        this.restart_passworld_id = restart_passworld_id;
+        this.img = img;
     }
 
     @Override
     public void onTick(long millisUntilFinished) {
-        info_button_id.setClickable(false);
-        info_button_id.setText(millisUntilFinished / 1000 + phoneActivity.getResources().getString(R.string.phone_send_number));
-        info_button_id.setBackgroundColor(phoneActivity.getResources().getColor(R.color.transition_bg));
-        Spannable span = new SpannableString(info_button_id.getText().toString());
+        restart_passworld_id.setClickable(false);
+        restart_passworld_id.setText(millisUntilFinished / 1000 + ActivityForgetPassword.getResources().getString(R.string.phone_send_number));
+        restart_passworld_id.setBackgroundColor(ActivityForgetPassword.getResources().getColor(R.color.transition_bg));
+        Spannable span = new SpannableString(restart_passworld_id.getText().toString());
         span.setSpan(new ForegroundColorSpan(Color.RED), 0, 2, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        info_button_id.setText(span);
+        restart_passworld_id.setText(span);
     }
 
     @Override
     public void onFinish() {
-        info_button_id.setText(phoneActivity.getResources().getString(R.string.phone_get_number));
-        info_button_id.setClickable(true);
+        restart_passworld_id.setText(ActivityForgetPassword.getResources().getString(R.string.phone_get_number));
+        restart_passworld_id.setClickable(true);
         if(img != 0) {
-            info_button_id.setBackgroundResource(img);
+            restart_passworld_id.setBackgroundResource(img);
         }
     }
 }
