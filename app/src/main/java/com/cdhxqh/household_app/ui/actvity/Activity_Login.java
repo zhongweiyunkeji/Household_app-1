@@ -146,10 +146,9 @@ public class Activity_Login extends BaseActivity{
     /**
      * 登录
      */
-    HttpRequestHandler<Constants> handler = new HttpRequestHandler<Constants>() {
+    HttpRequestHandler<String> handler = new HttpRequestHandler<String>() {
         @Override
         public void onSuccess(String data) {
-            MessageUtils.showMiddleToast(Activity_Login.this, data);
             TestClass.closeLoading();
             Intent intent = new Intent();
             intent.setClass(Activity_Login.this,MainActivity.class);
@@ -158,7 +157,7 @@ public class Activity_Login extends BaseActivity{
         }
 
         @Override
-        public void onSuccess(Constants data, int totalPages, int currentPage) {
+        public void onSuccess(String data, int totalPages, int currentPage) {
 
         }
 

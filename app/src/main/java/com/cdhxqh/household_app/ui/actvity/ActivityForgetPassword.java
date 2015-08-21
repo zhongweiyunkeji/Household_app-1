@@ -217,7 +217,7 @@ public class ActivityForgetPassword extends BaseActivity{
     /**
      * 根据手机号获取验证码
      */
-    HttpRequestHandler<Integer> handler1 = new HttpRequestHandler<Integer>() {
+    HttpRequestHandler<String> handler1 = new HttpRequestHandler<String>() {
                     @Override
                     public void onSuccess(String data) {
                         MessageUtils.showMiddleToast(ActivityForgetPassword.this, data);
@@ -227,7 +227,7 @@ public class ActivityForgetPassword extends BaseActivity{
                     }
 
                     @Override
-                    public void onSuccess(Integer data, int totalPages, int currentPage) {
+                    public void onSuccess(String data, int totalPages, int currentPage) {
                         Log.i(TAG, "22222");
                     }
 
@@ -238,7 +238,7 @@ public class ActivityForgetPassword extends BaseActivity{
                     }
                 };
 
-    HttpRequestHandler<Integer> handler =  new HttpRequestHandler<Integer>() {
+    HttpRequestHandler<String> handler =  new HttpRequestHandler<String>() {
         @Override
         public void onSuccess(String data) {
             MessageUtils.showMiddleToast(ActivityForgetPassword.this, data);
@@ -247,7 +247,7 @@ public class ActivityForgetPassword extends BaseActivity{
         }
 
         @Override
-        public void onSuccess(Integer data, int totalPages, int currentPage) {
+        public void onSuccess(String data, int totalPages, int currentPage) {
             Log.i(TAG, "22222");
         }
 
