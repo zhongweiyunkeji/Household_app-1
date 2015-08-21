@@ -217,13 +217,12 @@ public class ActivityForgetPassword extends BaseActivity{
     /**
      * 根据手机号获取验证码
      */
-
     HttpRequestHandler<Integer> handler1 = new HttpRequestHandler<Integer>() {
                     @Override
                     public void onSuccess(String data) {
                         MessageUtils.showMiddleToast(ActivityForgetPassword.this, data);
                         TestClass.closeLoading();
-                        TimeCountUtil timeCountUtil = new TimeCountUtil(ActivityForgetPassword.this, 60000, 1000, restart_passworld_id, R.drawable.phone_test_on);
+                        TimeCountUtil timeCountUtil = new TimeCountUtil(ActivityForgetPassword.this, 60000, 1000, get_verification_code, R.drawable.phone_test_on);
                         timeCountUtil.start();
                     }
 

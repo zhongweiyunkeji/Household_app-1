@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -11,7 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.api.HttpRequestHandler;
+import com.cdhxqh.household_app.api.Message;
+import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
+import com.cdhxqh.household_app.ui.widget.TestClass;
+import com.cdhxqh.household_app.ui.widget.TimeCountUtil;
+import com.cdhxqh.household_app.utils.MessageUtils;
 
 /**
  * Created by think on 2015/8/17.
@@ -23,9 +30,12 @@ public class Activity_Login extends BaseActivity{
     private Button login;
     private TextView TextViewPassWord;
     Button regBtn;  // 注册按钮
+    boolean close = true;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getData();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         if(myshared.getBoolean(Constants.ISFIRST, true)){
@@ -36,7 +46,12 @@ public class Activity_Login extends BaseActivity{
         } else {
             findViewById();
             initView();
-        }
+            }
+    }
+
+
+    public void getData() {
+        close =  getIntent().getBooleanExtra("close", true);
     }
 
     protected void findViewById() {
@@ -50,6 +65,13 @@ public class Activity_Login extends BaseActivity{
     }
 
     protected void initView() {
+        editor = myshared.edit();
+        if(close == false) {
+            editor.putBoolean(Constants.ISREMENBER, false);
+            editor.putString(Constants.PASS_KEY, "");
+            editor.commit();
+            init();
+        }
         username.setText(myshared.getString(Constants.NAME_KEY, ""));
         password.setText(myshared.getString(Constants.PASS_KEY, ""));
         isremenber.setChecked(myshared.getBoolean(Constants.ISREMENBER, false));
@@ -69,16 +91,61 @@ public class Activity_Login extends BaseActivity{
     private View.OnClickListener loginonclick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            SharedPreferences.Editor editor = myshared.edit();
             editor.putString(Constants.NAME_KEY, username.getText().toString());
             if(isremenber.isChecked()){
-                editor.putString(Constants.PASS_KEY,password.getText().toString());
+                editor.putString(Constants.PASS_KEY, password.getText().toString());
             }else{
                 editor.putString(Constants.PASS_KEY, "");
             }
-            editor.putBoolean(Constants.ISREMENBER,isremenber.isChecked());
+            editor.putBoolean(Constants.ISREMENBER, isremenber.isChecked());
             editor.commit();
-            logon();
+            if(username.getText() == null || username.getText().equals("")) {
+                username.setError(getString(R.string.username_null));
+                username.requestFocus();
+            }else if(password.getText() == null || password.getText().equals("")){
+                username.setError(getString(R.string.password_null));
+                username.requestFocus();
+            }else {
+                getHttpUtil();
+            }
+        }
+    };
+
+    /**
+     * 访问网络
+     * @param
+     */
+    private void getHttpUtil () {
+        /**
+         * 加载中
+         */
+        TestClass.loading(this, getString(R.string.loading));
+        HttpManager.filterManager(this, true, handler, Message.LOGIN_URL, "loginName", "password", username.getText().toString(), password.getText().toString());
+    }
+
+    /**
+     * 登录
+     */
+    HttpRequestHandler<Constants> handler = new HttpRequestHandler<Constants>() {
+        @Override
+        public void onSuccess(String data) {
+            MessageUtils.showMiddleToast(Activity_Login.this, data);
+            TestClass.closeLoading();
+            Intent intent = new Intent();
+            intent.setClass(Activity_Login.this,MainActivity.class);
+            startActivity(intent);
+            Activity_Login.this.finish();
+        }
+
+        @Override
+        public void onSuccess(Constants data, int totalPages, int currentPage) {
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+            MessageUtils.showErrorMessage(Activity_Login.this, error);
+            TestClass.closeLoading();
         }
     };
 
@@ -97,6 +164,7 @@ public class Activity_Login extends BaseActivity{
         startActivity(intent);
         this.finish();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
