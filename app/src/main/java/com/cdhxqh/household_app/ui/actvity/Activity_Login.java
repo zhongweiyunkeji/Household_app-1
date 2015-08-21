@@ -4,18 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.api.HttpRequestHandler;
 import com.cdhxqh.household_app.api.Message;
 import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
+import com.cdhxqh.household_app.ui.widget.SwitchButton;
 import com.cdhxqh.household_app.ui.widget.TestClass;
 import com.cdhxqh.household_app.ui.widget.TimeCountUtil;
 import com.cdhxqh.household_app.utils.MessageUtils;
@@ -32,6 +35,7 @@ public class Activity_Login extends BaseActivity{
     Button regBtn;  // 注册按钮
     boolean close = true;
     SharedPreferences.Editor editor;
+    SwitchButton switchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class Activity_Login extends BaseActivity{
         TextViewPassWord = (TextView) findViewById(R.id.TextViewPassWord);
 
         regBtn = (Button)findViewById(R.id.registered_btn_id);
+        switchButton = (SwitchButton) findViewById(R.id.wiperSwitch1);
     }
 
     protected void initView() {
@@ -77,6 +82,7 @@ public class Activity_Login extends BaseActivity{
         isremenber.setChecked(myshared.getBoolean(Constants.ISREMENBER, false));
         login.setOnClickListener(loginonclick);
         TextViewPassWord.setOnClickListener(passWordOnClickListener);
+        switchButton.setOnChangeListener(switchOnClickListener);
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,14 +105,28 @@ public class Activity_Login extends BaseActivity{
             }
             editor.putBoolean(Constants.ISREMENBER, isremenber.isChecked());
             editor.commit();
-            if(username.getText() == null || username.getText().equals("")) {
+            if(username.getText().toString() == null || username.getText().toString().equals("")) {
                 username.setError(getString(R.string.username_null));
                 username.requestFocus();
-            }else if(password.getText() == null || password.getText().equals("")){
-                username.setError(getString(R.string.password_null));
-                username.requestFocus();
+            }else if(password.getText().toString() == null || password.getText().toString().equals("")){
+                password.setError(getString(R.string.password_null));
+                password.requestFocus();
             }else {
                 getHttpUtil();
+            }
+        }
+    };
+
+    private SwitchButton.OnChangeListener switchOnClickListener = new SwitchButton.OnChangeListener() {
+        @Override
+        public void onChange(SwitchButton sb, boolean state) {
+            // TODO Auto-generated method stub
+            Log.d("switchButton", state ? "验票员" : "用户");
+            Toast.makeText(Activity_Login.this, state ? "密码可见" : "密不可见码", Toast.LENGTH_SHORT).show();
+            if(state) {
+                password.setInputType(View.GONE);
+            }else {
+                password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             }
         }
     };
