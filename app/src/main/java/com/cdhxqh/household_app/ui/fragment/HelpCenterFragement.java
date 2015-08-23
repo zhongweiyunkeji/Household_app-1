@@ -99,7 +99,7 @@ public class HelpCenterFragement extends BaseFragment {
         ArrayList<String> group = new ArrayList<String>(0);
         Map<String, List<String>> child = new HashMap<String, List<String>>(0);
 
-        adapter = new HelpCenterExpandableListViewAdapter(this.getActivity(), new HelpCenterFragement.ItemClickListener() {
+        adapter = new HelpCenterExpandableListViewAdapter(this.getActivity(), new ItemClickListener() {
             @Override
             public void onItemClick(ViewGroup parent, View convertView, ImageView imageView, int groupPosition, int childPosition, boolean isLastChild) {
                 if (onoff) { // 产品说明

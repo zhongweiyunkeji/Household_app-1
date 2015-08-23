@@ -21,7 +21,6 @@ public class DataCleanManager {
         deleteFilesByDirectory(context.getCacheDir());
     }
 
-
     /**
      * * 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) * *
      *

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
+import com.cdhxqh.household_app.ui.widget.Photo.PhotoUtil;
 import com.cdhxqh.household_app.zxing.activity.CaptureActivity;
 
 import java.io.File;
@@ -102,6 +103,10 @@ public class AddEquipmentActivity extends BaseActivity {
      */
     private Button next;
 
+    private static final int PHOTO_REQUEST_TAKEPHOTO = 1;// 拍照
+    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    private static final int PHOTO_REQUEST_CUT = 3;// 结果
+
     ImageView backImg;  // 返回按钮
     TextView titleTextView;  // 标题栏标题
     ImageView addIcon;        // 标题栏添加按钮
@@ -113,6 +118,7 @@ public class AddEquipmentActivity extends BaseActivity {
         setContentView(R.layout.activity_add_equipment);
         findViewById();
         initView();
+        PhotoUtil.activity = this;
     }
 
     public void findViewById() {
@@ -236,10 +242,7 @@ public class AddEquipmentActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             new CartoonDisplay(activity, 2, new String[]{"拍照", "从相册选择"}).display();
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            startActivityForResult(intent, ITEM_1);
+            PhotoUtil.startCamearPicCut();
         }
     };
 
@@ -250,10 +253,7 @@ public class AddEquipmentActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             new CartoonDisplay(activity, 2, new String[]{"拍照", "从相册选择"}).display();
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, ITEM_1);
+            PhotoUtil.startImageCaptrue();
         }
     };
 
@@ -266,51 +266,21 @@ public class AddEquipmentActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case (ITEM_1):
-                if(resultCode == RESULT_OK) {
-                    if (data != null) {
-                        //取得返回的Uri,基本上选择照片的时候返回的是以Uri形式，但是在拍照中有得机子呢Uri是空的，所以要特别注意
-                        Uri mImageCaptureUri = data.getData();
-                        //返回的Uri不为空时，那么图片信息数据都会在Uri中获得。如果为空，那么我们就进行下面的方式获取
-                        if (mImageCaptureUri != null) {
-                            Bitmap image;
-                            try {
-                                //这个方法是根据Uri获取Bitmap图片的静态方法
-                                image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), mImageCaptureUri);
-                                if (image != null) {
-                                    view_photo.setVisibility(View.VISIBLE);
-                                    view_photo.setImageBitmap(image);
-                                    site_photo.setVisibility(View.GONE);
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            Bundle extras = data.getExtras();
-                            if (extras != null) {
-                                //这里是有些拍照后的图片是直接存放到Bundle中的所以我们可以从这里面获取Bitmap图片
-                                Bitmap image = extras.getParcelable("data");
-                                if (image != null) {
-                                    view_photo.setVisibility(View.VISIBLE);
-                                    view_photo.setImageBitmap(image);
-                                    site_photo.setVisibility(View.GONE);
-                                }
-                            }
-                        }
-
-                    }
-                }
-                break;
-            case QRCODE : {
-                if (resultCode == RESULT_OK) {
-                    String result = data.getExtras().getString("result");
-                    Toast.makeText(AddEquipmentActivity.this, result, Toast.LENGTH_LONG).show();
-                    // 调用接口验票
-                }
-            }
-            default:
+            case PHOTO_REQUEST_TAKEPHOTO:
+                PhotoUtil.startPhotoZoom(Uri.fromFile(PhotoUtil.tempFile), 150);
                 break;
 
+            case PHOTO_REQUEST_GALLERY:
+                if (data != null) {
+                    PhotoUtil.startPhotoZoom(data.getData(), 150);
+                }
+                break;
+
+            case PHOTO_REQUEST_CUT:
+                if (data != null) {
+                    PhotoUtil.setPicToView(data);
+                }
+                break;
         }
     }
 

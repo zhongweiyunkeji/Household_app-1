@@ -200,18 +200,18 @@ public class ActivityForgetPassword extends BaseActivity{
             /**
              * 邮箱获取密码
              */
-            HttpManager.filterManager(this, true, handler, Message.PHONEPASS_URL, "email", EditTextMail.getText().toString());
+            HttpManager.filterManager(null, this, true, handler, Message.PHONEPASS_URL, "email", EditTextMail.getText().toString());
         }else if(i == 2){
             /**
              * 手机获取验证码
              */
-            HttpManager.filterManager(this, true, handler1, Message.PHONEPASS_URL, "mobile", registered_phone_number.getText().toString());
+            HttpManager.filterManager(null, this, true, handler1, Message.PHONEPASS_URL, "mobile", registered_phone_number.getText().toString());
         }
         else if(i == 3){
             /**
              * 手机获取验证码
              */
-            HttpManager.filterManager(this, true, handler, Message.PHONELINE_URL, "authstring", sms_verification_code.getText().toString());
+            HttpManager.filterManager(null, this, true, handler, Message.PHONELINE_URL, "authstring", sms_verification_code.getText().toString());
         }
     }
     /**
