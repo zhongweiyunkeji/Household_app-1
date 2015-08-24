@@ -230,33 +230,28 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
             case 0: {// 我的设备
-                text();
                 fragmentTransaction.replace(R.id.container, new MyDeviceFragment());
                 fragmentTransaction.commit();
                 invalidateOptionsMenu();
                 break;
             }
             case 1: {// 报警记录
-                text();
                 AlarmFragment fragement = new AlarmFragment();
                 fragmentTransaction.replace(R.id.container,fragement, "AlarmFragment" );
                 fragmentTransaction.commit();
                 break;
             }
             case 2: {// 安全服务中心
-                text();
                 fragmentTransaction.replace(R.id.container, new ProductFragment());
                 fragmentTransaction.commit();
                 break;
             }
             case 3: {// 文件管理
-                text();
                 fragmentTransaction.replace(R.id.container, new FileManagementFragment());
                 fragmentTransaction.commit();
                 break;
             }
             case 4: {  // 帮助中心
-                text();
                 try {
                     HelpCenterFragement fragement = new HelpCenterFragement();
                     fragmentTransaction.replace(R.id.container,fragement, "HelpCenterFragement" );
@@ -267,19 +262,16 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 break;
             }
             case 5: {// 常用联系人
-                text();
                 fragmentTransaction.replace(R.id.container, commonContactFragment);
                 fragmentTransaction.commit();
                 break;
             }
             case 6: {// 关于我们
-                text();
                 Bundle bundle = new Bundle();
                 openActivity(ActivityAbout.class, bundle);
                 break;
             }
             default: {// 设置
-                text();
                 fragmentTransaction.replace(R.id.container, new SettingFragment());
                 fragmentTransaction.commit();
                 break;
