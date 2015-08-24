@@ -200,35 +200,34 @@ public class ActivityForgetPassword extends BaseActivity{
             /**
              * 邮箱获取密码
              */
-            HttpManager.filterManager(this, true, handler, Message.PHONEPASS_URL, "email", EditTextMail.getText().toString());
+            HttpManager.filterManager(null, this, true, handler, Message.PHONEPASS_URL, "email", EditTextMail.getText().toString());
         }else if(i == 2){
             /**
              * 手机获取验证码
              */
-            HttpManager.filterManager(this, true, handler1, Message.PHONEPASS_URL, "mobile", registered_phone_number.getText().toString());
+            HttpManager.filterManager(null, this, true, handler1, Message.PHONEPASS_URL, "mobile", registered_phone_number.getText().toString());
         }
         else if(i == 3){
             /**
              * 手机获取验证码
              */
-            HttpManager.filterManager(this, true, handler, Message.PHONELINE_URL, "authstring", sms_verification_code.getText().toString());
+            HttpManager.filterManager(null, this, true, handler, Message.PHONELINE_URL, "authstring", sms_verification_code.getText().toString());
         }
     }
     /**
      * 根据手机号获取验证码
      */
-
-    HttpRequestHandler<Integer> handler1 = new HttpRequestHandler<Integer>() {
+    HttpRequestHandler<String> handler1 = new HttpRequestHandler<String>() {
                     @Override
                     public void onSuccess(String data) {
                         MessageUtils.showMiddleToast(ActivityForgetPassword.this, data);
                         TestClass.closeLoading();
-                        TimeCountUtil timeCountUtil = new TimeCountUtil(ActivityForgetPassword.this, 60000, 1000, restart_passworld_id, R.drawable.phone_test_on);
+                        TimeCountUtil timeCountUtil = new TimeCountUtil(ActivityForgetPassword.this, 60000, 1000, get_verification_code, R.drawable.phone_test_on);
                         timeCountUtil.start();
                     }
 
                     @Override
-                    public void onSuccess(Integer data, int totalPages, int currentPage) {
+                    public void onSuccess(String data, int totalPages, int currentPage) {
                         Log.i(TAG, "22222");
                     }
 
@@ -239,7 +238,7 @@ public class ActivityForgetPassword extends BaseActivity{
                     }
                 };
 
-    HttpRequestHandler<Integer> handler =  new HttpRequestHandler<Integer>() {
+    HttpRequestHandler<String> handler =  new HttpRequestHandler<String>() {
         @Override
         public void onSuccess(String data) {
             MessageUtils.showMiddleToast(ActivityForgetPassword.this, data);
@@ -248,7 +247,7 @@ public class ActivityForgetPassword extends BaseActivity{
         }
 
         @Override
-        public void onSuccess(Integer data, int totalPages, int currentPage) {
+        public void onSuccess(String data, int totalPages, int currentPage) {
             Log.i(TAG, "22222");
         }
 

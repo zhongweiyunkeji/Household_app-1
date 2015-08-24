@@ -47,6 +47,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
         for(int i = 0; i<contacts.size(); i++) {
             contacts.get(i).setFlag(true);
         }
+        AlarmActivity.update(contacts);
         dataChanged();
     }
 
@@ -54,6 +55,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
         for(int i = 0; i<contacts.size(); i++) {
             contacts.get(i).setFlag(false);
         }
+        AlarmActivity.update(contacts);
         dataChanged();
     }
 

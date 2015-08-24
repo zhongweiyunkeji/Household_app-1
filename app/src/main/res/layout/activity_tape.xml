@@ -26,10 +26,7 @@
 
         <com.cdhxqh.household_app.ui.widget.SwitchButton
             android:id="@+id/wiperSwitch"
-            android:paddingTop="14dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="14dp"
-            android:paddingLeft="10dp"
+            style="@style/ListPadding"
             android:layout_width="10dp"
             android:layout_height="10dp" />
 
@@ -61,7 +58,8 @@
     <!--开始录像时间-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/list_title_bgcolor">
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +83,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/font_color">
 
         <TextView
             android:id="@+id/week_tittle_a"
@@ -131,7 +130,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/font_color">
 
         <TextView
             android:id="@+id/time_tittle"
@@ -178,6 +178,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/list_title_bgcolor"
         android:orientation="horizontal">
 
         <TextView
@@ -202,6 +203,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/font_color"
         android:orientation="horizontal">
 
         <TextView
@@ -248,6 +250,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/font_color"
         android:orientation="horizontal">
 
         <TextView
@@ -298,7 +301,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:background="@color/text_color_blue"
+            android:background="@drawable/btn_lightblue"
             android:text="@string/save"
             android:textColor="@color/font_color"
             android:textSize="20sp" />

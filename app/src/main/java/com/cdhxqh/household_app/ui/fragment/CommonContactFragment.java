@@ -142,7 +142,7 @@ public class CommonContactFragment extends BaseFragment {
         alarm_contacts.setItemAnimator(new DefaultItemAnimator());
 
         if (contacts.size() <= 0) {
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 5; i++) {
                 Contacters c = new Contacters();
                 c.setName("张思");
                 c.setType("老师");

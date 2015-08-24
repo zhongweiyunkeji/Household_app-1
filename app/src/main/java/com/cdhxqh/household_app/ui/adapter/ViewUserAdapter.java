@@ -30,13 +30,13 @@ public class ViewUserAdapter extends RecyclerView.Adapter<ViewUserAdapter.ViewHo
     }
 
     @Override
-    public ViewUserAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_view_user_row, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewUserAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 //            holder.id.setText("*" + String.valueOf(position + 1));
         holder.name.setText(contactersList.get(position).getName());
         holder.phone.setText(contactersList.get(position).getPhone());

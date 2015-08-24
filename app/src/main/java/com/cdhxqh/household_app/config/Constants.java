@@ -9,4 +9,6 @@ public class Constants {
     public static final String PASS_KEY = "pass_key";
     public static final String ISREMENBER = "isRemenber";
     public static final String ISFIRST = "isFirst";
+    public static final String SESSIONID = "sessionId";
+    public static final String SESSIONIDTRUE = "sessionIdTrue";
 }

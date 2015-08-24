@@ -31,6 +31,7 @@
                     <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
                         android:id="@+id/wiperSwitch"
                         android:layout_width="10dp"
+                        style="@style/ListPadding"
                         android:layout_height="10dp"
                         android:layout_margin="6dp" />
 
@@ -261,14 +262,13 @@
 
                         <TextView
                             style="@style/ListPadding.ListLevel2"
-                            android:text="@string/phoneNumber"
+                            android:text="@string/manage"
 							android:layout_centerVertical="true" />
 
                         <TextView
                             android:id="@+id/user_num"
-                            style="@style/ListPadding.ListLevel2"
+                            style="@style/ListPadding.ListLevel3"
                             android:layout_width="match_parent"
-                            android:textSize="16sp"
 							android:layout_centerVertical="true"  />
 
                     </LinearLayout>

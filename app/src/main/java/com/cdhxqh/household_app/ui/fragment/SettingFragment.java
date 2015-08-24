@@ -2,8 +2,10 @@ package com.cdhxqh.household_app.ui.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +16,15 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.actvity.Activity_Login;
 import com.cdhxqh.household_app.ui.widget.DataCleanManager;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
 import com.cdhxqh.household_app.ui.widget.SwitchButton;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
+import com.cdhxqh.household_app.utils.AccountUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -89,7 +94,9 @@ public class SettingFragment extends BaseFragment {
     private View.OnClickListener catchsOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            DataCleanManager.cleanInternalCache(activity);
+
+            DataCleanManager.cleanInternalCache(activity);
+            DataCleanManager.cleanSharedPreference(activity);
 //            DataCleanManager.cleanDatabases(activity);
 //            DataCleanManager.cleanSharedPreference(activity);
         }
@@ -112,8 +119,10 @@ public class SettingFragment extends BaseFragment {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
-            intent.setClass(activity,Activity_Login.class);
-            startActivity(intent);
+            intent.putExtra("close", false);
+            intent.setClass(activity, Activity_Login.class);
+            startActivityForResult(intent, 0);
+            AccountUtils.removeAll(getActivity());
             activity.finish();
         }
     };

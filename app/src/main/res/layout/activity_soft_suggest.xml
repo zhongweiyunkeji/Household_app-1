@@ -6,38 +6,24 @@
     android:layout_gravity="center"
     android:background="@color/bgcolor"
     >
-    <include layout="@layout/activity_tittle"  />.
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        />
+    <include layout="@layout/activity_tittle"  />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:shrinkColumns="0"
-        android:stretchColumns="1"
-        android:background="#ffffff"
-        >
+        android:stretchColumns="1" >
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/list_line_x"/>.
-        <TableRow android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
+        <TableRow android:layout_width="match_parent" android:background="@color/font_color">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="反馈类型"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_gravity="left|center"
-                />
-            <RadioGroup android:orientation="horizontal" android:layout_gravity="left|center" >
+                style="@style/ListPadding.ListLevel2"
+                android:text="反馈类型" />
+            <RadioGroup
+                style="@style/ListPadding.ListLevel3"
+                android:orientation="horizontal">
                 <RadioButton
                     android:id="@+id/suggest"
                     android:layout_width="wrap_content"
@@ -53,7 +39,7 @@
                     android:layout_gravity="left|center"
                     android:layout_marginRight="10dp"
                     android:textColor="@color/text_color"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:text="建议"/>
                 <RadioButton
                     android:id="@+id/complain"
@@ -71,7 +57,7 @@
                     android:layout_gravity="left|center"
                     android:layout_marginRight="10dp"
                     android:textColor="@color/text_color"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:text="投诉"/>
             </RadioGroup>
         </TableRow>
@@ -80,89 +66,57 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/list_line_x"/>.
-        <TableRow android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
+        <TableRow>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="姓名"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="left|center"
-                />
+                style="@style/ListPadding.ListLevel2"
+                android:text="姓名"/>
             <EditText
                 android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="请填写您的姓名"
-                android:textColor="@color/text_color"
-                android:background="#ffffff"
-                android:textSize="15sp"
                 android:textCursorDrawable="@drawable/color_cursor"
-                />
+                style="@style/ListPadding.ListLevel4"
+                android:hint="请填写姓名"
+                android:textSize="16sp" />
         </TableRow>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/list_line_x"/>.
-        <TableRow android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
+            android:background="@drawable/list_line_x"/>
+
+        <TableRow>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="手机号"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="left|center"
-                />
+                style="@style/ListPadding.ListLevel2"
+                android:text="手机号" />
             <EditText
                 android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/text_color"
-                android:background="#ffffff"
-                android:hint="请填写您的手机号，以使我们能回复!"
-                android:textSize="15sp"
                 android:textCursorDrawable="@drawable/color_cursor"
-                />
+                style="@style/ListPadding.ListLevel4"
+                android:hint="请填写手机号, 以便我们回复!" />
         </TableRow>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/list_line_x"/>.
-
+            android:background="@drawable/list_line_x"/>
     </TableLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/list_line_x"/>.
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        />
+        android:background="@drawable/list_line_x"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/list_line_x"/>.
     <EditText
         android:id="@+id/reqmsg"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:layout_height="120dp"
         android:singleLine="false"
         android:gravity="top|left"
-        android:textColor="@color/text_color"
-        android:background="#ffffff"
-        android:textCursorDrawable="@drawable/color_cursor"
-        />
+        style="@style/ListPadding.ListLevel4"
+        android:hint="如您发现我们的系统中没有您要添加的设备，请告诉我们，我们向您承诺，会在第一时间处理好您的问题，期待您的反馈！"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -171,8 +125,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
-
+        android:background="@color/font_color">
 
         <ImageView
             android:id="@+id/photo"
@@ -184,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:padding="5dp"
             android:src="@drawable/ic_menu_cameraadd"/>
 
     </RelativeLayout>
@@ -194,16 +148,8 @@
 
     <Button
         android:id="@+id/submit"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="提交"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="20dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/btn_lightblue"
-        />
+        style="@style/btnLightBlue"
+        android:text="提交" />
 
 
 </LinearLayout>

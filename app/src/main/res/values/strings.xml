@@ -42,8 +42,8 @@
     <string name="securityWarning">安全警告设置</string>
     <string name="noticeType">通知方式</string>
     <string name="shortMessage">手机短信</string>
-    <string name="manage">联系人</string>
-    <string name="phoneNumber">联系人</string>
+    <string name="manage">联系人　</string>
+    <string name="phoneNumber">手机号</string>
     <string name="roleGroup">角色分组</string>
     <string name="save">保存</string>
     <string name="commit">提交</string>
@@ -83,6 +83,10 @@
     <string name="error_title">错误</string>
     <string name="loading">正在加载</string>
 
+    <!--登录-->
+    <string name="username_null">用户名为空</string>
+    <string name="password_null">密码为空</string>
+
     <!--验证码-->
     <string name="phone_send_number">秒后可重新发送</string>
     <string name="phone_get_number">重新获取验证码</string>
@@ -109,4 +113,6 @@
     <string name="please_input_phone_number_text">请输入11位手机号</string>
     <string name="next_button_text">下一步</string>
     <string name="login_time_out">已与服务器断开连接,请重新登录</string>
+
+    <string name="hello">Hello World, SetPasswordActivity!</string>
 </resources>

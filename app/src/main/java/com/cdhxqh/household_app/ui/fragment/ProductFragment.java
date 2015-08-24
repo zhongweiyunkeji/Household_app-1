@@ -4,14 +4,21 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.api.HttpRequestHandler;
+import com.cdhxqh.household_app.api.Message;
+import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.model.ProductModel;
 import com.cdhxqh.household_app.ui.adapter.ProductAdapter;
 import com.cdhxqh.household_app.ui.widget.ItemDivider;
+import com.cdhxqh.household_app.ui.widget.TestClass;
+import com.cdhxqh.household_app.ui.widget.TimeCountUtil;
+import com.cdhxqh.household_app.utils.MessageUtils;
 
 import java.util.ArrayList;
 
