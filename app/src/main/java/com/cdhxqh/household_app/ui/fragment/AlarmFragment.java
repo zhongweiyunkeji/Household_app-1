@@ -20,6 +20,8 @@ import com.cdhxqh.household_app.api.Message;
 import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Alarm;
+import com.cdhxqh.household_app.ui.actvity.Activity_Login;
+import com.cdhxqh.household_app.ui.actvity.Load_Activity;
 import com.cdhxqh.household_app.ui.actvity.MainActivity;
 import com.cdhxqh.household_app.ui.widget.TestClass;
 import com.cdhxqh.household_app.utils.MessageUtils;
@@ -156,6 +158,10 @@ public class AlarmFragment extends BaseFragment {
         getHttpUtil(2);
     }
 
+    public void update() {
+
+    }
+
     /**
      * 访问网络
      * @param
@@ -180,6 +186,16 @@ public class AlarmFragment extends BaseFragment {
         @Override
         public void onSuccess(ArrayList<Alarm> data) {
             TestClass.closeLoading();
+            if(data != null) {
+                if(data.get(0).isBack() == true) {
+//                    MessageUtils.showErrorMessage(getActivity(), "会话过期，请重新登录");
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), Activity_Login.class);
+                    getActivity().startActivity(intent);
+                    getActivity().finish();
+                }
+            }
+
         }
 
         @Override
