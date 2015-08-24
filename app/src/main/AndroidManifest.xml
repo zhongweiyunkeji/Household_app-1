@@ -31,7 +31,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme.Toolbar">
+        android:theme="@style/AppTheme.Toolbar"
+        tools:replace="icon,label" >
         <activity
             android:name=".ui.actvity.Load_Activity"
             android:label="@string/app_name"
