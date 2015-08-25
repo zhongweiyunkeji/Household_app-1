@@ -1,11 +1,13 @@
 package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,9 +23,11 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
+import com.cdhxqh.household_app.ui.widget.dialog.DateTimePickerDialog;
 
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -205,14 +209,6 @@ public class SafeActivity extends BaseActivity {
 
     }
 
-//    final Activity a = this;
-//    private View.OnClickListener cancelOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            new CartoonDisplay(a, 1).display();
-//        }
-//    };
-
     /**
      * 是否录像
      */
@@ -224,74 +220,6 @@ public class SafeActivity extends BaseActivity {
             startActivity(intent);
         }
     };
-
-    /**
-     * 导入通讯录
-     */
-//    final Context a = this;
-//    private View.OnClickListener connectOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            ContactsTool contactsTool = new ContactsTool();
-//            contactsTool.testGetContacts(a);
-//            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-//            startActivityForResult(intent, PICK_CONTACT);
-//        }
-//    };
-//
-//    @Override
-//    public void onActivityResult(int reqCode, int resultCode, Intent data) {
-//        super.onActivityResult(reqCode, resultCode, data);
-//
-//        switch (reqCode) {
-//            case (PICK_CONTACT) :
-//                if (resultCode == Activity.RESULT_OK) {
-//                    Uri contactData = data.getData();
-//                    Cursor c =  managedQuery(contactData, null, null, null, null);
-//                    if (c.moveToFirst()) {
-//                        ContentResolver reContentResolverol = getContentResolver();
-//                        String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-//                        contacts_value.setText(name);
-//                        //条件为联系人ID
-//                        String contactId = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
-//                        Cursor phone = reContentResolverol.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-//                                null,
-//                                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId,
-//                                null,
-//                                null);
-//                        while (phone.moveToNext()) {
-//                            usernumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-//                            phone_num.setText(usernumber);
-//                            if(is == true){
-//                                is = false;
-//                                select_user.startAnimation(animation2);
-//                                select_p.setVisibility(View.GONE);
-//                                select_user.setVisibility(View.GONE);
-//                            }
-//                        }
-//                    }
-//                    }
-//                break;
-//                }
-//
-//        }
-
-//    /**
-//     * 察看联系人
-//     */
-//    private View.OnClickListener viewOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            if(contactersList != null) {
-//                if(contactersList.size() > 0) {
-//                    Intent intent = new Intent();
-//                    intent.setClass(SafeActivity.this, ViewUserActivity.class);
-//                    intent.putExtra("contactList", (Serializable) contactersList);
-//                    startActivityForResult(intent, PICK_CONTACT);
-//                }
-//            }
-//        }
-//    };
 
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
@@ -312,13 +240,6 @@ public class SafeActivity extends BaseActivity {
                 user_num.setText("可选择多人");
             }
         }
-//        if(resultCode == Activity.RESULT_FIRST_USER) {
-//            if(contactersLists.size() > 0) {
-//                user_num.setText("已选择" + contactersLists.size() + "人");
-//            }else {
-//                user_num.setText("可选择多人");
-//            }
-//        }
     }
 
     /**
@@ -334,30 +255,10 @@ public class SafeActivity extends BaseActivity {
         }
     };
 
-//    private View.OnClickListener createOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            Intent intent=new Intent();
-////            intent.setClass(SafeActivity.this,AlarmActivity.class);
-//            startActivity(intent);
-//        }
-//    };
 
-//    private View.OnClickListener selectOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            if(is == true){
-//                is = false;
-//                select_user.startAnimation(animation2);
-//                select_p.setVisibility(View.GONE);
-//                select_user.setVisibility(View.GONE);
-//            }
-//        }
-//    };
-
-    private TextView setTime(TextView timeValue) {
-        return this.timeValue  = timeValue;
-    }
+//    private TextView setTime(TextView timeValue) {
+//        return this.timeValue  = timeValue;
+//    }
 
     /**
      * 选择联系人
@@ -377,8 +278,9 @@ public class SafeActivity extends BaseActivity {
     private View.OnClickListener outTimeOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            showDialog(1);
-            setTime(time_value);
+//            showDialog(1);
+//            setTime(time_value);
+            showDialog("time", time_value);
         }
     };
 
@@ -388,8 +290,9 @@ public class SafeActivity extends BaseActivity {
     private View.OnClickListener outTimeOnClickListener_a = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            showDialog(1);
-            setTime(time_value_a);
+//            showDialog(1);
+//            setTime(time_value_a);
+            showDialog("time", time_value_a);
         }
     };
 
@@ -399,8 +302,9 @@ public class SafeActivity extends BaseActivity {
     private View.OnClickListener outDateOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            showDialog(2);
-            setTime(week_value);
+//            showDialog(2);
+//            setTime(week_value);
+            showDialog("week", week_value);
         }
     };
 
@@ -410,42 +314,71 @@ public class SafeActivity extends BaseActivity {
     private View.OnClickListener outDateOnClickListener_a = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            showDialog(2);
-            setTime(week_value_a);
+//            showDialog(2);
+//            setTime(week_value_a);
+            showDialog("week", week_value_a);
         }
     };
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case 1:
-                Log.v("Test", "--------start---------->");
-                Calendar c = Calendar.getInstance();
-                return new TimePickerDialog(this, onTimeSetListener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true);
-            case 2:
-                Log.v("Test", "--------start---------->");
-                Calendar c_a = Calendar.getInstance();
-                return new DatePickerDialog(this, onDateSetListener, c_a.get(Calendar.YEAR), c_a.get(Calendar.MONTH), c_a.get(Calendar.DAY_OF_MONTH));
-            // return new TimePickerDialog(this,onTimeSetListener,22,3, true);
-        }
-        return super.onCreateDialog(id);
+    public void showDialog(final String type, final TextView textView) {
+        DateTimePickerDialog dialog = new DateTimePickerDialog(this, System.currentTimeMillis(), type);
+        dialog.setOnDateTimeSetListener(new DateTimePickerDialog.OnDateTimeSetListener() {
+            public void OnDateTimeSet(AlertDialog dialog, long data, String week) {
+//                Toast.makeText(SafeActivity.this, "您输入的日期是：" + getStringDate(date), Toast.LENGTH_LONG).show();
+                textView.setText(getStringDate(data, type, week));
+            }
+        });
+        dialog.show();
     }
 
-    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            String min;
-            timeValue.setText(hourOfDay + ":" +  (min = String.valueOf(minute).length() != 2 ? "0"+String.valueOf(minute) : String.valueOf(minute)));
+    /**
+     * 将长时间格式字符串转换为时间 yyyy-MM-dd HH:mm:ss
+     *
+     */
+    public static String getStringDate(Long date, String type, String week)
+    {
+        String dateString = null;
+        if(type.equals("week")) {
+            dateString = week;
+        }else if(type.equals("time")) {
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            dateString = formatter.format(date);
         }
-    };
 
-    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            timeValue.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
-        }
-    };
+        return dateString;
+    }
+
+//    @Override
+//    protected Dialog onCreateDialog(int id) {
+//        switch (id) {
+//            case 1:
+//                Log.v("Test", "--------start---------->");
+//                Calendar c = Calendar.getInstance();
+//                return new TimePickerDialog(this, onTimeSetListener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true);
+//            case 2:
+//                Log.v("Test", "--------start---------->");
+//                Calendar c_a = Calendar.getInstance();
+//                return new DatePickerDialog(this, onDateSetListener, c_a.get(Calendar.YEAR), c_a.get(Calendar.MONTH), c_a.get(Calendar.DAY_OF_MONTH));
+//            // return new TimePickerDialog(this,onTimeSetListener,22,3, true);
+//        }
+//        return super.onCreateDialog(id);
+//    }
+//
+//    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+//
+//        @Override
+//        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//            String min;
+//            timeValue.setText(hourOfDay + ":" +  (min = String.valueOf(minute).length() != 2 ? "0"+String.valueOf(minute) : String.valueOf(minute)));
+//        }
+//    };
+//
+//    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+//        @Override
+//        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//            timeValue.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+//        }
+//    };
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 

@@ -178,7 +178,7 @@ public class HttpManager {
              * 报警
              */
             case (Message.ALARM) :
-                client.addHeader("Cookie", "JSESSIONID="+SESSIONID);
+                client.addHeader("Cookie", "JSESSIONID=" + SESSIONID);
                 client.get(url, maps, new TextHttpResponseHandler() {
 
                     @Override
@@ -191,7 +191,12 @@ public class HttpManager {
                         //解析返回的Json数据 ArrayList<Alarm>
                         try {
                             JSONObject jsonObject = new JSONObject(responseString);
-                            SafeHandler.onSuccess(handler, (E)new ArrayList<Alarm>());
+                            String errmsg = (String) jsonObject.getString("errmsg");
+                            ArrayList<Alarm> arrayList = JsonUtils.parsingAlarm(cxt, responseString);
+
+
+                            SafeHandler.onSuccess(handler, (E) arrayList);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
