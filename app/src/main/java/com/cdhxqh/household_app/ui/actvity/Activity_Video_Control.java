@@ -3,12 +3,16 @@ package com.cdhxqh.household_app.ui.actvity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Gravity;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.cdhxqh.household_app.R;
 
@@ -25,6 +29,7 @@ public class Activity_Video_Control extends BaseActivity {
 
     LinearLayout layout;
     ScrollView   scrollView;
+    VideoView videoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +40,40 @@ public class Activity_Video_Control extends BaseActivity {
     }
 
     private void findViewById(){
+        videoView = (VideoView)findViewById(R.id.video_m3u8);
         layout = (LinearLayout)findViewById(R.id.video_monitoring_layout);
         scrollView = (ScrollView)findViewById(R.id.scrollView);
+        pay();
         // linearLayout = (FixGridLayout)findViewById(R.id.linearLayout);
+    }
+
+    public void pay(){
+        // http://vshare.ys7.com:80/hcnp/497827719_1_2_1_0_183.136.184.7_6500.m3u8
+        // rtsp://v2.cache2.c.youtube.com/CjgLENy73wIaLwm3JbT_%ED%AF%80%ED%B0%819HqWohMYESARFEIJbXYtZ29vZ2xlSARSB3Jlc3VsdHNg_vSmsbeSyd5JDA==/0/0/0/video.3gp
+        // rtsp://183.136.184.33:8554/demo://520752318:1:1:1:0:183.136.184.7:6500
+        final Uri uri = Uri.parse("rtsp://211.139.194.251:554/live/2/13E6330A31193128/5iLd2iNl5nQ2s8r8.sdp");
+        videoView.setMediaController(new MediaController(this));
+        videoView.setVideoURI(uri);
+        videoView.requestFocus();
+        videoView.start();
+
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                videoView.stopPlayback(); // 首先停止视频播放
+                videoView.setVideoURI(uri);  // 设置播放地址
+                videoView.requestFocus();  // 获取请求码
+                videoView.start();        // 开始播放
+                return true;//如果设置true就可以防止他弹出错误的提示框！
+            }
+        });
+
+    }
+
+    @Override
+    protected void onPause() {
+        videoView.stopPlayback();
+        super.onPause();
     }
 
     private void initView(){
