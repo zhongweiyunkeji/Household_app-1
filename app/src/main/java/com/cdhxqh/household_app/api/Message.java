@@ -201,7 +201,7 @@ public class Message {
     public static final String STOCK_SUCCESS = "ZWTICKET-ORDER-S-303";
 
     //库存不足
-    public static final String STOCK_FAILE = "ZWTICKET-ORDER-E-302";
+    public static final String SESSIONID_FAILE = "SECURITY-GLOBAL-E-4";
 
     //订单账号为空
     public static final String STOCK_FAILE_NULL = "ZWTICKET-ORDER-E-304";
