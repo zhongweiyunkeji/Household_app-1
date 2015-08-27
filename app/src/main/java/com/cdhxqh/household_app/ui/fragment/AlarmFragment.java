@@ -187,13 +187,13 @@ public class AlarmFragment extends BaseFragment {
         public void onSuccess(ArrayList<Alarm> data) {
             TestClass.closeLoading();
             if(data != null) {
-                if(data.get(0).isBack() == true) {
+               /* if(data.get(0).isBack() == true) {
 //                    MessageUtils.showErrorMessage(getActivity(), "会话过期，请重新登录");
                     Intent intent = new Intent();
                     intent.setClass(getActivity(), Activity_Login.class);
                     getActivity().startActivity(intent);
                     getActivity().finish();
-                }
+                }*/
             }
 
         }
