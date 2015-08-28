@@ -66,4 +66,6 @@
     <color name="header">#58567D</color>
     <color name="grgray">#686868</color>
 
+    <color name="application_bg">#f0f0f3</color>
+
 </resources>
