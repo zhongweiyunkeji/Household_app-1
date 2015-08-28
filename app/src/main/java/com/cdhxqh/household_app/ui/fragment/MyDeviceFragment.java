@@ -1,10 +1,13 @@
 package com.cdhxqh.household_app.ui.fragment;
 
+import android.app.Application;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +16,14 @@ import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
+import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
+import com.videogo.openapi.EzvizAPI;
+import com.videogo.openapi.bean.req.GetCameraInfoList;
+import com.videogo.openapi.bean.resp.CameraInfo;
+import com.videogo.realplay.RealPlayerHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by think on 2015/8/15.
@@ -23,9 +32,41 @@ public class MyDeviceFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private MyDevicelistAdapter myDevicelistAdapter;
+    Application application;
+    EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
+    ArrayList<CameraInfo> result;
+    AsyncTask task = new AsyncTask() {
+        @Override
+        protected Object doInBackground(Object[] params) {
+            try {
+                // 设置Token
+                mEzvizAPI.setAccessToken("at.0nf6rqqz9rjls1u92cbzo7c28zmnprtr-96623ark6g-1dnt99a-rwoxhw6hx");
+                GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
+                getCameraInfoList.setPageStart(0);
+                getCameraInfoList.setPageSize(10);
+                // 获取设备列表
+                result = (ArrayList<CameraInfo>)mEzvizAPI.getCameraInfoList(getCameraInfoList);
+                System.out.println("--------------------------->");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            if(NetWorkUtil.IsNetWorkEnable(getActivity()) && result!=null){
+                addData();
+            }
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getActivity()!=null){
+            application = (Application)getActivity().getApplication();
+        }
     }
 
     @Nullable
@@ -44,20 +85,17 @@ public class MyDeviceFragment extends BaseFragment {
                 DividerItemDecoration.VERTICAL_LIST));
         myDevicelistAdapter = new MyDevicelistAdapter(getActivity());
         recyclerView.setAdapter(myDevicelistAdapter);
-        addData();
+        task.execute();
         return view;
     }
 
+    /**
+     * 从萤石云获取设备列表
+     */
     private void addData() {
-        ArrayList<MyDevice> list = new ArrayList<MyDevice>();
-        for (int i = 0; i < 3; i++) {
-            MyDevice myDevice = new MyDevice();
-            myDevice.setName("海康DS-2CD2412F-"+i);
-            myDevice.setSize(i);
-            myDevice.setPlace("地点"+i);
-            myDevice.setNumber("1234567"+i);
-            list.add(i,myDevice);
-        }
-        myDevicelistAdapter.update(list, true);
+       myDevicelistAdapter.update(result, true);
+       System.out.println("--------------------------->");
     }
+
+
 }
