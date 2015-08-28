@@ -34,5 +34,4 @@ dependencies {
     compile files('libs/gcm.jar')
     compile files('libs/httpmime-4.1.3.jar')
     compile files('libs/jmdns-3.4.1.jar')
-    compile project(':vitamioBundle')
 }
