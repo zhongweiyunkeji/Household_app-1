@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -54,6 +55,10 @@ import com.videogo.util.ConnectionDetector;
 import com.videogo.util.LogUtil;
 import com.videogo.util.Utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
@@ -112,6 +117,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     private double mPlayRatio = 0;
 
+    ImageView screenshot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,6 +150,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         rightCtrl = (ImageView) findViewById(R.id.right);  //  向右控制
         bottomCtrl = (ImageView) findViewById(R.id.bottom);  //  向下控制
 
+        screenshot= (ImageView) findViewById(R.id.screenshot);
 
     }
 
@@ -214,6 +222,13 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         // 保持屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        screenshot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                savePic(getpic());
+            }
+        });
 
         pauseBtn.setVisibility(View.GONE);
         titleText.setText(info.getCameraName());
@@ -293,6 +308,38 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         });
         mSurfaceView.setVisibility(View.VISIBLE);
 
+    }
+
+    public  void savePic(Bitmap b) {
+
+        FileOutputStream fos = null;
+        try {
+
+            String sdpath ="/storage/sdcard1/";
+//            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+//            <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> 加这两个权限
+//            String sdpath = null;//设置保存图片的地址
+            File f = new File(sdpath ,"11.bmp");//设置图片名字
+            if (f.exists()) {
+                f.delete();
+            }
+
+            fos = new FileOutputStream(f);
+            if (null != fos) {
+                b.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                fos.flush();
+                fos.close();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Bitmap getpic(){
+        Bitmap bitmap  = videoView.getDrawingCache();
+        return bitmap;
     }
 
     /**
