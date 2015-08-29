@@ -113,6 +113,9 @@ public class Activity_Login extends BaseActivity{
                 password.requestFocus();
             }else {
                 getHttpUtil();
+//                Intent intent = new Intent();
+//                intent.setClass(Activity_Login.this,MainActivity.class);
+//                startActivity(intent);
             }
         }
     };
@@ -140,16 +143,18 @@ public class Activity_Login extends BaseActivity{
          * 加载中
          */
         TestClass.loading(this, getString(R.string.loading));
-        HttpManager.filterManager(this, true, handler, Message.LOGIN_URL, "loginName", "password", username.getText().toString(), password.getText().toString());
+        HttpManager.filterManager(null, this, true, handler, Message.LOGIN_URL, "loginName", "password", username.getText().toString(), password.getText().toString());
     }
 
     /**
      * 登录
      */
-    HttpRequestHandler<Constants> handler = new HttpRequestHandler<Constants>() {
+    HttpRequestHandler<Object[]> handler = new HttpRequestHandler<Object[]>() {
         @Override
-        public void onSuccess(String data) {
-            MessageUtils.showMiddleToast(Activity_Login.this, data);
+        public void onSuccess(Object[] data) {
+            editor.putLong(Constants.SESSIONID, (Long)data[0]);
+            editor.putString(Constants.SESSIONIDTRUE, (String) data[1]);
+            editor.commit();
             TestClass.closeLoading();
             Intent intent = new Intent();
             intent.setClass(Activity_Login.this,MainActivity.class);
@@ -158,7 +163,7 @@ public class Activity_Login extends BaseActivity{
         }
 
         @Override
-        public void onSuccess(Constants data, int totalPages, int currentPage) {
+        public void onSuccess(Object[] data, int totalPages, int currentPage) {
 
         }
 

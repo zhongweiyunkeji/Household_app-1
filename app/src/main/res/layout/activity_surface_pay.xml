@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--  播放区域    -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--  画布    -->
+        <SurfaceView
+            android:id="@+id/realplay_wnd_sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:id="@+id/process"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+            <!--  等待对话框   -->
+            <ProgressBar
+                android:layout_centerInParent="true"
+                android:id="@+id/realplay_watting_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/processtext"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="1%"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!--  播放暂停时显示界面    -->
+    <RelativeLayout
+        android:id="@+id/realplay_display_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="gone"
+        android:orientation="vertical"
+        >
+
+        <!--  暂停播放按钮   -->
+        <ImageView
+            android:id="@+id/realplay_play_iv"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/play_bigbtn_selector"
+            android:scaleType="fitXY"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

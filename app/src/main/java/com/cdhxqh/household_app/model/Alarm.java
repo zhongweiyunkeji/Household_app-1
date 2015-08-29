@@ -13,6 +13,15 @@ public class Alarm implements Serializable {
     private String date;
     private int icon;
     private boolean status = false;  // 保存复选框的选中状态
+    private boolean back;
+
+    public boolean isBack() {
+        return back;
+    }
+
+    public void setBack(boolean back) {
+        this.back = back;
+    }
 
     public Alarm() {
     }

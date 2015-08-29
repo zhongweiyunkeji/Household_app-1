@@ -28,13 +28,13 @@ public class CustomDialog extends Dialog {
     @Override
     public void onCreate(Bundle bundle) {
         setContentView(R.layout.dialog_layout);
-        findViewById(R.id.cancelBtn).setOnClickListener(new android.view.View.OnClickListener() {
+        findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View paramView) {
                 dismiss(); // 关闭对话框
             }
         });
-        findViewById(R.id.okBtn).setOnClickListener(new android.view.View.OnClickListener() {
+        findViewById(R.id.okBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View paramView) {
                 dismiss(); // 关闭对话框

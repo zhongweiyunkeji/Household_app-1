@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
+import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.model.Item;
 import com.cdhxqh.household_app.ui.fragment.AlarmFragment;
@@ -44,6 +46,7 @@ import com.cdhxqh.household_app.ui.fragment.SettingFragment;
 import com.cdhxqh.household_app.ui.widget.listview.WrapWidthListView;
 import com.cdhxqh.household_app.ui.widget.menu.PopMenu;
 import com.cdhxqh.household_app.ui.widget.menu.impl.DeviceMenu;
+import com.cdhxqh.household_app.utils.AccountUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,6 +73,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     private static final int DELE_CONTACT = 4;
 
+    public String a = "de";
 
     private String[] mFavoriteTabTitles;
     private String[] mFavoriteTabPaths;
@@ -110,8 +114,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         findViewById();
 
 
@@ -277,6 +279,27 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         }
         // invalidateOptionsMenu通知系统重新调用onCreateOptionMenu()方法重新生成ActionBar,需在API11以上才可使用，但在V4包的FragmentActivity也可使用该方法
         invalidateOptionsMenu();
+    }
+
+    /**
+     * 判断sessionid是否过期
+     */
+    public void text() {
+        if (myshared.contains(Constants.SESSIONID)) {
+            long result = HttpManager.getCurrentTime() - myshared.getLong(Constants.SESSIONID, HttpManager.getCurrentTime());
+            double i = Math.ceil(result / 60000);
+
+            if (Math.ceil(result / 60000) >= new Double(1)) {
+                Intent intent = new Intent();
+                intent.setClass(this, Activity_Login.class);
+                startActivityForResult(intent, 0);
+                SharedPreferences.Editor edit = myshared.edit();
+                edit.remove(Constants.SESSIONID);
+                edit.commit();
+                AccountUtils.removeAll(this);
+                finish();
+            }
+        }
     }
 
     @Override

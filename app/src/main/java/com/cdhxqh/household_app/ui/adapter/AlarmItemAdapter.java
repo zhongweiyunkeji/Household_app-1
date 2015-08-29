@@ -1,6 +1,9 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +52,17 @@ public class AlarmItemAdapter extends BaseAdapter {
         return position;
     }
 
+    private Bitmap getBitMap(int resid){
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        Bitmap mBitmap = BitmapFactory.decodeResource(context.getResources(),resid, opts);
+        // 缩放图片
+        Matrix matrix = new Matrix();
+        matrix.postScale(0.15F, 0.15F);
+        mBitmap = Bitmap.createBitmap(mBitmap, 0, 0, mBitmap.getWidth(), mBitmap.getHeight(), matrix, true);
+
+        return mBitmap;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ItemHolder holder = null;
@@ -61,7 +75,14 @@ public class AlarmItemAdapter extends BaseAdapter {
         }
 
         final Alarm alarm = list.get(position);
-        ImageLoader.getInstance().displayImage(alarm.getImg(), holder.img);
+        // ImageLoader.getInstance().displayImage(alarm.getImg(), holder.img);
+        Bitmap bitmap = null;
+        if((position+1)%2 == 0){
+            bitmap = getBitMap(R.drawable.img2);
+        } else {
+            bitmap = getBitMap(R.drawable.img3);
+        }
+        holder.img.setImageBitmap(bitmap);
         holder.title.setText(alarm.getTitle());
         holder.msg.setText(alarm.getMsg());
         holder.date.setText(alarm.getDate());

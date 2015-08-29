@@ -1,6 +1,9 @@
 package com.cdhxqh.household_app.ui.fragment;
 
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +15,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.api.HttpRequestHandler;
+import com.cdhxqh.household_app.api.Message;
+import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
+import com.cdhxqh.household_app.model.Alarm;
+import com.cdhxqh.household_app.ui.actvity.Activity_Login;
+import com.cdhxqh.household_app.ui.actvity.Load_Activity;
+import com.cdhxqh.household_app.ui.actvity.MainActivity;
+import com.cdhxqh.household_app.ui.widget.TestClass;
+import com.cdhxqh.household_app.utils.MessageUtils;
+
+import java.util.ArrayList;
 
 /**
  * Created by hexian on 2015/8/17.
@@ -21,6 +36,8 @@ public class AlarmFragment extends BaseFragment {
     TextView leftTab;
     TextView rightTab;
     public boolean flag = false;
+    private static final String count = "10";
+    private static String currentPage = "1";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +46,7 @@ public class AlarmFragment extends BaseFragment {
         findViewById(view);
         initView();
         return view;
+
     }
 
     public void findViewById(View view) {
@@ -112,7 +130,6 @@ public class AlarmFragment extends BaseFragment {
         });
 
         initThreeInFragment();
-
     }
 
     public void initThreeInFragment() {
@@ -125,6 +142,7 @@ public class AlarmFragment extends BaseFragment {
         transaction.replace(R.id.alarm_container, in, "ThreeInAlarmFragment");
         transaction.commit();
         flag = true;
+        getHttpUtil(1);
     }
 
     public void initThreeOutFragment() {
@@ -137,11 +155,58 @@ public class AlarmFragment extends BaseFragment {
         transaction.replace(R.id.alarm_container, out, "ThreeOutAlarmFragment");
         transaction.commit();
         flag = false;
+        getHttpUtil(2);
     }
 
+    public void update() {
 
+    }
 
+    /**
+     * 访问网络
+     * @param
+     */
+    private void getHttpUtil (int i) {
+        /**
+         * 加载中
+         */
+        SharedPreferences myShared = getActivity().getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+        TestClass.loading(getActivity(), getString(R.string.loading));
+        if(i == 1) {
+            HttpManager.filterManager(myShared.getString(Constants.SESSIONIDTRUE, ""), getActivity(), true, handler, Message.ALARM, "datenote", "showCount", "currentPage", "before", count, currentPage);
+        }else if(i == 2){
+            HttpManager.filterManager(myShared.getString(Constants.SESSIONIDTRUE, ""), getActivity(), true, handler, Message.ALARM, "datenote", "showCount", "currentPage", "after", count, currentPage);
+        }
+    }
 
+    /**
+     *
+     */
+    HttpRequestHandler<ArrayList<Alarm>> handler = new HttpRequestHandler<ArrayList<Alarm>>() {
+        @Override
+        public void onSuccess(ArrayList<Alarm> data) {
+            TestClass.closeLoading();
+            if(data != null) {
+               /* if(data.get(0).isBack() == true) {
+//                    MessageUtils.showErrorMessage(getActivity(), "会话过期，请重新登录");
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), Activity_Login.class);
+                    getActivity().startActivity(intent);
+                    getActivity().finish();
+                }*/
+            }
 
+        }
 
+        @Override
+        public void onSuccess(ArrayList<Alarm> data, int totalPages, int currentPage) {
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+            MessageUtils.showErrorMessage(getActivity(), error);
+            TestClass.closeLoading();
+        }
+    };
 }

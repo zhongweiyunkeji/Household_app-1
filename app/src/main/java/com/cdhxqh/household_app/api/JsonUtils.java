@@ -3,11 +3,14 @@ package com.cdhxqh.household_app.api;
 import android.content.Context;
 import android.util.Log;
 
+import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.Ec_user;
 import com.cdhxqh.household_app.utils.AccountUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2015/8/20.
@@ -103,6 +106,30 @@ public class JsonUtils {
         } catch (JSONException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * 报警*
+     */
+    public static ArrayList<Alarm> parsingAlarm(final Context cxt, String data) {
+        try {
+            ArrayList<Alarm> alarmList = new ArrayList<Alarm>();
+            JSONObject json = new JSONObject(data);
+            String errcode = json.getString("errcode");
+            if (errcode.equals(Message.SUCCESS_LINE_PASS)) {
+                return null; //成功
+            } else if (errcode.equals(Message.SESSIONID_FAILE)) {
+                Alarm alarm = new Alarm();
+                alarm.setBack(true);
+                alarmList.add(alarm);
+                return alarmList;
+            }else {
+                return null;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

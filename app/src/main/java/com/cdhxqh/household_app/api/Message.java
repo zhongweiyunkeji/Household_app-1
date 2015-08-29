@@ -36,9 +36,9 @@ public class Message {
 
     public static final String REG_URL = BASE_URL+"ecsusers/doCheck";
 
-    /**获取游客中心**/
+    /**报警**/
 
-    public static final String USER_URL = BASE_URL+"ecsusers/info";
+    public static final String ALARM = BASE_URL+"alarm/pagelist";
 
 
     /**获取景点门票**/
@@ -201,7 +201,7 @@ public class Message {
     public static final String STOCK_SUCCESS = "ZWTICKET-ORDER-S-303";
 
     //库存不足
-    public static final String STOCK_FAILE = "ZWTICKET-ORDER-E-302";
+    public static final String SESSIONID_FAILE = "SECURITY-GLOBAL-E-4";
 
     //订单账号为空
     public static final String STOCK_FAILE_NULL = "ZWTICKET-ORDER-E-304";

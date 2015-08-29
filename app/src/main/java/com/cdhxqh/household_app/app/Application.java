@@ -8,6 +8,7 @@ import android.os.Environment;
 
 import com.cdhxqh.household_app.BuildConfig;
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.ezviz.EzvizApplication;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -18,29 +19,21 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.io.File;
 
-public class Application extends android.app.Application{
+public class Application extends EzvizApplication {  // EzvizApplication
 
     private static final String TAG="Application";
     private static Application mContext;
 
-
-
-
-
     @Override
     public void onCreate() {
         super.onCreate();
-
-
         mContext = this;
-
         initImageLoader();
         initAppConfig();
     }
 
     private void initAppConfig() {
-        final ActivityManager mgr = (ActivityManager) getApplicationContext().
-                getSystemService(Activity.ACTIVITY_SERVICE);
+        final ActivityManager mgr = (ActivityManager) getApplicationContext().getSystemService(Activity.ACTIVITY_SERVICE);
     }
 
 
@@ -75,14 +68,8 @@ public class Application extends android.app.Application{
         return mContext;
     }
 
-
-
-
     public static Context getContext(){
         return mContext;
     }
-
-
-
 
 }

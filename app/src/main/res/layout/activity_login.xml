@@ -65,7 +65,7 @@
             android:inputType="textPassword"
             android:hint="@string/please_pass_word_text" />
 
-        <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+        <com.cdhxqh.household_app.ui.widget.SwitchButton
             android:id="@+id/wiperSwitch1"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="15dp"

@@ -11,4 +11,11 @@
     <dimen name="dimens_22">22dp</dimen>
     <dimen name="dimens_30">30dp</dimen>
     <dimen name="dimens_40">40dp</dimen>
+
+    <!-- 萤石云使用数字  -->
+    <dimen name="button_text_size">14dp</dimen>
+    <dimen name="loading_text_size">15dp</dimen>
+
+    <!-- 萤石云使用数字  -->
+
 </resources>

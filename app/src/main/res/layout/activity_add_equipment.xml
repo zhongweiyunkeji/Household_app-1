@@ -310,8 +310,8 @@
 
                 <ImageView
                     android:id="@+id/view_photo"
-                    android:layout_width="100dp"
-                    android:layout_height="200dp"
+                    android:layout_width="176dip"
+                    android:layout_height="176dip"
                     android:paddingTop="14dp"
                     android:paddingBottom="14dp"
                     android:visibility="gone"

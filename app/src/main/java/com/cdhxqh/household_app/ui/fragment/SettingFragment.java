@@ -2,6 +2,7 @@ package com.cdhxqh.household_app.ui.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,7 @@ import com.cdhxqh.household_app.ui.widget.SwitchButton;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
 import com.cdhxqh.household_app.utils.AccountUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -92,7 +94,9 @@ public class SettingFragment extends BaseFragment {
     private View.OnClickListener catchsOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            DataCleanManager.cleanInternalCache(activity);
+
+            DataCleanManager.cleanInternalCache(activity);
+            DataCleanManager.cleanSharedPreference(activity);
 //            DataCleanManager.cleanDatabases(activity);
 //            DataCleanManager.cleanSharedPreference(activity);
         }
