@@ -125,6 +125,27 @@
     <string name="realplay_password_error_message1">初始密码为12345，若密码已被修改，请输入修改后的密码</string>
     <string name="realplay_encrypt_password_error_title">请输入视频图片加密密码</string>
     <string name="realplay_encrypt_password_error_message">您的视频已加密，请输入密码进行查看，初始密码为机身标签上的验证码，如果没有验证码，请输入ABCDEF（密码区分大小写）</string>
+    <string name="remoteplayback_over_link">设备连接数过大，停止其他连接后再试试吧</string>
+    <string name="realplay_fail_device_not_exist">设备不在线</string>
+    <string name="realplay_fail_connect_device">播放失败，连接设备异常</string>
+    <string name="realplay_set_fail_status">视频播放失败，设备已开启隐私保护</string>
+    <string name="camera_not_online">设备不在线</string>
+    <string name="realplay_play_fail">视频播放失败</string>
+    <string name="please_input_phonenumber_txt">请输入手机号码</string>
+    <string name="get_sms_code">获取短信验证码</string>
+    <string name="sms_verify_code_received">请输入您收到的手机验证码</string>
+    <string name="please_input_phone_txt">请输入手机号码开通萤石云服务：/n（若对流程不清楚，请阅读《私有云账户对接流程》）</string>
+    <string name="open_ys_service">开通萤石云服务</string>
+    <string name="cancel">取消</string>
+    <string name="get_sms_code_fail">获取短信验证码失败</string>
+    <string name="open_ys_service_success">开通萤石云服务成功</string>
+    <string name="open_ys_service_fail">开通萤石云服务失败</string>
+    <string name="countdown">留言时长还剩%d秒</string>
+    <string name="secure_validatee_fail">安全验证失败</string>
+    <string name="secure_validate_success">安全验证成功</string>
+    <string name="submit_secure_validate">提交安全验证</string>
+    <string name="secure_validate">硬件安全验证</string>
+
     <!--   萤石需要mesg  -->
 
 
