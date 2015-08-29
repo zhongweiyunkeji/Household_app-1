@@ -19,6 +19,12 @@
     <!--  引入画布  -->
     <include layout="@layout/activity_surface_pay_bottom" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/list_line_x"
+        />
+
     <!--  控制区域  -->
     <LinearLayout
         android:layout_width="match_parent"

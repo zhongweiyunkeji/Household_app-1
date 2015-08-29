@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -46,6 +47,7 @@ import com.videogo.openapi.EzvizAPI;
 import com.videogo.openapi.bean.req.GetCameraInfoList;
 import com.videogo.openapi.bean.resp.CameraInfo;
 import com.videogo.realplay.RealPlayMsg;
+import com.videogo.realplay.RealPlayStatus;
 import com.videogo.realplay.RealPlayerHelper;
 import com.videogo.realplay.RealPlayerManager;
 import com.videogo.util.ConnectionDetector;
@@ -101,6 +103,13 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     TextView processText;
     RelativeLayout coverImg;
 
+    ImageView topCtrl;
+    ImageView leftCtrl;
+    ImageView rightCtrl;
+    ImageView bottomCtrl;
+
+    public static final int MSG_HIDE_PTZ_DIRECTION = 201;
+
     private double mPlayRatio = 0;
 
     @Override
@@ -128,6 +137,12 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         processText = (TextView) findViewById(R.id.processtext);  //  缓冲进度
 
         coverImg = (RelativeLayout) findViewById(R.id.realplay_display_view);  //  缓冲进度
+
+        topCtrl = (ImageView) findViewById(R.id.top);  //  向上控制
+        leftCtrl = (ImageView) findViewById(R.id.left);  //  向左控制
+        rightCtrl = (ImageView) findViewById(R.id.right);  //  向右控制
+        bottomCtrl = (ImageView) findViewById(R.id.bottom);  //  向下控制
+
 
     }
 
@@ -179,6 +194,12 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                         break;
                     case RealPlayMsg.MSG_GET_CAMERA_INFO_SUCCESS:
                         updateLoadingProgress(20);
+                        break;
+                    case MSG_HIDE_PTZ_DIRECTION:
+                        handleHidePtzDirection(msg);
+                        break;
+                    case RealPlayMsg.MSG_PTZ_SET_FAIL:
+                        handlePtzControlFail(msg);
                         break;
                     default:
                         break;
@@ -234,6 +255,11 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         mDisplayHeight = metric.heightPixels;
         mCanDisplayRect = new Rect(0, 0, 0, 0);
 
+        // 注册控制按钮事件
+        topCtrl.setOnTouchListener(mOnTouchListener);
+        bottomCtrl.setOnTouchListener(mOnTouchListener);
+        leftCtrl.setOnTouchListener(mOnTouchListener);
+        rightCtrl.setOnTouchListener(mOnTouchListener);
 
 
         mSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
@@ -532,4 +558,170 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
             startRealPlay();
         }
     }
+
+    private View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionevent) {
+            int action = motionevent.getAction();
+            switch (action) {
+                case MotionEvent.ACTION_DOWN:
+                    switch (view.getId()) {
+                        case R.id.top://上控
+                           // mPtzControlLy.setBackgroundResource(R.drawable.ptz_up_sel);
+                            setPtzDirectionIv(RealPlayStatus.PTZ_UP);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP, true);
+                            break;
+                        case R.id.bottom://下控
+                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bottom_sel);
+                            setPtzDirectionIv(RealPlayStatus.PTZ_DOWN);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN, true);
+                            break;
+                        case R.id.left://左控
+                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_left_sel);
+                            setPtzDirectionIv(RealPlayStatus.PTZ_LEFT);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT, true);
+                            break;
+                        case R.id.right://右控
+                           // mPtzControlLy.setBackgroundResource(R.drawable.ptz_right_sel);
+                            setPtzDirectionIv(RealPlayStatus.PTZ_RIGHT);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT, true);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    switch (view.getId()) {
+                        case R.id.top://上控
+                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP, false);
+                            break;
+                        case R.id.bottom://下控
+                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN, false);
+                            break;
+                        case R.id.left://左控
+                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT, false);
+                            break;
+                        case R.id.right://右控
+                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT, false);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        }
+    };
+
+
+    private void setPtzDirectionIv(int command) {
+        setPtzDirectionIv(command, 0);
+    }
+
+    private void setPtzDirectionIv(int command, int errorCode) {
+        if (command != -1 && errorCode == 0) {
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            //mRealPlayPtzDirectionIv.setVisibility(View.VISIBLE);
+            mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
+            Message msg = new Message();
+            msg.what = MSG_HIDE_PTZ_DIRECTION;
+            msg.arg1 = 1;
+            mHandler.sendMessageDelayed(msg, 500);
+        } else if(errorCode != 0) {
+            /*RelativeLayout.LayoutParams svParams = (RelativeLayout.LayoutParams)mRealPlaySv.getLayoutParams();
+            RelativeLayout.LayoutParams params = null;*/
+           // mRealPlayPtzDirectionIv.setVisibility(View.VISIBLE);
+            mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
+            Message msg = new Message();
+            msg.what = MSG_HIDE_PTZ_DIRECTION;
+            msg.arg1 = 1;
+            mHandler.sendMessageDelayed(msg, 500);
+        } else {
+            //mRealPlayPtzDirectionIv.setVisibility(View.GONE);
+            mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
+        }
+    }
+
+    /**
+     * 封装控制的方法
+     * @param msg
+     */
+    private void handleHidePtzDirection(Message msg) {
+        if (mHandler == null) {
+            return;
+        }
+        mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
+        Log.e("TAG", "------------------------------------------------------------------>SUCCESS");
+        if (msg.arg1 > 2) {
+            //mRealPlayPtzDirectionIv.setVisibility(View.GONE);
+        } else {
+            // mRealPlayPtzDirectionIv.setVisibility(msg.arg1 == 1 ? View.GONE : View.VISIBLE);
+            Message message = new Message();
+            message.what = MSG_HIDE_PTZ_DIRECTION;
+            message.arg1 = msg.arg1 + 1;
+            mHandler.sendMessageDelayed(message, 500);
+
+        }
+    }
+
+    private void handlePtzControlFail(Message msg) {
+        Log.e("TAG", "------------------------------------------------------------------>FAIL");
+        switch(msg.arg1) {
+            case ErrorCode.ERROR_CAS_PTZ_CONTROL_CALLING_PRESET_FAILED://正在调用预置点，键控动作无效
+                Utils.showToast(this,R.string.camera_lens_too_busy, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_PRESET_PRESETING_FAILE:// 当前正在调用预置点
+                Utils.showToast(this,R.string.ptz_is_preseting, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_CONTROL_TIMEOUT_SOUND_LACALIZATION_FAILED://当前正在声源定位
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_CONTROL_TIMEOUT_CRUISE_TRACK_FAILED://键控动作超时(当前正在轨迹巡航)
+                Utils.showToast(this,R.string.ptz_control_timeout_cruise_track_failed, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_PRESET_INVALID_POSITION_FAILED://当前预置点信息无效
+                Utils.showToast(this,R.string.ptz_preset_invalid_position_failed, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_PRESET_CURRENT_POSITION_FAILED://该预置点已是当前位置
+                Utils.showToast(this,R.string.ptz_preset_current_position_failed, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_PRESET_SOUND_LOCALIZATION_FAILED:// 设备正在响应本次声源定位
+                Utils.showToast(this,R.string.ptz_preset_sound_localization_failed, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_OPENING_PRIVACY_FAILED://当前正在开启隐私遮蔽
+            case ErrorCode.ERROR_CAS_PTZ_CLOSING_PRIVACY_FAILED://当前正在关闭隐私遮蔽
+            case ErrorCode.ERROR_CAS_PTZ_MIRRORING_FAILED://设备正在镜像操作（设备镜像要几秒钟，防止频繁镜像操作）
+                Utils.showToast(this,R.string.ptz_operation_too_frequently, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_CONTROLING_FAILED://设备正在键控动作（上下左右）(一个客户端在上下左右控制，另外一个在开其它东西)
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_FAILED://云台当前操作失败
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_PRESET_EXCEED_MAXNUM_FAILED://当前预置点超过最大个数
+                Utils.showToast(this,R.string.ptz_preset_exceed_maxnum_failed, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_PRIVACYING_FAILED:// 设备处于隐私遮蔽状态（关闭了镜头，再去操作云台相关）
+                Utils.showToast(this,R.string.ptz_privacying_failed, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_TTSING_FAILED:// 设备处于语音对讲状态(区别以前的语音对讲错误码，云台单独列一个）
+                Utils.showToast(this,R.string.ptz_mirroring_failed, msg.arg1);
+                break;
+            case ErrorCode.ERROR_CAS_PTZ_ROTATION_UP_LIMIT_FAILED://设备云台旋转到达上限位
+            case ErrorCode.ERROR_CAS_PTZ_ROTATION_DOWN_LIMIT_FAILED://设备云台旋转到达下限位
+            case ErrorCode.ERROR_CAS_PTZ_ROTATION_LEFT_LIMIT_FAILED://设备云台旋转到达左限位
+            case ErrorCode.ERROR_CAS_PTZ_ROTATION_RIGHT_LIMIT_FAILED://设备云台旋转到达右限位
+                setPtzDirectionIv(-1, msg.arg1);
+                break;
+            default:
+                Utils.showToast(this,R.string.ptz_operation_failed, msg.arg1);
+                break;
+        }
+    }
+
 }

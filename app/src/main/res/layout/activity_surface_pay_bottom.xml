@@ -22,4 +22,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/stopbtn_selector" />
+
+    <ImageButton
+        android:id="@+id/realplay_stop_btn1"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_menu_song3" />
+
+    <ImageButton
+        android:id="@+id/realplay_stop_btn2"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_menu_fullscreen" />
+
+
 </RelativeLayout>
