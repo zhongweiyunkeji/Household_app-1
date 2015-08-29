@@ -13,10 +13,10 @@
         <SurfaceView
             android:id="@+id/realplay_wnd_sv"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true" />
 
-        <!--  等待对话框   -->
+        <!--  暂停播放按钮   -->
         <ImageView
             android:id="@+id/realplay_play_iv"
             android:layout_width="wrap_content"
@@ -25,6 +25,7 @@
             android:background="@drawable/play_bigbtn_selector"
             android:scaleType="fitXY"/>
 
+        <!--  等待对话框   -->
         <ProgressBar
             android:layout_centerInParent="true"
             android:id="@+id/realplay_watting_pb"
@@ -33,12 +34,13 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <!--  视频播放按钮  -->
         <ImageButton
             android:id="@+id/realplay_play_btn"
+            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/playbtn_selector"
@@ -47,9 +49,10 @@
         <!--  视频暂停按钮  -->
         <ImageButton
             android:id="@+id/realplay_stop_btn"
+            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/stopbtn_selector" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

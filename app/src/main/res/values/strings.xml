@@ -115,4 +115,19 @@
     <string name="login_time_out">已与服务器断开连接,请重新登录</string>
 
     <string name="hello">Hello World, SetPasswordActivity!</string>
+
+    <!--   萤石需要mesg  -->
+    <string name="realplay_password_error_title">请输入设备密码</string>
+    <string name="realplay_login_password_msg">初始密码为设备验证码，若设备已注册平台，请输入用户ID</string>
+    <string name="realplay_login_password_error">登录设备失败</string>
+    <string name="realplay_play_fail_becauseof_network">视频播放失败，请检查您的网络</string>
+    <string name="realplay_password_error_message3">您的设备版本过低，需要输入设备密码，建议您升级设备</string>
+    <string name="realplay_password_error_message1">初始密码为12345，若密码已被修改，请输入修改后的密码</string>
+    <string name="realplay_encrypt_password_error_title">请输入视频图片加密密码</string>
+    <string name="realplay_encrypt_password_error_message">您的视频已加密，请输入密码进行查看，初始密码为机身标签上的验证码，如果没有验证码，请输入ABCDEF（密码区分大小写）</string>
+    <!--   萤石需要mesg  -->
+
+
+
+
 </resources>
