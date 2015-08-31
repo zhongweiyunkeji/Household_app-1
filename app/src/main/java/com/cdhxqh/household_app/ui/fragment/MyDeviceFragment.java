@@ -40,7 +40,7 @@ public class MyDeviceFragment extends BaseFragment {
         protected Object doInBackground(Object[] params) {
             try {
                 // 设置Token
-                mEzvizAPI.setAccessToken("at.0nf6rqqz9rjls1u92cbzo7c28zmnprtr-96623ark6g-1dnt99a-rwoxhw6hx");
+                mEzvizAPI.setAccessToken("at.1utv8y7f15rr3fpt4p6bik9u4jt5lbtr-48xl9lkear-0o7k1h0-ibfk0chwr");
                 GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
                 getCameraInfoList.setPageStart(0);
                 getCameraInfoList.setPageSize(10);
