@@ -609,24 +609,10 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         }
     }
 
-    private void reflectInvoke(final RealPlayerManager mRealPlayMgr, final Handler handler, final int command){
-        // mRealPlayerHelper.a(mRealPlayMgr, handler, command, "START", 3);
-        // mRealPlayerHelper.a(mRealPlayMgr, handler, command, "STOP", speed);
-        Future ret = Executors.newSingleThreadExecutor().submit(new Runnable() {
-            public void run() {
-                try {
-                    Method m = mRealPlayerHelper.getClass().getDeclaredMethod("a", new Class[]{RealPlayerManager.class, Handler.class, int.class, String.class, int.class});
-                    m.setAccessible(true);
-                    m.invoke(mRealPlayerHelper, new Object[]{mRealPlayMgr, handler, command, "START", 3});
-
-                    m.invoke(mRealPlayerHelper, new Object[]{mRealPlayMgr, handler, command, "STOP", 3});
-                } catch(Exception e  ) {
-                    e.printStackTrace();
-                    Log.e("TAG", e.toString());
-                } finally { }
-            }
-        });
-
+    @Override
+    public void onStop(){
+        stopRealPlay(false);
+        super.onStop();
     }
 
         private View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
@@ -635,37 +621,40 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         public boolean onTouch(View view, MotionEvent motionevent) {
             int action = motionevent.getAction();
             switch (action) {
-                case MotionEvent.ACTION_DOWN:
+                case MotionEvent.ACTION_DOWN:{
+                    Log.e("TAG", "------------------------------------------------------------------->ACTION_DOWN ===== "+System.currentTimeMillis());
                     switch (view.getId()) {
                         case R.id.top://上控
-                           // mPtzControlLy.setBackgroundResource(R.drawable.ptz_up_sel);
+                            // mPtzControlLy.setBackgroundResource(R.drawable.ptz_up_sel);
                             setPtzDirectionIv(RealPlayStatus.PTZ_UP);
-                            // mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP, true);
-                            reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP, true);
+                            //reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP);
                             break;
                         case R.id.bottom://下控
                             //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bottom_sel);
                             setPtzDirectionIv(RealPlayStatus.PTZ_DOWN);
-                           // mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN, true);
-                            reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN, true);
+                            //reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN);
                             break;
                         case R.id.left://左控
                             //mPtzControlLy.setBackgroundResource(R.drawable.ptz_left_sel);
                             setPtzDirectionIv(RealPlayStatus.PTZ_LEFT);
-                            // mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT, true);
-                            reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT, true);
+                            //reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT);
                             break;
                         case R.id.right://右控
-                           // mPtzControlLy.setBackgroundResource(R.drawable.ptz_right_sel);
+                            // mPtzControlLy.setBackgroundResource(R.drawable.ptz_right_sel);
                             setPtzDirectionIv(RealPlayStatus.PTZ_RIGHT);
-                           // mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT, true);
-                            reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT);
+                            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT, true);
+                            //reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT);
                             break;
                         default:
                             break;
                     }
                     break;
-                case MotionEvent.ACTION_UP:
+                }
+                case MotionEvent.ACTION_UP:{
+                    Log.e("TAG", "------------------------------------------------------------------->ACTION_UP ====== "+System.currentTimeMillis());
                     switch (view.getId()) {
                         case R.id.top://上控
                             //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
@@ -687,10 +676,13 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                             break;
                     }
                     break;
-                default:
+                }
+                default:{
                     break;
+                }
             }
-            return false;
+
+            return true;
         }
     };
 
