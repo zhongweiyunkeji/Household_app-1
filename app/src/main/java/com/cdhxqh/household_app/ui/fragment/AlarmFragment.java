@@ -142,7 +142,7 @@ public class AlarmFragment extends BaseFragment {
         transaction.replace(R.id.alarm_container, in, "ThreeInAlarmFragment");
         transaction.commit();
         flag = true;
-        getHttpUtil(1);
+        // getHttpUtil(1);
     }
 
     public void initThreeOutFragment() {
@@ -155,7 +155,7 @@ public class AlarmFragment extends BaseFragment {
         transaction.replace(R.id.alarm_container, out, "ThreeOutAlarmFragment");
         transaction.commit();
         flag = false;
-        getHttpUtil(2);
+        // getHttpUtil(2);
     }
 
     public void update() {
@@ -166,10 +166,10 @@ public class AlarmFragment extends BaseFragment {
      * 访问网络
      * @param
      */
-    private void getHttpUtil (int i) {
-        /**
+    /*private void getHttpUtil (int i) {
+        *//**
          * 加载中
-         */
+         *//*
         SharedPreferences myShared = getActivity().getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
         TestClass.loading(getActivity(), getString(R.string.loading));
         if(i == 1) {
@@ -177,23 +177,25 @@ public class AlarmFragment extends BaseFragment {
         }else if(i == 2){
             HttpManager.filterManager(myShared.getString(Constants.SESSIONIDTRUE, ""), getActivity(), true, handler, Message.ALARM, "datenote", "showCount", "currentPage", "after", count, currentPage);
         }
-    }
+    }*/
 
     /**
      *
      */
-    HttpRequestHandler<ArrayList<Alarm>> handler = new HttpRequestHandler<ArrayList<Alarm>>() {
+    /*HttpRequestHandler<ArrayList<Alarm>> handler = new HttpRequestHandler<ArrayList<Alarm>>() {
         @Override
         public void onSuccess(ArrayList<Alarm> data) {
             TestClass.closeLoading();
             if(data != null) {
-               /* if(data.get(0).isBack() == true) {
-//                    MessageUtils.showErrorMessage(getActivity(), "会话过期，请重新登录");
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity(), Activity_Login.class);
-                    getActivity().startActivity(intent);
-                    getActivity().finish();
-                }*/
+
+               // if(data.get(0).isBack() == true) {
+               //      MessageUtils.showErrorMessage(getActivity(), "会话过期，请重新登录");
+               //    Intent intent = new Intent();
+               //    intent.setClass(getActivity(), Activity_Login.class);
+               //    getActivity().startActivity(intent);
+               //    getActivity().finish();
+               //}
+
             }
 
         }
@@ -208,5 +210,5 @@ public class AlarmFragment extends BaseFragment {
             MessageUtils.showErrorMessage(getActivity(), error);
             TestClass.closeLoading();
         }
-    };
+    };*/
 }

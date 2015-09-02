@@ -148,7 +148,7 @@ public class AlarmItemAdapter extends BaseAdapter {
             Alarm obj = iistItem.get(i);
             boolean exist = false;
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).getTitle() == obj.getTitle()) {
+                if (list.get(j).getDate().equals(obj.getDate())) {
                     exist = true;
                     break;
                 }
