@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.actvity.Activity_Help_Center_Datail;
 import com.cdhxqh.household_app.ui.adapter.HelpCenterExpandableListViewAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

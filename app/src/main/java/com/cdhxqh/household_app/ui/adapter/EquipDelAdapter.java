@@ -1,7 +1,6 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

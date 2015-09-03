@@ -168,6 +168,8 @@
     <string name="alarm_type_water">发生水侵报警</string>
     <string name="alarm_type_urgent_button">发生紧急按钮报警</string>
     <string name="alarm_type_person_alarm">发生人体感应报警</string>
+    <string name="device_add_text">添加设备</string>
+    <string name="device_update_text">修改设备</string>
     <!--   萤石需要mesg  -->
 
 

@@ -4,11 +4,13 @@ package com.cdhxqh.household_app.ui.widget;
 *  * 文 件 名:  DataCleanManager.java
 * * 描    述:  主要功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录
 * */
-import java.io.File;
-import java.math.BigDecimal;
+
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
+
+import java.io.File;
+import java.math.BigDecimal;
 
 /** * 本应用数据清除管理器 */
 public class DataCleanManager {

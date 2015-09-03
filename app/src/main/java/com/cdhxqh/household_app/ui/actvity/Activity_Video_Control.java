@@ -299,9 +299,6 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         try {
 
             String sdpath ="/storage/sdcard1/";
-//            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-//            <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> 加这两个权限
-//            String sdpath = null;//设置保存图片的地址
             File f = new File(sdpath ,"11.bmp");//设置图片名字
             if (f.exists()) {
                 f.delete();
@@ -364,7 +361,6 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
      * 更新进度条
      */
     private void updateLoadingProgress(final int progress) {
-        Log.i(TAG,"progress="+progress);
         if(processText!=null){
             processText.setText(progress + "%");
             mHandler.postDelayed(new Runnable() {
@@ -539,7 +535,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
             mRealPlayerHelper.startEncryptLocalRealPlayTask(this, mRealPlayMgr, info.getDeviceId(),
                     mDeviceDiscoverInfo.localIP, title_resid, msg1_resid, msg2_resid);
         } else {
-            mRealPlayerHelper.startEncryptRealPlayTask(this, mRealPlayMgr, info.getCameraId(), title_resid, msg1_resid, msg2_resid);
+            mRealPlayerHelper.startEncryptRealPlayTask(getApplication(),R.color.black, mRealPlayMgr, info.getCameraId(), title_resid, msg1_resid, msg2_resid);
         }
 
         updateLoadingProgress(0);

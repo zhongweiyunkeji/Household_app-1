@@ -1,22 +1,13 @@
 package com.cdhxqh.household_app.ui.widget;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.text.DecimalFormat;
-import java.util.List;
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.telephony.NeighboringCellInfo;
 import android.telephony.TelephonyManager;
-import android.telephony.cdma.CdmaCellLocation;
-import android.telephony.gsm.GsmCellLocation;
-import android.util.Log;
 
 import com.cdhxqh.household_app.utils.ToastUtil;
+
+import java.text.DecimalFormat;
 
 public class NetWorkUtil {
 

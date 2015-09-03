@@ -445,13 +445,11 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             public void selected(View view, Item item, int position) {
                 switch (item.id) {
                     case DEVICEM_ADD: { //添加
-                        // Toast.makeText(MainActivity.this, "添加", Toast.LENGTH_LONG).show();
-                        Bundle bundle = new Bundle();
-                        openActivity(AddEquipmentActivity.class, bundle);
+//                        Bundle bundle = new Bundle();
+                        openActivity(AddEquipmentActivity.class, null);
                         break;
                     }
                     case DEVICEM_DEL: { //删除
-                        // Toast.makeText(MainActivity.this, "删除", Toast.LENGTH_LONG).show();
                         Bundle bundle = new Bundle();
                         openActivity(Activity_Equip_delete.class, bundle);
                         break;

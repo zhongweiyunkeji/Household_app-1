@@ -1,6 +1,5 @@
 package com.cdhxqh.household_app.ui.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,9 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
-import com.cdhxqh.household_app.ui.actvity.TestActivity;
 import com.videogo.openapi.bean.resp.CameraInfo;
 
 import java.util.ArrayList;

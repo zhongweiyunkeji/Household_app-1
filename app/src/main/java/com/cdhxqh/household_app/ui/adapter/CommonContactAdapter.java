@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.actvity.AddContacterActivity;
-import com.cdhxqh.household_app.ui.fragment.CommonContactFragment;
 
 import java.io.Serializable;
 import java.util.ArrayList;

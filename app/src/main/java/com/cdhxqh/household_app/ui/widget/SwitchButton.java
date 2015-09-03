@@ -12,7 +12,6 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Switch;
 
 import com.cdhxqh.household_app.R;
 

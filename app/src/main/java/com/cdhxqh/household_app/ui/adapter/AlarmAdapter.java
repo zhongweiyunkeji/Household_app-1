@@ -1,25 +1,18 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
-import com.cdhxqh.household_app.ui.actvity.Activity_Login;
 import com.cdhxqh.household_app.ui.actvity.AddContacterActivity;
 import com.cdhxqh.household_app.ui.actvity.AlarmActivity;
 

@@ -1,7 +1,5 @@
 package com.cdhxqh.household_app.model;
 
-import android.content.Intent;
-
 import java.io.Serializable;
 
 /**

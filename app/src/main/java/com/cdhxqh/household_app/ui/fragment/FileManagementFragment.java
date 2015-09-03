@@ -11,19 +11,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.FileItem;
 import com.cdhxqh.household_app.ui.actvity.Activity_File_Detail_img;
 import com.cdhxqh.household_app.ui.actvity.Activity_File_Detail_video;
-import com.cdhxqh.household_app.ui.actvity.Activity_Help_Center_Datail;
 import com.cdhxqh.household_app.ui.adapter.FileManagementExpandableListViewAdapter;
-import com.cdhxqh.household_app.ui.adapter.HelpCenterExpandableListViewAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

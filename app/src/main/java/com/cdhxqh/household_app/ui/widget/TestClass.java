@@ -3,8 +3,6 @@ package com.cdhxqh.household_app.ui.widget;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
-import com.cdhxqh.household_app.R;
-
 import java.util.regex.Pattern;
 
 /**

@@ -3,12 +3,7 @@ package com.cdhxqh.household_app.ui.widget.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.view.View;
-import android.view.Window;
-import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 
