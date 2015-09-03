@@ -14,5 +14,5 @@ public class Constants {
 
 
     /**设置Token**/
-    public static final String TOKEN_URL = "at.7xuar1gr0g4cmq1d75ypl15u2it0faqn-2rrghtr7r4-07azpnm-1ya5libcl";
+    public static final String TOKEN_URL = "at.07mxvay32n1l4x1t0t34io0ycpsrdi5b-9nw431gdgc-0ibyryz-o9yqwhzkv";
 }
