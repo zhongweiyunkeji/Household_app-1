@@ -35,6 +35,7 @@ public class TestClass {
      */
     public static void loading(Activity activity, String message) {
         progressDialog = ProgressDialog.show(activity, null, message, true, true);
+        progressDialog.setCancelable(false);// 设置模态对话框
     }
 
     /**
