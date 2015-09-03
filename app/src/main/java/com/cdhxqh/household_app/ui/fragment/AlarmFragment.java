@@ -97,6 +97,7 @@ public class AlarmFragment extends BaseFragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         myDevicelistAdapter = new MyDevicelistAdapter(getActivity());
+        myDevicelistAdapter.setShowDeviceSrarus(false); // 不显示设备状态
         recyclerView.setAdapter(myDevicelistAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

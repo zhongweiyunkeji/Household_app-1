@@ -64,6 +64,7 @@ public class MyDeviceFragment extends BaseFragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         myDevicelistAdapter = new MyDevicelistAdapter(getActivity());
+        myDevicelistAdapter.setShowSizeView(false); // 不显示报警记录总数
         recyclerView.setAdapter(myDevicelistAdapter);
         swipeRefreshLayout.setRefreshing(true);
 
