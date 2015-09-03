@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.MyDevice;
-import com.cdhxqh.household_app.ui.adapter.EquipDelAdapter;
 import com.cdhxqh.household_app.ui.adapter.EquipEditAdapter;
 
 import java.util.ArrayList;

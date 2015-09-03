@@ -1,6 +1,5 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.action.impl.OnItemClickCallBackImpl;
 import com.cdhxqh.household_app.ui.widget.SwitchButton;

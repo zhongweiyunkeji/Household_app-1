@@ -6,13 +6,9 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.widget.ImageView;
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.config.Constants;
-
-import java.util.Random;
 
 /**
  * Entry Activity

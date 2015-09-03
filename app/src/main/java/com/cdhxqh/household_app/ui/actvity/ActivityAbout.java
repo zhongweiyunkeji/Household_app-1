@@ -1,15 +1,11 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.view.Window;
+import android.widget.TextView;
+
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.widget.dialog.CustomDialog;
 

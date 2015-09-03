@@ -10,12 +10,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.adapter.EquipDelAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**

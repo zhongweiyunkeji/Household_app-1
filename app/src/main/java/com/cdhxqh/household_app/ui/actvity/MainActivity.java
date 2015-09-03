@@ -12,20 +12,14 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +42,6 @@ import com.cdhxqh.household_app.ui.widget.menu.PopMenu;
 import com.cdhxqh.household_app.ui.widget.menu.impl.DeviceMenu;
 import com.cdhxqh.household_app.utils.AccountUtils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -141,7 +134,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     private void initView() {
         toolbar.setNavigationIcon(R.drawable.ic_menu_list);  // 设置图标
         setSupportActionBar(toolbar);  // 设置ActionBar
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff")); //设置标题颜色
+        toolbar.setTitleTextColor(getResources().getColor(R.color.transition_bg)); //设置标题颜色
         mFavoriteTabTitles = getResources().getStringArray(R.array.title_drawers);
         // getSupportActionBar().setTitle(mFavoriteTabTitles[0]);
         getSupportActionBar().setTitle("");
@@ -443,27 +436,27 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     private void initMenu() {
         // 我的设备
         myDie = new DeviceMenu(this, null, null, R.layout.menu_mydevice, R.layout.menu_mydevice_item, R.id.head_hint_img);
-        myDie.addItem("添加", DEVICEM_ADD, R.drawable.ic_menu_add);
-        myDie.addItem("删除", DEVICEM_DEL, R.drawable.ic_menu_delete);
+        myDie.addItem("添加", DEVICEM_ADD, R.drawable.ic_menu_addb);
+        myDie.addItem("删除", DEVICEM_DEL, R.drawable.ic_menu_deletesb);
         myDie.addItem("编辑", DEVICEM_EDIT, R.drawable.ic_menu_eidt);
         myDie.update();
         myDie.setOnItemSelectedListener(new PopMenu.OnItemSelectedListener() {
             @Override
             public void selected(View view, Item item, int position) {
                 switch (item.id) {
-                    case DEVICEM_ADD: {
+                    case DEVICEM_ADD: { //添加
                         // Toast.makeText(MainActivity.this, "添加", Toast.LENGTH_LONG).show();
                         Bundle bundle = new Bundle();
                         openActivity(AddEquipmentActivity.class, bundle);
                         break;
                     }
-                    case DEVICEM_DEL: {
+                    case DEVICEM_DEL: { //删除
                         // Toast.makeText(MainActivity.this, "删除", Toast.LENGTH_LONG).show();
                         Bundle bundle = new Bundle();
                         openActivity(Activity_Equip_delete.class, bundle);
                         break;
                     }
-                    case DEVICEM_EDIT: {
+                    case DEVICEM_EDIT: { //编辑
                         Bundle bundle = new Bundle();
                         openActivity(Activity_Equip_edit.class, bundle);
                         Toast.makeText(MainActivity.this, "编辑", Toast.LENGTH_LONG).show();

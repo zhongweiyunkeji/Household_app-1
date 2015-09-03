@@ -1,10 +1,7 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.action.impl.OnItemClickCallBackImpl;
