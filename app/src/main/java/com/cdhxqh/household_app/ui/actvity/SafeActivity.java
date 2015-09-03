@@ -2,34 +2,25 @@ package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
 import com.cdhxqh.household_app.ui.widget.dialog.DateTimePickerDialog;
 
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by Administrator on 2015/8/11.

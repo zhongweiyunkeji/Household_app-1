@@ -1,26 +1,16 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -29,7 +19,6 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -45,30 +34,19 @@ import com.videogo.exception.HCNetSDKException;
 import com.videogo.exception.InnerException;
 import com.videogo.exception.RtspClientException;
 import com.videogo.openapi.EzvizAPI;
-import com.videogo.openapi.bean.req.GetCameraInfoList;
 import com.videogo.openapi.bean.resp.CameraInfo;
 import com.videogo.realplay.RealPlayMsg;
 import com.videogo.realplay.RealPlayStatus;
 import com.videogo.realplay.RealPlayerHelper;
 import com.videogo.realplay.RealPlayerManager;
 import com.videogo.util.ConnectionDetector;
-import com.videogo.util.LogUtil;
 import com.videogo.util.Utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 /**
  * Created by hexian on 2015/8/10.
@@ -77,7 +55,7 @@ import java.util.concurrent.Future;
  *
  */
 public class Activity_Video_Control extends BaseActivity implements SecureValidate.SecureValidateListener,OpenYSService.OpenYSServiceListener {
-
+    private static final String TAG="Activity_Video_Control";
     LinearLayout layout;
     ScrollView   scrollView;
     VideoView videoView;
@@ -107,8 +85,10 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     ImageButton mPlayBtn;
 
     ImageView pauseBtn;
+
     RelativeLayout waitLayout;
     TextView processText;
+
     RelativeLayout coverImg;
 
     ImageView topCtrl;
@@ -384,6 +364,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
      * 更新进度条
      */
     private void updateLoadingProgress(final int progress) {
+        Log.i(TAG,"progress="+progress);
         if(processText!=null){
             processText.setText(progress + "%");
             mHandler.postDelayed(new Runnable() {
@@ -391,6 +372,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                 public void run() {
                     Random r = new Random();
                     processText.setText((progress + r.nextInt(20)) + "%");
+
+
                 }
             }, 500);
         }

@@ -1,7 +1,6 @@
 package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,7 +13,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;

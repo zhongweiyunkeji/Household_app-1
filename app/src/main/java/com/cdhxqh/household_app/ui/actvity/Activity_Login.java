@@ -1,6 +1,5 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,11 +19,10 @@ import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.widget.SwitchButton;
 import com.cdhxqh.household_app.ui.widget.TestClass;
-import com.cdhxqh.household_app.ui.widget.TimeCountUtil;
 import com.cdhxqh.household_app.utils.MessageUtils;
 
 /**
- * Created by think on 2015/8/17.
+ * 登录界面
  */
 public class Activity_Login extends BaseActivity{
     private EditText username;

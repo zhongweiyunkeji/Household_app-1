@@ -1,9 +1,5 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,11 +11,13 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.adapter.ViewPagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
