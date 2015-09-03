@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.actvity.AlarmActivity;
-import com.cdhxqh.household_app.ui.actvity.ViewUserActivity;
 
 import java.util.ArrayList;
 

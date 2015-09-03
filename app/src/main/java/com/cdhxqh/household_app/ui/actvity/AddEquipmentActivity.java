@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,10 @@ import com.cdhxqh.household_app.zxing.activity.CaptureActivity;
  * Created by Administrator on 2015/8/18.
  */
 public class AddEquipmentActivity extends BaseActivity {
+
+
+    private static final String TAG="AddEquipmentActivity";
+
     /**
      * 添加设备
      */
@@ -100,9 +105,13 @@ public class AddEquipmentActivity extends BaseActivity {
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
 
     ImageView backImg;  // 返回按钮
+
     TextView titleTextView;  // 标题栏标题
+
     ImageView addIcon;        // 标题栏添加按钮
+
     ImageView scanIcpn;     // 标题栏扫描二维码按钮
+
     String action;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,17 +146,18 @@ public class AddEquipmentActivity extends BaseActivity {
 
     public void initView() {
         Bundle bundle = getIntent().getExtras();
+        Log.i(TAG,"bundle="+bundle);
         if(bundle!=null){
             action = bundle.getString("action");
             MyDevice myDevice = (MyDevice)bundle.getSerializable("entity");
             if("edit".equals(action)){
-                titleTextView.setText("修改设备");
+                titleTextView.setText(getString(R.string.device_update_text));
                 if(myDevice!=null){
                     Toast.makeText(this, myDevice.getName(), Toast.LENGTH_SHORT);
                 }
             }
         } else {
-            titleTextView.setText("添加设备");
+            titleTextView.setText(getString(R.string.device_add_text));
         }
         /**
          * 拍摄照片监听

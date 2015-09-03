@@ -1,7 +1,5 @@
 package com.cdhxqh.household_app.model;
 
-import android.widget.TextView;
-
 /**
  * Created by Administrator on 2015/8/14.
  */

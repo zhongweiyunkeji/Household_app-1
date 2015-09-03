@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.action.OnItemClickCallBack;
+
 import java.util.ArrayList;
 
 /**

@@ -8,37 +8,40 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.model.MyDevice;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.openapi.bean.req.GetCameraInfoList;
 import com.videogo.openapi.bean.resp.CameraInfo;
-import com.videogo.realplay.RealPlayerHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by think on 2015/8/15.
+ * 我的设备
  */
 public class MyDeviceFragment extends BaseFragment {
 
     int currentPage = 0; // 当前页(索引从0开始)
+
     int showPage = 1;   // 每页显示
 
     SwipeRefreshLayout swipeRefreshLayout;
+
     private RecyclerView recyclerView;
+
     private MyDevicelistAdapter myDevicelistAdapter;
+
     Application application;
+
     EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
+
     ArrayList<CameraInfo> result;
 
     @Override
@@ -105,7 +108,7 @@ public class MyDeviceFragment extends BaseFragment {
             if(!isCancelled()){
                 try {
                     // 设置Token
-                    mEzvizAPI.setAccessToken("at.7xuar1gr0g4cmq1d75ypl15u2it0faqn-2rrghtr7r4-07azpnm-1ya5libcl");
+                    mEzvizAPI.setAccessToken(Constants.TOKEN_URL);
                     GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
                     getCameraInfoList.setPageStart(currentPage);
                     getCameraInfoList.setPageSize(showPage);

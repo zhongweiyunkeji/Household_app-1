@@ -11,4 +11,8 @@ public class Constants {
     public static final String ISFIRST = "isFirst";
     public static final String SESSIONID = "sessionId";
     public static final String SESSIONIDTRUE = "sessionIdTrue";
+
+
+    /**设置Token**/
+    public static final String TOKEN_URL = "at.7xuar1gr0g4cmq1d75ypl15u2it0faqn-2rrghtr7r4-07azpnm-1ya5libcl";
 }

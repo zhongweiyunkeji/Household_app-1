@@ -1,7 +1,6 @@
 package com.cdhxqh.household_app.api;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.Ec_user;

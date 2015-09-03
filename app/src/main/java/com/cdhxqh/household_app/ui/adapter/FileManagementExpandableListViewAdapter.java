@@ -1,7 +1,6 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +8,10 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.FileItem;
 import com.cdhxqh.household_app.ui.fragment.FileManagementFragment;
-import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
