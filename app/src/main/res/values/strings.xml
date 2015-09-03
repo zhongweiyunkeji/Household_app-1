@@ -157,6 +157,17 @@
     <string name="ptz_preset_exceed_maxnum_failed">已经不能收藏更多了</string>
     <string name="ptz_privacying_failed">镜头已遮蔽，无法操作云台</string>
     <string name="ptz_mirroring_failed">语音对讲中，无法操作云台</string>
+    <string name="alarm_type_unknown">发生未知类型报警</string>
+    <string name="alarm_type_infrared">发生人体感应事件</string>
+    <string name="alarm_type_remotecontrol">发生紧急遥控按钮事件</string>
+    <string name="alarm_type_motion_detection">发生移动侦测报警</string>
+    <string name="alarm_type_baby_cry">发生婴儿啼哭报警</string>
+    <string name="alarm_type_door">发生门磁报警</string>
+    <string name="alarm_type_smoke">发生烟感报警</string>
+    <string name="alarm_type_gas">发生可燃气体报警</string>
+    <string name="alarm_type_water">发生水侵报警</string>
+    <string name="alarm_type_urgent_button">发生紧急按钮报警</string>
+    <string name="alarm_type_person_alarm">发生人体感应报警</string>
     <!--   萤石需要mesg  -->
 
 
