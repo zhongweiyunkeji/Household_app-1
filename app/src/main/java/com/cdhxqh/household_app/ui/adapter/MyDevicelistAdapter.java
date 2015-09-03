@@ -31,6 +31,9 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
     private static final String TAG = "ReviewListAdapter";
     Context mContext;
 
+    private boolean showSizeView = true;
+    private boolean showDeviceSrarus = true;
+
     ArrayList<CameraInfo> list=new ArrayList<CameraInfo>();
 
     public MyDevicelistAdapter(Context context){
@@ -58,7 +61,12 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final CameraInfo info  = list.get(position);
         holder.nameView.setText(list.get(position).getCameraName());  // 摄像头名称
-        holder.sizeView.setText(0+"");
+        if(showSizeView){
+            holder.sizeView.setText(0+"");
+            holder.sizeView.setVisibility(View.VISIBLE);
+        } else {
+            holder.sizeView.setVisibility(View.GONE);
+        }
         String name = "";
         int imgResid = 0;
         if(0 == position){
@@ -77,13 +85,18 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
         holder.iconView.setImageBitmap(getBitMap(imgResid));
         holder.placeView.setText(name);
         holder.numberView.setText(info.getDeviceSerial());
-        String status = (info.getStatus() == 1) ? "在线" : "离线";
-        holder.status.setText(status);
-        if("在线".equals(status)){
-            holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
-        } else
-        if("离线".equals(status)){
-            holder.status.setTextColor(mContext.getResources().getColor(R.color.grgray));
+        if(showDeviceSrarus){
+            String status = (info.getStatus() == 1) ? "在线" : "离线";
+            holder.status.setText(status);
+            if("在线".equals(status)){
+                holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
+            } else
+            if("离线".equals(status)){
+                holder.status.setTextColor(mContext.getResources().getColor(R.color.grgray));
+            }
+            holder.status.setVisibility(View.VISIBLE);
+        } else {
+            holder.status.setVisibility(View.GONE);
         }
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -150,5 +163,13 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
         list = data;
 
         notifyDataSetChanged();
+    }
+
+    public void setShowDeviceSrarus(boolean showDeviceSrarus) {
+        this.showDeviceSrarus = showDeviceSrarus;
+    }
+
+    public void setShowSizeView(boolean showSizeView) {
+        this.showSizeView = showSizeView;
     }
 }
