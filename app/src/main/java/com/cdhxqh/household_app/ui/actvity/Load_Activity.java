@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.config.Constants;
 
 /**
  * Entry Activity
@@ -50,12 +51,11 @@ public class Load_Activity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 Intent intent = new Intent();
-                /*if(!mIsLogin || myshared.getString(Constants.PASS_KEY, "").equals("")) {
+                if(!mIsLogin || myshared.getString(Constants.PASS_KEY, "").equals("")) {
                     intent.setClass(Load_Activity.this, Activity_Login.class);
                 }else {
                     intent.setClass(Load_Activity.this, MainActivity.class);
-                }*/
-                intent.setClass(Load_Activity.this, MainActivity.class);
+                }
                 startActivity(intent);
                 finish();
             }

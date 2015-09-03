@@ -34,7 +34,7 @@ import java.util.List;
  * Created by think on 2015/8/15.
  */
 public class MyDeviceFragment extends BaseFragment {
-
+    private static final String TAG="MyDeviceFragment";
     int currentPage = 0; // 当前页(索引从0开始)
     int showPage = 10;   // 每页显示
 
@@ -58,8 +58,8 @@ public class MyDeviceFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getActivity()!=null){
-            application = (Application)getActivity().getApplication();
+        if (getActivity() != null) {
+            application = (Application) getActivity().getApplication();
         }
     }
 
@@ -99,9 +99,9 @@ public class MyDeviceFragment extends BaseFragment {
      */
     private void addData() {
         swipeRefreshLayout.setRefreshing(false);
-       myDevicelistAdapter.update(result, true);
-        if(!result.isEmpty()){
-            currentPage ++;
+        myDevicelistAdapter.update(result, true);
+        if (!result.isEmpty()) {
+            currentPage++;
         } else {
 
         }
@@ -109,15 +109,15 @@ public class MyDeviceFragment extends BaseFragment {
 
     public class MyAsyncTask extends AsyncTask {
 
-        public MyAsyncTask(){
-            if(!swipeRefreshLayout.isRefreshing()){
+        public MyAsyncTask() {
+            if (!swipeRefreshLayout.isRefreshing()) {
                 swipeRefreshLayout.setRefreshing(true);
             }
         }
 
         @Override
         protected Object doInBackground(Object[] params) {
-            if(!isCancelled()){
+            if (!isCancelled()) {
                 try {
                     // 设置Token
                     mEzvizAPI.setAccessToken(Constants.TOKEN_URL);
@@ -125,7 +125,8 @@ public class MyDeviceFragment extends BaseFragment {
                     getCameraInfoList.setPageStart(currentPage);
                     getCameraInfoList.setPageSize(showPage);
                     // 获取设备列表
-                    result = (ArrayList<CameraInfo>)mEzvizAPI.getCameraInfoList(getCameraInfoList);
+                    result = (ArrayList<CameraInfo>) mEzvizAPI.getCameraInfoList(getCameraInfoList);
+                    Log.i(TAG,"result="+result);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -135,7 +136,8 @@ public class MyDeviceFragment extends BaseFragment {
 
         @Override
         protected void onPostExecute(Object o) {
-            if(NetWorkUtil.IsNetWorkEnable(getActivity()) && result!=null){
+            if (NetWorkUtil.IsNetWorkEnable(getActivity()) && result != null) {
+                Log.i(TAG,"112345");
                 addData();
             }
         }
@@ -145,7 +147,7 @@ public class MyDeviceFragment extends BaseFragment {
     /**
      * 初始化任务
      */
-    private void startAsynTask(){
+    private void startAsynTask() {
         new MyAsyncTask().execute();
     }
 
