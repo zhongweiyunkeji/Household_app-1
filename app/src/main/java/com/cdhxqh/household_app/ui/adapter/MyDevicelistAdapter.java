@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.videogo.openapi.bean.resp.CameraInfo;
 
@@ -30,11 +31,13 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
 
     private boolean showSizeView = true;
     private boolean showDeviceSrarus = true;
+    DeviceOnClick callback;
 
     ArrayList<CameraInfo> list=new ArrayList<CameraInfo>();
 
-    public MyDevicelistAdapter(Context context){
+    public MyDevicelistAdapter(Context context, DeviceOnClick callback){
         this.mContext = context;
+        this.callback = callback;
     }
 
     private Bitmap getBitMap(int resid){
@@ -97,15 +100,13 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
             holder.status.setVisibility(View.GONE);
         }
 
+        final ViewHolder h = holder;
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("device_name", info);
-                intent.putExtras(bundle);
-                intent.setClass(mContext,Activity_Video_Control.class);
-                mContext.startActivity(intent);
+                if(callback!=null){
+                    callback.callback(h, position, v, info);
+                }
             }
         });
 
