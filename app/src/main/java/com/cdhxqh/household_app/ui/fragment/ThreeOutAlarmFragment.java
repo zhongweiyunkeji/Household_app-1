@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
+import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_Del;
 import com.cdhxqh.household_app.ui.actvity.Activity_alarm_play;
 import com.cdhxqh.household_app.ui.actvity.MainActivity;
@@ -140,7 +141,7 @@ public class ThreeOutAlarmFragment extends BaseFragment {
             }
             Alarm alarm = new Alarm("2015-08-17 18:51:22",R.drawable.ic_menu_alarm_orange,
                     "http://c.hiphotos.baidu.com/news/w%3D638/sign=b918710f45a98226b8c12824b283b97a/e824b899a9014c083cdadbdf0c7b02087af4f4e3.jpg",
-                    "海康DS-2CD2412F IN " + i, str);
+                    "海康DS-2CD2412F IN " +i, "家里门口 - 有可疑人员移动 "+i);
             list.add(alarm);
         }
         adapter.update(list);
