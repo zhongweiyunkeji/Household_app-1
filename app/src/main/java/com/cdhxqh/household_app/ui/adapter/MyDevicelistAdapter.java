@@ -70,20 +70,21 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
         String name = "";
         int imgResid = 0;
         if(0 == position){
-            name = "办公室";
+            // name = "办公室";
             imgResid = R.drawable.camera_office;
         } else
         if(1 == position){
-            name = "楼道";
+            // name = "楼道";
             imgResid = R.drawable.camera_corridor;
         } else
         if(2 == position){
-            name = "操场";
+            // name = "操场";
             imgResid = R.drawable.camera_playground;
         }
 
         holder.iconView.setImageBitmap(getBitMap(imgResid));
-        holder.placeView.setText(name);
+        // holder.placeView.setText(name);
+        holder.placeView.setVisibility(View.GONE);
         holder.numberView.setText(info.getDeviceSerial());
         if(showDeviceSrarus){
             String status = (info.getStatus() == 1) ? "在线" : "离线";
