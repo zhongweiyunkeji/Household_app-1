@@ -34,6 +34,7 @@ import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_Del;
+import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_List;
 import com.cdhxqh.household_app.ui.actvity.Activity_Login;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.actvity.Activity_alarm_play;
@@ -80,8 +81,10 @@ public class AlarmFragment extends BaseFragment {
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
             bundle.putParcelable("device_name", info);
+            bundle.putBoolean("showCheckBox", false);
+            bundle.putBoolean("hideToolBar", false);
             intent.putExtras(bundle);
-            intent.setClass(getActivity(),Activity_Video_Control.class);
+            intent.setClass(getActivity(), Activity_Alarm_List.class);
             getActivity().startActivity(intent);
         }
     };
@@ -148,6 +151,12 @@ public class AlarmFragment extends BaseFragment {
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            TestClass.loading(getActivity(), "正在加载数据，请稍后");
+        }
+
+        @Override
         protected Object doInBackground(Object[] params) {
             if(!isCancelled()){
                 try {
@@ -158,11 +167,27 @@ public class AlarmFragment extends BaseFragment {
                     getCameraInfoList.setPageSize(showPage);
                     // 获取设备列表
                     result = (ArrayList<CameraInfo>)mEzvizAPI.getCameraInfoList(getCameraInfoList);
+                    return result;
                 } catch (Exception e) {
                     e.printStackTrace();
+                    result = new ArrayList<CameraInfo>(0);
+                    for(int i=0; i<3; i++){
+                        CameraInfo alarmInfo = new CameraInfo();
+                        alarmInfo.setCameraId("" + (1000 + i));
+                        alarmInfo.setCameraName("设备名称");
+                        alarmInfo.setCameraNo(i);
+                        alarmInfo.setDeviceId(""+i);
+                        alarmInfo.setPicUrl("http://");
+                        alarmInfo.setDeviceSerial("" + (1000 + i));
+                        alarmInfo.setStatus(1);
+                        result.add(alarmInfo);
+                    }
                 }
             }
-            return new ArrayList<CameraInfo>(0);
+            if(result == null){
+                result = new ArrayList<CameraInfo>(0);
+            }
+            return result;
         }
 
         @Override
@@ -170,6 +195,7 @@ public class AlarmFragment extends BaseFragment {
             if(NetWorkUtil.IsNetWorkEnable(getActivity()) && result!=null){
                 addData();
             }
+            TestClass.closeLoading();
         }
 
     }
