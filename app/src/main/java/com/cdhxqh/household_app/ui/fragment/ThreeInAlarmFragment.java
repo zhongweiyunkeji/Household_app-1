@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.AlarmType;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
@@ -215,7 +216,7 @@ public class ThreeInAlarmFragment extends BaseFragment {
             }
 
             try {
-                mEzvizAPI.setAccessToken("at.7xuar1gr0g4cmq1d75ypl15u2it0faqn-2rrghtr7r4-07azpnm-1ya5libcl");
+                mEzvizAPI.setAccessToken(Constants.TOKEN_URL);
                 GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
                 getCameraInfoList.setPageStart(0);
                 getCameraInfoList.setPageSize(10);
