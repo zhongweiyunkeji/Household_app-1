@@ -25,12 +25,21 @@ import com.cdhxqh.household_app.utils.MessageUtils;
  * 登录界面
  */
 public class Activity_Login extends BaseActivity{
+    private static final String TAG="Activity_Login";
+
+    /**用户名**/
     private EditText username;
+    /**密码**/
     private EditText password;
+    /**记住密码**/
     private CheckBox isremenber;
+    /**登录按钮**/
     private Button login;
+
+    /**忘记密码**/
     private TextView TextViewPassWord;
-    Button regBtn;  // 注册按钮
+    /**注册按钮**/
+    Button regBtn;
     boolean close = true;
     SharedPreferences.Editor editor;
     SwitchButton switchButton;
@@ -81,6 +90,8 @@ public class Activity_Login extends BaseActivity{
         login.setOnClickListener(loginonclick);
         TextViewPassWord.setOnClickListener(passWordOnClickListener);
         switchButton.setOnChangeListener(switchOnClickListener);
+
+
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,7 +151,7 @@ public class Activity_Login extends BaseActivity{
         /**
          * 加载中
          */
-        TestClass.loading(this, getString(R.string.loading));
+        TestClass.loading(this, getString(R.string.login_hint_text));
         HttpManager.filterManager(null, this, true, handler, Message.LOGIN_URL, "loginName", "password", username.getText().toString(), password.getText().toString());
     }
 
@@ -150,6 +161,7 @@ public class Activity_Login extends BaseActivity{
     HttpRequestHandler<Object[]> handler = new HttpRequestHandler<Object[]>() {
         @Override
         public void onSuccess(Object[] data) {
+            Toast.makeText(Activity_Login.this,"登录成功",Toast.LENGTH_SHORT).show();
             editor.putLong(Constants.SESSIONID, (Long)data[0]);
             editor.putString(Constants.SESSIONIDTRUE, (String) data[1]);
             editor.commit();

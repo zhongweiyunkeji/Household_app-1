@@ -1,6 +1,7 @@
 package com.cdhxqh.household_app.app;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.cdhxqh.household_app.api.ErrorType;
 import com.cdhxqh.household_app.api.HttpRequestHandler;
@@ -25,6 +26,8 @@ import java.util.Date;
  * Created by Administrator on 2015/8/19.
  */
 public class HttpManager {
+
+    private static final String TAG="HttpManager12";
 
     /**
      *

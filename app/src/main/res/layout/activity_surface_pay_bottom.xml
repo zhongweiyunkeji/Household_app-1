@@ -24,7 +24,7 @@
         android:background="@drawable/stopbtn_selector" />
 
     <ImageButton
-        android:id="@+id/realplay_stop_btn1"
+        android:id="@+id/voice_control_btn"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

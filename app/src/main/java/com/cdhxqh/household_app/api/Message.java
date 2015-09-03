@@ -10,14 +10,13 @@ public class Message {
      * 这里编写与服务器交互需要的url
      */
 
-    //酒店服务端IP
 
-//    public static final String BASE_URL = "http://172.25.124.1:8080/qdm/";
-    //公司服务端Ip
-//    public static final String BASE_URL = "http://192.168.1.106:8080/qdm/";
     //远程服务器地址
 
-    public static final String BASE_URL = "http://192.168.1.99:8080/security/";  //  "http://182.92.158.158:8080/qdm/"
+//    public static final String BASE_URL = "http://192.168.1.99:8080/security/";
+
+    //远程服务地址
+    public static final String BASE_URL = "http://182.92.158.158:8080/security/";
 
     /**登录用户接口**/
     public static final String LOGIN_URL = BASE_URL+"user/login";

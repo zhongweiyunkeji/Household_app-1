@@ -21,7 +21,7 @@ public class Activity_soft_suggest extends BaseActivity {
 
     RadioButton suggest;
     RadioButton complain;
-    EditText name ;
+    EditText name;
     EditText phone;
     EditText reqmsg;
     ImageView photo;
@@ -35,22 +35,22 @@ public class Activity_soft_suggest extends BaseActivity {
         initView();
     }
 
-    public void findViewById(){
+    public void findViewById() {
 
-        backImg = (ImageView)findViewById(R.id.back_imageview_id);
-        titleTextView = (TextView)findViewById(R.id.title_text_id);
-        settingImg = (ImageView)findViewById(R.id.title_add_id);
+        backImg = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        settingImg = (ImageView) findViewById(R.id.title_add_id);
 
-         suggest  = (RadioButton)findViewById(R.id.suggest);    // 建议
-         complain = (RadioButton)findViewById(R.id.complain);  // 投诉
-         name      = (EditText)findViewById(R.id.name);         // 姓名
-         phone     = (EditText)findViewById(R.id.phone);        // 手机号
-         reqmsg    = (EditText)findViewById(R.id.reqmsg);       // 建议内容
-         photo     = (ImageView)findViewById(R.id.photo);       // 照片
-         submit    = (Button)findViewById(R.id.submit);        // 提交
+        suggest = (RadioButton) findViewById(R.id.suggest);    // 建议
+        complain = (RadioButton) findViewById(R.id.complain);  // 投诉
+        name = (EditText) findViewById(R.id.name);         // 姓名
+        phone = (EditText) findViewById(R.id.phone);        // 手机号
+        reqmsg = (EditText) findViewById(R.id.reqmsg);       // 建议内容
+        photo = (ImageView) findViewById(R.id.photo);       // 照片
+        submit = (Button) findViewById(R.id.submit);        // 提交
     }
 
-    public void initView(){
+    public void initView() {
         titleTextView.setText("意见反馈");
         settingImg.setVisibility(View.GONE);
 

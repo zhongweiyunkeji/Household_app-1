@@ -170,6 +170,7 @@
     <string name="alarm_type_person_alarm">发生人体感应报警</string>
     <string name="device_add_text">添加设备</string>
     <string name="device_update_text">修改设备</string>
+    <string name="login_hint_text">登录中...</string>
     <!--   萤石需要mesg  -->
 
 

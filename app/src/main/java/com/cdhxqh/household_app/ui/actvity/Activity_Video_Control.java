@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.DeviceDiscoverInfo;
 import com.cdhxqh.household_app.ezviz.OpenYSService;
 import com.cdhxqh.household_app.ezviz.SecureValidate;
@@ -41,6 +42,7 @@ import com.videogo.realplay.RealPlayerHelper;
 import com.videogo.realplay.RealPlayerManager;
 import com.videogo.util.ConnectionDetector;
 import com.videogo.util.Utils;
+import com.videogo.util.LocalInfo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,6 +66,9 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     TextView titleText; // 标题
     ImageView settingImg; // 标题栏右侧按钮
     ImageView backImg;  // 退回按钮
+
+    /**控制声音**/
+    private ImageButton voice_btn;
 
     /** 标识是否正在播放 */
     boolean mIsPlaying = false;
@@ -96,6 +101,10 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     ImageView rightCtrl;
     ImageView bottomCtrl;
 
+
+    private LocalInfo mLocalInfo = null;
+
+
     public static final int MSG_HIDE_PTZ_DIRECTION = 201;
 
     private double mPlayRatio = 0;
@@ -125,6 +134,9 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         pauseBtn = (ImageView) findViewById(R.id.realplay_play_iv);  //  播放按钮
         waitLayout = (RelativeLayout) findViewById(R.id.process);  //  播放按钮
         processText = (TextView) findViewById(R.id.processtext);  //  缓冲进度
+
+        voice_btn=(ImageButton)findViewById(R.id.voice_control_btn);
+
 
         coverImg = (RelativeLayout) findViewById(R.id.realplay_display_view);  //  缓冲进度
 
@@ -202,6 +214,12 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     }
 
     private void initView(){
+
+        // 获取配置信息操作对象
+        mLocalInfo = LocalInfo.getInstance();
+        mLocalInfo.setSoundOpen(true);
+
+
         // 保持屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -258,7 +276,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         bottomCtrl.setOnTouchListener(mOnTouchListener);
         leftCtrl.setOnTouchListener(mOnTouchListener);
         rightCtrl.setOnTouchListener(mOnTouchListener);
-
+        voice_btn.setOnClickListener(voiceBtnOnClickListener);
 
         mSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -293,12 +311,33 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     }
 
+
+    private View.OnClickListener voiceBtnOnClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            onSoundBtnClick();
+        }
+    };
+
+    private void onSoundBtnClick() {
+        if (mLocalInfo.isSoundOpen()) {
+            mLocalInfo.setSoundOpen(false);
+            voice_btn.setBackgroundResource(R.drawable.ic_menu_song3);
+        } else {
+            mLocalInfo.setSoundOpen(true);
+            voice_btn.setBackgroundResource(R.drawable.ic_menu_mute);
+        }
+
+    }
+
+
+    /**图片保存路径**/
     public  void savePic(Bitmap b) {
 
         FileOutputStream fos = null;
         try {
 
-            String sdpath ="/storage/sdcard1/";
+            String sdpath = Constants.VIDEO_PATH;
             File f = new File(sdpath ,"11.bmp");//设置图片名字
             if (f.exists()) {
                 f.delete();

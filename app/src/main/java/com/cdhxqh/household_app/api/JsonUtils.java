@@ -93,7 +93,6 @@ public class JsonUtils {
                 ec_user.setUserName(result.getString("username"));
                 ec_user.setPassword(result.getString("password"));
                 ec_user.setMobilePhone(result.getString("mobile"));
-//                PersistenceHelper.saveModel(cxt, ec_user, Constants.USER_CACHE+userId);
                 AccountUtils.writeLoginMember(cxt, ec_user);
 
                 return true;
