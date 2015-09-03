@@ -1,6 +1,7 @@
 package com.cdhxqh.household_app.ui.fragment;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.MyDevice;
+import com.cdhxqh.household_app.ui.action.DeviceOnClick;
+import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
@@ -41,6 +44,16 @@ public class MyDeviceFragment extends BaseFragment {
     Application application;
     EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
     ArrayList<CameraInfo> result;
+    DeviceOnClick callback = new DeviceOnClick(){
+        public void callback(RecyclerView.ViewHolder holder, int position, View view, CameraInfo info){
+            Intent intent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("device_name", info);
+            intent.putExtras(bundle);
+            intent.setClass(getActivity(),Activity_Video_Control.class);
+            getActivity().startActivity(intent);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +77,7 @@ public class MyDeviceFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        myDevicelistAdapter = new MyDevicelistAdapter(getActivity());
+        myDevicelistAdapter = new MyDevicelistAdapter(getActivity(), callback);
         myDevicelistAdapter.setShowSizeView(false); // 不显示报警记录总数
         recyclerView.setAdapter(myDevicelistAdapter);
         swipeRefreshLayout.setRefreshing(true);
