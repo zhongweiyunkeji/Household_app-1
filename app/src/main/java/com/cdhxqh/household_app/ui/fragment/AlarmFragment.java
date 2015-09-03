@@ -65,7 +65,7 @@ import java.util.TimeZone;
 public class AlarmFragment extends BaseFragment {
 
     int currentPage = 0; // 当前页(索引从0开始)
-    int showPage = 1;   // 每页显示
+    int showPage = 10;   // 每页显示
 
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
