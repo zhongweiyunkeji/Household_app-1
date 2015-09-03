@@ -65,6 +65,7 @@ public class MyDeviceFragment extends BaseFragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         myDevicelistAdapter = new MyDevicelistAdapter(getActivity());
         recyclerView.setAdapter(myDevicelistAdapter);
+        swipeRefreshLayout.setRefreshing(true);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -82,7 +83,13 @@ public class MyDeviceFragment extends BaseFragment {
      * 从萤石云获取设备列表
      */
     private void addData() {
+        swipeRefreshLayout.setRefreshing(false);
        myDevicelistAdapter.update(result, true);
+        if(!result.isEmpty()){
+            currentPage ++;
+        } else {
+
+        }
     }
 
     public class MyAsyncTask extends AsyncTask {
