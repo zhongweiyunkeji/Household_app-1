@@ -32,8 +32,10 @@ import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.AlarmType;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
+import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_Del;
 import com.cdhxqh.household_app.ui.actvity.Activity_Login;
+import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.actvity.Activity_alarm_play;
 import com.cdhxqh.household_app.ui.actvity.Load_Activity;
 import com.cdhxqh.household_app.ui.actvity.MainActivity;
@@ -73,6 +75,16 @@ public class AlarmFragment extends BaseFragment {
     Application application;
     EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
     ArrayList<CameraInfo> result;
+    DeviceOnClick callback = new DeviceOnClick(){
+        public void callback(RecyclerView.ViewHolder holder, int position, View view, CameraInfo info){
+            Intent intent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("device_name", info);
+            intent.putExtras(bundle);
+            intent.setClass(getActivity(),Activity_Video_Control.class);
+            getActivity().startActivity(intent);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +108,7 @@ public class AlarmFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        myDevicelistAdapter = new MyDevicelistAdapter(getActivity());
+        myDevicelistAdapter = new MyDevicelistAdapter(getActivity(), callback);
         myDevicelistAdapter.setShowDeviceSrarus(false); // 不显示设备状态
         recyclerView.setAdapter(myDevicelistAdapter);
 
@@ -140,7 +152,7 @@ public class AlarmFragment extends BaseFragment {
             if(!isCancelled()){
                 try {
                     // 设置Token
-                    mEzvizAPI.setAccessToken("at.7xuar1gr0g4cmq1d75ypl15u2it0faqn-2rrghtr7r4-07azpnm-1ya5libcl");
+                    mEzvizAPI.setAccessToken(Constants.TOKEN_URL);
                     GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
                     getCameraInfoList.setPageStart(currentPage);
                     getCameraInfoList.setPageSize(showPage);
