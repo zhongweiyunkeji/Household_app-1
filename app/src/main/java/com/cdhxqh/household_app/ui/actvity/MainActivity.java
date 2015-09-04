@@ -376,7 +376,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         if (mSelectPos == 0) { // 我的设备
             deviceItem.setVisibility(View.VISIBLE);
         } else if (mSelectPos == 1) { // 报警记录
-            alarmIte.setVisible(true);
+            // alarmIte.setVisible(true);
         } else if (mSelectPos == 2) { // 安全服务中心
 
         } else if (mSelectPos == 3) { // 文件管理
