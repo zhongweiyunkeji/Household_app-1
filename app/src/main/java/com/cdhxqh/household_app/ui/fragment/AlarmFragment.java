@@ -165,23 +165,42 @@ public class AlarmFragment extends BaseFragment {
                     GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
                     getCameraInfoList.setPageStart(currentPage);
                     getCameraInfoList.setPageSize(showPage);
+                    int x = 1/0;  // 使用异常里面的数据来缓存
                     // 获取设备列表
                     result = (ArrayList<CameraInfo>)mEzvizAPI.getCameraInfoList(getCameraInfoList);
                     return result;
                 } catch (Exception e) {
                     e.printStackTrace();
                     result = new ArrayList<CameraInfo>(0);
-                    for(int i=0; i<3; i++){
-                        CameraInfo alarmInfo = new CameraInfo();
-                        alarmInfo.setCameraId("" + (1000 + i));
-                        alarmInfo.setCameraName("设备名称");
-                        alarmInfo.setCameraNo(i);
-                        alarmInfo.setDeviceId(""+i);
-                        alarmInfo.setPicUrl("http://");
-                        alarmInfo.setDeviceSerial("" + (1000 + i));
-                        alarmInfo.setStatus(1);
-                        result.add(alarmInfo);
-                    }
+                    CameraInfo f1 = new CameraInfo();
+                    f1.setDeviceSerial("536724861");
+                    f1.setPicUrl("https://i.ys7.com/assets/imgs/public/homeDevice.jpeg");
+                    f1.setCameraName("C6(536724861)");
+                    f1.setDeviceName(null);
+                    f1.setDeviceId("e2b6ad92be744a2e8745473dd3dc3918536724861");
+                    f1.setCameraId("24a7467d51a1484c9146b501f4ee34cf");
+                    f1.setCameraNo(1);
+                    f1.setDefence(0);
+                    f1.setIsEncrypt(1);
+                    f1.setIsShared(0);
+                    f1.setStatus(1);
+
+                    CameraInfo f2 = new CameraInfo();
+                    f2.setDeviceSerial("536724535");
+                    f2.setPicUrl("https://i.ys7.com/assets/imgs/public/homeDevice.jpeg");
+                    f2.setCameraName("C6(536724535)");
+                    f2.setDeviceName(null);
+                    f2.setDeviceId("e2b6ad92be744a2e8745473dd3dc3918536724535");
+                    f2.setCameraId("393dc7038a9041a5bd6173fea61364fc");
+                    f2.setCameraNo(1);
+                    f2.setDefence(0);
+                    f2.setIsEncrypt(0);
+                    f2.setIsShared(0);
+                    f2.setStatus(1);
+
+                    result.add(f1);
+                    result.add(f2);
+                    return result;
                 }
             }
             if(result == null){
