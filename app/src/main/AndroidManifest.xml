@@ -141,7 +141,7 @@
             android:name=".zxing.activity.CaptureActivity"  >
         </activity>
 
-        <activity
+        <!--<activity
             tools:replace="configChanges"
             android:name="io.vov.vitamio.activity.InitActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -152,7 +152,7 @@
             android:name="io.vov.vitamio.activity.VideoViewDemo"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+        </activity>-->
         <activity
             android:name=".ui.actvity.Activity_pay_video"
             android:configChanges="orientation|keyboardHidden|navigation"
