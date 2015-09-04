@@ -14,7 +14,8 @@ public class Constants {
 
 
     /**设置Token**/
-    public static final String TOKEN_URL = "at.07mxvay32n1l4x1t0t34io0ycpsrdi5b-9nw431gdgc-0ibyryz-o9yqwhzkv";
+//    public static final String TOKEN_URL = "at.akpf73cs0opka1vmbbve5iavcb107cwo-2o7upbvuw0-07pjh1e-vtzavaaih";
+    public static final String TOKEN_URL = "at.51fatjuk9s8oz5s228c9geef7r9fusyg-1orrc8mkzs-0mxjggv-a4vngtpf6";
 
     /**视频截图保存路径**/
     public static final String VIDEO_PATH="/storage/sdcard1/";
