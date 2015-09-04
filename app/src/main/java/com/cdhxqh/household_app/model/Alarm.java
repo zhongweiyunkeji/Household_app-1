@@ -14,6 +14,9 @@ public class Alarm implements Serializable {
     private int icon;
     private boolean status = false;  // 保存复选框的选中状态
     private boolean back;
+    private boolean encryption;
+    private String serial;
+    private String checkSum;
 
     public boolean isBack() {
         return back;
@@ -80,5 +83,29 @@ public class Alarm implements Serializable {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public boolean isEncryption() {
+        return encryption;
+    }
+
+    public void setEncryption(boolean encryption) {
+        this.encryption = encryption;
+    }
+
+    public String getCheckSum() {
+        return checkSum;
+    }
+
+    public void setCheckSum(String checkSum) {
+        this.checkSum = checkSum;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 }
