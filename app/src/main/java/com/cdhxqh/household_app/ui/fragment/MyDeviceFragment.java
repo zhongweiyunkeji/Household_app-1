@@ -22,8 +22,10 @@ import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
+import com.cdhxqh.household_app.ui.widget.TestClass;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.openapi.bean.req.GetCameraInfoList;
+import com.videogo.openapi.bean.resp.AlarmInfo;
 import com.videogo.openapi.bean.resp.CameraInfo;
 import com.videogo.realplay.RealPlayerHelper;
 
@@ -116,6 +118,12 @@ public class MyDeviceFragment extends BaseFragment {
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            TestClass.loading(getActivity(), "正在加载数据，请稍后");
+        }
+
+        @Override
         protected Object doInBackground(Object[] params) {
             if (!isCancelled()) {
                 try {
@@ -127,8 +135,21 @@ public class MyDeviceFragment extends BaseFragment {
                     // 获取设备列表
                     result = (ArrayList<CameraInfo>) mEzvizAPI.getCameraInfoList(getCameraInfoList);
                     Log.i(TAG,"result="+result);
+                    int i = 1/0;
                 } catch (Exception e) {
                     e.printStackTrace();
+                    result = new ArrayList<CameraInfo>(0);
+                    for(int i=0; i<3; i++){
+                        CameraInfo alarmInfo = new CameraInfo();
+                        alarmInfo.setCameraId("" + (1000 + i));
+                        alarmInfo.setCameraName("设备名称");
+                        alarmInfo.setCameraNo(i);
+                        alarmInfo.setDeviceId(""+i);
+                        alarmInfo.setPicUrl("http://");
+                        alarmInfo.setDeviceSerial("" + (1000 + i));
+                        alarmInfo.setStatus(1);
+                        result.add(alarmInfo);
+                    }
                 }
             }
             return new ArrayList<CameraInfo>(0);
@@ -140,6 +161,7 @@ public class MyDeviceFragment extends BaseFragment {
                 Log.i(TAG,"112345");
                 addData();
             }
+            TestClass.closeLoading();
         }
 
     }
