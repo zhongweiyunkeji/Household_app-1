@@ -19,7 +19,7 @@
         android:id="@+id/item_img"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/img2"
+        android:src="@drawable/alarm_encrypt_image_mid"
         android:gravity="center"
         android:layout_gravity="center"
         />

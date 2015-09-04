@@ -44,6 +44,11 @@
             android:layout_marginRight="10dp"/>
     </RelativeLayout>
 
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/list_line_x"/>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_container"
         android:layout_width="match_parent"
