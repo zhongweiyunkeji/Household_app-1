@@ -102,6 +102,7 @@ public class MyDeviceFragment extends BaseFragment {
      */
     private void addData() {
         swipeRefreshLayout.setRefreshing(false);
+        myDevicelistAdapter.setShowSwitch(true);
         myDevicelistAdapter.update(result, true);
         if (!result.isEmpty()) {
             currentPage++;
