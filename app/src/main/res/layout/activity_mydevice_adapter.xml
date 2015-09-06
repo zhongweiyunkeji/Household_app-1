@@ -74,16 +74,31 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/mydevice_open"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="开启"
-        android:textSize="14sp"
-        android:paddingTop="3dp"
-        android:paddingRight="3dp"
-        android:textColor="@color/green" />
-    <!--此处有两种状态，一个是开启，一个是关闭，根据用户是否开启摄像头来显示不同状态-->
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/mydevice_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在线"
+            android:layout_gravity="right"
+            android:textSize="14sp"
+            android:paddingTop="3dp"
+            android:paddingRight="3dp"
+            android:textColor="@color/green" />
+        <!--此处有两种状态，一个是开启，一个是关闭，根据用户是否开启摄像头来显示不同状态-->
+        <ImageButton
+            android:id="@+id/tab_devicedefence_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/cameralist_button_selector"
+            android:gravity="center"
+            android:src="@drawable/my_switch_selector"/>
+    </LinearLayout>
     <!--<TextView-->
         <!--android:id="@+id/mydevice_close"-->
         <!--android:layout_width="wrap_content"-->
