@@ -19,7 +19,6 @@ import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
-import com.cdhxqh.household_app.ui.actvity.Test;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
