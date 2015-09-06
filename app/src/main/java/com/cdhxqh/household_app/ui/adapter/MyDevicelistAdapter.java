@@ -1,24 +1,35 @@
 package com.cdhxqh.household_app.ui.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.ezviz.TransferAPI;
+import com.cdhxqh.household_app.ezviz.WaitDialog;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
+import com.videogo.exception.BaseException;
+import com.videogo.exception.ErrorCode;
 import com.videogo.openapi.bean.resp.CameraInfo;
+import com.videogo.util.ConnectionDetector;
+import com.videogo.util.Utils;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -31,6 +42,7 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
 
     private boolean showSizeView = true;
     private boolean showDeviceSrarus = true;
+    private boolean showSwitch = false;
     DeviceOnClick callback;
 
     ArrayList<CameraInfo> list=new ArrayList<CameraInfo>();
@@ -86,6 +98,22 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
         // holder.placeView.setText(name);
         holder.placeView.setVisibility(View.GONE);
         holder.numberView.setText(info.getDeviceSerial());
+
+        if(showSwitch){
+            if (info.getDefence() == 1) {// 是否打开设备监控
+                holder.udstatus.setSelected(true);
+            } else {
+                holder.udstatus.setSelected(false);
+            }
+            holder.udstatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new UpdateDefenceTask(info, mContext, MyDevicelistAdapter.this).execute();
+                }
+            });
+        }
+
+
         if(showDeviceSrarus){
             String status = (info.getStatus() == 1) ? "在线" : "离线";
             holder.status.setText(status);
@@ -117,6 +145,10 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
         return list.size();
     }
 
+    public void setShowSwitch(boolean showSwitch) {
+        this.showSwitch = showSwitch;
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         public LinearLayout linearLayout;
@@ -131,6 +163,7 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
         /**编号**/
         public TextView numberView;
         public TextView status;
+        public ImageButton udstatus;
         public ViewHolder(final View itemView) {
             super(itemView);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.mydevice_content_id);
@@ -140,6 +173,7 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
             placeView = (TextView) itemView.findViewById(R.id.mydevice_place);
             numberView = (TextView) itemView.findViewById(R.id.mydevice_number);
             status = (TextView) itemView.findViewById(R.id.mydevice_open);
+            udstatus = (ImageButton) itemView.findViewById(R.id.tab_devicedefence_btn);
         }
     }
 
@@ -170,5 +204,63 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
 
     public void setShowSizeView(boolean showSizeView) {
         this.showSizeView = showSizeView;
+    }
+
+
+
+    private class UpdateDefenceTask extends AsyncTask<Void, Void, Boolean> {
+        private CameraInfo mCameraInfo;
+        private Dialog mWaitDialog;
+        private int mErrorCode;
+        Context context;
+        MyDevicelistAdapter adapter;
+
+        public UpdateDefenceTask(CameraInfo cameraInfo, Context context, MyDevicelistAdapter adapter) {
+            mCameraInfo = cameraInfo;
+            this.context = context;
+            this.adapter = adapter;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mWaitDialog = new WaitDialog(context, android.R.style.Theme_Translucent_NoTitleBar);
+            mWaitDialog.setCancelable(false);
+            mWaitDialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            if (!ConnectionDetector.isNetworkAvailable(context)) {
+                return null;
+            }
+
+            try {
+                return TransferAPI.updateDefence(mCameraInfo.getDeviceSerial(), mCameraInfo.getDefence() == 0 ? 1 : 0);
+            } catch (BaseException e) {
+                e.printStackTrace();
+                mErrorCode = e.getErrorCode();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                mErrorCode = ErrorCode.ERROR_WEB_PARAM_ERROR;
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            mWaitDialog.dismiss();
+
+            if (result != null && result) {
+                Utils.showToast(context, mCameraInfo.getDefence() == 0 ? R.string.device_defence_open_success : R.string.device_defence_close_success);
+                mCameraInfo.setDefence(mCameraInfo.getDefence()==0?1:0);
+                if(adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
+            } else {
+                Utils.showToast(context, mCameraInfo.getDefence()==0?R.string.device_defence_open_fail:R.string.device_defence_close_fail, mErrorCode);
+            }
+        }
     }
 }
