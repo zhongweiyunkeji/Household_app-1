@@ -5,14 +5,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.AlarmType;
@@ -30,6 +31,7 @@ import com.videogo.util.Utils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -42,14 +44,17 @@ public class Activity_Alarm_List extends BaseActivity {
     ListView listView;
     AlarmItemAdapter adapter;
     RelativeLayout relativeLayout;
-    int currentPage = 1;
-    int showPage = 10;
+    int currentPage = 0;
+    int showPage = 30;
     EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
     CameraInfo info;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     ImageView backImg;
     TextView titleText;
     ImageView settingImg;
+
+    CheckBox checkdAll;
+    ImageView delBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,11 @@ public class Activity_Alarm_List extends BaseActivity {
         backImg = (ImageView)findViewById(R.id.back_imageview_id);
         titleText = (TextView)findViewById(R.id.title_text_id);
         settingImg = (ImageView)findViewById(R.id.title_add_id);
+
+        checkdAll = (CheckBox)findViewById(R.id.checkd_all);
+        delBtn = (ImageView)findViewById(R.id.del_btn);
+
+
     }
 
     public void initView() {
@@ -89,10 +99,10 @@ public class Activity_Alarm_List extends BaseActivity {
         adapter = new AlarmItemAdapter(this, new AlarmOnClickCallBack() {
             @Override
             public void onClick(int position, View convertView, Alarm alarm) {
-                Intent intent = new Intent(Activity_Alarm_List.this,  Activity_alarm_play.class);
+               /* Intent intent = new Intent(Activity_Alarm_List.this,  Activity_alarm_play.class);
                 Bundle bundle = new Bundle();
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivity(intent);*/
                 // Toast.makeText(getActivity(), "" + getActivity().getClass().getName(), Toast.LENGTH_SHORT).show();
             }
         }, false);
@@ -105,6 +115,79 @@ public class Activity_Alarm_List extends BaseActivity {
             public void onRefresh() {
                 // 获取网络数据
                 initData();
+            }
+        });
+/*
+
+        checkdAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {  // 全选按钮事件
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (adapter != null) {
+                    if (isChecked) {
+                        adapter.selectAll();
+                    } else {
+                        adapter.unselectAll();
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        delBtn.setOnClickListener(new View.OnClickListener() { // 删除按钮事件
+            @Override
+            public void onClick(View v) {
+                ArrayList<Alarm> list = adapter.getList();
+                ArrayList<Alarm> clonList = (ArrayList<Alarm>) list.clone();
+                int size = list.size();
+                for (int index = 0; index < size; index++) {
+                    Alarm alarm = list.get(index);
+                    boolean flag = alarm.isStatus();
+                    if (flag) {
+                        clonList.remove(alarm);
+                    }
+                }
+                Collections.reverse(clonList);
+                adapter.reload(clonList);
+                if (adapter.getList().size() == 0) {
+                    checkdAll.setChecked(false);
+                }
+            }
+        });
+*/
+
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:{
+
+                    }
+                    case MotionEvent.ACTION_UP:{
+
+                    }
+                    case MotionEvent.ACTION_MOVE:{
+
+                    }
+                }
+                return false;
+            }
+        });
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(firstVisibleItem+visibleItemCount == totalItemCount){ // 滚动到最底部
+
+                } else
+                if(firstVisibleItem == 0){
+
+                }
+               // Log.e("TAG", "--------------------------->firstVisibleItem="+firstVisibleItem+", visibleItemCount="+visibleItemCount+", totalItemCount="+totalItemCount);
             }
         });
 
@@ -158,19 +241,20 @@ public class Activity_Alarm_List extends BaseActivity {
                 getAlarmInfoList.setStatus(2);
                 getAlarmInfoList.setAlarmType(-1); // 获取全部报警记录(报警类型可参考文档：萤石平台接口使用说明文档(最新版).doc)
 
+                // int x = 1/0;  // 使用异常里面的数据来缓存
                 result = (ArrayList<AlarmInfo>)mEzvizAPI.getAlarmInfoList(getAlarmInfoList);
 
                 return result;
-            } catch (BaseException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 result = new ArrayList<AlarmInfo>(0);
-                for(int i=0; i<3; i++){
+                for(int i=0; i<30; i++){
                     AlarmInfo alarmInfo = new AlarmInfo();
-                    alarmInfo.setAlarmId(""+(1000+i));
+                    alarmInfo.setAlarmId("" + (1000 + i));
                     alarmInfo.setAlarmIsEncyption(true);
                     alarmInfo.setAlarmName("设备名称");
                     alarmInfo.setAlarmPicUrl("http://");
-                    alarmInfo.setAlarmStart("2013-09-03 15:29:4"+i);
+                    alarmInfo.setAlarmStart("2013-09-03 15:29:4" + i);
                     alarmInfo.setDeviceSerial("" + (1000 + i));
                     alarmInfo.setAlarmType(10002);
                     result.add(alarmInfo);
@@ -194,9 +278,10 @@ public class Activity_Alarm_List extends BaseActivity {
                     alarmTypeName = Activity_Alarm_List.this.getResources().getString(alarmType.getTextResId());
                 }
 
-                Alarm alarm = new Alarm(info.getAlarmStart(), R.drawable.ic_menu_alarm_orange,
-                        "http://c.hiphotos.baidu.com/news/w%3D638/sign=b918710f45a98226b8c12824b283b97a/e824b899a9014c083cdadbdf0c7b02087af4f4e3.jpg",
-                        alarmTypeName, info.getAlarmName());
+                Alarm alarm = new Alarm(info.getAlarmStart(), R.drawable.ic_menu_alarm_orange, info.getAlarmPicUrl(), alarmTypeName, info.getAlarmName());
+                alarm.setEncryption(info.getAlarmEncryption());
+                alarm.setSerial(alarm.getSerial());
+                alarm.setCheckSum(alarm.getCheckSum());
                 list.add(alarm);
             }
 

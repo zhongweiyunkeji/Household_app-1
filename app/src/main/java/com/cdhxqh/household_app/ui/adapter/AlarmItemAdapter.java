@@ -16,6 +16,11 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
+import com.videogo.universalimageloader.core.DisplayImageOptions;
+import com.videogo.universalimageloader.core.assist.FailReason;
+import com.videogo.universalimageloader.core.download.DecryptFileInfo;
+import com.videogo.universalimageloader.core.listener.ImageLoadingListener;
+import com.videogo.universalimageloader.core.listener.ImageLoadingProgressListener;
 
 import java.util.ArrayList;
 
@@ -74,13 +79,59 @@ public class AlarmItemAdapter extends BaseAdapter {
 
         final Alarm alarm = list.get(position);
         // ImageLoader.getInstance().displayImage(alarm.getImg(), holder.img);
-        Bitmap bitmap = null;
+        /*Bitmap bitmap = null;
         if((position+1)%2 == 0){
             bitmap = getBitMap(R.drawable.img2);
         } else {
             bitmap = getBitMap(R.drawable.img3);
         }
-        holder.img.setImageBitmap(bitmap);
+        holder.img.setImageBitmap(bitmap);*/
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .needDecrypt(alarm.isEncryption())
+                .considerExifParams(true)
+                .showImageForEmptyUri(R.drawable.alarm_encrypt_image_mid)
+                .showImageOnFail(R.drawable.alarm_encrypt_image_mid)
+                .showImageOnDecryptFail(R.drawable.alarm_encrypt_image_mid)
+                .extraForDownloader(new DecryptFileInfo(alarm.getSerial(), alarm.getCheckSum()))
+                .build();
+
+        String imgUrl = alarm.getImg();
+        com.videogo.universalimageloader.core.ImageLoader mImageLoader = com.videogo.universalimageloader.core.ImageLoader.getInstance();
+        mImageLoader.displayImage(imgUrl, holder.img, options,
+                new ImageLoadingListener() {
+
+                    @Override
+                    public void onLoadingStarted(String imageUri, View view) {
+                       // Log.e("TAG", "---------------------------------------------------------->");
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                        Log.e("TAG", "---------------------------------------------------------->"+failReason.getType());
+                        Log.e("TAG", "---------------------------------------------------------->"+failReason.getCause());
+                    }
+
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        Log.e("TAG", "---------------------------------------------------------->");
+                        Log.e("TAG", "---------------------------------------------------------->");
+                    }
+
+                    @Override
+                    public void onLoadingCancelled(String imageUri, View view) {
+                      //  Log.e("TAG", "---------------------------------------------------------->");
+                      //  Log.e("TAG", "---------------------------------------------------------->");
+                    }
+                }, new ImageLoadingProgressListener() {
+                    @Override
+                    public void onProgressUpdate(String imageUri, View view, int current, int total) {
+
+                    }
+                });
+
         holder.title.setText(alarm.getTitle());
         holder.msg.setText(alarm.getMsg());
         holder.date.setText(alarm.getDate());
