@@ -173,6 +173,10 @@
     <string name="login_hint_text">登录中...</string>
     <string name="push_event_get">收到</string>
     <string name="push_event_get_count">条推送消息。</string>
+    <string name="device_defence_open_success">活动检测开启成功</string>
+    <string name="device_defence_open_fail">活动检测开启失败</string>
+    <string name="device_defence_close_success">活动检测关闭成功</string>
+    <string name="device_defence_close_fail">活动检测失关闭</string>
     <!--   萤石需要mesg  -->
 
 
