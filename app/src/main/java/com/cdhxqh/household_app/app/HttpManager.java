@@ -206,6 +206,39 @@ public class HttpManager {
                     }
                 });
                 break;
+            /**
+             * 注册
+             */
+            case (Message.REG_CHECK_CODE) :{
+                client.addHeader("Cookie", "JSESSIONID=" + SESSIONID);
+                client.get(url, maps, new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        SafeHandler.onFailure(handler, "错误消息");
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        //解析返回的Json数据 ArrayList<Alarm>
+                        try {
+                            // {"errcode":"SECURITY-GLOBAL-E-12","errmsg":"该手机已被注册过,无法再次进行注册","result":null}
+                            JSONObject jsonObject = new JSONObject(responseString);
+                            String code = jsonObject.getString("errcode");
+                            if ("SECURITY-GLOBAL-E-12".equals(code)) {// 已注册
+                                SafeHandler.onSuccess(handler, (E)new String[]{code});
+                                return;
+                            } else {
+                                SafeHandler.onSuccess(handler, (E)new String[]{code, });
+                            }
+                            SafeHandler.onSuccess(handler, null);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                break;
+            }
+
         }
     }
 
