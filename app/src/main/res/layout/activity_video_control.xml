@@ -10,13 +10,14 @@
 
     <!--  引入画布  -->
     <LinearLayout
+        android:id="@+id/linearlayout_surface_id"
         android:layout_width="match_parent"
         android:layout_height="200dp">
         <include layout="@layout/activity_surface_pay" />
     </LinearLayout>
 
-    <!--  引入画布  -->
-    <include layout="@layout/activity_surface_pay_bottom" />
+    <!--&lt;!&ndash;  引入画布  &ndash;&gt;-->
+    <!--<include layout="@layout/activity_surface_pay_bottom" />-->
 
     <View
         android:layout_width="match_parent"

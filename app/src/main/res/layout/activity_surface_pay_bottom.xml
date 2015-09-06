@@ -4,7 +4,7 @@
     android:layout_height="50dp"
     android:layout_alignParentBottom="true"
     android:background="@drawable/control_bar_bg"
-    android:orientation="horizontal"
+    android:layout_gravity="bottom"
     >
     <!--  视频播放按钮  -->
     <ImageButton
@@ -31,7 +31,7 @@
         android:background="@drawable/ic_menu_song3" />
 
     <ImageButton
-        android:id="@+id/realplay_stop_btn2"
+        android:id="@+id/set_full_screen_btn"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <!--  播放区域    -->
     <RelativeLayout
+        android:id="@+id/relativelayout_suface_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <!--  画布    -->
@@ -56,5 +57,8 @@
             android:scaleType="fitXY"/>
 
     </RelativeLayout>
+
+    <!--  引入画布  -->
+    <include layout="@layout/activity_surface_pay_bottom" />
 
 </FrameLayout>

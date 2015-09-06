@@ -19,6 +19,7 @@ import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
+import com.cdhxqh.household_app.ui.actvity.Test;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
@@ -53,7 +54,8 @@ public class MyDeviceFragment extends BaseFragment {
             bundle.putParcelable("device_name", info);
             intent.putExtras(bundle);
             intent.setClass(getActivity(),Activity_Video_Control.class);
-            getActivity().startActivity(intent);
+//            intent.setClass(getActivity(), Test.class);
+            getActivity().startActivityForResult(intent, 0);
         }
     };
 
@@ -170,13 +172,13 @@ public class MyDeviceFragment extends BaseFragment {
                     return result;
                 }
             }
-            return new ArrayList<CameraInfo>(0);
+            return result;
         }
 
         @Override
         protected void onPostExecute(Object o) {
             if (NetWorkUtil.IsNetWorkEnable(getActivity()) && result != null) {
-                Log.i(TAG,"112345");
+                Log.i(TAG,"112345"+"result="+result);
                 addData();
             }
             TestClass.closeLoading();

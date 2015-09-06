@@ -3,6 +3,7 @@ package com.cdhxqh.household_app.ui.actvity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -30,6 +32,7 @@ import com.cdhxqh.household_app.ezviz.DeviceDiscoverInfo;
 import com.cdhxqh.household_app.ezviz.OpenYSService;
 import com.cdhxqh.household_app.ezviz.SecureValidate;
 import com.videogo.constant.Constant;
+import com.videogo.demo.DemoRealPlayer;
 import com.videogo.exception.ErrorCode;
 import com.videogo.exception.HCNetSDKException;
 import com.videogo.exception.InnerException;
@@ -52,14 +55,13 @@ import java.util.Random;
 
 /**
  * Created by hexian on 2015/8/10.
- *
+ * <p/>
  * 流媒体视频控制(放大、缩小，加大、减小以及方向控制主类)
- *
  */
-public class Activity_Video_Control extends BaseActivity implements SecureValidate.SecureValidateListener,OpenYSService.OpenYSServiceListener {
-    private static final String TAG="Activity_Video_Control";
+public class Activity_Video_Control extends BaseActivity implements SecureValidate.SecureValidateListener, OpenYSService.OpenYSServiceListener {
+    private static final String TAG = "Activity_Video_Control";
     LinearLayout layout;
-    ScrollView   scrollView;
+    ScrollView scrollView;
     VideoView videoView;
     ImageView imgView;
     CameraInfo info;  // 摄像头信息
@@ -67,22 +69,49 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     ImageView settingImg; // 标题栏右侧按钮
     ImageView backImg;  // 退回按钮
 
-    /**控制声音**/
+    /**
+     * 控制声音*
+     */
     private ImageButton voice_btn;
 
-    /** 标识是否正在播放 */
+    /**设置全屏**/
+    private ImageButton fullScreen_btn;
+
+    /**播放布局文件**/
+    RelativeLayout relativeLayout;
+    LinearLayout linearLayout;
+    /**
+     * 标识是否正在播放
+     */
     boolean mIsPlaying = false;
-    /** 视频窗口可以显示的区域 */
+    /**
+     * 视频窗口可以显示的区域
+     */
     Rect mCanDisplayRect = null;
-    /** 竖屏时的宽度 */
+    /**
+     * 竖屏时的宽度
+     */
     private int mDisplayWidth = 0;
-    /** 竖屏时的高度 */
+    /**
+     * 竖屏时的高度
+     */
     private int mDisplayHeight = 0;
 
     RealPlayerHelper mRealPlayerHelper;
+    /**
+     * 演示点预览控制对象
+     */
+    private DemoRealPlayer mDemoRealPlayer = null;
     Handler mHandler;
     SurfaceView mSurfaceView;
+
+    /** 屏幕当前方向 */
+    private int mOrientation = Configuration.ORIENTATION_PORTRAIT;
+    /**
+     * 实时预览控制对象
+     */
     RealPlayerManager mRealPlayMgr;
+
     SurfaceHolder mSurfaceHolder;
     DeviceDiscoverInfo mDeviceDiscoverInfo;
     AlertDialog mPlayFailDialog;
@@ -111,6 +140,16 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     ImageView screenshot;
 
+    private float mRealRatio = Constant.LIVE_VIEW_RATIO;
+
+
+    /**标题布局**/
+    private LinearLayout title_linearlayout;
+    /**手柄区域**/
+    private RelativeLayout handleRelativeLayout;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,14 +158,19 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         findViewById();
         initDate();
         initView();
+
     }
 
-    private void findViewById(){
-        layout = (LinearLayout)findViewById(R.id.video_monitoring_layout);
-        scrollView = (ScrollView)findViewById(R.id.scrollView);
-        titleText = (TextView)findViewById(R.id.title_text_id);
-        settingImg = (ImageView)findViewById(R.id.title_add_id);
-        backImg = (ImageView)findViewById(R.id.back_imageview_id);
+    private void findViewById() {
+        title_linearlayout=(LinearLayout)findViewById(R.id.title_linearlayout_id); //标题区域
+        handleRelativeLayout=(RelativeLayout)findViewById(R.id.relativeLayout_handle_id); //手柄区域
+
+
+        layout = (LinearLayout) findViewById(R.id.video_monitoring_layout);
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
+        titleText = (TextView) findViewById(R.id.title_text_id);
+        settingImg = (ImageView) findViewById(R.id.title_add_id);
+        backImg = (ImageView) findViewById(R.id.back_imageview_id);
         mSurfaceView = (SurfaceView) findViewById(R.id.realplay_wnd_sv);
         mStopBtn = (ImageButton) findViewById(R.id.realplay_stop_btn);  // 停止按钮
         mPlayBtn = (ImageButton) findViewById(R.id.realplay_play_btn);  //  播放按钮
@@ -135,8 +179,12 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         waitLayout = (RelativeLayout) findViewById(R.id.process);  //  播放按钮
         processText = (TextView) findViewById(R.id.processtext);  //  缓冲进度
 
-        voice_btn=(ImageButton)findViewById(R.id.voice_control_btn);
+        voice_btn = (ImageButton) findViewById(R.id.voice_control_btn); //控制声音
 
+        fullScreen_btn=(ImageButton)findViewById(R.id.set_full_screen_btn); //设置全屏
+
+        relativeLayout=(RelativeLayout)findViewById(R.id.relativelayout_suface_id); //播放布局文件
+        linearLayout=(LinearLayout)findViewById(R.id.linearlayout_surface_id); //播放布局文件
 
         coverImg = (RelativeLayout) findViewById(R.id.realplay_display_view);  //  缓冲进度
 
@@ -145,15 +193,15 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         rightCtrl = (ImageView) findViewById(R.id.right);  //  向右控制
         bottomCtrl = (ImageView) findViewById(R.id.bottom);  //  向下控制
 
-        screenshot= (ImageView) findViewById(R.id.screenshot);
+        screenshot = (ImageView) findViewById(R.id.screenshot);
 
     }
 
-    public void initDate(){
+    public void initDate() {
         Intent intent = getIntent();
-        if(intent!=null){
+        if (intent != null) {
             Bundle bundle = intent.getExtras();
-            if(bundle!=null){ // 获取数据
+            if (bundle != null) { // 获取数据
                 info = bundle.getParcelable("device_name");
             }
         }
@@ -174,11 +222,11 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                         break;
                     case RealPlayMsg.MSG_REALPLAY_PASSWORD_ERROR:
                         //处理播放密码错误
-                        if(TextUtils.isEmpty(info.getCameraId())) {
+                        if (TextUtils.isEmpty(info.getCameraId())) {
                             Utils.showToast(Activity_Video_Control.this, R.string.realplay_login_password_error, msg.arg1);
-                            handlePasswordError(R.string.realplay_password_error_title,  R.string.realplay_login_password_msg, 0, false);
+                            handlePasswordError(R.string.realplay_password_error_title, R.string.realplay_login_password_msg, 0, false);
                         } else {
-                            handlePasswordError(R.string.realplay_password_error_title,  R.string.realplay_password_error_message3, R.string.realplay_password_error_message1, false);
+                            handlePasswordError(R.string.realplay_password_error_title, R.string.realplay_password_error_message3, R.string.realplay_password_error_message1, false);
                         }
                         break;
                     case RealPlayMsg.MSG_REALPLAY_ENCRYPT_PASSWORD_ERROR:
@@ -213,10 +261,11 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     }
 
-    private void initView(){
+    private void initView() {
 
         // 获取配置信息操作对象
         mLocalInfo = LocalInfo.getInstance();
+
         mLocalInfo.setSoundOpen(true);
 
 
@@ -271,12 +320,20 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         mDisplayHeight = metric.heightPixels;
         mCanDisplayRect = new Rect(0, 0, 0, 0);
 
+
+        // 获取屏幕参数
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        mLocalInfo.setScreenWidthHeight(metric.widthPixels, metric.heightPixels);
+        mLocalInfo.setNavigationBarHeight((int) Math.ceil(25 * getResources().getDisplayMetrics().density));
+
         // 注册控制按钮事件
         topCtrl.setOnTouchListener(mOnTouchListener);
         bottomCtrl.setOnTouchListener(mOnTouchListener);
         leftCtrl.setOnTouchListener(mOnTouchListener);
         rightCtrl.setOnTouchListener(mOnTouchListener);
         voice_btn.setOnClickListener(voiceBtnOnClickListener);
+
+        fullScreen_btn.setOnClickListener(fullScreen_btnOnClickListener);
 
         mSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -309,36 +366,65 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         });
         mSurfaceView.setVisibility(View.VISIBLE);
 
+
     }
 
 
-    private View.OnClickListener voiceBtnOnClickListener=new View.OnClickListener() {
+    private View.OnClickListener voiceBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             onSoundBtnClick();
         }
     };
 
+    /**设置全屏**/
+    private View.OnClickListener fullScreen_btnOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.i(TAG,"设置全屏");
+            setlandscape();
+            setRealPlaySvLayout();
+        }
+    };
+
+
+    /**设置横屏**/
+    private void setlandscape(){
+        // 开启旋转传感器
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        Log.i(TAG,"getRequestedOrientation()="+getRequestedOrientation());
+        if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE||mOrientation==2){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }else{
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+    }
+
+
     private void onSoundBtnClick() {
         if (mLocalInfo.isSoundOpen()) {
             mLocalInfo.setSoundOpen(false);
-            voice_btn.setBackgroundResource(R.drawable.ic_menu_song3);
+            voice_btn.setBackgroundResource(R.drawable.ic_menu_mute);
         } else {
             mLocalInfo.setSoundOpen(true);
-            voice_btn.setBackgroundResource(R.drawable.ic_menu_mute);
+            voice_btn.setBackgroundResource(R.drawable.ic_menu_song3);
         }
+
+        setRealPlaySound();
 
     }
 
 
-    /**图片保存路径**/
-    public  void savePic(Bitmap b) {
+    /**
+     * 图片保存路径*
+     */
+    public void savePic(Bitmap b) {
 
         FileOutputStream fos = null;
         try {
 
             String sdpath = Constants.VIDEO_PATH;
-            File f = new File(sdpath ,"11.bmp");//设置图片名字
+            File f = new File(sdpath, "11.bmp");//设置图片名字
             if (f.exists()) {
                 f.delete();
             }
@@ -356,8 +442,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         }
     }
 
-    private Bitmap getpic(){
-        Bitmap bitmap  = videoView.getDrawingCache();
+    private Bitmap getpic() {
+        Bitmap bitmap = videoView.getDrawingCache();
         return bitmap;
     }
 
@@ -381,8 +467,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         //设置播放Surface
         mRealPlayMgr.setPlaySurface(mSurfaceHolder);
         //开启预览任务
-        if(TextUtils.isEmpty(info.getCameraId())) {
-            if(!TextUtils.isEmpty(EzvizAPI.getInstance().getUserCode())) {
+        if (TextUtils.isEmpty(info.getCameraId())) {
+            if (!TextUtils.isEmpty(EzvizAPI.getInstance().getUserCode())) {
                 mRealPlayerHelper.startLocalRealPlayTask(mRealPlayMgr, info.getDeviceId(), mDeviceDiscoverInfo.localIP, null);
             } else {
                 mRealPlayerHelper.startEncryptLocalRealPlayTask(this, mRealPlayMgr, info.getDeviceId(),
@@ -390,9 +476,12 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
             }
         } else {
             mRealPlayerHelper.startRealPlayTask(mRealPlayMgr, info.getCameraId());
+
         }
 
+
         updateLoadingProgress(0);
+
     }
 
 
@@ -400,7 +489,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
      * 更新进度条
      */
     private void updateLoadingProgress(final int progress) {
-        if(processText!=null){
+        if (processText != null) {
             processText.setText(progress + "%");
             mHandler.postDelayed(new Runnable() {
                 @Override
@@ -451,8 +540,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
      * 处理播放失败的情况
      */
     private void showPlayFailDialog(String msg) {
-        if(mPlayFailDialog!=null){
-            mPlayFailDialog.dismiss();;
+        if (mPlayFailDialog != null) {
+            mPlayFailDialog.dismiss();
         }
         mPlayFailDialog = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -475,6 +564,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         }
 
         setPlayStartUI();
+        setRealPlaySound();
 
         // 开启旋转传感器
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
@@ -536,7 +626,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                 break;
         }
 
-        if(!TextUtils.isEmpty(msg)) {
+        if (!TextUtils.isEmpty(msg)) {
             showPlayFailDialog(msg);
         }
     }
@@ -570,11 +660,11 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         //设置播放Surface
         mRealPlayMgr.setPlaySurface(mSurfaceHolder);
         //开启加密预览任务
-        if(TextUtils.isEmpty(info.getCameraId())) {
+        if (TextUtils.isEmpty(info.getCameraId())) {
             mRealPlayerHelper.startEncryptLocalRealPlayTask(this, mRealPlayMgr, info.getDeviceId(),
                     mDeviceDiscoverInfo.localIP, title_resid, msg1_resid, msg2_resid);
         } else {
-            mRealPlayerHelper.startEncryptRealPlayTask(getApplication(),R.color.black, mRealPlayMgr, info.getCameraId(), title_resid, msg1_resid, msg2_resid);
+            mRealPlayerHelper.startEncryptRealPlayTask(getApplication(), R.color.black, mRealPlayMgr, info.getCameraId(), title_resid, msg1_resid, msg2_resid);
         }
 
         updateLoadingProgress(0);
@@ -599,6 +689,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     @Override
     protected void onResume() {  // 继续播放
         super.onResume();
+        Log.i(TAG,"this is onResume ");
         // 开始播放
         startRealPlay();
     }
@@ -609,11 +700,12 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     @Override
     protected void onPause() {
         super.onPause();
+        Log.i(TAG,"this is onPause ");
     }
 
     @Override
     public void onSecureValidate(int result) {
-        if(result == 0) {
+        if (result == 0) {
             // 开始播放
             startRealPlay();
         }
@@ -621,26 +713,26 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     @Override
     public void onOpenYSService(int result) {
-        if(result == 0) {
+        if (result == 0) {
             // 开始播放
             startRealPlay();
         }
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         stopRealPlay(false);
         super.onStop();
     }
 
-        private View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
+    private View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
 
         @Override
         public boolean onTouch(View view, MotionEvent motionevent) {
             int action = motionevent.getAction();
             switch (action) {
-                case MotionEvent.ACTION_DOWN:{
-                    Log.e("TAG", "------------------------------------------------------------------->ACTION_DOWN ===== "+System.currentTimeMillis());
+                case MotionEvent.ACTION_DOWN: {
+                    Log.e("TAG", "------------------------------------------------------------------->ACTION_DOWN ===== " + System.currentTimeMillis());
                     switch (view.getId()) {
                         case R.id.top://上控
                             // mPtzControlLy.setBackgroundResource(R.drawable.ptz_up_sel);
@@ -671,8 +763,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                     }
                     break;
                 }
-                case MotionEvent.ACTION_UP:{
-                    Log.e("TAG", "------------------------------------------------------------------->ACTION_UP ====== "+System.currentTimeMillis());
+                case MotionEvent.ACTION_UP: {
+                    Log.e("TAG", "------------------------------------------------------------------->ACTION_UP ====== " + System.currentTimeMillis());
                     switch (view.getId()) {
                         case R.id.top://上控
                             //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
@@ -695,7 +787,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                     }
                     break;
                 }
-                default:{
+                default: {
                     break;
                 }
             }
@@ -718,10 +810,10 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
             msg.what = MSG_HIDE_PTZ_DIRECTION;
             msg.arg1 = 1;
             mHandler.sendMessageDelayed(msg, 500);
-        } else if(errorCode != 0) {
+        } else if (errorCode != 0) {
             /*RelativeLayout.LayoutParams svParams = (RelativeLayout.LayoutParams)mRealPlaySv.getLayoutParams();
             RelativeLayout.LayoutParams params = null;*/
-           // mRealPlayPtzDirectionIv.setVisibility(View.VISIBLE);
+            // mRealPlayPtzDirectionIv.setVisibility(View.VISIBLE);
             mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
             Message msg = new Message();
             msg.what = MSG_HIDE_PTZ_DIRECTION;
@@ -735,6 +827,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     /**
      * 封装控制的方法
+     *
      * @param msg
      */
     private void handleHidePtzDirection(Message msg) {
@@ -757,44 +850,44 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     private void handlePtzControlFail(Message msg) {
         Log.e("TAG", "------------------------------------------------------------------>FAIL");
-        switch(msg.arg1) {
+        switch (msg.arg1) {
             case ErrorCode.ERROR_CAS_PTZ_CONTROL_CALLING_PRESET_FAILED://正在调用预置点，键控动作无效
-                Utils.showToast(this,R.string.camera_lens_too_busy, msg.arg1);
+                Utils.showToast(this, R.string.camera_lens_too_busy, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_PRESET_PRESETING_FAILE:// 当前正在调用预置点
-                Utils.showToast(this,R.string.ptz_is_preseting, msg.arg1);
+                Utils.showToast(this, R.string.ptz_is_preseting, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_CONTROL_TIMEOUT_SOUND_LACALIZATION_FAILED://当前正在声源定位
                 break;
             case ErrorCode.ERROR_CAS_PTZ_CONTROL_TIMEOUT_CRUISE_TRACK_FAILED://键控动作超时(当前正在轨迹巡航)
-                Utils.showToast(this,R.string.ptz_control_timeout_cruise_track_failed, msg.arg1);
+                Utils.showToast(this, R.string.ptz_control_timeout_cruise_track_failed, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_PRESET_INVALID_POSITION_FAILED://当前预置点信息无效
-                Utils.showToast(this,R.string.ptz_preset_invalid_position_failed, msg.arg1);
+                Utils.showToast(this, R.string.ptz_preset_invalid_position_failed, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_PRESET_CURRENT_POSITION_FAILED://该预置点已是当前位置
-                Utils.showToast(this,R.string.ptz_preset_current_position_failed, msg.arg1);
+                Utils.showToast(this, R.string.ptz_preset_current_position_failed, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_PRESET_SOUND_LOCALIZATION_FAILED:// 设备正在响应本次声源定位
-                Utils.showToast(this,R.string.ptz_preset_sound_localization_failed, msg.arg1);
+                Utils.showToast(this, R.string.ptz_preset_sound_localization_failed, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_OPENING_PRIVACY_FAILED://当前正在开启隐私遮蔽
             case ErrorCode.ERROR_CAS_PTZ_CLOSING_PRIVACY_FAILED://当前正在关闭隐私遮蔽
             case ErrorCode.ERROR_CAS_PTZ_MIRRORING_FAILED://设备正在镜像操作（设备镜像要几秒钟，防止频繁镜像操作）
-                Utils.showToast(this,R.string.ptz_operation_too_frequently, msg.arg1);
+                Utils.showToast(this, R.string.ptz_operation_too_frequently, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_CONTROLING_FAILED://设备正在键控动作（上下左右）(一个客户端在上下左右控制，另外一个在开其它东西)
                 break;
             case ErrorCode.ERROR_CAS_PTZ_FAILED://云台当前操作失败
                 break;
             case ErrorCode.ERROR_CAS_PTZ_PRESET_EXCEED_MAXNUM_FAILED://当前预置点超过最大个数
-                Utils.showToast(this,R.string.ptz_preset_exceed_maxnum_failed, msg.arg1);
+                Utils.showToast(this, R.string.ptz_preset_exceed_maxnum_failed, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_PRIVACYING_FAILED:// 设备处于隐私遮蔽状态（关闭了镜头，再去操作云台相关）
-                Utils.showToast(this,R.string.ptz_privacying_failed, msg.arg1);
+                Utils.showToast(this, R.string.ptz_privacying_failed, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_TTSING_FAILED:// 设备处于语音对讲状态(区别以前的语音对讲错误码，云台单独列一个）
-                Utils.showToast(this,R.string.ptz_mirroring_failed, msg.arg1);
+                Utils.showToast(this, R.string.ptz_mirroring_failed, msg.arg1);
                 break;
             case ErrorCode.ERROR_CAS_PTZ_ROTATION_UP_LIMIT_FAILED://设备云台旋转到达上限位
             case ErrorCode.ERROR_CAS_PTZ_ROTATION_DOWN_LIMIT_FAILED://设备云台旋转到达下限位
@@ -803,9 +896,115 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                 setPtzDirectionIv(-1, msg.arg1);
                 break;
             default:
-                Utils.showToast(this,R.string.ptz_operation_failed, msg.arg1);
+                Utils.showToast(this, R.string.ptz_operation_failed, msg.arg1);
                 break;
         }
     }
+
+
+    private void setRealPlaySound() {
+        if (mRealPlayMgr != null) {
+            if (mLocalInfo.isSoundOpen()) {
+                mRealPlayMgr.openSound();
+            } else {
+                mRealPlayMgr.closeSound();
+            }
+        } else if (mDemoRealPlayer != null) {
+            if (mLocalInfo.isSoundOpen()) {
+                mDemoRealPlayer.openSound();
+            } else {
+                mDemoRealPlayer.closeSound();
+            }
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Log.i(TAG, "this is ConfigurationChanged");
+        mOrientation = newConfig.orientation;
+        setRealPlaySvLayout();
+        updateOperatorUI();
+        super.onConfigurationChanged(newConfig);
+    }
+
+
+    /**设置屏幕大小**/
+    private void setRealPlaySvLayout() {
+
+////        // 开启旋转传感器
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+
+        // 设置播放窗口位置
+        final int screenWidth = mLocalInfo.getScreenWidth();
+        final int screenHeight = (mOrientation == Configuration.ORIENTATION_PORTRAIT) ? (mLocalInfo.getScreenHeight() - mLocalInfo
+                .getNavigationBarHeight()) : mLocalInfo.getScreenHeight();
+
+        final RelativeLayout.LayoutParams realPlaySvlp = Utils.getPlayViewLp(mRealRatio, mOrientation,
+                screenWidth, screenHeight,
+                screenWidth, screenHeight);
+
+        //获取屏幕长宽
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        mDisplayWidth = metric.widthPixels;
+        mDisplayHeight = metric.heightPixels;
+        Log.i(TAG, "mDisplayWidth="+mDisplayWidth+",mDisplayHeight="+mDisplayHeight);
+
+        RelativeLayout.LayoutParams svLp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        svLp.addRule(RelativeLayout.CENTER_IN_PARENT);
+        mSurfaceView.setLayoutParams(svLp);
+        if(mOrientation!=Configuration.ORIENTATION_PORTRAIT){
+            LinearLayout.LayoutParams realPlayPlayRlLp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            linearLayout.setLayoutParams(realPlayPlayRlLp);
+
+
+            title_linearlayout.setVisibility(View.GONE);
+            handleRelativeLayout.setVisibility(View.GONE);
+            scrollView.setVisibility(View.GONE);
+        }else{
+            LinearLayout.LayoutParams realPlayPlayRlLp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    600);
+            linearLayout.setLayoutParams(realPlayPlayRlLp);
+
+            title_linearlayout.setVisibility(View.VISIBLE);
+            handleRelativeLayout.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+
+
+    private void updateOperatorUI() {
+        if (mOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            Log.i(TAG, "12345*");
+            // 显示状态栏
+            fullScreen(false);
+        } else {
+            Log.i(TAG, "123456*");
+            // 隐藏状态栏
+            fullScreen(true);
+        }
+    }
+
+
+
+    private void fullScreen(boolean enable) {
+        if (enable) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+            getWindow().setAttributes(lp);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        } else {
+            WindowManager.LayoutParams attr = getWindow().getAttributes();
+            attr.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getWindow().setAttributes(attr);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+    }
+
+
 
 }
