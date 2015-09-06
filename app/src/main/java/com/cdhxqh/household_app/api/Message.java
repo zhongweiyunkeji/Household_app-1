@@ -234,4 +234,6 @@ public class Message {
 
     public static final String ATTRACTIONS_SEARCH_URL = BASE_URL + "ecsbrand/articlelist";
 
+    public static final String REG_CHECK_CODE = BASE_URL + "user/check";
+
 }
