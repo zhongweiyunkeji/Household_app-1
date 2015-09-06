@@ -121,7 +121,7 @@ public class Activity_Login extends BaseActivity{
                 password.setError(getString(R.string.password_null));
                 password.requestFocus();
             }else {
-//                getHttpUtil();
+                 // getHttpUtil();
                   Intent intent = new Intent();
                   intent.setClass(Activity_Login.this,MainActivity.class);
                   startActivity(intent);

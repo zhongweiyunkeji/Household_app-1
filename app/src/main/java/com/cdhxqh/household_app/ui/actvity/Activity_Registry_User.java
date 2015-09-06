@@ -18,8 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.api.HttpRequestHandler;
+import com.cdhxqh.household_app.api.Message;
+import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.action.impl.OnItemClickCallBackImpl;
 import com.cdhxqh.household_app.ui.widget.SwitchButton;
+import com.cdhxqh.household_app.ui.widget.TestClass;
+import com.cdhxqh.household_app.utils.MessageUtils;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
 
 import java.util.regex.Pattern;
 
@@ -134,7 +142,11 @@ public class Activity_Registry_User extends BaseActivity {
         sendMsgBtn.setOnClickListener(new View.OnClickListener() { // 发送验证码按钮
             @Override
             public void onClick(View v) {
-
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams maps = new RequestParams();
+                maps.put("mobile", phoneTextView.getText().toString());
+                maps.put("password",pewTextView.getText().toString() );
+                HttpManager.seletctHttpMethod(null, handler, Message.REG_CHECK_CODE, client, Activity_Registry_User.this, maps);
             }
         });
 
@@ -260,4 +272,22 @@ public class Activity_Registry_User extends BaseActivity {
             Log.i("", "----------------------->"+text);
         }
     }
+
+
+    HttpRequestHandler<String[]> handler = new HttpRequestHandler<String[]>() {
+        @Override
+        public void onSuccess(String[] data) {
+
+        }
+
+        @Override
+        public void onSuccess(String[] data, int totalPages, int currentPage) {
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+
+        }
+    };
 }
