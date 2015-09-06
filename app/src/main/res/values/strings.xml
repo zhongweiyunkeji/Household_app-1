@@ -171,6 +171,8 @@
     <string name="device_add_text">添加设备</string>
     <string name="device_update_text">修改设备</string>
     <string name="login_hint_text">登录中...</string>
+    <string name="push_event_get">收到</string>
+    <string name="push_event_get_count">条推送消息。</string>
     <!--   萤石需要mesg  -->
 
 
