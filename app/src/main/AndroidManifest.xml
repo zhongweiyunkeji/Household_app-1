@@ -143,11 +143,6 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity android:name=".ui.actvity.Activity_Alarm_List" />
-        <activity
-            android:name=".ui.actvity.Test"
-            android:label="@string/title_activity_test"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
