@@ -4,99 +4,12 @@
     android:orientation="vertical">
 
     <include
+    android:id="@+id/include_title"
+    layout="@layout/activity_tittle"></include>
+
+    <include
         android:id="@+id/include_title"
-        layout="@layout/activity_tittle"></include>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/font_color"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/ListPadding.ListLevel2"
-                android:layout_weight="4"
-                android:layout_width="0dp"
-                android:text="@string/isCheck" />
-
-            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
-                android:id="@+id/wiperSwitch1"
-                style="@style/ListPadding"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/ListPadding.ListLevel2"
-                android:layout_weight="4"
-                android:layout_width="0dp"
-                android:text="@string/isSafe" />
-
-            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
-                android:id="@+id/wiperSwitch2"
-                style="@style/ListPadding"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/font_color"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/ListPadding.ListLevel2"
-                android:layout_weight="4"
-                android:layout_width="0dp"
-                android:text="@string/isDeal" />
-
-            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
-                android:id="@+id/wiperSwitch3"
-                style="@style/ListPadding"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/list_line_x"></View>
-
-    </LinearLayout>
+        layout="@layout/activity_deal_content"></include>
 
     <Button
         android:id="@+id/restart_passworld_id"
@@ -111,12 +24,5 @@
         android:textColor="@color/font_color"
         android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-
-    </LinearLayout>
 
 </LinearLayout>
