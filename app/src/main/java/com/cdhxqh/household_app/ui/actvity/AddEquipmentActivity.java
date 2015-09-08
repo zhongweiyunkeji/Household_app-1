@@ -153,7 +153,7 @@ public class AddEquipmentActivity extends BaseActivity {
             if("edit".equals(action)){
                 titleTextView.setText(getString(R.string.device_update_text));
                 if(myDevice!=null){
-                    Toast.makeText(this, myDevice.getName(), Toast.LENGTH_SHORT);
+                    Toast.makeText(this, myDevice.getDeviceName(), Toast.LENGTH_SHORT);
                 }
             }
         } else {
