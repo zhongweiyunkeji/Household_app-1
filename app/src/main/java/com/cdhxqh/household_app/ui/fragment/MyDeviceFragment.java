@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
@@ -23,12 +24,21 @@ import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
 import com.cdhxqh.household_app.ui.widget.TestClass;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.openapi.bean.req.GetCameraInfoList;
 import com.videogo.openapi.bean.resp.AlarmInfo;
 import com.videogo.openapi.bean.resp.CameraInfo;
 import com.videogo.realplay.RealPlayerHelper;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,15 +55,14 @@ public class MyDeviceFragment extends BaseFragment {
     private MyDevicelistAdapter myDevicelistAdapter;
     Application application;
     EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
-    ArrayList<CameraInfo> result;
+    ArrayList<MyDevice> result = new ArrayList<MyDevice>(0);
     DeviceOnClick callback = new DeviceOnClick(){
-        public void callback(RecyclerView.ViewHolder holder, int position, View view, CameraInfo info){
+        public void callback(RecyclerView.ViewHolder holder, int position, View view, MyDevice info){
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
-            bundle.putParcelable("device_name", info);
+            bundle.putSerializable("device_name", info);
             intent.putExtras(bundle);
             intent.setClass(getActivity(),Activity_Video_Control.class);
-//            intent.setClass(getActivity(), Test.class);
             getActivity().startActivityForResult(intent, 0);
         }
     };
@@ -111,86 +120,71 @@ public class MyDeviceFragment extends BaseFragment {
         }
     }
 
-    public class MyAsyncTask extends AsyncTask {
-
-        public MyAsyncTask() {
-            if (!swipeRefreshLayout.isRefreshing()) {
-                swipeRefreshLayout.setRefreshing(true);
-            }
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            TestClass.loading(getActivity(), "正在加载数据，请稍后");
-        }
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-            if (!isCancelled()) {
-                try {
-                    // 设置Token
-                    mEzvizAPI.setAccessToken(Constants.TOKEN_URL);
-                    GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
-                    getCameraInfoList.setPageStart(currentPage);
-                    getCameraInfoList.setPageSize(showPage);
-                    // int x = 1/0;  // 使用异常里面的数据来缓存
-                    // 获取设备列表
-                    result = (ArrayList<CameraInfo>) mEzvizAPI.getCameraInfoList(getCameraInfoList);
-                    Log.i(TAG,"result="+result);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    result = new ArrayList<CameraInfo>(0);
-                    CameraInfo f1 = new CameraInfo();
-                    f1.setDeviceSerial("536724861");
-                    f1.setPicUrl("https://i.ys7.com/assets/imgs/public/homeDevice.jpeg");
-                    f1.setCameraName("C6(536724861)");
-                    f1.setDeviceName(null);
-                    f1.setDeviceId("e2b6ad92be744a2e8745473dd3dc3918536724861");
-                    f1.setCameraId("24a7467d51a1484c9146b501f4ee34cf");
-                    f1.setCameraNo(1);
-                    f1.setDefence(0);
-                    f1.setIsEncrypt(1);
-                    f1.setIsShared(0);
-                    f1.setStatus(1);
-
-                    CameraInfo f2 = new CameraInfo();
-                    f2.setDeviceSerial("536724535");
-                    f2.setPicUrl("https://i.ys7.com/assets/imgs/public/homeDevice.jpeg");
-                    f2.setCameraName("C6(536724535)");
-                    f2.setDeviceName(null);
-                    f2.setDeviceId("e2b6ad92be744a2e8745473dd3dc3918536724535");
-                    f2.setCameraId("393dc7038a9041a5bd6173fea61364fc");
-                    f2.setCameraNo(1);
-                    f2.setDefence(0);
-                    f2.setIsEncrypt(0);
-                    f2.setIsShared(0);
-                    f2.setStatus(1);
-
-                    result.add(f1);
-                    result.add(f2);
-                    return result;
-                }
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            if (NetWorkUtil.IsNetWorkEnable(getActivity()) && result != null) {
-                Log.i(TAG,"112345"+"result="+result);
-                addData();
-            }
-            TestClass.closeLoading();
-        }
-
-    }
-
     /**
      * 初始化任务
      */
     private void startAsynTask() {
-        new MyAsyncTask().execute();
+        TestClass.loading(getActivity(), "正在加载数据，请稍后");
+        getDeviceList();
     }
+
+    private void getDeviceList(){
+        RequestParams maps = new RequestParams();
+        maps.put("showCount", showPage);
+        maps.put("currentPage", currentPage);
+        AsyncHttpClient client = new AsyncHttpClient();
+        HttpManager.sendHttpRequest(getActivity(), Constants.DEVICE_LIST, maps, responseHandler, "get");
+    }
+
+    AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            if(responseBody!=null){
+                String resultStr = new String(responseBody, Charset.forName("utf-8"));
+                try {
+                    JSONObject resultJson = new JSONObject(resultStr);
+                    JSONObject result = resultJson.getJSONObject("result");
+                    JSONArray rsList = result.getJSONArray("list");
+                    for(int index=0; index<rsList.length(); index++){
+                        JSONObject obj = rsList.getJSONObject(index);
+                        String uid = obj.getInt("uid") + "";
+                        boolean ispublic = obj.getBoolean("ispublic");
+                        boolean isEncrypt = obj.getInt("isEncrypt")==1 ? true : false;
+                        String cameraId = obj.getString("cameraId");
+                        String deviceName = obj.getString("deviceName");
+                        int defence = obj.getInt("defence");
+                        int ca_id = obj.getInt("ca_id");
+                        String deviceId = obj.getString("deviceId");
+                        String picUrl = obj.getString("picUrl");
+                        int cameraNo = obj.getInt("cameraNo");
+                        boolean status = obj.getString("status").trim().equals("1") ? true : false;
+                        String cameraName = obj.getString("cameraName");
+                        boolean isShared = obj.getInt("isShared")==1 ? true : false;
+                        String deviceSerial = obj.getString("deviceSerial");
+
+                        MyDevice device = new MyDevice(ca_id, cameraId, cameraNo, defence, deviceName, deviceSerial, isEncrypt, ispublic, isShared, picUrl, status, uid, deviceId, cameraName);
+                        MyDeviceFragment.this.result.add(device);
+                    }
+
+                    addData();
+
+                    currentPage ++;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            TestClass.closeLoading();
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+            if(responseBody!=null){
+                String result = new String(responseBody, Charset.forName("utf-8"));
+            }
+            TestClass.closeLoading();
+        }
+    };
 
 }
