@@ -6,10 +6,10 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -32,9 +32,11 @@ import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.DeviceDiscoverInfo;
 import com.cdhxqh.household_app.ezviz.OpenYSService;
 import com.cdhxqh.household_app.ezviz.SecureValidate;
-import com.cdhxqh.household_app.ui.action.DeviceOnClick;
+import com.cdhxqh.household_app.utils.AudioPlayUtil;
 import com.videogo.constant.Constant;
+import com.videogo.constant.IntentConsts;
 import com.videogo.demo.DemoRealPlayer;
+import com.videogo.exception.BaseException;
 import com.videogo.exception.ErrorCode;
 import com.videogo.exception.HCNetSDKException;
 import com.videogo.exception.InnerException;
@@ -46,8 +48,12 @@ import com.videogo.realplay.RealPlayStatus;
 import com.videogo.realplay.RealPlayerHelper;
 import com.videogo.realplay.RealPlayerManager;
 import com.videogo.util.ConnectionDetector;
-import com.videogo.util.Utils;
 import com.videogo.util.LocalInfo;
+import com.videogo.util.RotateViewUtil;
+import com.videogo.util.SDCardUtil;
+import com.videogo.util.Utils;
+import com.videogo.widget.CustomRect;
+import com.videogo.widget.CustomTouchListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -62,6 +68,7 @@ import java.util.Random;
  */
 public class Activity_Video_Control extends BaseActivity implements SecureValidate.SecureValidateListener, OpenYSService.OpenYSServiceListener {
     private static final String TAG = "Activity_Video_Control";
+    private static final String TAG1 = "Activity_Video_Control1";
     LinearLayout layout;
     ScrollView scrollView;
     VideoView videoView;
@@ -76,12 +83,18 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
      */
     private ImageButton voice_btn;
 
-    /**设置全屏**/
+    /**
+     * 设置全屏*
+     */
     private ImageButton fullScreen_btn;
 
-    /**播放布局文件**/
-    RelativeLayout relativeLayout;
+    /**
+     * 播放布局文件*
+     */
+    RelativeLayout mRealPlayPlayRl;
     LinearLayout linearLayout;
+    private RelativeLayout.LayoutParams mRealPlayCaptureRlLp = null;
+
     /**
      * 标识是否正在播放
      */
@@ -101,20 +114,30 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     RealPlayerHelper mRealPlayerHelper;
     /**
+     * 实时预览控制对象
+     */
+    private RealPlayerManager mRealPlayMgr = null;
+    /**
      * 演示点预览控制对象
      */
     private DemoRealPlayer mDemoRealPlayer = null;
     Handler mHandler;
+    /**
+     * 画布*
+     */
     SurfaceView mSurfaceView;
 
-    /** 屏幕当前方向 */
+    /**
+     * 屏幕当前方向
+     */
     private int mOrientation = Configuration.ORIENTATION_PORTRAIT;
     /**
      * 实时预览控制对象
      */
-    RealPlayerManager mRealPlayMgr;
 
     SurfaceHolder mSurfaceHolder;
+
+
     DeviceDiscoverInfo mDeviceDiscoverInfo;
     AlertDialog mPlayFailDialog;
     ImageButton mStopBtn;
@@ -132,8 +155,40 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     ImageView rightCtrl;
     ImageView bottomCtrl;
 
-    ImageView alarmBtn;
-    ImageView secureBtn;
+
+    /**
+     * 录像布局*
+     */
+    private View mRealPlayRecordContainer = null;
+    /**
+     * 录像按钮*
+     */
+    private ImageButton mRealPlayRecordBtn = null;
+    /**
+     * 开始录像按钮*
+     */
+    private ImageButton mRealPlayRecordStartBtn = null;
+
+
+    /**
+     * 录像显示时间布局*
+     */
+    private LinearLayout mRealPlayRecordLy = null;
+
+    /**
+     * 显示时间*
+     */
+    private ImageView mRealPlayRecordIv = null;
+    /**
+     * 记时*
+     */
+    private TextView mRealPlayRecordTv = null;
+
+    private RelativeLayout mRealPlayControlRl = null;
+    private ImageView mRealPlayCaptureIv = null;
+
+    private ImageView mRealPlayCaptureWatermarkIv = null;
+
 
     private LocalInfo mLocalInfo = null;
 
@@ -147,10 +202,79 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     private float mRealRatio = Constant.LIVE_VIEW_RATIO;
 
 
-    /**标题布局**/
+    /**
+     * 标题布局*
+     */
     private LinearLayout title_linearlayout;
-    /**手柄区域**/
+    /**
+     * 手柄区域*
+     */
     private RelativeLayout handleRelativeLayout;
+
+    /**
+     * 控制布局*
+     */
+
+    private RelativeLayout mRealPlayCaptureRl;
+
+    private CustomTouchListener mRealPlayTouchListener = null;
+
+    /**
+     * 标识是否正在播放
+     */
+    private int mStatus = RealPlayStatus.STATUS_INIT;
+
+    private float mZoomScale = 0;
+
+    /**
+     * 播放比例*
+     */
+    private float mPlayScale = 1;
+    /**
+     * 布局文件是否显示*
+     */
+    private boolean isShow = false;
+
+    /**
+     * 视频的放大按钮*
+     */
+    LinearLayout e_LinearLayout;
+    /**
+     * 视频缩小按钮*
+     */
+    LinearLayout n_LinearLayout;
+
+
+
+    /**视频**/
+    private ImageButton playbackBtn;
+
+
+
+
+
+    /**
+     * 录像*
+     */
+    private int mControlDisplaySec = 0;
+
+    /**
+     * 录像文件路径
+     */
+    private String mRecordFilePath = null;
+    private String mRecordTime = null;
+    /**
+     * 录像时间
+     */
+    private int mRecordSecond = 0;
+    private int mCaptureDisplaySec = 0;
+
+    private AudioPlayUtil mAudioPlayUtil = null;
+
+    private boolean mIsOnStop = false;
+
+    private RotateViewUtil mRecordRotateViewUtil = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,8 +288,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     }
 
     private void findViewById() {
-        title_linearlayout=(LinearLayout)findViewById(R.id.title_linearlayout_id); //标题区域
-        handleRelativeLayout=(RelativeLayout)findViewById(R.id.relativeLayout_handle_id); //手柄区域
+        title_linearlayout = (LinearLayout) findViewById(R.id.title_linearlayout_id); //标题区域
+        handleRelativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout_handle_id); //手柄区域
 
 
         layout = (LinearLayout) findViewById(R.id.video_monitoring_layout);
@@ -183,10 +307,14 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
         voice_btn = (ImageButton) findViewById(R.id.voice_control_btn); //控制声音
 
-        fullScreen_btn=(ImageButton)findViewById(R.id.set_full_screen_btn); //设置全屏
+        fullScreen_btn = (ImageButton) findViewById(R.id.set_full_screen_btn); //设置全屏
 
-        relativeLayout=(RelativeLayout)findViewById(R.id.relativelayout_suface_id); //播放布局文件
-        linearLayout=(LinearLayout)findViewById(R.id.linearlayout_surface_id); //播放布局文件
+        mRealPlayPlayRl = (RelativeLayout) findViewById(R.id.relativelayout_suface_id); //播放布局文件
+
+
+        linearLayout = (LinearLayout) findViewById(R.id.linearlayout_surface_id); //播放布局文件
+
+        mRealPlayCaptureRl = (RelativeLayout) findViewById(R.id.play_control_id); //控制布局
 
         coverImg = (RelativeLayout) findViewById(R.id.realplay_display_view);  //  缓冲进度
 
@@ -195,10 +323,35 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         rightCtrl = (ImageView) findViewById(R.id.right);  //  向右控制
         bottomCtrl = (ImageView) findViewById(R.id.bottom);  //  向下控制
 
-        //alarmBtn = (ImageView) findViewById(R.id.device_alarm);  //  报警记录
-        //secureBtn = (ImageView) findViewById(R.id.device_secure);  //  报警记录
-
         screenshot = (ImageView) findViewById(R.id.screenshot);
+
+
+        e_LinearLayout = (LinearLayout) findViewById(R.id.enlarge_btn_linearlayout_id); //放大
+        n_LinearLayout = (LinearLayout) findViewById(R.id.narrow_btn_linearlayout_id); //缩小
+
+
+        /**录像**/
+        mRealPlayRecordContainer = findViewById(R.id.realplay_video_container);
+        mRealPlayRecordBtn = (ImageButton) findViewById(R.id.realplay_video_btn);
+        mRealPlayRecordStartBtn = (ImageButton) findViewById(R.id.realplay_video_start_btn);
+        mRealPlayRecordLy = (LinearLayout) findViewById(R.id.realplay_record_ly);
+        mRealPlayRecordIv = (ImageView) findViewById(R.id.realplay_record_iv);
+        mRealPlayRecordTv = (TextView) findViewById(R.id.realplay_record_tv);
+
+//        mRealPlayCaptureRl = (RelativeLayout) findViewById(R.id.realplay_capture_rl);
+//        mRealPlayCaptureRlLp = (RelativeLayout.LayoutParams) mRealPlayCaptureRl.getLayoutParams();
+
+        mRealPlayCaptureIv = (ImageView) findViewById(R.id.realplay_capture_iv);
+
+        mRealPlayCaptureWatermarkIv = (ImageView) findViewById(R.id.realplay_capture_watermark_iv);
+
+
+        playbackBtn=(ImageButton)findViewById(R.id.realplay_video_playback);
+
+
+
+        setPlayScaleUI(1, null, null);
+
 
     }
 
@@ -273,35 +426,13 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
         mLocalInfo.setSoundOpen(true);
 
-        alarmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("device_name", info);
-                bundle.putBoolean("showCheckBox", false);
-                bundle.putBoolean("hideToolBar", false);
-                intent.putExtras(bundle);
-                intent.setClass(Activity_Video_Control.this, Activity_Alarm_List.class);
-                Activity_Video_Control.this.startActivity(intent);
-            }
-        });
-
-        secureBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("device_name", info);
-                intent.putExtras(bundle);
-                intent.setClass(Activity_Video_Control.this, SafeCenterActivity.class);
-                Activity_Video_Control.this.startActivity(intent);
-            }
-        });
 
         // 保持屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        /**获取屏幕参数**/
+        mRecordRotateViewUtil = new RotateViewUtil();
 
         screenshot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,7 +460,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         mStopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopRealPlay(false);
+                stopRealPlay();
                 pauseBtn.setVisibility(View.VISIBLE);
             }
         });
@@ -382,7 +513,13 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+                Log.i(TAG, "大小被改变");
 
+                Log.i(TAG, "width=" + width + ",height=" + height + ",format=" + format);
+                if (mRealPlayMgr != null) {
+                    //设置播放Surface
+                    mRealPlayMgr.setPlaySurface(holder);
+                }
             }
 
             @Override
@@ -394,9 +531,198 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                 mSurfaceHolder = null;
             }
         });
-        mSurfaceView.setVisibility(View.VISIBLE);
+//        mSurfaceView.setVisibility(View.VISIBLE);
 
 
+        mRealPlayTouchListener = new CustomTouchListener() {
+
+            @Override
+            public boolean canZoom(float scale) {
+                Log.i(TAG, "mStatus=" + mStatus);
+                if (mStatus == RealPlayStatus.STATUS_PLAY) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            @Override
+            public boolean canDrag(int direction) {
+                Log.i(TAG, "canDrag");
+                if (mRealPlayMgr != null) {
+                    // 出界判断
+                    if (DRAG_LEFT == direction || DRAG_RIGHT == direction) {
+                        // 左移/右移出界判断
+                        if (mRealPlayMgr.getSupportPtzLeftRight() == 1) {
+                            return true;
+                        }
+                    } else if (DRAG_UP == direction || DRAG_DOWN == direction) {
+                        // 上移/下移出界判断
+                        if (mRealPlayMgr.getSupportPtzTopBottom() == 1) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public void onSingleClick() {
+                Log.i(TAG, "onSingleClick");
+//                onRealPlaySvClick();
+            }
+
+            @Override
+            public void onDoubleClick(MotionEvent e) {
+                Log.i(TAG, "onDoubleClick");
+            }
+
+            @Override
+            public void onZoom(float scale) {
+                Log.i(TAG, "****onZoom=" + scale + "mRealPlayMgr.getSupportPtzZoom()=" + mRealPlayMgr.getSupportPtzZoom());
+                if (mRealPlayMgr != null && mRealPlayMgr.getSupportPtzZoom() == 1) {
+                    startZoom(scale);
+                }
+            }
+
+
+            @Override
+            public void onDrag(int direction, float distance, float rate) {
+                Log.i(TAG, "onDrag");
+                if (mRealPlayMgr != null) {
+                }
+            }
+
+            @Override
+            public void onEnd(int mode) {
+                Log.i(TAG, "onEnd");
+                if (mRealPlayMgr != null) {
+//                    stopDrag(false);
+                }
+                if (mRealPlayMgr != null && mRealPlayMgr.getSupportPtzZoom() == 1) {
+                    stopZoom();
+                }
+            }
+
+            @Override
+            public void onZoomChange(float scale, CustomRect oRect, CustomRect curRect) {
+                Log.i(TAG, "onZoomChange");
+                if (mRealPlayMgr != null && mRealPlayMgr.getSupportPtzZoom() == 1) {
+                    //采用云台调焦
+                    return;
+                }
+                if (mStatus == RealPlayStatus.STATUS_PLAY) {
+                    if (scale > 1.0f && scale < 1.1f) {
+                        scale = 1.1f;
+                    }
+                    setPlayScaleUI(scale, oRect, curRect);
+                }
+            }
+        };
+
+
+//        mSurfaceView.setOnTouchListener(mRealPlayTouchListener);
+
+
+        mSurfaceView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isShow) {
+                    isShow = false;
+                    mRealPlayCaptureRl.setVisibility(View.GONE);
+                } else {
+                    isShow = true;
+                    mRealPlayCaptureRl.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+        e_LinearLayout.setOnClickListener(eOnClickListener);
+        n_LinearLayout.setOnClickListener(nOnClickListener);
+
+
+        /**录像事件**/
+
+        mRealPlayRecordBtn.setOnClickListener(mRealPlayRecordBtnOnClickListener);
+        mRealPlayRecordContainer.setOnClickListener(mRealPlayRecordBtnOnClickListener);
+        mRealPlayRecordStartBtn.setOnClickListener(mRealPlayRecordBtnOnClickListener);
+
+
+
+        /**视频回放**/
+        playbackBtn.setOnClickListener(playbackBtnOnClickListener);
+
+
+    }
+
+
+    private View.OnClickListener playbackBtnOnClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent();
+            intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, info);
+            intent.setClass(Activity_Video_Control.this,Activity_Video_Playback.class);
+            startActivity(intent);
+        }
+    };
+
+
+
+
+
+
+
+    private View.OnClickListener mRealPlayRecordBtnOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            onRecordBtnClick();
+        }
+    };
+
+
+    private View.OnClickListener eOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Log.i(TAG, "点击放大");
+            maxenlarge();
+        }
+    };
+
+
+    private View.OnClickListener nOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.i(TAG, "点击缩小");
+//            minnarrow();
+        }
+
+
+    };
+
+
+    /**
+     * 缩小方法*
+     */
+    private void minnarrow() {
+        android.widget.LinearLayout.LayoutParams sufaceviewParams = (android.widget.LinearLayout.LayoutParams) mSurfaceView
+                .getLayoutParams();
+        sufaceviewParams.height = 200;
+        sufaceviewParams.width = 200;
+        sufaceviewParams.gravity = Gravity.CENTER;
+        mSurfaceView.setLayoutParams(sufaceviewParams);
+    }
+
+    /**
+     * 放大方法*
+     */
+    private void maxenlarge() {
+        mSurfaceHolder.setFixedSize(600, 400);
+        if (mRealPlayMgr != null) {
+            //设置播放Surface
+            mRealPlayMgr.setPlaySurface(mSurfaceHolder);
+        }
     }
 
 
@@ -407,25 +733,27 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         }
     };
 
-    /**设置全屏**/
+    /**
+     * 设置全屏*
+     */
     private View.OnClickListener fullScreen_btnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.i(TAG,"设置全屏");
             setlandscape();
             setRealPlaySvLayout();
         }
     };
 
 
-    /**设置横屏**/
-    private void setlandscape(){
+    /**
+     * 设置横屏*
+     */
+    private void setlandscape() {
         // 开启旋转传感器
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        Log.i(TAG,"getRequestedOrientation()="+getRequestedOrientation());
-        if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE||mOrientation==2){
+        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE || mOrientation == 2) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }else{
+        } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
     }
@@ -490,7 +818,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         }
 
         setPlayLoadingUI();
-
+        mStatus = RealPlayStatus.STATUS_START;
         mRealPlayMgr = new RealPlayerManager(this);
         //设置Handler，接收处理消息
         mRealPlayMgr.setHandler(mHandler);
@@ -586,6 +914,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
      * 处理播放成功的情况
      */
     private void handlePlaySuccess(Message msg) {
+        mStatus = RealPlayStatus.STATUS_PLAY;
         if (msg.arg1 != 0) {
             mPlayRatio = Math.min((double) msg.arg2 / msg.arg1, Constant.LIVE_VIEW_RATIO);
         }
@@ -604,7 +933,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
      * 处理播放失败的情况
      */
     private void handlePlayFail(int errorCode) {
-        stopRealPlay(false);
+        stopRealPlay();
 
         String msg = null;
         // 判断返回的错误码
@@ -664,7 +993,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     /**
      * 停止播放
      */
-    private void stopRealPlay(boolean onScroll) {
+    private void stopRealPlay() {
         if (mRealPlayMgr != null) {
             //停止预览任务
             mRealPlayerHelper.stopRealPlayTask(mRealPlayMgr);
@@ -719,9 +1048,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     @Override
     protected void onResume() {  // 继续播放
         super.onResume();
-        Log.i(TAG,"this is onResume ");
         // 开始播放
-        // startRealPlay();
+        startRealPlay();
     }
 
     /**
@@ -730,7 +1058,6 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i(TAG,"this is onPause ");
     }
 
     @Override
@@ -751,7 +1078,13 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     @Override
     public void onStop() {
-        stopRealPlay(false);
+
+
+        if (mStatus != RealPlayStatus.STATUS_STOP) {
+            mIsOnStop = true;
+            stopRealPlay();
+            mStatus = RealPlayStatus.STATUS_PAUSE;
+        }
         super.onStop();
     }
 
@@ -762,31 +1095,22 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
             int action = motionevent.getAction();
             switch (action) {
                 case MotionEvent.ACTION_DOWN: {
-                    Log.e("TAG", "------------------------------------------------------------------->ACTION_DOWN ===== " + System.currentTimeMillis());
                     switch (view.getId()) {
                         case R.id.top://上控
-                            // mPtzControlLy.setBackgroundResource(R.drawable.ptz_up_sel);
                             setPtzDirectionIv(RealPlayStatus.PTZ_UP);
                             mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP, true);
-                            //reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP);
                             break;
                         case R.id.bottom://下控
-                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bottom_sel);
                             setPtzDirectionIv(RealPlayStatus.PTZ_DOWN);
                             mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN, true);
-                            //reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN);
                             break;
                         case R.id.left://左控
-                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_left_sel);
                             setPtzDirectionIv(RealPlayStatus.PTZ_LEFT);
                             mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT, true);
-                            //reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT);
                             break;
                         case R.id.right://右控
-                            // mPtzControlLy.setBackgroundResource(R.drawable.ptz_right_sel);
                             setPtzDirectionIv(RealPlayStatus.PTZ_RIGHT);
                             mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT, true);
-                            //reflectInvoke(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT);
                             break;
                         default:
                             break;
@@ -794,22 +1118,17 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                     break;
                 }
                 case MotionEvent.ACTION_UP: {
-                    Log.e("TAG", "------------------------------------------------------------------->ACTION_UP ====== " + System.currentTimeMillis());
                     switch (view.getId()) {
                         case R.id.top://上控
-                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
                             mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_UP, false);
                             break;
                         case R.id.bottom://下控
-                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
                             mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_DOWN, false);
                             break;
                         case R.id.left://左控
-                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
                             mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_LEFT, false);
                             break;
                         case R.id.right://右控
-                            //mPtzControlLy.setBackgroundResource(R.drawable.ptz_bg);
                             mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, RealPlayStatus.PTZ_RIGHT, false);
                             break;
                         default:
@@ -834,23 +1153,18 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     private void setPtzDirectionIv(int command, int errorCode) {
         if (command != -1 && errorCode == 0) {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            //mRealPlayPtzDirectionIv.setVisibility(View.VISIBLE);
             mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
             Message msg = new Message();
             msg.what = MSG_HIDE_PTZ_DIRECTION;
             msg.arg1 = 1;
             mHandler.sendMessageDelayed(msg, 500);
         } else if (errorCode != 0) {
-            /*RelativeLayout.LayoutParams svParams = (RelativeLayout.LayoutParams)mRealPlaySv.getLayoutParams();
-            RelativeLayout.LayoutParams params = null;*/
-            // mRealPlayPtzDirectionIv.setVisibility(View.VISIBLE);
             mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
             Message msg = new Message();
             msg.what = MSG_HIDE_PTZ_DIRECTION;
             msg.arg1 = 1;
             mHandler.sendMessageDelayed(msg, 500);
         } else {
-            //mRealPlayPtzDirectionIv.setVisibility(View.GONE);
             mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
         }
     }
@@ -865,7 +1179,6 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
             return;
         }
         mHandler.removeMessages(MSG_HIDE_PTZ_DIRECTION);
-        Log.e("TAG", "------------------------------------------------------------------>SUCCESS");
         if (msg.arg1 > 2) {
             //mRealPlayPtzDirectionIv.setVisibility(View.GONE);
         } else {
@@ -879,7 +1192,6 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     }
 
     private void handlePtzControlFail(Message msg) {
-        Log.e("TAG", "------------------------------------------------------------------>FAIL");
         switch (msg.arg1) {
             case ErrorCode.ERROR_CAS_PTZ_CONTROL_CALLING_PRESET_FAILED://正在调用预置点，键控动作无效
                 Utils.showToast(this, R.string.camera_lens_too_busy, msg.arg1);
@@ -950,7 +1262,6 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        Log.i(TAG, "this is ConfigurationChanged");
         mOrientation = newConfig.orientation;
         setRealPlaySvLayout();
         updateOperatorUI();
@@ -958,11 +1269,11 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     }
 
 
-    /**设置屏幕大小**/
+    /**
+     * 设置屏幕大小*
+     */
     private void setRealPlaySvLayout() {
 
-////        // 开启旋转传感器
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
         // 设置播放窗口位置
         final int screenWidth = mLocalInfo.getScreenWidth();
@@ -978,13 +1289,12 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         mDisplayWidth = metric.widthPixels;
         mDisplayHeight = metric.heightPixels;
-        Log.i(TAG, "mDisplayWidth="+mDisplayWidth+",mDisplayHeight="+mDisplayHeight);
 
         RelativeLayout.LayoutParams svLp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         svLp.addRule(RelativeLayout.CENTER_IN_PARENT);
         mSurfaceView.setLayoutParams(svLp);
-        if(mOrientation!=Configuration.ORIENTATION_PORTRAIT){
+        if (mOrientation != Configuration.ORIENTATION_PORTRAIT) {
             LinearLayout.LayoutParams realPlayPlayRlLp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
             linearLayout.setLayoutParams(realPlayPlayRlLp);
@@ -993,7 +1303,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
             title_linearlayout.setVisibility(View.GONE);
             handleRelativeLayout.setVisibility(View.GONE);
             scrollView.setVisibility(View.GONE);
-        }else{
+        } else {
             LinearLayout.LayoutParams realPlayPlayRlLp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     600);
             linearLayout.setLayoutParams(realPlayPlayRlLp);
@@ -1006,19 +1316,15 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     }
 
 
-
     private void updateOperatorUI() {
         if (mOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            Log.i(TAG, "12345*");
             // 显示状态栏
             fullScreen(false);
         } else {
-            Log.i(TAG, "123456*");
             // 隐藏状态栏
             fullScreen(true);
         }
     }
-
 
 
     private void fullScreen(boolean enable) {
@@ -1035,6 +1341,221 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         }
     }
 
+
+    /**
+     * 开始缩放*
+     */
+    private void startZoom(float scale) {
+        Log.i(TAG, "开始缩放");
+        if (mRealPlayMgr == null) {
+            return;
+        }
+
+        boolean preZoomIn = mZoomScale > 1.01 ? true : false;
+        boolean zoomIn = scale > 1.01 ? true : false;
+        if (mZoomScale != 0 && preZoomIn != zoomIn) {
+            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, mZoomScale > 1.01 ? RealPlayStatus.PTZ_ZOOMIN
+                    : RealPlayStatus.PTZ_ZOOMOUT, RealPlayStatus.PTZ_SPEED_DEFAULT, false);
+            mZoomScale = 0;
+        }
+        if (scale != 0 && (mZoomScale == 0 || preZoomIn != zoomIn)) {
+            mZoomScale = scale;
+            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, mZoomScale > 1.01 ? RealPlayStatus.PTZ_ZOOMIN
+                    : RealPlayStatus.PTZ_ZOOMOUT, RealPlayStatus.PTZ_SPEED_DEFAULT, true);
+        }
+    }
+
+    /**
+     * 停止缩放*
+     */
+    private void stopZoom() {
+        if (mRealPlayMgr == null) {
+            return;
+        }
+        if (mZoomScale != 0) {
+            mRealPlayerHelper.setPtzCommand(mRealPlayMgr, mHandler, mZoomScale > 1.01 ? RealPlayStatus.PTZ_ZOOMIN
+                    : RealPlayStatus.PTZ_ZOOMOUT, RealPlayStatus.PTZ_SPEED_DEFAULT, false);
+            mZoomScale = 0;
+        }
+    }
+
+
+    private void setPlayScaleUI(float scale, CustomRect oRect, CustomRect curRect) {
+        Log.i(TAG, "zhe***改变=" + scale + ",mPlayScale=" + mPlayScale);
+        if (scale == 1) {
+            if (mPlayScale == scale) {
+                return;
+            }
+            try {
+                if (mRealPlayMgr != null) {
+                    mRealPlayMgr.setDisplayRegion(false, null, null);
+                } else if (mDemoRealPlayer != null) {
+                    mDemoRealPlayer.setDisplayRegion(false, null, null);
+                }
+            } catch (BaseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            if (mPlayScale == scale) {
+                try {
+                    if (mRealPlayMgr != null) {
+                        mRealPlayMgr.setDisplayRegion(true, oRect, curRect);
+                    } else if (mDemoRealPlayer != null) {
+                        mDemoRealPlayer.setDisplayRegion(true, oRect, curRect);
+                    }
+                } catch (BaseException e) {
+                    e.printStackTrace();
+                }
+                return;
+            }
+//            RelativeLayout.LayoutParams realPlayRatioTvLp = (RelativeLayout.LayoutParams) mRealPlayRatioTv
+//                    .getLayoutParams();
+            if (mOrientation == Configuration.ORIENTATION_PORTRAIT) {
+//                realPlayRatioTvLp.setMargins(Utils.dip2px(this, 10), Utils.dip2px(this, 10), 0, 0);
+            } else {
+//                realPlayRatioTvLp.setMargins(Utils.dip2px(this, 70), Utils.dip2px(this, 20), 0, 0);
+            }
+//            mRealPlayRatioTv.setLayoutParams(realPlayRatioTvLp);
+            Log.i(TAG, "scale=" + scale);
+            String sacleStr = String.valueOf(scale);
+            Log.i(TAG, "s=" + sacleStr.subSequence(0, Math.min(3, sacleStr.length())) + "X");
+//            mRealPlayRatioTv.setText(sacleStr.subSequence(0, Math.min(3, sacleStr.length())) + "X");
+//            mRealPlayRatioTv.setVisibility(View.VISIBLE);
+//            mRealPlayControlRl.setVisibility(View.GONE);
+//            mRealPlayFullOperateBar.setVisibility(View.GONE);
+            try {
+                Log.i(TAG1, "执行到这里了");
+                if (mRealPlayMgr != null) {
+                    Log.i(TAG1, "放大缩小" + "sacleStr=" + sacleStr + ",oRect=" + oRect + ",curRect=" + curRect);
+                    mRealPlayMgr.setDisplayRegion(true, oRect, curRect);
+                } else if (mDemoRealPlayer != null) {
+                    mDemoRealPlayer.setDisplayRegion(true, oRect, curRect);
+                }
+            } catch (BaseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        mPlayScale = scale;
+    }
+
+
+    /**
+     * 开始录像
+     *
+     * @see
+     * @since V1.0
+     */
+    private void onRecordBtnClick() {
+        mControlDisplaySec = 0;
+        if (mRecordFilePath != null) {
+            stopRealPlayRecord();
+            return;
+        }
+
+        if (!SDCardUtil.isSDCardUseable()) {
+            // 提示SD卡不可用
+            Utils.showToast(this, R.string.remoteplayback_SDCard_disable_use);
+            return;
+        }
+
+        if (SDCardUtil.getSDCardRemainSize() < SDCardUtil.PIC_MIN_MEM_SPACE) {
+            // 提示内存不足
+            Utils.showToast(this, R.string.remoteplayback_record_fail_for_memory);
+            return;
+        }
+
+        if (mRealPlayMgr != null) {
+            mCaptureDisplaySec = 4;
+            updateCaptureUI();
+            mAudioPlayUtil.playAudioFile(AudioPlayUtil.RECORD_SOUND);
+            mRealPlayerHelper.startRecordTask(mRealPlayMgr, getResources(),
+                    R.drawable.video_file_watermark);
+        }
+    }
+
+    /**
+     * 停止录像
+     *
+     * @see
+     * @since V1.0
+     */
+    private void stopRealPlayRecord() {
+        if (mRealPlayMgr == null || mRecordFilePath == null) {
+            return;
+        }
+
+        // 设置录像按钮为check状态
+        if (mOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (!mIsOnStop) {
+                mRecordRotateViewUtil.applyRotation(mRealPlayRecordContainer, mRealPlayRecordStartBtn,
+                        mRealPlayRecordBtn, 0, 90);
+            } else {
+                mRealPlayRecordStartBtn.setVisibility(View.GONE);
+                mRealPlayRecordBtn.setVisibility(View.VISIBLE);
+            }
+//            mRealPlayFullRecordStartBtn.setVisibility(View.GONE);
+//            mRealPlayFullRecordBtn.setVisibility(View.VISIBLE);
+        } else {
+            if (!mIsOnStop) {
+//                mRecordRotateViewUtil.applyRotation(mRealPlayFullRecordContainer, mRealPlayFullRecordStartBtn,
+//                        mRealPlayFullRecordBtn, 0, 90);
+            } else {
+//                mRealPlayFullRecordStartBtn.setVisibility(View.GONE);
+//                mRealPlayFullRecordBtn.setVisibility(View.VISIBLE);
+
+            }
+            mRealPlayRecordStartBtn.setVisibility(View.GONE);
+            mRealPlayRecordBtn.setVisibility(View.VISIBLE);
+        }
+        mAudioPlayUtil.playAudioFile(AudioPlayUtil.RECORD_SOUND);
+        mRealPlayerHelper.stopRecordTask(mRealPlayMgr);
+
+        // 计时按钮不可见
+        mRealPlayRecordLy.setVisibility(View.GONE);
+        mRealPlayCaptureRl.setVisibility(View.VISIBLE);
+        mCaptureDisplaySec = 0;
+        try {
+            mRealPlayCaptureIv.setImageURI(Uri.parse(mRecordFilePath));
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
+        }
+        mRealPlayCaptureWatermarkIv.setTag(mRecordFilePath);
+        mRecordFilePath = null;
+        updateCaptureUI();
+    }
+
+
+    // 更新抓图/录像显示UI
+    private void updateCaptureUI() {
+        if (mRealPlayCaptureRl.getVisibility() == View.VISIBLE) {
+            if (mOrientation == Configuration.ORIENTATION_PORTRAIT) {
+                if (mRealPlayControlRl.getVisibility() == View.VISIBLE) {
+                    mRealPlayCaptureRlLp.setMargins(0, 0, 0, Utils.dip2px(this, 40));
+                } else {
+                    mRealPlayCaptureRlLp.setMargins(0, 0, 0, 0);
+                }
+                mRealPlayCaptureRl.setLayoutParams(mRealPlayCaptureRlLp);
+            } else {
+                RelativeLayout.LayoutParams realPlayCaptureRlLp = new RelativeLayout.LayoutParams(
+                        Utils.dip2px(this, 65), Utils.dip2px(this, 45));
+                realPlayCaptureRlLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                realPlayCaptureRlLp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                mRealPlayCaptureRl.setLayoutParams(realPlayCaptureRlLp);
+            }
+            if (mRealPlayCaptureWatermarkIv.getTag() != null) {
+                mRealPlayCaptureWatermarkIv.setVisibility(View.VISIBLE);
+                mRealPlayCaptureWatermarkIv.setTag(null);
+            }
+        }
+        if (mCaptureDisplaySec >= 4) {
+            mCaptureDisplaySec = 0;
+            mRealPlayCaptureRl.setVisibility(View.GONE);
+            mRealPlayCaptureIv.setImageURI(null);
+            mRealPlayCaptureWatermarkIv.setTag(null);
+            mRealPlayCaptureWatermarkIv.setVisibility(View.GONE);
+        }
+    }
 
 
 }
