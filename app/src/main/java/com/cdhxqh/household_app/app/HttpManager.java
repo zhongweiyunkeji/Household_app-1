@@ -172,7 +172,9 @@ public class HttpManager {
                                 }
                                 try {
                                     JSONObject obj = new JSONObject(responseString);
-                                    String token = obj.getString("accessToken");
+                                    String result = obj.getString("result");
+                                    JSONObject rs = new JSONObject(result);
+                                    String token = rs.getString("accessToken");
                                     if(token!=null){
                                         JSONObject access = new JSONObject(token);
                                         String accessToken = access.getString("accessToken");
