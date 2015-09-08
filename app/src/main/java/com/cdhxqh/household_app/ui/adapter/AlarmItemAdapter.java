@@ -1,6 +1,7 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
+import com.cdhxqh.household_app.ui.actvity.Activity_Write_Information;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.universalimageloader.core.DisplayImageOptions;
 import com.videogo.universalimageloader.core.assist.FailReason;
@@ -165,6 +167,15 @@ public class AlarmItemAdapter extends BaseAdapter {
                 Log.i("TAG", "-----------p = " + p + "----------->" + isChecked);
             }
         });*/
+        holder.item_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, Activity_Write_Information.class);
+                context.startActivity(intent);
+            }
+        });
+
 
         final CheckBox box = holder.checkbox;
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
@@ -244,6 +255,8 @@ public class AlarmItemAdapter extends BaseAdapter {
         TextView msg;
         TextView date;
         ImageView icon;
+        ImageView item_button;
+
 
         public ItemHolder(View view){
             checkbox = (CheckBox)view.findViewById(R.id.checkbox);
@@ -252,6 +265,7 @@ public class AlarmItemAdapter extends BaseAdapter {
             msg = (TextView)view.findViewById(R.id.item_msg);
             date = (TextView)view.findViewById(R.id.item_date);
             // icon = (ImageView)view.findViewById(R.id.item_icon);
+            item_button = (ImageView)view.findViewById(R.id.item_button);
         }
 
     }
