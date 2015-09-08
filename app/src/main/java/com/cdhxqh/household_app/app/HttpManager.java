@@ -1,15 +1,19 @@
 package com.cdhxqh.household_app.app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.cdhxqh.household_app.api.ErrorType;
 import com.cdhxqh.household_app.api.HttpRequestHandler;
 import com.cdhxqh.household_app.api.JsonUtils;
 import com.cdhxqh.household_app.api.Message;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Alarm;
+import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
 import com.cdhxqh.household_app.utils.SafeHandler;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -63,6 +67,7 @@ public class HttpManager {
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                            Log.i("TAG", "");
                         }
 
                         @Override
@@ -153,6 +158,7 @@ public class HttpManager {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                        Log.i("TAG", "TAG");
                     }
 
                     @Override
@@ -266,5 +272,25 @@ public class HttpManager {
             e.printStackTrace();
         }
         return currentTime;
+    }
+
+    public static void sendHttpRequest(Context context, String url, RequestParams maps, AsyncHttpResponseHandler handler, String method){
+        SharedPreferences myShared = context.getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+        String  sessionid = myShared.getString(Constants.SESSIONIDTRUE, "");
+        if(method == null){
+            method = "post";
+        }
+        method = method.toLowerCase().trim();
+        if (NetWorkUtil.IsNetWorkEnable(context)) { // 检查网络是否开启
+            AsyncHttpClient client = new AsyncHttpClient();
+            if(!"".equals(sessionid)){
+                client.addHeader("Cookie", "JSESSIONID=" + sessionid);
+            }
+            if("post".equals(method)){
+                client.post(context, url, maps, handler);
+            } else {
+                client.get(context, url, maps, handler);
+            }
+        }
     }
 }
