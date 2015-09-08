@@ -121,13 +121,13 @@ public class Activity_Login extends BaseActivity{
                 password.setError(getString(R.string.password_null));
                 password.requestFocus();
             }else {
-                 // getHttpUtil();
-                  Intent intent = new Intent();
+                  getHttpUtil();
+                 /* Intent intent = new Intent();
                   Bundle bundle = new Bundle();
                   bundle.putString("username", username.getText().toString());
                   intent.putExtras(bundle);
                   intent.setClass(Activity_Login.this, MainActivity.class);
-                  startActivity(intent);
+                  startActivity(intent);*/
             }
         }
     };
@@ -165,9 +165,10 @@ public class Activity_Login extends BaseActivity{
         @Override
         public void onSuccess(Object[] data) {
             Toast.makeText(Activity_Login.this,"登录成功",Toast.LENGTH_SHORT).show();
-            editor.putLong(Constants.SESSIONID, (Long)data[0]);
+            editor.putLong(Constants.SESSIONID, (Long) data[0]);
             editor.putString(Constants.SESSIONIDTRUE, (String) data[1]);
             editor.commit();
+            Constants.TOKEN_URL = (String)data[2];
             TestClass.closeLoading();
             Intent intent = new Intent();
             intent.setClass(Activity_Login.this,MainActivity.class);

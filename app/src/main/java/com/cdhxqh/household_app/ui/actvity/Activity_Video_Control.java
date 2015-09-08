@@ -195,8 +195,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         rightCtrl = (ImageView) findViewById(R.id.right);  //  向右控制
         bottomCtrl = (ImageView) findViewById(R.id.bottom);  //  向下控制
 
-        //alarmBtn = (ImageView) findViewById(R.id.device_alarm);  //  报警记录
-        //secureBtn = (ImageView) findViewById(R.id.device_secure);  //  报警记录
+        alarmBtn = (ImageView) findViewById(R.id.device_alarm);  //  报警记录
+        secureBtn = (ImageView) findViewById(R.id.device_secure);  //  报警记录
 
         screenshot = (ImageView) findViewById(R.id.screenshot);
 
