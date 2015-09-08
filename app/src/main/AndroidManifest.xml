@@ -123,6 +123,7 @@
         <activity android:name=".ui.actvity.Activity_Equip_delete" />
         <activity android:name=".ui.actvity.Activity_Equip_edit" />
         <activity android:name=".zxing.activity.CaptureActivity" />
+        <activity android:name=".ui.actvity.SafeCenterActivity" />
 
         <!--
         <activity
