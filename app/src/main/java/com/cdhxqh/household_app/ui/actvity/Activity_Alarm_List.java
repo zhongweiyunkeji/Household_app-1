@@ -241,7 +241,7 @@ public class Activity_Alarm_List extends BaseActivity {
                 getAlarmInfoList.setStatus(2);
                 getAlarmInfoList.setAlarmType(-1); // 获取全部报警记录(报警类型可参考文档：萤石平台接口使用说明文档(最新版).doc)
 
-                // int x = 1/0;  // 使用异常里面的数据来缓存
+                 int x = 1/0;  // 使用异常里面的数据来缓存
                 result = (ArrayList<AlarmInfo>)mEzvizAPI.getAlarmInfoList(getAlarmInfoList);
 
                 return result;

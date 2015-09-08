@@ -273,7 +273,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
         mLocalInfo.setSoundOpen(true);
 
-      /*  alarmBtn.setOnClickListener(new View.OnClickListener() {
+        alarmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
@@ -297,7 +297,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
                 intent.setClass(Activity_Video_Control.this, SafeCenterActivity.class);
                 Activity_Video_Control.this.startActivity(intent);
             }
-        });*/
+        });
 
         // 保持屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -721,7 +721,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         super.onResume();
         Log.i(TAG,"this is onResume ");
         // 开始播放
-        startRealPlay();
+        // startRealPlay();
     }
 
     /**
