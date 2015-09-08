@@ -38,6 +38,7 @@ import com.cdhxqh.household_app.app.Application;
 import com.cdhxqh.household_app.ezviz.OpenYSService;
 import com.cdhxqh.household_app.ezviz.SecureValidate;
 import com.cdhxqh.household_app.ezviz.WaitDialog;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.remoteplayback.RemoteFileTimeBar;
 import com.cdhxqh.household_app.ui.widget.HVScrollView;
 import com.cdhxqh.household_app.utils.AudioPlayUtil;
@@ -127,7 +128,7 @@ public class Activity_Video_Playback extends BaseActivity implements View.OnClic
     /**
      * 报警发生时间
      */
-    private CameraInfo mCameraInfo = null;
+    private MyDevice mCameraInfo = null;
     private List<CloudFile> mCloudFileList = null;
     private List<RemoteFileInfo> mDeviceFileList = null;
     private Calendar mStartTime = null;
@@ -272,7 +273,7 @@ public class Activity_Video_Playback extends BaseActivity implements View.OnClic
         Intent intent = getIntent();
         if (intent != null) {
             mAlarmStartTime = Utils.parseTimeToCalendar(intent.getStringExtra(IntentConsts.EXTRA_ALARM_TIME));
-            mCameraInfo = (CameraInfo) intent.getParcelableExtra(IntentConsts.EXTRA_CAMERA_INFO);
+            mCameraInfo = (MyDevice) intent.getSerializableExtra(IntentConsts.EXTRA_CAMERA_INFO);
         }
 
         if (mAlarmStartTime != null) {
@@ -620,7 +621,7 @@ public class Activity_Video_Playback extends BaseActivity implements View.OnClic
             return;
         }
         initUI();
-        if (mCameraInfo.getStatus() != 1) {
+        if (!mCameraInfo.isStatus()) {
             if (mStatus != STATUS_STOP) {
                 stopRemotePlayBack();
             }

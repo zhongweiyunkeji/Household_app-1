@@ -33,6 +33,7 @@ import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.DeviceDiscoverInfo;
 import com.cdhxqh.household_app.ezviz.OpenYSService;
 import com.cdhxqh.household_app.ezviz.SecureValidate;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.utils.AudioPlayUtil;
 import com.videogo.constant.Constant;
 import com.videogo.constant.IntentConsts;
@@ -74,7 +75,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     ScrollView scrollView;
     VideoView videoView;
     ImageView imgView;
-    CameraInfo info;  // 摄像头信息
+    MyDevice info;  // 摄像头信息
     TextView titleText; // 标题
     ImageView settingImg; // 标题栏右侧按钮
     ImageView backImg;  // 退回按钮
@@ -365,7 +366,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             if (bundle != null) { // 获取数据
-                info = bundle.getParcelable("device_name");
+                info = (MyDevice)bundle.getSerializable("device_name");
             }
         }
 
@@ -447,7 +448,7 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         });
 
         pauseBtn.setVisibility(View.GONE);
-        titleText.setText(info.getCameraName());
+        titleText.setText(info.getDeviceName());
         settingImg.setVisibility(View.GONE);
         backImg.setOnClickListener(new View.OnClickListener() {
             @Override
