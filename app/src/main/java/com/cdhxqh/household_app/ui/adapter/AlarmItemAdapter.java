@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
+import com.videogo.openapi.EzvizAPI;
 import com.videogo.universalimageloader.core.DisplayImageOptions;
 import com.videogo.universalimageloader.core.assist.FailReason;
 import com.videogo.universalimageloader.core.download.DecryptFileInfo;
@@ -99,6 +100,7 @@ public class AlarmItemAdapter extends BaseAdapter {
                 .build();
 
         String imgUrl = alarm.getImg();
+        EzvizAPI.getInstance().initImageLoader(context);  // 初始化
         com.videogo.universalimageloader.core.ImageLoader mImageLoader = com.videogo.universalimageloader.core.ImageLoader.getInstance();
         mImageLoader.displayImage(imgUrl, holder.img, options,
                 new ImageLoadingListener() {
@@ -122,8 +124,8 @@ public class AlarmItemAdapter extends BaseAdapter {
 
                     @Override
                     public void onLoadingCancelled(String imageUri, View view) {
-                      //  Log.e("TAG", "---------------------------------------------------------->");
-                      //  Log.e("TAG", "---------------------------------------------------------->");
+                        Log.e("TAG", "---------------------------------------------------------->");
+                        Log.e("TAG", "---------------------------------------------------------->");
                     }
                 }, new ImageLoadingProgressListener() {
                     @Override
@@ -135,7 +137,7 @@ public class AlarmItemAdapter extends BaseAdapter {
         holder.title.setText(alarm.getTitle());
         holder.msg.setText(alarm.getMsg());
         holder.date.setText(alarm.getDate());
-        holder.icon.setImageResource(alarm.getIcon());
+        // holder.icon.setImageResource(alarm.getIcon());
 
         final Alarm a = alarm;
         final int p = position;
@@ -249,7 +251,7 @@ public class AlarmItemAdapter extends BaseAdapter {
             title = (TextView)view.findViewById(R.id.item_title);
             msg = (TextView)view.findViewById(R.id.item_msg);
             date = (TextView)view.findViewById(R.id.item_date);
-            icon = (ImageView)view.findViewById(R.id.item_icon);
+            // icon = (ImageView)view.findViewById(R.id.item_icon);
         }
 
     }

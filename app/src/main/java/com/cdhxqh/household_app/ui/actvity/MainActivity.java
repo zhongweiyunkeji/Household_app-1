@@ -89,6 +89,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     private NavigationDrawerFragment product_fragment;
 
     static Intent intent;
+    TextView loginView;
 
     DeviceMenu myDie; // 我的设备
     static final int DEVICEM_ADD = 0;
@@ -98,6 +99,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     DeviceMenu likMan; // 我的设备
     static final int LINK_MAN_ADD = 3;
     static final int DEVICEM_SEARCH = 4;
+    String username = "";
 
     FragmentTransaction fragmentTransaction;
 
@@ -109,11 +111,18 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         setContentView(R.layout.activity_main);
         findViewById();
 
+        getData();
 
         initView();
 
         initMenu();
 
+    }
+
+    private void getData(){
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        username = bundle.getString("username");
     }
 
 
@@ -122,6 +131,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
      */
     private void findViewById() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        loginView = (TextView) findViewById(R.id.txt_member);
         mDrawerLayout = (ViewGroup) findViewById(R.id.drawer_layout);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.left_drawer);
@@ -140,7 +150,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         getSupportActionBar().setTitle("");
 
         atnrTitle = (TextView) findViewById(R.id.actionbar_title_text);
-
+        loginView.setText(username);
         /*ActionBar.LayoutParams lp =new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
         View view = LayoutInflater.from(this).inflate(R.layout.actionbar_title, null);
         centerTextViwt = (TextView)view.findViewById(R.id.actionbar_01);

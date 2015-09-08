@@ -111,6 +111,8 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
                     new UpdateDefenceTask(info, mContext, MyDevicelistAdapter.this).execute();
                 }
             });
+        } else {
+            holder.udstatus.setVisibility(View.GONE);
         }
 
 

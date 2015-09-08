@@ -134,7 +134,7 @@ public class MyDeviceFragment extends BaseFragment {
                     GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
                     getCameraInfoList.setPageStart(currentPage);
                     getCameraInfoList.setPageSize(showPage);
-                    // int x = 1/0;  // 使用异常里面的数据来缓存
+                   //  int x = 1/0;  // 使用异常里面的数据来缓存
                     // 获取设备列表
                     result = (ArrayList<CameraInfo>) mEzvizAPI.getCameraInfoList(getCameraInfoList);
                     Log.i(TAG,"result="+result);

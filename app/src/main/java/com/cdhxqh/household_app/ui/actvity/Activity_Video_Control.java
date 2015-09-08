@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -31,6 +32,7 @@ import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.DeviceDiscoverInfo;
 import com.cdhxqh.household_app.ezviz.OpenYSService;
 import com.cdhxqh.household_app.ezviz.SecureValidate;
+import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.videogo.constant.Constant;
 import com.videogo.demo.DemoRealPlayer;
 import com.videogo.exception.ErrorCode;
@@ -130,6 +132,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     ImageView rightCtrl;
     ImageView bottomCtrl;
 
+    ImageView alarmBtn;
+    ImageView secureBtn;
 
     private LocalInfo mLocalInfo = null;
 
@@ -147,8 +151,6 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     private LinearLayout title_linearlayout;
     /**手柄区域**/
     private RelativeLayout handleRelativeLayout;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,6 +194,9 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         leftCtrl = (ImageView) findViewById(R.id.left);  //  向左控制
         rightCtrl = (ImageView) findViewById(R.id.right);  //  向右控制
         bottomCtrl = (ImageView) findViewById(R.id.bottom);  //  向下控制
+
+        //alarmBtn = (ImageView) findViewById(R.id.device_alarm);  //  报警记录
+        //secureBtn = (ImageView) findViewById(R.id.device_secure);  //  报警记录
 
         screenshot = (ImageView) findViewById(R.id.screenshot);
 
@@ -268,6 +273,31 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
         mLocalInfo.setSoundOpen(true);
 
+      /*  alarmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("device_name", info);
+                bundle.putBoolean("showCheckBox", false);
+                bundle.putBoolean("hideToolBar", false);
+                intent.putExtras(bundle);
+                intent.setClass(Activity_Video_Control.this, Activity_Alarm_List.class);
+                Activity_Video_Control.this.startActivity(intent);
+            }
+        });
+
+        secureBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("device_name", info);
+                intent.putExtras(bundle);
+                intent.setClass(Activity_Video_Control.this, SafeCenterActivity.class);
+                Activity_Video_Control.this.startActivity(intent);
+            }
+        });*/
 
         // 保持屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

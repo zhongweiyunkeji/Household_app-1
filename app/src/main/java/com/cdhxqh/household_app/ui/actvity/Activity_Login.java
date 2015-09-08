@@ -123,7 +123,10 @@ public class Activity_Login extends BaseActivity{
             }else {
                  // getHttpUtil();
                   Intent intent = new Intent();
-                  intent.setClass(Activity_Login.this,MainActivity.class);
+                  Bundle bundle = new Bundle();
+                  bundle.putString("username", username.getText().toString());
+                  intent.putExtras(bundle);
+                  intent.setClass(Activity_Login.this, MainActivity.class);
                   startActivity(intent);
             }
         }
