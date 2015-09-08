@@ -63,12 +63,27 @@
             android:text="2015-08-17 18:51:22"/>
     </LinearLayout>
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ImageView
+    android:id="@+id/item_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/btn_dxz"
+    android:layout_marginRight="10dp"
+    android:gravity="top|right"/>
 
     <ImageView
-        android:id="@+id/item_icon"
+        android:id="@+id/item_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_alarm_orange"
+        android:src="@drawable/btn_dxz"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
         android:gravity="top|right"/>
+
+</LinearLayout>
 
 </LinearLayout>
