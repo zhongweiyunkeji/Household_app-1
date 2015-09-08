@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cdhxqh.household_app">
+    package="com.cdhxqh.household_app" >
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 读取通讯录权限 -->
@@ -43,13 +43,13 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.Toolbar"
-        tools:replace="icon,label">
+        tools:replace="icon,label" >
         <activity
             android:name=".ui.actvity.Load_Activity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
 
             <!-- android:theme="@style/AppTheme.Toolbar1" -->
             <intent-filter>
@@ -101,14 +101,10 @@
         <activity android:name=".ui.actvity.Activity_Help_Center" />
         <activity android:name=".ui.actvity.Activity_Notify_Mode" />
         <activity android:name=".ui.actvity.Activity_Role_Group" />
-
-
         <activity
             android:name=".ui.actvity.Activity_Video_Control"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
-
-
         <activity android:name=".ui.actvity.TestActivity" />
         <activity android:name=".ui.actvity.Activity_Help_Center_Datail" />
         <activity android:name=".ui.actvity.Activity_Help_Center_Search" />
@@ -144,6 +140,10 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity android:name=".ui.actvity.Activity_Alarm_List" />
+        <activity
+            android:name=".ui.actvity.Activity_Video_Playback"
+            android:label="@string/title_activity_activity__video__playback" >
+        </activity>
     </application>
 
 </manifest>

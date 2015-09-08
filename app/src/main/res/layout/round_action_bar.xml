@@ -10,57 +10,63 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="left"
+        android:layout_alignParentLeft="true"
         android:layout_weight="0"
-        android:layout_alignParentLeft="true">
+        android:gravity="left">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <!-- 放大按钮  -->
             <LinearLayout
+                android:id="@+id/enlarge_btn_linearlayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:background="@drawable/shape2"
-                android:gravity="left">
+                android:gravity="left"
+                android:orientation="horizontal">
+
                 <ImageView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_menu_blowup"/>
+                    android:src="@drawable/ic_menu_blowup" />
                 <!--android:hint="放大"-->
                 <Button
-                    android:gravity="left|center"
                     android:id="@+id/img_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center"
                     android:background="@android:color/transparent"
+                    android:gravity="left|center"
                     android:textColorHint="@color/font_color"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
             </LinearLayout>
 
             <!--  缩小按钮  -->
             <LinearLayout
+                android:id="@+id/narrow_btn_linearlayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/shape2"
                 android:gravity="left"
-                android:layout_marginTop="20dp">
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_menu_blowdown"/>
-              <!--  android:hint="缩小"-->
+                    android:src="@drawable/ic_menu_blowdown" />
+                <!--  android:hint="缩小"-->
                 <Button
                     android:id="@+id/img_leftDown"
-                    android:gravity="left|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:gravity="left|center"
                     android:textColorHint="@color/font_color"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -68,9 +74,10 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:layout_alignParentRight="true"
         android:layout_weight="0"
-        android:layout_alignParentRight="true">
+        android:gravity="right">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,270 +86,116 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:background="@drawable/shape2"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
                 <!--android:hint="放大"-->
                 <Button
                     android:id="@+id/img_right"
-                    android:gravity="right|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:gravity="right|center"
                     android:textColorHint="@color/font_color"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_menu_add"/>
+                    android:src="@drawable/ic_menu_add" />
             </LinearLayout>
 
             <!--  减小按钮  -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/shape2"
                 android:gravity="center"
-                android:layout_marginTop="20dp">
+                android:orientation="horizontal">
                 <!--android:hint="缩小"-->
                 <Button
                     android:id="@+id/img_rightDown"
-                    android:gravity="right|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:gravity="right|center"
                     android:textColorHint="@color/font_color"
-                    android:textSize="20dp"/>
+                    android:textSize="20dp" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_menu_small"/>
+                    android:src="@drawable/ic_menu_small" />
             </LinearLayout>
         </LinearLayout>
 
-        </RelativeLayout>
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_centerInParent="true"
-        android:layout_marginTop="-20dp">
+        android:layout_marginTop="-20dp"
+        android:layout_weight="1">
+
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/shape3"
             android:columnCount="3"
-            android:rowCount="3"
-            android:background="@drawable/shape3">
+            android:rowCount="3">
             <!--  左上方图片:   在圆心的上方,与左边图片右对齐,同时与上边图片下对齐   -->
             <ImageView
                 android:id="@+id/left_top"
-                android:background="@drawable/btn_view_left"
-                />
+                android:background="@drawable/btn_view_left" />
             <!-- 正上方图片:  在圆心图片的上方(layout_above),且左边界和圆心的左边界对齐(layout_alignLeft),同时右边界与圆心的右边界对齐(layout_alignRight)   -->
             <ImageView
                 android:id="@+id/top"
-                android:background="@drawable/btn_up_nol"
-                />
+                android:background="@drawable/btn_up_nol" />
             <!--  右上方图片:   在圆心的上方,与右边图片左对齐,同时与上边图片下对齐    -->
             <ImageView
                 android:id="@+id/right_top"
-                android:src="@drawable/btn_view_right"
-                />
+                android:src="@drawable/btn_view_right" />
             <!-- 正左方图片：  在圆心图片的左方(layout_toLeftOf),且上边界和圆心的上边界对齐(layout_alignLeft),同时下边界与圆心的下边界对齐(layout_alignBottom)   -->
             <ImageView
                 android:id="@+id/left"
-                android:background="@drawable/btn_left_nol"
-                />
+                android:background="@drawable/btn_left_nol" />
             <!--中间圆心图片  -->
             <ImageView
                 android:id="@+id/center"
-                android:src="@drawable/view_down"
-                />
+                android:src="@drawable/view_down" />
             <!-- 正右方图片：  在圆心图片的右方(layout_toLeftOf),且上边界和圆心的上边界对齐(layout_alignLeft),同时下边界与圆心的下边界对齐(layout_alignBottom)   -->
             <ImageView
                 android:id="@+id/right"
-                android:src="@drawable/btn_right_nol"
-                />
+                android:src="@drawable/btn_right_nol" />
             <!--  左下方图片:   在圆心的下方,与左边图片右对齐,同时与下边图片上对齐   -->
             <ImageView
                 android:id="@+id/left_bottom"
-                android:src="@drawable/btn_view_leftb"
-                />
+                android:src="@drawable/btn_view_leftb" />
             <!-- 正下方图片：  在圆心图片的下方(layout_below),且左边界和圆心的左边界对齐(layout_alignLeft),同时右边界与圆心的右边界对齐(layout_alignRight)   -->
             <ImageView
                 android:id="@+id/bottom"
-                android:src="@drawable/btn_down_nol"
-                />
+                android:src="@drawable/btn_down_nol" />
             <!--  右下方图片:   在圆心的下方,与右边图片左对齐,同时与下边图片上对齐   -->
             <ImageView
                 android:id="@+id/right_bottom"
-                android:src="@drawable/btn_view_rightb"
-                />
+                android:src="@drawable/btn_view_rightb" />
         </GridLayout>
     </RelativeLayout>
 
 
-    <!-- 中间圆心图片  -->
-    <!--<ImageView-->
-        <!--android:id="@+id/center"-->
-        <!--android:src="@drawable/view_down"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:scaleType="centerInside"-->
-    <!--/>-->
-
-    <!--&lt;!&ndash; 正上方图片:  在圆心图片的上方(layout_above),且左边界和圆心的左边界对齐(layout_alignLeft),同时右边界与圆心的右边界对齐(layout_alignRight)   &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/top"-->
-        <!--android:layout_above="@+id/center"-->
-        <!--android:layout_alignLeft="@+id/center"-->
-        <!--android:layout_alignRight="@+id/center"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/btn_up_nol"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash; 正左方图片：  在圆心图片的左方(layout_toLeftOf),且上边界和圆心的上边界对齐(layout_alignLeft),同时下边界与圆心的下边界对齐(layout_alignBottom)   &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/left"-->
-        <!--android:layout_toLeftOf="@+id/center"-->
-        <!--android:layout_alignTop="@+id/center"-->
-        <!--android:layout_alignBottom="@+id/center"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/btn_left_nol"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash; 正下方图片：  在圆心图片的下方(layout_below),且左边界和圆心的左边界对齐(layout_alignLeft),同时右边界与圆心的右边界对齐(layout_alignRight)   &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/bottom"-->
-        <!--android:layout_below="@+id/center"-->
-        <!--android:layout_alignLeft="@+id/center"-->
-        <!--android:layout_alignRight="@+id/center"-->
-        <!--android:src="@drawable/btn_down_nol"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash; 正右方图片：  在圆心图片的右方(layout_toLeftOf),且上边界和圆心的上边界对齐(layout_alignLeft),同时下边界与圆心的下边界对齐(layout_alignBottom)   &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/right"-->
-        <!--android:layout_alignTop="@+id/center"-->
-        <!--android:layout_alignBottom="@+id/center"-->
-        <!--android:layout_toRightOf="@+id/center"-->
-        <!--android:src="@drawable/btn_right_nol"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash;  左上方图片:   在圆心的上方,与左边图片右对齐,同时与上边图片下对齐   &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/left_top"-->
-        <!--android:src="@drawable/btn_view_left"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/center"-->
-        <!--android:layout_alignRight="@+id/left"-->
-        <!--android:layout_alignBottom="@+id/top"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash;  右上方图片:   在圆心的上方,与右边图片左对齐,同时与上边图片下对齐    &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/right_top"-->
-        <!--android:src="@drawable/btn_view_right"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/center"-->
-        <!--android:layout_alignLeft="@+id/right"-->
-        <!--android:layout_alignBottom="@+id/top"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash;  左下方图片:   在圆心的下方,与左边图片右对齐,同时与下边图片上对齐   &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/left_bottom"-->
-        <!--android:src="@drawable/btn_view_leftb"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/center"-->
-        <!--android:layout_alignRight="@+id/left"-->
-        <!--android:layout_alignTop="@+id/bottom"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash;  右下方图片:   在圆心的下方,与右边图片左对齐,同时与下边图片上对齐   &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/right_bottom"-->
-        <!--android:src="@drawable/btn_view_rightb"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/center"-->
-        <!--android:layout_alignLeft="@+id/right"-->
-        <!--android:layout_alignTop="@+id/bottom"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash; 放大按钮  &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/img_left"-->
-        <!--android:layout_alignTop="@+id/top"-->
-        <!--android:layout_toLeftOf="@+id/left_top"-->
-        <!--android:background="@drawable/btn_blowup_nol"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerInside"-->
-         <!--/>-->
-
-    <!--&lt;!&ndash;  加大按钮 &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:id="@+id/img_right"-->
-        <!--android:layout_alignTop="@+id/right_top"-->
-        <!--android:layout_toRightOf="@+id/right_top"-->
-        <!--android:background="@drawable/btn_add_nol"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash;  缩小按钮  &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:background="@drawable/btn_blowdown_nol"-->
-        <!--android:layout_alignBottom="@+id/left_bottom"-->
-        <!--android:layout_toLeftOf="@+id/left_bottom"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
-    <!--&lt;!&ndash; 减小 &ndash;&gt;-->
-    <!--<ImageView-->
-        <!--android:background="@drawable/btn_minus_nol"-->
-        <!--android:layout_alignBottom="@+id/right_bottom"-->
-        <!--android:layout_toRightOf="@+id/right_bottom"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scaleType="centerInside"-->
-        <!--/>-->
-
 </RelativeLayout>
 
-<!--
-<FrameLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:layout_margin="20dp"
-android:gravity="top"
-    >
-</FrameLayout>
--->
+    <!--
+    <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:gravity="top"
+        >
+    </FrameLayout>
+    -->
 
 
 

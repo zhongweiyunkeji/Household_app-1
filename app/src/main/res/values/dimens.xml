@@ -18,4 +18,13 @@
 
     <!-- 萤石云使用数字  -->
 
+    <!-- realplay text size -->
+    <dimen name="realplay_text_size">12dp</dimen>
+    <dimen name="remoteplayback_tip_text_size">16dp</dimen>
+    <dimen name="remoteplayback_button_text_size">15dp</dimen>
+    <dimen name="remoteplayback_ratio_text_size">24dp</dimen>
+    <dimen name="remoteplayback_text_size">12dp</dimen>
+    <dimen name="version_text_size">9dp</dimen>
+    <dimen name="remoteplayback_channel_text_size">9dp</dimen>
+
 </resources>
