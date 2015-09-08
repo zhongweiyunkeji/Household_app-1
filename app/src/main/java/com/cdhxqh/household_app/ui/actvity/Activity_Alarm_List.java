@@ -18,6 +18,7 @@ import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.AlarmType;
 import com.cdhxqh.household_app.model.Alarm;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.adapter.AlarmItemAdapter;
 import com.cdhxqh.household_app.ui.widget.TestClass;
@@ -47,7 +48,7 @@ public class Activity_Alarm_List extends BaseActivity {
     int currentPage = 0;
     int showPage = 30;
     EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
-    CameraInfo info;
+    MyDevice info;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     ImageView backImg;
     TextView titleText;
@@ -68,7 +69,7 @@ public class Activity_Alarm_List extends BaseActivity {
     public void getData(){
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
-            info = (CameraInfo)bundle.getParcelable("device_name");
+            info = (MyDevice)bundle.getParcelable("device");
         }
     }
 
