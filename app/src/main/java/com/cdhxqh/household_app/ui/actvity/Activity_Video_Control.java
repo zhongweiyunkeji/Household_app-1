@@ -247,14 +247,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
      */
     LinearLayout n_LinearLayout;
 
-
-
     /**视频**/
     private ImageButton playbackBtn;
-
-
-
-
 
     /**
      * 录像*
@@ -659,6 +653,16 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         /**视频回放**/
         playbackBtn.setOnClickListener(playbackBtnOnClickListener);
 
+
+        alarmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity_Video_Control.this, Activity_Alarm_List.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("device", info);
+                startActivity(intent);
+            }
+        });
 
     }
 
