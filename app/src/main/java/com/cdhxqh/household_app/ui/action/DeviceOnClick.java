@@ -3,6 +3,7 @@ package com.cdhxqh.household_app.ui.action;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.cdhxqh.household_app.model.MyDevice;
 import com.videogo.openapi.bean.resp.CameraInfo;
 
 /**
@@ -10,6 +11,6 @@ import com.videogo.openapi.bean.resp.CameraInfo;
  */
 public interface DeviceOnClick {
 
-    public abstract void callback(RecyclerView.ViewHolder holder, int position, View view, CameraInfo info);
+    public abstract void callback(RecyclerView.ViewHolder holder, int position, View view, MyDevice info);
 
 }
