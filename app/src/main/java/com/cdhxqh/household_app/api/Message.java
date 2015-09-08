@@ -2,6 +2,8 @@ package com.cdhxqh.household_app.api;
 
 import android.os.Environment;
 
+import com.cdhxqh.household_app.config.Constants;
+
 
 public class Message {
 
@@ -9,14 +11,12 @@ public class Message {
      ******************************************* 接口参数设置信息开始 ******************************************
      * 这里编写与服务器交互需要的url
      */
-
+    //远程服务地址
+    public static final String BASE_URL = Constants.BASE_URL;
 
     //远程服务器地址
 
 //    public static final String BASE_URL = "http://192.168.1.99:8080/security/";
-
-    //远程服务地址
-    public static final String BASE_URL = "http://182.92.158.158:8080/security/";
 
     /**登录用户接口**/
     public static final String LOGIN_URL = BASE_URL+"user/login";
