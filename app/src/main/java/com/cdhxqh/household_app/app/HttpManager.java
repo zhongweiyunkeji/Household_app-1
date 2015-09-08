@@ -14,6 +14,7 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -156,10 +157,10 @@ public class HttpManager {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                        Object[] objectList = new Object[2];
+                        Object[] objectList = new Object[3];
                         //解析返回的Json数据
                             boolean flag = JsonUtils.parsingAuthStr(cxt, responseString);
-                            if (flag == true) {
+                            if (flag) {
                                 for (Header h : headers) {
                                     String name = h.getName();
                                     if ("Set-Cookie".equals(name) && (-1 != url.indexOf(Message.LOGIN_URL))) {
@@ -169,8 +170,19 @@ public class HttpManager {
                                         break;
                                     }
                                 }
+                                try {
+                                    JSONObject obj = new JSONObject(responseString);
+                                    String token = obj.getString("accessToken");
+                                    if(token!=null){
+                                        JSONObject access = new JSONObject(token);
+                                        String accessToken = access.getString("accessToken");
+                                        objectList[2] = accessToken;
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                                 SafeHandler.onSuccess(handler, (E)objectList);
-                            } else if (flag == false) {
+                            } else {
                                 SafeHandler.onFailure(handler, "登录失败");
                             }
                     }

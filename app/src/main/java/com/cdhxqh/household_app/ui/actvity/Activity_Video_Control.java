@@ -6,10 +6,10 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -154,7 +154,8 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
     ImageView leftCtrl;
     ImageView rightCtrl;
     ImageView bottomCtrl;
-
+    ImageView alarmBtn;
+    ImageView secureBtn;
 
     /**
      * 录像布局*
@@ -322,6 +323,9 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
         leftCtrl = (ImageView) findViewById(R.id.left);  //  向左控制
         rightCtrl = (ImageView) findViewById(R.id.right);  //  向右控制
         bottomCtrl = (ImageView) findViewById(R.id.bottom);  //  向下控制
+
+        alarmBtn = (ImageView) findViewById(R.id.device_alarm);  //  报警记录
+        secureBtn = (ImageView) findViewById(R.id.device_secure);  //  报警记录
 
         screenshot = (ImageView) findViewById(R.id.screenshot);
 

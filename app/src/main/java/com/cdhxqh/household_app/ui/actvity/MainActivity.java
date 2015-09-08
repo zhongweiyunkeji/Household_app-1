@@ -3,6 +3,7 @@ package com.cdhxqh.household_app.ui.actvity;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -122,7 +123,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
     private void getData(){
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        username = bundle.getString("username");
+        if(bundle!=null){
+            username = bundle.getString("username");
+        } else {
+            SharedPreferences myshared = this.getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+            username = myshared.getString("Constants.USER_INFO", "");
+        }
     }
 
 
