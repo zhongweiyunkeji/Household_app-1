@@ -56,10 +56,10 @@ public class EquipDelAdapter extends BaseAdapter {
         final MyDevice myDevice = (MyDevice)list.get(position);
 
         ImageLoader.getInstance().displayImage("http://tech.cnr.cn/techgd/20150819/W020150819406395420486.jpg", holder.imageView);  // 设备图片
-        holder.sizeText.setText(""+myDevice.getSize());
-        holder.divName.setText(myDevice.getName());
-        holder.divAddr.setText(myDevice.getPlace());
-        holder.divNum.setText(myDevice.getName());
+        // holder.sizeText.setText(""+myDevice.getSize());
+        holder.divName.setText(myDevice.getDeviceName());
+        holder.divAddr.setText(myDevice.getDeviceName());
+        holder.divNum.setText(myDevice.getDeviceName());
         holder.dicStatuis.setText("在线");
 
         final CheckBox box = holder.checkBox;
@@ -85,7 +85,7 @@ public class EquipDelAdapter extends BaseAdapter {
             MyDevice obj = iistItem.get(i);
             boolean exist = false;
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).getName() == obj.getName()) {
+                if (list.get(j).getDeviceName() == obj.getDeviceName()) {
                     exist = true;
                     break;
                 }

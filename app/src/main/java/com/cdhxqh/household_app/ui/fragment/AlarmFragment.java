@@ -31,6 +31,7 @@ import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.AlarmType;
 import com.cdhxqh.household_app.model.Alarm;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_Del;
@@ -75,12 +76,12 @@ public class AlarmFragment extends BaseFragment {
     private MyDevicelistAdapter myDevicelistAdapter;
     Application application;
     EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
-    ArrayList<CameraInfo> result;
+    ArrayList<MyDevice> result;
     DeviceOnClick callback = new DeviceOnClick(){
-        public void callback(RecyclerView.ViewHolder holder, int position, View view, CameraInfo info){
+        public void callback(RecyclerView.ViewHolder holder, int position, View view, MyDevice info){
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
-            bundle.putParcelable("device_name", info);
+            bundle.putSerializable("device_name", info);
             bundle.putBoolean("showCheckBox", false);
             bundle.putBoolean("hideToolBar", false);
             intent.putExtras(bundle);
@@ -161,17 +162,17 @@ public class AlarmFragment extends BaseFragment {
             if(!isCancelled()){
                 try {
                     // 设置Token
-                    mEzvizAPI.setAccessToken(Constants.TOKEN_URL);
+                  /*  mEzvizAPI.setAccessToken(Constants.TOKEN_URL);
                     GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
                     getCameraInfoList.setPageStart(currentPage);
                     getCameraInfoList.setPageSize(showPage);
                     // int x = 1/0;  // 使用异常里面的数据来缓存
                     // 获取设备列表
-                    result = (ArrayList<CameraInfo>)mEzvizAPI.getCameraInfoList(getCameraInfoList);
+                    result = (ArrayList<CameraInfo>)mEzvizAPI.getCameraInfoList(getCameraInfoList);*/
                     return result;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    result = new ArrayList<CameraInfo>(0);
+                    /*result = new ArrayList<CameraInfo>(0);
                     CameraInfo f1 = new CameraInfo();
                     f1.setDeviceSerial("536724861");
                     f1.setPicUrl("https://i.ys7.com/assets/imgs/public/homeDevice.jpeg");
@@ -199,12 +200,12 @@ public class AlarmFragment extends BaseFragment {
                     f2.setStatus(1);
 
                     result.add(f1);
-                    result.add(f2);
+                    result.add(f2);*/
                     return result;
                 }
             }
             if(result == null){
-                result = new ArrayList<CameraInfo>(0);
+                result = new ArrayList<MyDevice>(0);
             }
             return result;
         }

@@ -1,6 +1,7 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.app.Dialog;
+import android.bluetooth.BluetoothClass;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ezviz.TransferAPI;
 import com.cdhxqh.household_app.ezviz.WaitDialog;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.videogo.exception.BaseException;
@@ -45,7 +47,7 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
     private boolean showSwitch = false;
     DeviceOnClick callback;
 
-    ArrayList<CameraInfo> list=new ArrayList<CameraInfo>();
+    ArrayList<MyDevice> list=new ArrayList<MyDevice>();
 
     public MyDevicelistAdapter(Context context, DeviceOnClick callback){
         this.mContext = context;
@@ -71,8 +73,8 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        final CameraInfo info  = list.get(position);
-        holder.nameView.setText(list.get(position).getCameraName());  // 摄像头名称
+        final MyDevice info  = list.get(position);
+        holder.nameView.setText(list.get(position).getDeviceName());  // 摄像头名称
         if(showSizeView){
             holder.sizeView.setText(0+"");
             holder.sizeView.setVisibility(View.VISIBLE);
@@ -117,7 +119,7 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
 
 
         if(showDeviceSrarus){
-            String status = (info.getStatus() == 1) ? "在线" : "离线";
+            String status = info.isStatus() ? "在线" : "离线";
             holder.status.setText(status);
             if("在线".equals(status)){
                 holder.status.setTextColor(mContext.getResources().getColor(R.color.green));
@@ -179,11 +181,11 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
         }
     }
 
-    public void update(ArrayList<CameraInfo> data, boolean merge) {
+    public void update(ArrayList<MyDevice> data, boolean merge) {
         Log.i(TAG, "mItems=" + list.size());
         if (merge && list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
-                CameraInfo device = list.get(i);
+                MyDevice device = list.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
                     if (data.get(j) == device) {
@@ -211,13 +213,13 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
 
 
     private class UpdateDefenceTask extends AsyncTask<Void, Void, Boolean> {
-        private CameraInfo mCameraInfo;
+        private MyDevice mCameraInfo;
         private Dialog mWaitDialog;
         private int mErrorCode;
         Context context;
         MyDevicelistAdapter adapter;
 
-        public UpdateDefenceTask(CameraInfo cameraInfo, Context context, MyDevicelistAdapter adapter) {
+        public UpdateDefenceTask(MyDevice cameraInfo, Context context, MyDevicelistAdapter adapter) {
             mCameraInfo = cameraInfo;
             this.context = context;
             this.adapter = adapter;
@@ -238,7 +240,7 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
             }
 
             try {
-                return TransferAPI.updateDefence(mCameraInfo.getDeviceSerial(), mCameraInfo.getDefence() == 0 ? 1 : 0);
+                return TransferAPI.updateDefence(mCameraInfo.getDeviceSerial(), mCameraInfo.getDefence());
             } catch (BaseException e) {
                 e.printStackTrace();
                 mErrorCode = e.getErrorCode();

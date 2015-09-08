@@ -155,7 +155,7 @@ public class Activity_Login extends BaseActivity{
          * 加载中
          */
         TestClass.loading(this, getString(R.string.login_hint_text));
-        HttpManager.filterManager(null, this, true, handler, Message.LOGIN_URL, "loginName", "password", username.getText().toString(), password.getText().toString());
+        HttpManager.filterManager(null, this, true, handler, Message.LOGIN_URL.trim(), "loginName", "password", username.getText().toString(), password.getText().toString());
     }
 
     /**

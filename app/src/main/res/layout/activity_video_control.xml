@@ -60,24 +60,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
-
                     <ImageView
                         android:id="@+id/screenshot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/btn_screenshot_nol" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/btn_image_nol" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -114,19 +101,7 @@
                         android:onClick="onClick"
                         android:visibility="gone" />
                 </FrameLayout>
-            </LinearLayout>
 
-            <!--Row2-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp">
-
-                android:paddingBottom="20dp"
-                android:gravity="center">
                 <!--  报警记录  -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -139,6 +114,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
+            </LinearLayout>
+
+            <!--Row2-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
                 <!--  安全服务中心  -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,6 +133,18 @@
                     <ImageView
                         android:id="@+id/device_secure"
                         android:background="@drawable/btn_safe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <!--  占位  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:background="@drawable/btn_alarm_nol"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
