@@ -35,7 +35,7 @@
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="left"
             android:layout_gravity="left|center"
             android:paddingTop="5dp"
             android:textSize="20sp"

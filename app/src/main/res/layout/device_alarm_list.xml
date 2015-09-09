@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+<!--
 
     <include layout="@layout/activity_tittle" />
 
@@ -48,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/list_line_x"/>
+-->
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_container"
