@@ -51,7 +51,7 @@ public class ProductFragment extends BaseFragment{
             ProductModel c = new ProductModel();
             c.setProduct_id("监控");
             c.setPosition_id("阳台");
-            c.setMonitor_time_id("2012");
+            c.setMonitor_time_id("开启");
             contacts.add(c);
         }
 

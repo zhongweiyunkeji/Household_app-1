@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -51,7 +52,20 @@ public class AlarmActivity extends Activity{
      * 联系人信息
      */
     private static ArrayList<Contacters> contactsMessage = new ArrayList<Contacters>();
-    static ArrayList<Contacters> contacts  = new ArrayList<Contacters>();;
+    static ArrayList<Contacters> contacts  = new ArrayList<Contacters>();
+
+    /**
+     * 返回按钮*
+     */
+    private ImageView back_imageview_id;
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView title_add_id;
 
     /**
      *添加联系人
@@ -91,11 +105,28 @@ public class AlarmActivity extends Activity{
          * 添加联系人
          */
         addContacts = (ImageView) findViewById(R.id.title_add_id);
+
+        /**
+         * 标题标签相关id
+         */
+        back_imageview_id = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        title_add_id = (ImageView) findViewById(R.id.title_add_id);
     }
 
 
     protected void initView() {
+        //设置标签页显示方式
+        back_imageview_id.setVisibility(View.VISIBLE);
+        title_add_id.setVisibility(View.GONE);
+        titleTextView.setText("忘记密码");
+
         checkbox_all.setOnCheckedChangeListener(checkOnClickListener);
+
+        back_imageview_id.setOnTouchListener(backImageViewOnTouchListener);
+
+        //返回至登录界面事件
+        back_imageview_id.setOnClickListener(backImageViewOnClickListener);
 
         edit.setOnClickListener(itemOnClickListener);
 
@@ -124,6 +155,31 @@ public class AlarmActivity extends Activity{
 
         alarm_contacts.setAdapter(alarmAdapter);
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent();
+            intent.putExtra("contactList", (Serializable) contactsMessage);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+    };
 
     /**
      * 全选按钮事件

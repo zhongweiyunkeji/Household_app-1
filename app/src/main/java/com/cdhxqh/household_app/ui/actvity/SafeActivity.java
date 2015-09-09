@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -97,6 +98,19 @@ public class SafeActivity extends BaseActivity {
      */
     LinearLayout view_user;
 
+    /**
+     * 返回按钮*
+     */
+    private ImageView back_imageview_id;
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView title_add_id;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safe_service);
@@ -158,9 +172,19 @@ public class SafeActivity extends BaseActivity {
         user_num = (TextView)findViewById(R.id.user_num);
 
 //        view_user = (LinearLayout) findViewById(R.id.view_user);
+        /**
+         * 标题标签相关id
+         */
+        back_imageview_id = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        title_add_id = (ImageView) findViewById(R.id.title_add_id);
     }
 
     protected void initView() {
+        //设置标签页显示方式
+        back_imageview_id.setVisibility(View.VISIBLE);
+        title_add_id.setVisibility(View.GONE);
+        titleTextView.setText("安全服务中心");
         select_time.setOnClickListener( outTimeOnClickListener);
         select_time_a.setOnClickListener(outTimeOnClickListener_a);
 
@@ -187,6 +211,10 @@ public class SafeActivity extends BaseActivity {
 //         * 导入通讯录
 //         */
 //        putConnect.setOnClickListener(connectOnClickListener);
+        back_imageview_id.setOnTouchListener(backImageViewOnTouchListener);
+
+        //返回至登录界面事件
+        back_imageview_id.setOnClickListener(backImageViewOnClickListener);
 
         sb.setOnChangeListener(new SwitchButtonIs.OnChangeListener() {
 
@@ -194,11 +222,32 @@ public class SafeActivity extends BaseActivity {
             public void onChange(SwitchButtonIs sb, boolean state) {
                 // TODO Auto-generated method stub
                 Log.d("switchButton", state ? "验票员" : "用户");
-                Toast.makeText(SafeActivity.this, state ? "验票员" : "用户", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 
     /**
      * 是否录像
