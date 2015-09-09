@@ -61,27 +61,24 @@
                         style="@style/ListPadding.ListLevel2"
                         android:layout_gravity="center"
                         android:text="接收人" />
-                    <RelativeLayout
+                    <EditText
+                        android:id="@+id/selectuser"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <EditText
-                            android:id="@+id/selectuser"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="left|center"
-                            android:layout_gravity="left|center"
-                            android:text="11111111"
-                            android:textCursorDrawable="@drawable/color_cursor"
-                            android:background="@null"/>
-                        <ImageView
-                            android:id="@+id/contactser"
-                            android:scaleType="centerInside"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true"
-                            android:src="@drawable/btn_users" />
-                    </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:gravity="left|center_vertical"
+                        android:layout_gravity="left|center"
+                        android:text="11111111"
+                        android:layout_weight="1"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:background="@null"/>
+                    <ImageView
+                        android:id="@+id/contactser"
+                        android:scaleType="centerInside"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/btn_users" />
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -109,6 +106,7 @@
                         android:text="开启协助模式"/>
 
                     <ImageButton
+                        android:id="@+id/assistModule"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/cameralist_button_selector"
@@ -133,6 +131,7 @@
                         style="@style/ListPadding.ListLevel2"
                         android:text="是否需要协助人员反馈"/>
                     <ImageButton
+                        android:id="@+id/feedback"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/cameralist_button_selector"
