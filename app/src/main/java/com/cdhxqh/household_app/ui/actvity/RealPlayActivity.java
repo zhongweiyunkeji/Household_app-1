@@ -224,6 +224,8 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
 
     private WaitDialog mWaitDialog = null;
 
+    RelativeLayout controlLayout;  // 操作手柄
+
     /**
      * 监听锁屏解锁的事件
      */
@@ -278,6 +280,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         titleView = (TextView) findViewById(R.id.title_text_id);
         rightView = (ImageView) findViewById(R.id.title_add_id);
 
+        controlLayout = (RelativeLayout) findViewById(R.id.video_control);
 
     }
 
@@ -287,7 +290,6 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
     private void initView() {
         backImage.setOnClickListener(backImageOnClickListener);
         rightView.setVisibility(View.GONE);
-
 
         // 保持屏幕常亮
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -466,6 +468,11 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         initOperateBarUI();
         setRealPlaySvLayout();
 
+        if(!checvkAuth()){
+            controlLayout.setVisibility(View.GONE);
+            mRealPlayOperateBar.setVisibility(View.GONE);
+        }
+
     }
 
 
@@ -508,9 +515,11 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
 
     public boolean checvkAuth(){
         if(mCameraInfo!=null){
-
+            if(mCameraInfo.getUid().equals(""+Constants.USER_ID)){
+                return true;
+            }
         }
-        ToastUtil.showMessage(this, "");
+       // ToastUtil.showMessage(this, "您当前没有该权限");
         return false;
     }
 
@@ -1001,10 +1010,10 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.realplay_play_btn:
-            case R.id.realplay_full_play_btn:
-            case R.id.realplay_play_iv:
-                if (mStatus != RealPlayStatus.STATUS_STOP) {
+            case R.id.realplay_play_btn:        // 播放按钮
+            case R.id.realplay_full_play_btn:  // 全屏按钮
+            case R.id.realplay_play_iv:         // ???
+                if (mStatus != RealPlayStatus.STATUS_STOP) {  // 停止播放
                     stopRealPlay();
                     setRealPlayStopUI();
                 } else {
@@ -1012,7 +1021,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
                 }
                 break;
             case R.id.realplay_previously_btn:
-            case R.id.realplay_full_previously_btn:
+            case R.id.realplay_full_previously_btn:   // 抓图
                 onCapturePicBtnClick();
                 break;
             case R.id.realplay_capture_rl:
