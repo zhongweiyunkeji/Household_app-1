@@ -20,15 +20,17 @@ public class Constants {
     /**视频截图保存路径**/
     public static final String VIDEO_PATH="/storage/sdcard1/";
 
-    // 182.92.158.158
-    public static final String BASE_URL = "http://182.92.158.158:8080/security/";
+    // 182.92.158.158   192.168.1.101
+    public static final String BASE_URL = "http://192.168.1.101:8080/security/";
 
     // 设备列表
     public static final String DEVICE_LIST = BASE_URL + "yscamera/list";
 
+    // 报警记录
+    public static final String ALARM_LIST = BASE_URL + "/ysalarm/list";
 
-
-
+    // 用户登录的ID
+    public static int USER_ID = -10;
 
 
 
