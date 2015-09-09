@@ -48,14 +48,12 @@ import java.util.List;
  */
 public class MyDeviceFragment extends BaseFragment {
     private static final String TAG="MyDeviceFragment";
-    int currentPage = 0; // 当前页(索引从0开始)
+    int currentPage = 1; // 当前页(索引从0开始)
     int showPage = 1;   // 每页显示
 
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private MyDevicelistAdapter myDevicelistAdapter;
-    Application application;
-    EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
     ArrayList<MyDevice> result = new ArrayList<MyDevice>(0);
     DeviceOnClick callback = new DeviceOnClick(){
         public void callback(RecyclerView.ViewHolder holder, int position, View view, MyDevice info){
@@ -71,17 +69,25 @@ public class MyDeviceFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getActivity() != null) {
-            application = (Application) getActivity().getApplication();
-        }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_mydevice, container, false);
+        findById(view);
+        initView();
+        return view;
+    }
+
+    public void findById(View view){
         recyclerView = (RecyclerView) view.findViewById(R.id.mydevice_list);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+    }
+
+    public void initView(){
+        myDevicelistAdapter = new MyDevicelistAdapter(getActivity(), callback);
+        myDevicelistAdapter.setShowSizeView(false); // 不显示报警记录总数
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -90,10 +96,7 @@ public class MyDeviceFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        myDevicelistAdapter = new MyDevicelistAdapter(getActivity(), callback);
-        myDevicelistAdapter.setShowSizeView(false); // 不显示报警记录总数
         recyclerView.setAdapter(myDevicelistAdapter);
-        swipeRefreshLayout.setRefreshing(true);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -103,37 +106,17 @@ public class MyDeviceFragment extends BaseFragment {
         });
 
         startAsynTask();  // 请求网络数据
-
-        return view;
-    }
-
-    /**
-     * 从萤石云获取设备列表
-     */
-    private void addData() {
-        swipeRefreshLayout.setRefreshing(false);
-        myDevicelistAdapter.setShowSwitch(true);
-        myDevicelistAdapter.update(result, true);
-        if (!result.isEmpty()) {
-            currentPage++;
-        } else {
-
-        }
     }
 
     /**
      * 初始化任务
      */
     private void startAsynTask() {
-        getDeviceList();
-    }
-
-    private void getDeviceList(){
         RequestParams maps = new RequestParams();
         maps.put("showCount", showPage);
         maps.put("currentPage", currentPage);
         AsyncHttpClient client = new AsyncHttpClient();
-        HttpManager.sendHttpRequest(getActivity(), Constants.DEVICE_LIST, maps, "get", true, responseHandler);
+        HttpManager.sendHttpRequest(getActivity(), Constants.DEVICE_LIST.trim(), maps, "get", false, responseHandler);
     }
 
     HttpCallBackHandle responseHandler = new HttpCallBackHandle() {
@@ -141,6 +124,7 @@ public class MyDeviceFragment extends BaseFragment {
         public void onSuccess(int statusCode, Header[] headers, String responseBody) {
             if(responseBody!=null){
                 String resultStr = responseBody;
+                MyDeviceFragment.this.result.clear();;
                 try {
                     JSONObject resultJson = new JSONObject(resultStr);
                     JSONObject result = resultJson.getJSONObject("result");
@@ -166,22 +150,27 @@ public class MyDeviceFragment extends BaseFragment {
                         MyDeviceFragment.this.result.add(device);
                     }
 
-                    addData();
-
-                    currentPage ++;
+                    if(!MyDeviceFragment.this.result.isEmpty()){
+                        myDevicelistAdapter.setShowSwitch(true);
+                        myDevicelistAdapter.update(MyDeviceFragment.this.result, true);
+                    }
+                    currentPage++;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-
-                swipeRefreshLayout.setRefreshing(false);
+                if(swipeRefreshLayout.isRefreshing()){
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
 
         }
 
         @Override
         public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
-            swipeRefreshLayout.setRefreshing(false);
+            if(swipeRefreshLayout.isRefreshing()){
+                swipeRefreshLayout.setRefreshing(false);
+            }
         }
     };
 
