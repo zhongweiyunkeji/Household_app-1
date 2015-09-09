@@ -7,11 +7,12 @@ import java.io.Serializable;
  */
 public class Alarm implements Serializable {
 
-    private String img;
-    private String title;
-    private String msg;
-    private String date;
-    private int icon;
+    private String img;   // 左侧报警图片
+    private String title; // 报警信息
+    private String msg;   // 家庭住址
+    private String date;  // 报警事件
+    private int icon;    // 协助状态
+    private int payVideoRes;  // 转到设备实时预览按钮
     private boolean status = false;  // 保存复选框的选中状态
     private boolean back;
     private boolean encryption;
@@ -107,5 +108,13 @@ public class Alarm implements Serializable {
 
     public void setSerial(String serial) {
         this.serial = serial;
+    }
+
+    public int getPayVideoRes() {
+        return payVideoRes;
+    }
+
+    public void setPayVideoRes(int payVideoRes) {
+        this.payVideoRes = payVideoRes;
     }
 }
