@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ezviz.TransferAPI;
 import com.cdhxqh.household_app.ezviz.WaitDialog;
+import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
@@ -183,21 +184,21 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
 
     public void update(ArrayList<MyDevice> data, boolean merge) {
         Log.i(TAG, "mItems=" + list.size());
-        if (merge && list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                MyDevice device = list.get(i);
+        if (merge) {
+            for (int i = 0; i < data.size(); i++) {
+                MyDevice device = data.get(i);
                 boolean exist = false;
-                for (int j = 0; j < data.size(); j++) {
-                    if (data.get(j) == device) {
+                for (int j = 0; j < list.size(); j++) {
+                    if (list.get(j).getDeviceSerial().equals(device.getDeviceSerial())) {
                         exist = true;
                         break;
                     }
                 }
                 if (exist) continue;
-                data.add(device);
+                list.add(0, device);
             }
         }
-        list = data;
+       data = list;
 
         notifyDataSetChanged();
     }

@@ -189,12 +189,12 @@ public class AlarmItemAdapter extends BaseAdapter {
         }
     }
 
-    public void update(ArrayList<Alarm> iistItem) {
-        for (int i = 0; i < iistItem.size(); i++) {
-            Alarm obj = iistItem.get(i);
+    public void update(ArrayList<Alarm> array) {
+        for (int i = 0; i < array.size(); i++) {
+            Alarm obj = array.get(i);
             boolean exist = false;
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).getDate().equals(obj.getDate())) {
+                if (list.get(j).getDate().equals(obj.getDate()) && (list.get(j).getSerial().equals(obj.getSerial()))) {
                     exist = true;
                     break;
                 }
@@ -202,7 +202,7 @@ public class AlarmItemAdapter extends BaseAdapter {
             if (exist) continue;
             list.add(0, obj);
         }
-        iistItem = list;
+        array = list;
 
         try {
             notifyDataSetChanged();
