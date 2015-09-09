@@ -246,7 +246,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             }
             case 1: {// 报警记录
                 AlarmFragment fragement = new AlarmFragment();
-                fragmentTransaction.replace(R.id.container,fragement, "AlarmFragment" );
+                fragmentTransaction.replace(R.id.container,fragement);
                 fragmentTransaction.commit();
                 break;
             }
