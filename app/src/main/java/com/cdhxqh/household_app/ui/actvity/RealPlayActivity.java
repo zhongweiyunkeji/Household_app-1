@@ -36,11 +36,13 @@ import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.Application;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.OpenYSService;
 import com.cdhxqh.household_app.ezviz.SecureValidate;
 import com.cdhxqh.household_app.ezviz.WaitDialog;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.utils.AudioPlayUtil;
+import com.cdhxqh.household_app.utils.ToastUtil;
 import com.videogo.constant.Config;
 import com.videogo.constant.Constant;
 import com.videogo.constant.IntentConsts;
@@ -504,6 +506,13 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         mIsOnStop = false;
     }
 
+    public boolean checvkAuth(){
+        if(mCameraInfo!=null){
+
+        }
+        ToastUtil.showMessage(this, "");
+        return false;
+    }
 
     @Override
     protected void onStop() {
@@ -520,6 +529,9 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
             mStatus = RealPlayStatus.STATUS_PAUSE;
         }
         mRealPlaySv.setVisibility(View.INVISIBLE);
+
+        // 回复原来的
+        EzvizAPI.getInstance().setAccessToken(Constants.TOKEN_URL);
     }
 
 
@@ -548,7 +560,10 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         Intent intent = getIntent();
         if (intent != null) {
             mRtspUrl = intent.getStringExtra(IntentConsts.EXTRA_RTSP_URL);
-            mCameraInfo = (MyDevice) intent.getParcelableExtra(IntentConsts.EXTRA_CAMERA_INFO);
+            Bundle bundle = intent.getExtras();
+            if(bundle!=null){
+                mCameraInfo = (MyDevice) bundle.getSerializable(IntentConsts.EXTRA_CAMERA_INFO);
+            }
         }
         // 获取本地信息
         Application application = (Application) getApplication();

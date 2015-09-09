@@ -107,7 +107,7 @@ public class MyDeviceFragment extends BaseFragment {
     public void startActivity(MyDevice info){
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-//        bundle.putSerializable("device_name", info);
+        bundle.putSerializable(IntentConsts.EXTRA_CAMERA_INFO, info);
         intent.putExtras(bundle);
 //        intent.setClass(getActivity(), Activity_Video_Control.class);
 
