@@ -21,6 +21,7 @@ import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
+import com.cdhxqh.household_app.ui.actvity.RealPlayActivity;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
@@ -28,6 +29,7 @@ import com.cdhxqh.household_app.ui.widget.TestClass;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.videogo.constant.IntentConsts;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.openapi.bean.req.GetCameraInfoList;
 import com.videogo.openapi.bean.resp.AlarmInfo;
@@ -105,9 +107,12 @@ public class MyDeviceFragment extends BaseFragment {
     public void startActivity(MyDevice info){
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("device_name", info);
+//        bundle.putSerializable("device_name", info);
         intent.putExtras(bundle);
-        intent.setClass(getActivity(), Activity_Video_Control.class);
+//        intent.setClass(getActivity(), Activity_Video_Control.class);
+
+        intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, info);
+        intent.setClass(getActivity(),RealPlayActivity.class);
         getActivity().startActivityForResult(intent, 0);
     }
 
@@ -169,6 +174,7 @@ public class MyDeviceFragment extends BaseFragment {
         public void onSuccess(int statusCode, Header[] headers, String responseBody) {
             if(responseBody!=null){
                 String resultStr = responseBody;
+                Log.i(TAG,"resultStr="+resultStr);
                 MyDeviceFragment.this.result.clear();;
                 try {
                     JSONObject resultJson = new JSONObject(resultStr);

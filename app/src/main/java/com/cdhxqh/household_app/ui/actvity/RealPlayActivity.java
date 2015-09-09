@@ -1738,7 +1738,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         mRealPlayTalkBtn.setEnabled(false);
         mRealPlayCaptureBtn.setEnabled(false);
         mRealPlayRecordBtn.setEnabled(false);
-        if (mCameraInfo != null && mCameraInfo.isStatus() && mRealPlayMgr != null
+        if (mCameraInfo != null && mCameraInfo.getStatus() == 1 && mRealPlayMgr != null
                 && !TextUtils.isEmpty(mRealPlayMgr.getCapability())) {
             mRealPlayQualityBtn.setEnabled(true);
         } else {
