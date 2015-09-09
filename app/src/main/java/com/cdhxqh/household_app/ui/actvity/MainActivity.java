@@ -42,6 +42,7 @@ import com.cdhxqh.household_app.ui.widget.listview.WrapWidthListView;
 import com.cdhxqh.household_app.ui.widget.menu.PopMenu;
 import com.cdhxqh.household_app.ui.widget.menu.impl.DeviceMenu;
 import com.cdhxqh.household_app.utils.AccountUtils;
+import com.videogo.openapi.EzvizAPI;
 
 import java.util.ArrayList;
 
@@ -130,6 +131,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             username = ec_user.getUserName();
         }
         Constants.USER_ID = myshared.getInt(Constants.LOGINUSERID, -10);
+        Constants.TOKEN_URL = myshared.getString(Constants.TOKEN, "");
+        EzvizAPI.getInstance().setAccessToken(Constants.TOKEN_URL);
     }
 
 

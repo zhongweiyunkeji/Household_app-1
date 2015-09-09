@@ -168,6 +168,7 @@ public class Activity_Login extends BaseActivity{
             editor.putLong(Constants.SESSIONID, (Long) data[0]);  // 废弃不用
             editor.putString(Constants.SESSIONIDTRUE, (String) data[1]);  // 这个是SESSIONID
             editor.putInt(Constants.LOGINUSERID, ((Integer) data[3]).intValue());
+            editor.putString(Constants.TOKEN, (String) data[2]);  // 这个是SESSIONID
             editor.commit();
             Constants.TOKEN_URL = (String)data[2];
             TestClass.closeLoading();

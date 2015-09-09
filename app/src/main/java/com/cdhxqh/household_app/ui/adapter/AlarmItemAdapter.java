@@ -151,14 +151,14 @@ public class AlarmItemAdapter extends BaseAdapter {
             }
         }
 
-        holder.item_button.setOnClickListener(new View.OnClickListener() {
+        /*holder.item_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, Activity_Write_Information.class);
                 context.startActivity(intent);
             }
-        });
+        });*/
 
 
         final CheckBox box = holder.checkbox;
@@ -239,7 +239,7 @@ public class AlarmItemAdapter extends BaseAdapter {
         TextView msg;
         TextView date;
         ImageView icon;
-        ImageView item_button;
+       // ImageView item_button;
 
 
         public ItemHolder(View view){
@@ -249,7 +249,7 @@ public class AlarmItemAdapter extends BaseAdapter {
             msg = (TextView)view.findViewById(R.id.item_msg);
             date = (TextView)view.findViewById(R.id.item_date);
             // icon = (ImageView)view.findViewById(R.id.item_icon);
-            item_button = (ImageView)view.findViewById(R.id.item_button);
+           // item_button = (ImageView)view.findViewById(R.id.item_button);
         }
 
     }
