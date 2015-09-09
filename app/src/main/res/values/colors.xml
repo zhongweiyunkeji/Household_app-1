@@ -85,4 +85,6 @@
     <color name="common_bg">#f0f0f3</color>
     <color name="black_bg">#000000</color>
 
+    <color name="clarity">@android:color/transparent</color>
+
 </resources>

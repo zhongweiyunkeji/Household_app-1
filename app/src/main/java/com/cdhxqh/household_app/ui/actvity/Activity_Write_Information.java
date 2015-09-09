@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +18,7 @@ import com.cdhxqh.household_app.ui.widget.Photo.PhotoUtil;
 /**
  * Created by Administrator on 2015/9/8.
  */
-public class Activity_Write_Information extends BaseActivity{
+public class Activity_Write_Information extends BaseActivity {
     /**
      * 拍摄照片
      */
@@ -39,17 +40,17 @@ public class Activity_Write_Information extends BaseActivity{
     private LinearLayout cancel;
 
     /**
-     *灰色屏幕
+     * 灰色屏幕
      */
     private RelativeLayout select_p;
 
     /**
-     *拍照
+     * 拍照
      */
     private static final int ITEM_1 = 1;
 
     /**
-     *从相册中查找
+     * 从相册中查找
      */
     private static final int ITEM_2 = 2;
 
@@ -61,12 +62,25 @@ public class Activity_Write_Information extends BaseActivity{
     private ImageView view_photo;
 
     /**
-     *拍摄或选择图片
+     * 拍摄或选择图片
      */
     private TextView site_photo;
     private static final int PHOTO_REQUEST_TAKEPHOTO = 1;// 拍照
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
+
+    /**
+     * 返回按钮*
+     */
+    private ImageView back_imageview_id;
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView title_add_id;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +98,12 @@ public class Activity_Write_Information extends BaseActivity{
         view_photo = (ImageView) findViewById(R.id.view_photo);
         site_photo = (TextView) findViewById(R.id.site_photo);
 
-
+    /**
+     * 标题标签相关id
+     */
+        back_imageview_id = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        title_add_id = (ImageView) findViewById(R.id.title_add_id);
     }
 
     public void initView() {
@@ -109,7 +128,40 @@ public class Activity_Write_Information extends BaseActivity{
          *灰色屏幕
          */
         select_p.setOnClickListener(selectOnClickListener);
+
+        back_imageview_id.setOnTouchListener(backImageViewOnTouchListener);
+
+        //返回至登录界面事件
+        back_imageview_id.setOnClickListener(backImageViewOnClickListener);
+
+        //设置标签页显示方式
+        back_imageview_id.setVisibility(View.VISIBLE);
+        title_add_id.setVisibility(View.GONE);
+        titleTextView.setText("填写反馈信息");
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
+
 
     /**
      * 拍摄照片监听
@@ -166,6 +218,7 @@ public class Activity_Write_Information extends BaseActivity{
 
     /**
      * 相册的回调方法
+     *
      * @param requestCode
      * @param resultCode
      * @param data
