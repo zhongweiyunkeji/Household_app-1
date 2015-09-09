@@ -146,6 +146,7 @@ public class MyDeviceFragment extends BaseFragment {
                         String picUrl = obj.getString("picUrl");
                         int cameraNo = obj.getInt("cameraNo");
                         boolean status = obj.getString("status").trim().equals("1") ? true : false;
+                        Log.i(TAG,"status="+status);
                         String cameraName = obj.getString("cameraName");
                         boolean isShared = obj.getInt("isShared")==1 ? true : false;
                         String deviceSerial = obj.getString("deviceSerial");
