@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Contacters;
+import com.cdhxqh.household_app.model.ProductModel;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
 import com.cdhxqh.household_app.ui.widget.dialog.DateTimePickerDialog;
 import java.io.Serializable;
@@ -58,6 +59,8 @@ public class SafeCenterActivity extends BaseActivity {
     // 下一步按钮
     Button nextBtn;
 
+    ProductModel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,7 @@ public class SafeCenterActivity extends BaseActivity {
         Log.i("TAG", "TAG");
         findViewById();
         initView();
+        getData();
     }
 
     public void findViewById() {
@@ -104,11 +108,19 @@ public class SafeCenterActivity extends BaseActivity {
                 String text = selectUser.getText().toString();
                 String addr = address.getText().toString();
                 // 提交数据
-
             }
         });
     }
 
+    public void getData(){
+        Intent intent = getIntent();
+        if(intent!=null){
+            Bundle bundle = intent.getExtras();
+            if(bundle!=null){
+                model = (ProductModel)bundle.getSerializable("PRODUCTMODEL");
+            }
+        }
+    }
 
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
