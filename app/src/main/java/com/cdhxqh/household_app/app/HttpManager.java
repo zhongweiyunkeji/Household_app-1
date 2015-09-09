@@ -186,6 +186,7 @@ public class HttpManager {
                                     String result = obj.getString("result");
                                     JSONObject rs = new JSONObject(result);
                                     String token = rs.getString("accessToken");
+                                    Constants.USER_ID = rs.getInt("id");
                                     if(token!=null){
                                         JSONObject access = new JSONObject(token);
                                         String accessToken = access.getString("accessToken");
