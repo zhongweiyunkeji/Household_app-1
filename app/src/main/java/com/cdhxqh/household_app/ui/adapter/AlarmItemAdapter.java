@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +17,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.model.Alarm;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
+import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.actvity.Activity_Write_Information;
+import com.loopj.android.http.RequestParams;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.universalimageloader.core.DisplayImageOptions;
 import com.videogo.universalimageloader.core.assist.FailReason;
 import com.videogo.universalimageloader.core.download.DecryptFileInfo;
 import com.videogo.universalimageloader.core.listener.ImageLoadingListener;
 import com.videogo.universalimageloader.core.listener.ImageLoadingProgressListener;
+
+import org.apache.http.Header;
 
 import java.util.ArrayList;
 
@@ -151,6 +160,33 @@ public class AlarmItemAdapter extends BaseAdapter {
             }
         }
 
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "";
+                RequestParams maps = new RequestParams();
+
+                HttpManager.sendHttpRequest(context, url, maps, "get", false, new HttpCallBackHandle() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                        if(responseBody!=null && !"".equals(responseBody)){
+                            MyDevice info = new MyDevice();
+                            Intent intent = new Intent(context, Activity_Video_Control.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("device_name", info);
+                            intent.putExtras(bundle);
+                            context.startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+
+                    }
+                });
+            }
+        });
         /*holder.item_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

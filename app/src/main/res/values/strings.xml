@@ -186,7 +186,6 @@
     <string name="video_playback_title">录像回放</string>
     <string name="select_date">请选择日期</string>
     <string name="certain">确定</string>
-
     <string name="remoteplayback_record_fail">录像失败</string>
     <string name="remoteplayback_capture_fail">抓图失败</string>
     <string name="remoteplayback_norecordfile_alarm">没有查询到该时刻的报警录像</string>
@@ -197,12 +196,23 @@
     <string name="remoteplayback_connect_device_error">播放中断，请重试</string>
     <string name="remoteplayback_connect_server_error">连接服务器失败，请重试</string>
     <string name="remoteplayback_fail">视频播放失败</string>
-=======
+    <string name="title_activity_real_play">RealPlayActivity</string>
+    <!-- 一键配置模块 -->
+    <string name="start_voice_talk">正在发起对讲</string>
+    <string name="local_network_exception">没有可用网络，请检查您的网络</string>
+    <string name="realplay_set_fail_network">设置失败，请检查您的网络</string>
+    <string name="setting_video_level">正在设置画面质量…</string>
+    <string name="talking">对讲中…</string>
+    <string name="realplay_play_talkback_fail_ison">同一时间只能与一台设备进行对讲哦，请停止其他对讲后再尝试</string>
+    <string name="realplay_play_talkback_fail_privacy">隐私保护模式下无法对讲</string>
+    <string name="realplay_play_talkback_fail">对讲开启失败</string>
+    <string name="realplay_set_vediomode_fail">视频质量切换失败</string>
+    <string name="device_password_is_null">设备密码不能为空</string>
+    <string name="press_to_talk_release_to_listen">按住说话\n松开收听</string>
     <!--   萤石需要mesg  -->
 
     <string name="isCheck">是否已协助核查</string>
     <string name="isSafe">是否存在安全隐患</string>
     <string name="isDeal">是否已处理</string>
->>>>>>> Stashed changes
 
 </resources>

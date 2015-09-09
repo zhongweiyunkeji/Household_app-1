@@ -26,5 +26,10 @@
     <dimen name="remoteplayback_text_size">12dp</dimen>
     <dimen name="version_text_size">9dp</dimen>
     <dimen name="remoteplayback_channel_text_size">9dp</dimen>
+    <dimen name="realplay_tip_text_size">16dp</dimen>
+    <dimen name="realplay_button_text_size">15dp</dimen>
+    <dimen name="realplay_ratio_text_size">24dp</dimen>
+    <dimen name="realplay_channel_text_size">9dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
 
 </resources>

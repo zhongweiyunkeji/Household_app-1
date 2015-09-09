@@ -1088,14 +1088,13 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
 
     @Override
     public void onStop() {
-
-
         if (mStatus != RealPlayStatus.STATUS_STOP) {
             mIsOnStop = true;
             stopRealPlay();
             mStatus = RealPlayStatus.STATUS_PAUSE;
         }
         super.onStop();
+        EzvizAPI.getInstance().setAccessToken(Constants.TOKEN_URL);
     }
 
     private View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
@@ -1566,6 +1565,5 @@ public class Activity_Video_Control extends BaseActivity implements SecureValida
             mRealPlayCaptureWatermarkIv.setVisibility(View.GONE);
         }
     }
-
 
 }
