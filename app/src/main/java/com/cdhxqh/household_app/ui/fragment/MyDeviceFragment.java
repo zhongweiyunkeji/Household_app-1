@@ -19,6 +19,7 @@ import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
@@ -48,7 +49,7 @@ import java.util.List;
 public class MyDeviceFragment extends BaseFragment {
     private static final String TAG="MyDeviceFragment";
     int currentPage = 0; // 当前页(索引从0开始)
-    int showPage = 10;   // 每页显示
+    int showPage = 1;   // 每页显示
 
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -124,7 +125,6 @@ public class MyDeviceFragment extends BaseFragment {
      * 初始化任务
      */
     private void startAsynTask() {
-        TestClass.loading(getActivity(), "正在加载数据，请稍后");
         getDeviceList();
     }
 
@@ -133,14 +133,14 @@ public class MyDeviceFragment extends BaseFragment {
         maps.put("showCount", showPage);
         maps.put("currentPage", currentPage);
         AsyncHttpClient client = new AsyncHttpClient();
-        HttpManager.sendHttpRequest(getActivity(), Constants.DEVICE_LIST, maps, responseHandler, "get");
+        HttpManager.sendHttpRequest(getActivity(), Constants.DEVICE_LIST, maps, "get", true, responseHandler);
     }
 
-    AsyncHttpResponseHandler responseHandler = new AsyncHttpResponseHandler() {
+    HttpCallBackHandle responseHandler = new HttpCallBackHandle() {
         @Override
-        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+        public void onSuccess(int statusCode, Header[] headers, String responseBody) {
             if(responseBody!=null){
-                String resultStr = new String(responseBody, Charset.forName("utf-8"));
+                String resultStr = responseBody;
                 try {
                     JSONObject resultJson = new JSONObject(resultStr);
                     JSONObject result = resultJson.getJSONObject("result");
@@ -173,17 +173,15 @@ public class MyDeviceFragment extends BaseFragment {
                     e.printStackTrace();
                 }
 
+
+                swipeRefreshLayout.setRefreshing(false);
             }
 
-            TestClass.closeLoading();
         }
 
         @Override
-        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-            if(responseBody!=null){
-                String result = new String(responseBody, Charset.forName("utf-8"));
-            }
-            TestClass.closeLoading();
+        public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+            swipeRefreshLayout.setRefreshing(false);
         }
     };
 
