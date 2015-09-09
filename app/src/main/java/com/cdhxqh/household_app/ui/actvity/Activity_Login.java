@@ -165,8 +165,9 @@ public class Activity_Login extends BaseActivity{
         @Override
         public void onSuccess(Object[] data) {
             Toast.makeText(Activity_Login.this,"登录成功",Toast.LENGTH_SHORT).show();
-            editor.putLong(Constants.SESSIONID, (Long) data[0]);
-            editor.putString(Constants.SESSIONIDTRUE, (String) data[1]);
+            editor.putLong(Constants.SESSIONID, (Long) data[0]);  // 废弃不用
+            editor.putString(Constants.SESSIONIDTRUE, (String) data[1]);  // 这个是SESSIONID
+            editor.putInt(Constants.LOGINUSERID, ((Integer) data[3]).intValue());
             editor.commit();
             Constants.TOKEN_URL = (String)data[2];
             TestClass.closeLoading();

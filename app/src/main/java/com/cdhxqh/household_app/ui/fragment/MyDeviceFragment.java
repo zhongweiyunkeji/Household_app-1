@@ -49,7 +49,7 @@ import java.util.List;
 public class MyDeviceFragment extends BaseFragment {
     private static final String TAG="MyDeviceFragment";
     int currentPage = 1; // 当前页(索引从0开始)
-    int showPage = 1;   // 每页显示
+    int showPage = 10;   // 每页显示
 
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;

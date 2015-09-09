@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ezviz.TransferAPI;
 import com.cdhxqh.household_app.ezviz.WaitDialog;
 import com.cdhxqh.household_app.model.Alarm;
@@ -103,10 +104,14 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
         holder.numberView.setText(info.getDeviceSerial());
 
         if(showSwitch){
-            if (info.getDefence() == 1) {// 是否打开设备监控
-                holder.udstatus.setSelected(true);
+            if(info.getUid().equals(""+Constants.USER_ID)){
+                if (info.getDefence() == 1) {// 是否打开设备监控
+                    holder.udstatus.setSelected(true);
+                } else {
+                    holder.udstatus.setSelected(false);
+                }
             } else {
-                holder.udstatus.setSelected(false);
+                holder.udstatus.setVisibility(View.GONE);
             }
             holder.udstatus.setOnClickListener(new View.OnClickListener() {
                 @Override

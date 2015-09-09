@@ -168,7 +168,7 @@ public class HttpManager {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                        Object[] objectList = new Object[3];
+                        Object[] objectList = new Object[4];
                         //解析返回的Json数据
                             boolean flag = JsonUtils.parsingAuthStr(cxt, responseString);
                             if (flag) {
@@ -187,6 +187,7 @@ public class HttpManager {
                                     JSONObject rs = new JSONObject(result);
                                     String token = rs.getString("accessToken");
                                     Constants.USER_ID = rs.getInt("id");
+                                    objectList[3] = new Integer(Constants.USER_ID);
                                     if(token!=null){
                                         JSONObject access = new JSONObject(token);
                                         String accessToken = access.getString("accessToken");
