@@ -1,7 +1,10 @@
 package com.cdhxqh.household_app.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 
 import com.cdhxqh.household_app.api.ErrorType;
@@ -10,7 +13,9 @@ import com.cdhxqh.household_app.api.JsonUtils;
 import com.cdhxqh.household_app.api.Message;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Alarm;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
+import com.cdhxqh.household_app.ui.widget.TestClass;
 import com.cdhxqh.household_app.utils.SafeHandler;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -274,22 +279,57 @@ public class HttpManager {
         return currentTime;
     }
 
-    public static void sendHttpRequest(Context context, String url, RequestParams maps, AsyncHttpResponseHandler handler, String method){
+    public static void sendHttpRequest(final Context context, final String url, final RequestParams maps, String method, final boolean showDialog, final HttpCallBackHandle callback){
         SharedPreferences myShared = context.getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
         String  sessionid = myShared.getString(Constants.SESSIONIDTRUE, "");
         if(method == null){
             method = "post";
         }
         method = method.toLowerCase().trim();
+        final String m = method;
         if (NetWorkUtil.IsNetWorkEnable(context)) { // 检查网络是否开启
-            AsyncHttpClient client = new AsyncHttpClient();
+            final AsyncHttpClient client = new AsyncHttpClient();
             if(!"".equals(sessionid)){
                 client.addHeader("Cookie", "JSESSIONID=" + sessionid);
             }
-            if("post".equals(method)){
-                client.post(context, url, maps, handler);
-            } else {
-                client.get(context, url, maps, handler);
+
+            if(showDialog){
+                // TestClass.loading((Activity) context, "正在努力加载，请稍后... ...");
+                Log.e("TAG", "thread 01 ------------------------------------------------------->"+Thread.currentThread().getName());
+            }
+
+            TextHttpResponseHandler ayncHandler = new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    try {
+                        callback.onFailure(statusCode, headers, responseString, throwable);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if(showDialog){
+                        // TestClass.closeLoading();
+                    }
+                    Log.e("TAG", "thread 03 ------------------------------------------------------->"+Thread.currentThread().getName());
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    try {
+                        callback.onSuccess(statusCode, headers, responseString);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if(showDialog){
+                        //  TestClass.closeLoading();
+                    }
+                    Log.e("TAG", "thread 02 ------------------------------------------------------->"+Thread.currentThread().getName());
+                }
+            };
+
+            if("post".equals(m)){
+                client.post(context, url, maps, ayncHandler);
+            } else  {
+                client.get(context, url, maps, ayncHandler);
             }
         }
     }
