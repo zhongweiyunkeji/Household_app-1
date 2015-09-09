@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class SafeCenterActivity extends BaseActivity {
      */
     ArrayList<Contacters> contactersList;
 
-    // 保存选择的联系人
+    // 接收人
     EditText selectUser;
 
     // 返回按钮
@@ -61,6 +62,12 @@ public class SafeCenterActivity extends BaseActivity {
 
     ProductModel model;
 
+    // 协助模式按钮
+    ImageButton assistModule;
+
+    // 反馈模式按钮
+    ImageButton feedback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +87,8 @@ public class SafeCenterActivity extends BaseActivity {
         type = (EditText)findViewById(R.id.alarm_type);
         address = (EditText)findViewById(R.id.address);
         nextBtn = (Button)findViewById(R.id.nextBtn);
+        assistModule = (ImageButton)findViewById(R.id.assistModule);
+        feedback = (ImageButton)findViewById(R.id.feedback);
     }
 
     public void initView(){
@@ -108,6 +117,22 @@ public class SafeCenterActivity extends BaseActivity {
                 String text = selectUser.getText().toString();
                 String addr = address.getText().toString();
                 // 提交数据
+            }
+        });
+
+        assistModule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isSelected = assistModule.isSelected();
+                assistModule.setSelected(!isSelected);
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isSelected = feedback.isSelected();
+                feedback.setSelected(!isSelected);
             }
         });
     }
