@@ -18,13 +18,18 @@ import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.actvity.Activity_Write_Information;
+import com.cdhxqh.household_app.ui.actvity.RealPlayActivity;
+import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
+import com.cdhxqh.household_app.utils.ToastUtil;
 import com.loopj.android.http.RequestParams;
+import com.videogo.constant.IntentConsts;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.universalimageloader.core.DisplayImageOptions;
 import com.videogo.universalimageloader.core.assist.FailReason;
@@ -33,6 +38,8 @@ import com.videogo.universalimageloader.core.listener.ImageLoadingListener;
 import com.videogo.universalimageloader.core.listener.ImageLoadingProgressListener;
 
 import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -162,40 +169,90 @@ public class AlarmItemAdapter extends BaseAdapter {
 
 
         holder.img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "";
-                RequestParams maps = new RequestParams();
+              @Override
+              public void onClick(View v) {
+                  int caid = alarm.getCaid();// 自己平台设备id
+                  RequestParams maps = new RequestParams();
+                  maps.put("ca_id", caid);
+                  HttpManager.sendHttpRequest(context, Constants.SINGLE_DEVICE, maps, "get", false, new HttpCallBackHandle() {
+                      @Override
+                      public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                          if (NetWorkUtil.IsNetWorkEnable(context)) {
+                              try {
+                                  if (responseBody != null) {
+                                      JSONObject result = new JSONObject(responseBody);
+                                      String rs = result.getString("result");
+                                      if(rs!=null && !"".equals(rs)){
+                                          JSONObject obj = new JSONObject(rs);
+                                          String uid = obj.getInt("uid") + "";
+                                          boolean ispublic = (obj.getInt("ispublic")==1) ? true : false;
+                                          boolean isEncrypt = obj.getInt("isEncrypt") == 1 ? true : false;
+                                          String cameraId = obj.getString("cameraId");
+                                          String deviceName = obj.getString("deviceName");
+                                          int defence = obj.getInt("defence");
+                                          int ca_id = obj.getInt("caId");
+                                          String deviceId = obj.getString("deviceId");
+                                          String picUrl = obj.getString("picUrl");
+                                          int cameraNo = obj.getInt("cameraNo");
+                                          boolean status = obj.getString("status").trim().equals("1") ? true : false;
+                                          String cameraName = obj.getString("cameraName");
+                                          boolean isShared = obj.getInt("isShared") == 1 ? true : false;
+                                          String deviceSerial = obj.getString("deviceSerial");
+                                          final MyDevice device = new MyDevice(ca_id, cameraId, cameraNo, defence, deviceName, deviceSerial, isEncrypt, ispublic, isShared, picUrl, status, uid, deviceId, cameraName);
 
-                HttpManager.sendHttpRequest(context, url, maps, "get", false, new HttpCallBackHandle() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, String responseBody) {
-                        if(responseBody!=null && !"".equals(responseBody)){
-                            MyDevice info = new MyDevice();
-                            Intent intent = new Intent(context, Activity_Video_Control.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("device_name", info);
-                            intent.putExtras(bundle);
-                            context.startActivity(intent);
-                        }
-                    }
+                                          RequestParams maps = new RequestParams();
+                                          maps.put("uid", uid);
+                                          HttpManager.sendHttpRequest(context, Constants.ACCESSTOKEN, maps, "get", false, new HttpCallBackHandle() {
+                                              @Override
+                                              public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                                                  if (NetWorkUtil.IsNetWorkEnable(context)) {
+                                                      if (responseBody != null && !"".equals(responseBody)) {
+                                                          // 解析AccessToken
+                                                          try {
+                                                              JSONObject respJosn = new JSONObject(responseBody);
+                                                              String code = respJosn.getString("errcode");
+                                                              if ("200".equals(code)) {
+                                                                  String result = respJosn.getString("result");
+                                                                  if (result != null) {
+                                                                      JSONObject resultJson = new JSONObject(result);
+                                                                      String token = resultJson.getString("accessToken");
+                                                                      EzvizAPI.getInstance().setAccessToken(token);
+                                                                  }
+                                                              }
+                                                          } catch (JSONException e) {
+                                                              e.printStackTrace();
+                                                          }
+                                                          startActivity(device);
+                                                      }
+                                                  }
+                                              }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                                              @Override
+                                              public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                                                  // 什么也不做
+                                                  ToastUtil.showMessage(context, "您当前没有权限");
+                                              }
+                                          });
+                                      }
+                                  } else {
+                                      // 什么也不做
+                                      ToastUtil.showMessage(context, "您当前没有权限");
+                                  }
+                              } catch (JSONException e) {
+                                  e.printStackTrace();
+                              }
 
-                    }
-                });
-            }
-        });
-        /*holder.item_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(context, Activity_Write_Information.class);
-                context.startActivity(intent);
-            }
-        });*/
+                          }
+                      }
 
+                      @Override
+                      public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                          // 什么也不做
+                          ToastUtil.showMessage(context, "您当前没有权限");
+                      }
+                  });
+              }
+          });
 
         final CheckBox box = holder.checkbox;
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
@@ -288,6 +345,18 @@ public class AlarmItemAdapter extends BaseAdapter {
            // item_button = (ImageView)view.findViewById(R.id.item_button);
         }
 
+    }
+
+
+    public void startActivity(MyDevice info){
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(IntentConsts.EXTRA_CAMERA_INFO, info);
+        intent.putExtras(bundle);
+
+        intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, info);
+        intent.setClass(context, RealPlayActivity.class);
+        context.startActivity(intent);
     }
 
 

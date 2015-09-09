@@ -23,7 +23,7 @@ public class Constants {
     public static final String VIDEO_PATH="/storage/sdcard1/";
 
     // 182.92.158.158   192.168.1.101
-    public static final String BASE_URL = "http://192.168.1.101:8080/security/";
+    public static final String BASE_URL = "http://182.92.158.158:8080/security/";
 
     // 设备列表
     public static final String DEVICE_LIST = BASE_URL + "yscamera/list";
@@ -37,6 +37,7 @@ public class Constants {
     // 根据公户id获取accessToken
     public static final String ACCESSTOKEN = BASE_URL + "/ys/accessToken";
 
-
+    // 根据设备id获取单个设备
+    public static final String SINGLE_DEVICE = BASE_URL + "/yscamera/getInfo";
 
 }

@@ -18,6 +18,8 @@ public class Alarm implements Serializable {
     private boolean encryption;
     private String serial;
     private String checkSum;
+    private int caid;  // 自己平台设备id
+    private int uid;   // 自己平台用户id
 
     public boolean isBack() {
         return back;
@@ -116,5 +118,21 @@ public class Alarm implements Serializable {
 
     public void setPayVideoRes(int payVideoRes) {
         this.payVideoRes = payVideoRes;
+    }
+
+    public int getCaid() {
+        return caid;
+    }
+
+    public void setCaid(int caid) {
+        this.caid = caid;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 }

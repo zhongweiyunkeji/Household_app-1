@@ -26,6 +26,7 @@ import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
 import com.cdhxqh.household_app.ui.widget.TestClass;
+import com.cdhxqh.household_app.utils.ToastUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -94,9 +95,7 @@ public class MyDeviceFragment extends BaseFragment {
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
-                            if (NetWorkUtil.IsNetWorkEnable(getActivity())) {
-
-                            }
+                            ToastUtil.showMessage(getActivity(), "您当前没有权限");
                         }
                     });
                 }
@@ -165,7 +164,6 @@ public class MyDeviceFragment extends BaseFragment {
         RequestParams maps = new RequestParams();
         maps.put("showCount", showPage);
         maps.put("currentPage", currentPage);
-        AsyncHttpClient client = new AsyncHttpClient();
         HttpManager.sendHttpRequest(getActivity(), Constants.DEVICE_LIST.trim(), maps, "get", false, responseHandler);
     }
 

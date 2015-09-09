@@ -150,7 +150,7 @@ public class AlarmFragment extends BaseFragment {
                         for(int index=0; index<length; index++){
                             JSONObject jsonObject = jsonList.getJSONObject(index);
                             jsonObject.getInt("alarm_id");   // 自己平台报警记录id
-                            jsonObject.getInt("ca_id");      // 设备编号
+                            int caid = jsonObject.getInt("ca_id");      // 设备编号
                             int uid = jsonObject.getInt("uid");        // 用户id
                             jsonObject.getString("alarm_type");  // 报警类型
                             jsonObject.getInt("alarm_time");     // 报警事件
@@ -181,6 +181,8 @@ public class AlarmFragment extends BaseFragment {
                             alarm.setDate(startTime);
                             alarm.setTitle(username + " " + installAddr + " " + alarmTypeName);
                             alarm.setMsg(familyAddr);
+                            alarm.setCaid(caid);
+                            alarm.setUid(uid);
                             if("新增".equals(status) && (Constants.USER_ID == uid)){
                                 alarm.setIcon(R.drawable.btn_dxz);
                             } else
