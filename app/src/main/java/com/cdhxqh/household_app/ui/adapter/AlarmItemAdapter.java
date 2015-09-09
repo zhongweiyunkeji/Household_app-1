@@ -81,15 +81,6 @@ public class AlarmItemAdapter extends BaseAdapter {
         }
 
         final Alarm alarm = list.get(position);
-        // ImageLoader.getInstance().displayImage(alarm.getImg(), holder.img);
-        /*Bitmap bitmap = null;
-        if((position+1)%2 == 0){
-            bitmap = getBitMap(R.drawable.img2);
-        } else {
-            bitmap = getBitMap(R.drawable.img3);
-        }
-        holder.img.setImageBitmap(bitmap);*/
-
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
@@ -160,13 +151,6 @@ public class AlarmItemAdapter extends BaseAdapter {
             }
         }
 
-        /*holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                alarm.setStatus(isChecked);  // 记住选中状态
-                Log.i("TAG", "-----------p = " + p + "----------->" + isChecked);
-            }
-        });*/
         holder.item_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
