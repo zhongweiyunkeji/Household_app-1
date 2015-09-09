@@ -51,6 +51,7 @@ public class MyDeviceFragment extends BaseFragment {
     int currentPage = 1; // 当前页(索引从0开始)
     int showPage = 10;   // 每页显示
 
+
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private MyDevicelistAdapter myDevicelistAdapter;
