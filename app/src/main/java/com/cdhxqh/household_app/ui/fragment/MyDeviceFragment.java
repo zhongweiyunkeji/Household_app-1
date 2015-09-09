@@ -21,7 +21,6 @@ import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
-import com.cdhxqh.household_app.ui.actvity.RealPlayActivity;
 import com.cdhxqh.household_app.ui.adapter.MyDevicelistAdapter;
 import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
@@ -29,7 +28,6 @@ import com.cdhxqh.household_app.ui.widget.TestClass;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.videogo.constant.IntentConsts;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.openapi.bean.req.GetCameraInfoList;
 import com.videogo.openapi.bean.resp.AlarmInfo;
@@ -58,17 +56,59 @@ public class MyDeviceFragment extends BaseFragment {
     private MyDevicelistAdapter myDevicelistAdapter;
     ArrayList<MyDevice> result = new ArrayList<MyDevice>(0);
     DeviceOnClick callback = new DeviceOnClick(){
-        public void callback(RecyclerView.ViewHolder holder, int position, View view, MyDevice info){
-            Intent intent = new Intent();
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("device_name", info);
-//            intent.putExtras(bundle);
-            intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, info);
-//            intent.setClass(getActivity(),Activity_Video_Control.class);
-            intent.setClass(getActivity(),RealPlayActivity.class);
-            getActivity().startActivityForResult(intent, 0);
+        public void callback(RecyclerView.ViewHolder holder, int position, View view, final MyDevice info){
+            if(info.getUid().equals(""+ Constants.USER_ID)){ // 如果是自己的设备
+                startActivity(info);
+            } else { // 如果是分享别人的设备
+                if (NetWorkUtil.IsNetWorkEnable(getActivity())) {
+                    String userid = info.getUid();
+                    RequestParams maps = new RequestParams();
+                    maps.put("uid", userid);
+                    HttpManager.sendHttpRequest(getActivity(), Constants.ACCESSTOKEN, maps, "get", false, new HttpCallBackHandle() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                            if (NetWorkUtil.IsNetWorkEnable(getActivity())) {
+                                if (responseBody != null && !"".equals(responseBody)) {
+                                    // 解析AccessToken
+                                    try {
+                                        JSONObject respJosn = new JSONObject(responseBody);
+                                        String code = respJosn.getString("errcode");
+                                        if("200".equals(code)){
+                                            String result = respJosn.getString("result");
+                                            if(result!=null){
+                                                JSONObject resultJson = new JSONObject(result);
+                                                String token = resultJson.getString("accessToken");
+                                                EzvizAPI.getInstance().setAccessToken(token);
+                                            }
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    startActivity(info);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                            if (NetWorkUtil.IsNetWorkEnable(getActivity())) {
+
+                            }
+                        }
+                    });
+                }
+            }
         }
     };
+
+    public void startActivity(MyDevice info){
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("device_name", info);
+        intent.putExtras(bundle);
+        intent.setClass(getActivity(), Activity_Video_Control.class);
+        getActivity().startActivityForResult(intent, 0);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

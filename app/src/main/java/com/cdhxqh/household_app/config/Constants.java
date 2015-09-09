@@ -34,7 +34,8 @@ public class Constants {
     // 用户登录的ID
     public static int USER_ID = -10;
 
-
+    // 根据公户id获取accessToken
+    public static final String ACCESSTOKEN = BASE_URL + "/ys/accessToken";
 
 
 
