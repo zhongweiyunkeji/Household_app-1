@@ -39,6 +39,7 @@ import com.cdhxqh.household_app.app.Application;
 import com.cdhxqh.household_app.ezviz.OpenYSService;
 import com.cdhxqh.household_app.ezviz.SecureValidate;
 import com.cdhxqh.household_app.ezviz.WaitDialog;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.utils.AudioPlayUtil;
 import com.videogo.constant.Config;
 import com.videogo.constant.Constant;
@@ -113,7 +114,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
     public static final int MSG_HIDE_PTZ_DIRECTION = 201;
 
     private String mRtspUrl = null;
-    private CameraInfo mCameraInfo = null;
+    private MyDevice mCameraInfo = null;
 
     /**
      * 实时预览控制对象
@@ -483,7 +484,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
             if (mCameraInfo == null) {
                 return;
             }
-            if (mCameraInfo.getStatus() == 1) {
+            if (mCameraInfo.isStatus()) {
                 if (mStatus == RealPlayStatus.STATUS_INIT || mStatus == RealPlayStatus.STATUS_PAUSE) {
                     // 开始播放
                     startRealPlay();
@@ -547,7 +548,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         Intent intent = getIntent();
         if (intent != null) {
             mRtspUrl = intent.getStringExtra(IntentConsts.EXTRA_RTSP_URL);
-            mCameraInfo = (CameraInfo) intent.getParcelableExtra(IntentConsts.EXTRA_CAMERA_INFO);
+            mCameraInfo = (MyDevice) intent.getParcelableExtra(IntentConsts.EXTRA_CAMERA_INFO);
         }
         // 获取本地信息
         Application application = (Application) getApplication();
@@ -826,7 +827,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
 
 
     private void setVideoLevel() {
-        if (mCameraInfo == null || mCameraInfo.getStatus() != 1) {
+        if (mCameraInfo == null || !mCameraInfo.isStatus()) {
             mRealPlayQualityBtn.setEnabled(false);
         }
         if (mRealPlayMgr == null) {
@@ -865,7 +866,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
                 mRealPlayOperateBar.setVisibility(View.GONE);
             }
             mRealPlayFullOperateBar.setVisibility(View.GONE);
-            if (mCameraInfo != null && mCameraInfo.getStatus() != 1) {
+            if (mCameraInfo != null && !mCameraInfo.isStatus()) {
                 mRealPlayControlRl.setVisibility(View.GONE);
             } else {
                 mRealPlayControlRl.setVisibility(View.VISIBLE);
@@ -1593,7 +1594,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void onRealPlaySvClick() {
-        if ((mCameraInfo != null && mCameraInfo.getStatus() == 1) || mRtspUrl != null) {
+        if ((mCameraInfo != null && mCameraInfo.isStatus()) || mRtspUrl != null) {
             if (mOrientation == Configuration.ORIENTATION_PORTRAIT || mRtspUrl != null) {
                 if (mRealPlayControlRl.getVisibility() == View.VISIBLE) {
                     mRealPlayControlRl.setVisibility(View.GONE);
@@ -1737,7 +1738,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         mRealPlayTalkBtn.setEnabled(false);
         mRealPlayCaptureBtn.setEnabled(false);
         mRealPlayRecordBtn.setEnabled(false);
-        if (mCameraInfo != null && mCameraInfo.getStatus() == 1 && mRealPlayMgr != null
+        if (mCameraInfo != null && mCameraInfo.isStatus() && mRealPlayMgr != null
                 && !TextUtils.isEmpty(mRealPlayMgr.getCapability())) {
             mRealPlayQualityBtn.setEnabled(true);
         } else {
@@ -1766,7 +1767,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         mRealPlayFlowTv.setVisibility(View.GONE);
         mRealPlayFullFlowLy.setVisibility(View.GONE);
         mRealPlayBtn.setBackgroundResource(R.drawable.play_play_selector);
-        if ((mCameraInfo != null && mCameraInfo.getStatus() == 1) || mRtspUrl != null) {
+        if ((mCameraInfo != null && mCameraInfo.isStatus()) || mRtspUrl != null) {
             if (mOrientation == Configuration.ORIENTATION_PORTRAIT || mRtspUrl != null) {
                 mRealPlayControlRl.setVisibility(View.VISIBLE);
             } else {
@@ -1780,7 +1781,7 @@ public class RealPlayActivity extends BaseActivity implements View.OnClickListen
         mRealPlayTalkBtn.setEnabled(false);
         mRealPlayCaptureBtn.setEnabled(false);
         mRealPlayRecordBtn.setEnabled(false);
-        if (mCameraInfo != null && mCameraInfo.getStatus() == 1 && mRealPlayMgr != null
+        if (mCameraInfo != null && mCameraInfo.isStatus() && mRealPlayMgr != null
                 && !TextUtils.isEmpty(mRealPlayMgr.getCapability())) {
             mRealPlayQualityBtn.setEnabled(true);
         } else {
