@@ -17,7 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -34,6 +36,7 @@ import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.action.DeviceOnClick;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_Del;
 import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_List;
 import com.cdhxqh.household_app.ui.actvity.Activity_Login;
@@ -47,6 +50,7 @@ import com.cdhxqh.household_app.ui.widget.DividerItemDecoration;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
 import com.cdhxqh.household_app.ui.widget.TestClass;
 import com.cdhxqh.household_app.utils.MessageUtils;
+import com.loopj.android.http.RequestParams;
 import com.videogo.exception.BaseException;
 import com.videogo.openapi.EzvizAPI;
 import com.videogo.openapi.bean.req.GetAlarmInfoList;
@@ -55,6 +59,11 @@ import com.videogo.openapi.bean.resp.AlarmInfo;
 import com.videogo.openapi.bean.resp.CameraInfo;
 import com.videogo.util.ConnectionDetector;
 import com.videogo.util.Utils;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,163 +77,146 @@ import java.util.TimeZone;
  */
 public class AlarmFragment extends BaseFragment {
 
-    int currentPage = 0; // 当前页(索引从0开始)
+    int currentPage = 1; // 当前页(索引从0开始)
     int showPage = 10;   // 每页显示
 
     SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerView;
-    private MyDevicelistAdapter myDevicelistAdapter;
-    Application application;
-    EzvizAPI mEzvizAPI = EzvizAPI.getInstance();
-    ArrayList<MyDevice> result;
-    DeviceOnClick callback = new DeviceOnClick(){
-        public void callback(RecyclerView.ViewHolder holder, int position, View view, MyDevice info){
-            Intent intent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("device_name", info);
-            bundle.putBoolean("showCheckBox", false);
-            bundle.putBoolean("hideToolBar", false);
-            intent.putExtras(bundle);
-            intent.setClass(getActivity(), Activity_Alarm_List.class);
-            getActivity().startActivity(intent);
-        }
-    };
+    ListView listView;
+    AlarmItemAdapter adapter;
+    MyDevice info;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    ArrayList<Alarm> list = new ArrayList<Alarm>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getActivity()!=null){
-            application = (Application)getActivity().getApplication();
-        }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_mydevice, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.mydevice_list);
+        View view = inflater.inflate(R.layout.device_alarm_list, container, false);
+        findViewById(view);
+        initView();
+        return view;
+    }
+
+    public void findViewById(View view){
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+        listView = (ListView) view.findViewById(R.id.three_in_alarm_listview);
+    }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.setSmoothScrollbarEnabled(true);
-        layoutManager.scrollToPosition(0);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        myDevicelistAdapter = new MyDevicelistAdapter(getActivity(), callback);
-        myDevicelistAdapter.setShowDeviceSrarus(false); // 不显示设备状态
-        recyclerView.setAdapter(myDevicelistAdapter);
+    public void initView(){
+        adapter = new AlarmItemAdapter(getActivity(), new AlarmOnClickCallBack() {
+            @Override
+            public void onClick(int position, View convertView, Alarm alarm) {
 
+            }
+        }, false);
+        listView.setAdapter(adapter);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.e("TAG", "TAG");
                 startAsynTask();  // 请求网络数据
             }
         });
 
         startAsynTask();  // 请求网络数据
-
-        return view;
-    }
-
-    /**
-     * 从萤石云获取设备列表
-     */
-    private void addData() {
-        swipeRefreshLayout.setRefreshing(false);
-
-        myDevicelistAdapter.update(result, true);
-        if(!result.isEmpty()){
-            currentPage ++;
-        } else {
-
-        }
-    }
-
-
-    public class MyAsyncTask extends AsyncTask {
-
-        public MyAsyncTask(){
-            if(!swipeRefreshLayout.isRefreshing()){
-                swipeRefreshLayout.setRefreshing(true);
-            }
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            TestClass.loading(getActivity(), "正在加载数据，请稍后");
-        }
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-            if(!isCancelled()){
-                try {
-                    // 设置Token
-                  /*  mEzvizAPI.setAccessToken(Constants.TOKEN_URL);
-                    GetCameraInfoList getCameraInfoList = new GetCameraInfoList();
-                    getCameraInfoList.setPageStart(currentPage);
-                    getCameraInfoList.setPageSize(showPage);
-                    // int x = 1/0;  // 使用异常里面的数据来缓存
-                    // 获取设备列表
-                    result = (ArrayList<CameraInfo>)mEzvizAPI.getCameraInfoList(getCameraInfoList);*/
-                    return result;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    /*result = new ArrayList<CameraInfo>(0);
-                    CameraInfo f1 = new CameraInfo();
-                    f1.setDeviceSerial("536724861");
-                    f1.setPicUrl("https://i.ys7.com/assets/imgs/public/homeDevice.jpeg");
-                    f1.setCameraName("C6(536724861)");
-                    f1.setDeviceName(null);
-                    f1.setDeviceId("e2b6ad92be744a2e8745473dd3dc3918536724861");
-                    f1.setCameraId("24a7467d51a1484c9146b501f4ee34cf");
-                    f1.setCameraNo(1);
-                    f1.setDefence(0);
-                    f1.setIsEncrypt(1);
-                    f1.setIsShared(0);
-                    f1.setStatus(1);
-
-                    CameraInfo f2 = new CameraInfo();
-                    f2.setDeviceSerial("536724535");
-                    f2.setPicUrl("https://i.ys7.com/assets/imgs/public/homeDevice.jpeg");
-                    f2.setCameraName("C6(536724535)");
-                    f2.setDeviceName(null);
-                    f2.setDeviceId("e2b6ad92be744a2e8745473dd3dc3918536724535");
-                    f2.setCameraId("393dc7038a9041a5bd6173fea61364fc");
-                    f2.setCameraNo(1);
-                    f2.setDefence(0);
-                    f2.setIsEncrypt(0);
-                    f2.setIsShared(0);
-                    f2.setStatus(1);
-
-                    result.add(f1);
-                    result.add(f2);*/
-                    return result;
-                }
-            }
-            if(result == null){
-                result = new ArrayList<MyDevice>(0);
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            if(NetWorkUtil.IsNetWorkEnable(getActivity()) && result!=null){
-                addData();
-            }
-            TestClass.closeLoading();
-        }
-
     }
 
     /**
      * 初始化任务
      */
     private void startAsynTask(){
-        new MyAsyncTask().execute();
+        RequestParams maps = new RequestParams();
+        maps.put("showCount", showPage);
+        maps.put("currentPage", currentPage);
+        HttpManager.sendHttpRequest(getActivity(), Constants.ALARM_LIST, maps, "get", false, callback);
     }
+
+    HttpCallBackHandle callback = new HttpCallBackHandle() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+            try {
+                list.clear();;
+                JSONObject response = new JSONObject(responseBody);
+                String errcode =  response.getString("errcode");
+                if("SECURITY-GLOBAL-S-0".equals(errcode)){// 返回数据成功
+                    JSONArray jsonList = response.getJSONObject("result").getJSONArray("list");
+                    if(jsonList!=null){
+                        int length = jsonList.length();
+                        for(int index=0; index<length; index++){
+                            JSONObject jsonObject = jsonList.getJSONObject(index);
+                            jsonObject.getInt("alarm_id");   // 自己平台报警记录id
+                            jsonObject.getInt("ca_id");      // 设备编号
+                            int uid = jsonObject.getInt("uid");        // 用户id
+                            jsonObject.getString("alarm_type");  // 报警类型
+                            jsonObject.getInt("alarm_time");     // 报警事件
+                            jsonObject.getString("alarm_image"); // 报警图片
+                            jsonObject.getString("alarm_video"); // 报警视频
+                            jsonObject.getString("alarm_result");// 报警结果
+                            String status = jsonObject.getString("alarm_status"); // 报警状态   新增 已协助  已处理  已关闭  已取消
+                            jsonObject.getString("alarmId");       // 萤石报警记录id
+                            jsonObject.getString("alarmName");    // 报警名称
+                            String img = jsonObject.getString("alarmPicUrl");  // 报警图片
+                            String startTime = jsonObject.getString("alarmStart");   // 报警开始时间
+                            int type = jsonObject.getInt("alarmType");       // 报警类型
+                            jsonObject.getInt("channelNo");       // 通道编号
+                            jsonObject.getInt("isCheck");         // 是否查看
+                            String username = jsonObject.getString("username");         // 是否查看
+                            String installAddr = jsonObject.getString("address");         // 设备安装位置
+                            String familyAddr = jsonObject.getString("community");         // 设备安装位置
+
+                            AlarmType alarmType = AlarmType.getAlarmTypeById(type);
+                            String alarmTypeName = null;
+                            if (alarmType != AlarmType.UNKNOWN) {
+                                alarmTypeName = getActivity().getResources().getString(alarmType.getTextResId());
+                            }
+
+
+                            Alarm alarm = new Alarm();
+                            alarm.setImg(img);
+                            alarm.setDate(startTime);
+                            alarm.setTitle(username + " " + installAddr + " " + alarmTypeName);
+                            alarm.setMsg(familyAddr);
+                            if("新增".equals(status) && (Constants.USER_ID == uid)){
+                                alarm.setIcon(R.drawable.btn_dxz);
+                            } else
+                            if("新增".equals(status) && (Constants.USER_ID != uid)){
+                                alarm.setIcon(R.drawable.btn_dcl);
+                            } else
+                            if("已处理".equals(status)){
+                                alarm.setIcon(R.drawable.btn_ycl);
+                            }
+                            list.add(alarm);
+                        }
+
+                        currentPage++;
+                    }
+
+                    if(!list.isEmpty()){
+                        adapter.update(list);
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            if(swipeRefreshLayout.isRefreshing()){
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+            Log.i("statusCode", "statusCode");
+            Log.i("statusCode", "statusCode");
+            if(swipeRefreshLayout.isRefreshing()){
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }
+    };
 
 }
