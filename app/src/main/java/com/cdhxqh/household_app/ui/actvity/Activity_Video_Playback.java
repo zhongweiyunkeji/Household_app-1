@@ -67,7 +67,6 @@ import com.videogo.util.Utils;
 import com.videogo.widget.CustomRect;
 import com.videogo.widget.CustomTouchListener;
 import com.videogo.widget.TimeBarHorizontalScrollView;
-import com.videogo.widget.TitleBar;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;

@@ -144,9 +144,19 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity android:name=".ui.actvity.Activity_Alarm_List" />
+        <!--视频录像-->
         <activity
             android:name=".ui.actvity.Activity_Video_Playback"
-            android:label="@string/title_activity_activity__video__playback" >
+            android:label="@string/title_activity_activity__video__playback"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--视频播放-->
+        <activity
+            android:name=".ui.actvity.RealPlayActivity"
+            android:label="@string/title_activity_real_play"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
