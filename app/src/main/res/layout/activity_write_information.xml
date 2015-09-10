@@ -102,4 +102,6 @@
         android:textSize="20sp" />
 
 
+    <include layout="@layout/activity_select_display"   />
+
 </LinearLayout>
