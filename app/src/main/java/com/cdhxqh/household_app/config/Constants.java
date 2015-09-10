@@ -45,4 +45,10 @@ public class Constants {
     // 获取联系人信息
     public static final String CONTACT = BASE_URL + "/user/pagelist";
 
+    // 更新安全服务中心设置
+    public static final String UPDATE_SAFE = BASE_URL + "/ysalarm/config";
+
+    // 获取单个安全服务中心设置信息
+    public static final String GET_SAFE_SETTING = BASE_URL + "/ysalarm/getconfig";
+
 }

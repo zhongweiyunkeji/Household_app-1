@@ -53,13 +53,11 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
         dataChanged();
     }
 
-    public void setSelect(ArrayList<Contacters> list){
+    public void setSelect(int[] ids){
         for(Contacters c : contacts){
-            for(Contacters entity : list){
-                if(entity.getUid() == c.getUid()){
+            for(int i=0; i<ids.length; i++){
+                if(c.getUid() == ids[i]){
                     c.setFlag(true);
-                } else {
-                    c.setFlag(false);
                 }
             }
         }

@@ -13,10 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.model.ProductModel;
+import com.cdhxqh.household_app.model.SaceConfig;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.actvity.SafeActivity;
 import com.cdhxqh.household_app.ui.actvity.SafeCenterActivity;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -47,10 +57,50 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         viewHolder.safe_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext, SafeCenterActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("PRODUCTMODEL", model);
-                mContext.startActivity(intent);
+                // 发送网络请求
+                RequestParams maps = new RequestParams();
+                maps.put("ca_id", model.getCaid());
+                HttpManager.sendHttpRequest(mContext, Constants.GET_SAFE_SETTING, maps, "get", false, new HttpCallBackHandle() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                        if(responseBody!=null){
+                            try {
+                                JSONObject object = new JSONObject(responseBody);
+                                JSONObject result = object.getJSONObject("result");
+                                if(result!=null){
+                                    int acid = result.getInt("ac_id");  // 主键id
+                                    int caid = result.getInt("ca_id");  // 设备id
+                                    int uid = result.getInt("uid");    // 用户id
+                                    String alarmType = result.getString("alarmtype");  // 报警类型
+                                    int email = result.getInt("email");    // email
+                                    int sms = result.getInt("sms");    // 短信
+                                    int app = result.getInt("app");    // ??????
+                                    int groupid = result.getInt("groupid");    // ??????
+                                    String mobile = result.getString("mobile");  // ???
+                                    int help = result.getInt("help");       // ???
+                                    int feedback = result.getInt("feedback");  // ????
+                                    String helpaddress = result.getString("helpaddress");  //  ?????
+                                    String uids = result.getString("uids");  // ?????
+
+                                    SaceConfig config = new SaceConfig(acid, caid, feedback, help, uid, uids, helpaddress);
+                                    Intent intent = new Intent(mContext, SafeCenterActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("PRODUCTMODEL", config);
+                                    intent.putExtras(bundle);
+                                    mContext.startActivity(intent);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                        Log.i("TAG", "TAG");
+                        Log.i("TAG", "TAG");
+                    }
+                });
             }
         });
     }

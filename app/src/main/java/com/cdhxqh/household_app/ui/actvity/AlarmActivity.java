@@ -92,6 +92,8 @@ public class AlarmActivity extends Activity{
 
     private TextView putConnect;
 
+    private int[] usersid = new int[0];
+
     private static final int EDIT_CONTACT = 3;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,6 +204,18 @@ public class AlarmActivity extends Activity{
         if(intent!=null){
             Bundle bundle = intent.getExtras();
             selectContacts = (ArrayList<Contacters>)bundle.getSerializable("contactList");
+            String users = bundle.getString("users");
+            if(users!=null){
+                String[] array = users.split(",");
+                if(array.length ==0 || "".equals(array[0])){
+
+                } else {
+                    usersid = new int[array.length];
+                    for(int i=0; i<array.length; i++){
+                        usersid[i] = Integer.parseInt(array[i]);
+                    }
+                }
+            }
         }
     }
     /**
@@ -215,6 +229,9 @@ public class AlarmActivity extends Activity{
                 finish();
             }else {
                 retContacts.clear();
+                if(contactsMessage.isEmpty()){
+                    contactsMessage = alarmAdapter.getContacts();
+                }
                 for(Contacters c : contactsMessage){
                     if(c.isFlag()){
                         retContacts.add(c);
@@ -299,7 +316,7 @@ public class AlarmActivity extends Activity{
                                 contacts.add(contacters);
                             }
                             alarmAdapter.updata(contacts);
-                            alarmAdapter.setSelect(selectContacts);
+                            alarmAdapter.setSelect(usersid);
                             // alarmAdapter.dataChanged();
                         }
                     }

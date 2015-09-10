@@ -16,10 +16,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.model.ProductModel;
+import com.cdhxqh.household_app.model.SaceConfig;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
 import com.cdhxqh.household_app.ui.widget.dialog.DateTimePickerDialog;
+import com.cdhxqh.household_app.utils.ToastUtil;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,10 +68,10 @@ public class SafeCenterActivity extends BaseActivity {
     // 协助地址
     EditText address;
 
-    // 下一步按钮
+    // 保存按钮
     Button nextBtn;
 
-    ProductModel model;
+    SaceConfig model;
 
     // 协助模式按钮
     ImageButton assistModule;
@@ -68,14 +79,18 @@ public class SafeCenterActivity extends BaseActivity {
     // 反馈模式按钮
     ImageButton feedback;
 
+    boolean httpFinish = false;
+
+    String users = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safe_center_service);
         Log.i("TAG", "TAG");
         findViewById();
-        initView();
         getData();
+        initView();
     }
 
     public void findViewById() {
@@ -99,14 +114,31 @@ public class SafeCenterActivity extends BaseActivity {
             }
         });
         titleView.setText("安全服务中心");
-        // selectUser.setHint("可选多人");
+
+        if(model!=null){
+            boolean flag = model.getHelp()==1 ? true : false;
+            assistModule.setSelected(flag); // 开启协助模式
+            flag = model.getFeedback()==1 ? true : false;
+            feedback.setSelected(flag);     // 需要协助人员反馈
+            address.setText(model.getHelpaddress());  // 协助地址
+            String[] array = model.getUids().split(",");
+            selectUser.setText("已选择" + array.length + "人");
+            users = model.getUids();
+            Log.i("TAG", "TAG");
+            // 请求http获取选中的联系人
+            // HttpManager.sendHttpRequest(this, );
+        }
+
         settingImg.setVisibility(View.GONE);
         ctrImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(SafeCenterActivity.this, AlarmActivity.class);
-                intent.putExtra("contactList", (Serializable)contactersList);
+                Bundle bundle = new Bundle();
+                bundle.putString("users", users);
+                bundle.putSerializable("contactList", (Serializable) contactersList);
+                intent.putExtras(bundle);
                 startActivityForResult(intent, PICK_CONTACT);
             }
         });
@@ -114,9 +146,46 @@ public class SafeCenterActivity extends BaseActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 调用数据
-                String text = selectUser.getText().toString();
-                String addr = address.getText().toString();
+                RequestParams maps = new RequestParams();
+                maps.put("ca_id", model.getCaid());
+                maps.put("uids", users);
+                maps.put("help", assistModule.isSelected()?1:0);
+                maps.put("feedback", feedback.isSelected()?1:0);
+                maps.put("helpaddress", address.getText().toString());
+
+                // 更新module使得界面可以及时更新过来
+                model.setCaid(model.getAcid());
+                model.setUids(users);
+                model.setHelp(assistModule.isSelected() ? 1 : 0);
+                model.setFeedback(feedback.isSelected() ? 1 : 0);
+                model.setHelpaddress(address.getText().toString());
+
+                HttpManager.sendHttpRequest(SafeCenterActivity.this, Constants.UPDATE_SAFE, maps, "post", false, new HttpCallBackHandle() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                        if (responseBody != null) {
+                            try {
+                                JSONObject object = new JSONObject(responseBody);
+                                String errcode = object.getString("errcode");
+                                String errmsg = object.getString("errmsg");
+                                if ("SECURITY-GLOBAL-S-0".equals(errcode)) {
+                                    ToastUtil.showMessage(SafeCenterActivity.this, "保存成功 ");
+                                } else {
+                                    ToastUtil.showMessage(SafeCenterActivity.this, errmsg);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                        Log.i("TAG", "TAG");
+                        Log.i("TAG", "TAG");
+                        Log.i("TAG", "TAG");
+                    }
+                });
                 // 提交数据
             }
         });
@@ -143,7 +212,7 @@ public class SafeCenterActivity extends BaseActivity {
         if(intent!=null){
             Bundle bundle = intent.getExtras();
             if(bundle!=null){
-                model = (ProductModel)bundle.getSerializable("PRODUCTMODEL");
+                model = (SaceConfig)bundle.getSerializable("PRODUCTMODEL");
             }
         }
     }
@@ -154,19 +223,20 @@ public class SafeCenterActivity extends BaseActivity {
         super.onActivityResult(reqCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if(contactersList.size() > 0) {
+                users = "";
                 selectUser.setText("已选择" + contactersList.size() + "人");
+                for(int index=0; index<contactersList.size(); index++){
+                    Contacters c = contactersList.get(index);
+                    users = c.getUid() + ","+users;
+                }
+                users = users.trim();
+                users = users.substring(0, users.length()-1);
+                users = users.trim();
             }else {
                 selectUser.setText("可选择多人");
-                selectUser.setHint("");
+                users = "";
             }
         }
     }
 
 }
-/*for(int i = 0; i<contactersList.size(); i++) {
-            if(contactersList.get(i).isFlag() == true) {
-                Contacters context = new Contacters();
-                context = contactersList.get(i);
-                contactersLists.add(context);
-            }
-        }*/
