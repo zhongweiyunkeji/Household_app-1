@@ -116,25 +116,18 @@ public class AlarmItemAdapter extends BaseAdapter {
 
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {
-                       // Log.e("TAG", "---------------------------------------------------------->");
                     }
 
                     @Override
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                        Log.e("TAG", "---------------------------------------------------------->"+failReason.getType());
-                        Log.e("TAG", "---------------------------------------------------------->"+failReason.getCause());
                     }
 
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        Log.e("TAG", "---------------------------------------------------------->");
-                        Log.e("TAG", "---------------------------------------------------------->");
                     }
 
                     @Override
                     public void onLoadingCancelled(String imageUri, View view) {
-                        Log.e("TAG", "---------------------------------------------------------->");
-                        Log.e("TAG", "---------------------------------------------------------->");
                     }
                 }, new ImageLoadingProgressListener() {
                     @Override
