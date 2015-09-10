@@ -67,7 +67,6 @@
                         android:layout_height="match_parent"
                         android:gravity="left|center_vertical"
                         android:layout_gravity="left|center"
-                        android:text="11111111"
                         android:layout_weight="1"
                         android:textCursorDrawable="@drawable/color_cursor"
                         android:background="@null"/>
