@@ -2,6 +2,7 @@ package com.cdhxqh.household_app.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -14,9 +15,11 @@ import com.cdhxqh.household_app.api.Message;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
+import com.cdhxqh.household_app.ui.actvity.Activity_Login;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
 import com.cdhxqh.household_app.ui.widget.TestClass;
 import com.cdhxqh.household_app.utils.SafeHandler;
+import com.cdhxqh.household_app.utils.ToastUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -77,6 +80,10 @@ public class HttpManager {
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                            if(checkSession(responseString)){  // 检查session是否过期, 过期将转到登录页面
+                                redirectLoginPage(cxt);
+                                return;
+                            }
                             //解析返回的Json数据
                             try {
                                 JSONObject jsonObject = new JSONObject(responseString);
@@ -99,11 +106,16 @@ public class HttpManager {
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
                         }
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                            if(checkSession(responseString)){  // 检查session是否过期, 过期将转到登录页面
+                                redirectLoginPage(cxt);
+                                return;
+                            }
                             //解析返回的Json数据
                             try {
                                 JSONObject jsonObject = new JSONObject(responseString);
@@ -136,6 +148,10 @@ public class HttpManager {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        if(checkSession(responseString)){  // 检查session是否过期, 过期将转到登录页面
+                            redirectLoginPage(cxt);
+                            return;
+                        }
                         //解析返回的Json数据
                         try {
                             JSONObject jsonObject = new JSONObject(responseString);
@@ -218,6 +234,10 @@ public class HttpManager {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        if(checkSession(responseString)){  // 检查session是否过期, 过期将转到登录页面
+                            redirectLoginPage(cxt);
+                            return;
+                        }
                         //解析返回的Json数据 ArrayList<Alarm>
                         try {
                             JSONObject jsonObject = new JSONObject(responseString);
@@ -317,6 +337,10 @@ public class HttpManager {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     try {
+                        if(checkSession(responseString)){  // 检查session是否过期, 过期将转到登录页面
+                            redirectLoginPage(context);
+                            return;
+                        }
                         callback.onSuccess(statusCode, headers, responseString);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -335,4 +359,26 @@ public class HttpManager {
             }
         }
     }
+
+    public static boolean checkSession(String resStr){
+        try {
+            JSONObject json = new JSONObject(resStr);
+            String errcode = json.getString("errcode");
+            if("SECURITY-GLOBAL-E-4".equals(errcode)){
+                return true;
+            }
+            return false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static void redirectLoginPage(Context context){
+        Intent intent = new Intent(context, Activity_Login.class);
+        context.startActivity(intent);
+        ToastUtil.showMessage(context, "回话已超时，请重启新登录");
+    }
+
+
 }
