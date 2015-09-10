@@ -1,18 +1,13 @@
 package com.cdhxqh.household_app.ui.actvity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
-import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.AppManager;
-import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Ec_user;
 import com.cdhxqh.household_app.utils.AccountUtils;

@@ -1,6 +1,5 @@
 package com.cdhxqh.household_app.ui.widget;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,7 +12,6 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Switch;
 
 import com.cdhxqh.household_app.R;
 

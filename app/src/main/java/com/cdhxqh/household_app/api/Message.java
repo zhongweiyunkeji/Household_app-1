@@ -2,6 +2,8 @@ package com.cdhxqh.household_app.api;
 
 import android.os.Environment;
 
+import com.cdhxqh.household_app.config.Constants;
+
 
 public class Message {
 
@@ -9,15 +11,12 @@ public class Message {
      ******************************************* 接口参数设置信息开始 ******************************************
      * 这里编写与服务器交互需要的url
      */
+    //远程服务地址
+    public static final String BASE_URL = Constants.BASE_URL;
 
-    //酒店服务端IP
-
-//    public static final String BASE_URL = "http://172.25.124.1:8080/qdm/";
-    //公司服务端Ip
-//    public static final String BASE_URL = "http://192.168.1.106:8080/qdm/";
     //远程服务器地址
 
-    public static final String BASE_URL = "http://192.168.1.99:8080/security/";  //  "http://182.92.158.158:8080/qdm/"
+//    public static final String BASE_URL = "http://192.168.1.99:8080/security/";
 
     /**登录用户接口**/
     public static final String LOGIN_URL = BASE_URL+"user/login";
@@ -234,5 +233,7 @@ public class Message {
     public static final String SCENICE_SEARCH_URL = BASE_URL + "ecsbrand/brandlist";
 
     public static final String ATTRACTIONS_SEARCH_URL = BASE_URL + "ecsbrand/articlelist";
+
+    public static final String REG_CHECK_CODE = BASE_URL + "user/check";
 
 }

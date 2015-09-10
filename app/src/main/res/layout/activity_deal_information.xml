@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/bodyBackground"
+    android:orientation="vertical">
+
+    <include
+    android:id="@+id/include_title"
+    layout="@layout/activity_tittle"></include>
+
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/activity_deal_content"></include>
+
+    <Button
+        android:id="@+id/restart_passworld_id"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/btn_lightblue"
+        android:text="@string/save"
+        android:textColor="@color/font_color"
+        android:textSize="20sp" />
+
+
+</LinearLayout>

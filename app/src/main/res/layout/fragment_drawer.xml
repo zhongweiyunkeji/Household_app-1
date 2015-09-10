@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/navigation_drawer_width"
     android:layout_height="match_parent"
     android:background="@color/bgcolor"
@@ -12,8 +11,7 @@
         android:padding="8dp"
         android:background="@drawable/profile_bg">
 
-        <de.hdodenhof.circleimageview.CircleImageView    
-			xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_member"
             android:layout_width="80dp"
             android:layout_height="80dp"

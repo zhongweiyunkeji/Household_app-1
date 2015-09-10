@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.ui.actvity.Activity_Help_Center;
 import com.cdhxqh.household_app.ui.fragment.HelpCenterFragement;
 
 import java.util.ArrayList;

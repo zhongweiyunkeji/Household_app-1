@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,10 +58,10 @@ public class EquipEditAdapter extends BaseAdapter {
         final MyDevice myDevice = (MyDevice)list.get(position);
 
         ImageLoader.getInstance().displayImage("http://tech.cnr.cn/techgd/20150819/W020150819406395420486.jpg", holder.imageView);  // 设备图片
-        holder.sizeText.setText(""+myDevice.getSize());
+        /*holder.sizeText.setText(""+myDevice.getSize());
         holder.divName.setText(myDevice.getName());
         holder.divAddr.setText(myDevice.getPlace());
-        holder.divNum.setText(myDevice.getName());
+        holder.divNum.setText(myDevice.getName());*/
         holder.actionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +77,7 @@ public class EquipEditAdapter extends BaseAdapter {
             MyDevice obj = iistItem.get(i);
             boolean exist = false;
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).getName() == obj.getName()) {
+                if (list.get(j).getDeviceName() == obj.getDeviceName()) {
                     exist = true;
                     break;
                 }

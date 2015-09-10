@@ -2,12 +2,10 @@ package com.cdhxqh.household_app.ui.actvity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,14 +21,14 @@ import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
 import com.cdhxqh.household_app.ui.widget.Photo.PhotoUtil;
 import com.cdhxqh.household_app.zxing.activity.CaptureActivity;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by Administrator on 2015/8/18.
  */
 public class AddEquipmentActivity extends BaseActivity {
+
+
+    private static final String TAG="AddEquipmentActivity";
+
     /**
      * 添加设备
      */
@@ -108,10 +106,26 @@ public class AddEquipmentActivity extends BaseActivity {
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
 
     ImageView backImg;  // 返回按钮
-    TextView titleTextView;  // 标题栏标题
+
+
     ImageView addIcon;        // 标题栏添加按钮
+
     ImageView scanIcpn;     // 标题栏扫描二维码按钮
+
     String action;
+
+    /**
+     * 返回按钮*
+     */
+    private ImageView back_imageview_id;
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView title_add_id;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,22 +154,32 @@ public class AddEquipmentActivity extends BaseActivity {
         addIcon = (ImageView)findViewById(R.id.title_add_id);
         scanIcpn = (ImageView)findViewById(R.id.title_scan_id);
 
-
+/**
+ * 标题标签相关id
+ */
+        back_imageview_id = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        title_add_id = (ImageView) findViewById(R.id.title_add_id);
     }
 
     public void initView() {
+        //设置标签页显示方式
+        back_imageview_id.setVisibility(View.VISIBLE);
+        title_add_id.setVisibility(View.GONE);
+        titleTextView.setText("添加设备");
         Bundle bundle = getIntent().getExtras();
+        Log.i(TAG,"bundle="+bundle);
         if(bundle!=null){
             action = bundle.getString("action");
             MyDevice myDevice = (MyDevice)bundle.getSerializable("entity");
             if("edit".equals(action)){
-                titleTextView.setText("修改设备");
+                titleTextView.setText(getString(R.string.device_update_text));
                 if(myDevice!=null){
-                    Toast.makeText(this, myDevice.getName(), Toast.LENGTH_SHORT);
+                    Toast.makeText(this, myDevice.getDeviceName(), Toast.LENGTH_SHORT);
                 }
             }
         } else {
-            titleTextView.setText("添加设备");
+            titleTextView.setText(getString(R.string.device_add_text));
         }
         /**
          * 拍摄照片监听
@@ -202,7 +226,34 @@ public class AddEquipmentActivity extends BaseActivity {
          * 下一步
          */
         next.setOnClickListener(nextOnClickListener);
+
+        back_imageview_id.setOnTouchListener(backImageViewOnTouchListener);
+
+        //返回至登录界面事件
+        back_imageview_id.setOnClickListener(backImageViewOnClickListener);
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 
     /**
      * 拍摄照片监听

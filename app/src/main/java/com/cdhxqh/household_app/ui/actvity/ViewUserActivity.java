@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -74,6 +75,19 @@ public class ViewUserActivity extends BaseActivity {
      */
     LinearLayout top_check;
 
+    /**
+     * 返回按钮*
+     */
+    private ImageView back_imageview_id;
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView title_add_id;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_user);
@@ -99,9 +113,22 @@ public class ViewUserActivity extends BaseActivity {
        create_user = (LinearLayout) findViewById(R.id.create_user);
 
        top_check = (LinearLayout) findViewById(R.id.top_check);
+
+       /**
+        * 标题标签相关id
+        */
+       back_imageview_id = (ImageView) findViewById(R.id.back_imageview_id);
+       titleTextView = (TextView) findViewById(R.id.title_text_id);
+       title_add_id = (ImageView) findViewById(R.id.title_add_id);
+
+
     }
 
     private void initView() {
+        //设置标签页显示方式
+        back_imageview_id.setVisibility(View.VISIBLE);
+        title_add_id.setVisibility(View.GONE);
+        titleTextView.setText("选择联系人");
         checkbox_all.setOnCheckedChangeListener(checkOnClickListener);
 
         delete.setOnClickListener(deleteOnClickListener);
@@ -111,6 +138,11 @@ public class ViewUserActivity extends BaseActivity {
         cancel.setOnClickListener(cancelOnClickListener);
 
         create_user.setOnClickListener(selectUserOnClickListener);
+
+        back_imageview_id.setOnTouchListener(backImageViewOnTouchListener);
+
+        //返回至登录界面事件
+        back_imageview_id.setOnClickListener(backImageViewOnClickListener);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -124,6 +156,28 @@ public class ViewUserActivity extends BaseActivity {
 
         userList.setAdapter(viewUserAdapter);
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 
     /**
      * 删除联系人

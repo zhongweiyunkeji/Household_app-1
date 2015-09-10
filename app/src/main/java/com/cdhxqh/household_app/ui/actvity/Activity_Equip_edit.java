@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.MyDevice;
-import com.cdhxqh.household_app.ui.adapter.EquipDelAdapter;
 import com.cdhxqh.household_app.ui.adapter.EquipEditAdapter;
 
 import java.util.ArrayList;
@@ -78,12 +75,12 @@ public class Activity_Equip_edit extends BaseActivity {
     public ArrayList<MyDevice> getData(){
         ArrayList<MyDevice> list = new ArrayList<MyDevice>(0);
         for(int i=0; i<20; i++){
-            MyDevice divice = new MyDevice();
+            /*MyDevice divice = new MyDevice();
             divice.setName("海康DS-2CD2412F " + i);  // 设备名称
             divice.setNumber("2317635" + i);          // 设备编号
             divice.setSize(i);                         // 交表
             divice.setPlace("家里门口 "+i);           // 地点
-            list.add(divice);
+            list.add(divice);*/
         }
 
         return list;

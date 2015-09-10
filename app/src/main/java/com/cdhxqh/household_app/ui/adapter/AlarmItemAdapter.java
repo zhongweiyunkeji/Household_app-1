@@ -1,23 +1,45 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Alarm;
+import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
+import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
+import com.cdhxqh.household_app.ui.actvity.Activity_Write_Information;
+import com.cdhxqh.household_app.ui.actvity.RealPlayActivity;
+import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
+import com.cdhxqh.household_app.utils.ToastUtil;
+import com.loopj.android.http.RequestParams;
+import com.videogo.constant.IntentConsts;
+import com.videogo.openapi.EzvizAPI;
+import com.videogo.universalimageloader.core.DisplayImageOptions;
+import com.videogo.universalimageloader.core.assist.FailReason;
+import com.videogo.universalimageloader.core.download.DecryptFileInfo;
+import com.videogo.universalimageloader.core.listener.ImageLoadingListener;
+import com.videogo.universalimageloader.core.listener.ImageLoadingProgressListener;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -75,18 +97,56 @@ public class AlarmItemAdapter extends BaseAdapter {
         }
 
         final Alarm alarm = list.get(position);
-        // ImageLoader.getInstance().displayImage(alarm.getImg(), holder.img);
-        Bitmap bitmap = null;
-        if((position+1)%2 == 0){
-            bitmap = getBitMap(R.drawable.img2);
-        } else {
-            bitmap = getBitMap(R.drawable.img3);
-        }
-        holder.img.setImageBitmap(bitmap);
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .needDecrypt(alarm.isEncryption())
+                .considerExifParams(true)
+                .showImageForEmptyUri(R.drawable.alarm_encrypt_image_mid)
+                .showImageOnFail(R.drawable.alarm_encrypt_image_mid)
+                .showImageOnDecryptFail(R.drawable.alarm_encrypt_image_mid)
+                .extraForDownloader(new DecryptFileInfo(alarm.getSerial(), alarm.getCheckSum()))
+                .build();
+
+        String imgUrl = alarm.getImg();
+        EzvizAPI.getInstance().initImageLoader(context);  // 初始化
+        com.videogo.universalimageloader.core.ImageLoader mImageLoader = com.videogo.universalimageloader.core.ImageLoader.getInstance();
+        mImageLoader.displayImage(imgUrl, holder.img, options,
+                new ImageLoadingListener() {
+
+                    @Override
+                    public void onLoadingStarted(String imageUri, View view) {
+                       // Log.e("TAG", "---------------------------------------------------------->");
+                    }
+
+                    @Override
+                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                        Log.e("TAG", "---------------------------------------------------------->"+failReason.getType());
+                        Log.e("TAG", "---------------------------------------------------------->"+failReason.getCause());
+                    }
+
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        Log.e("TAG", "---------------------------------------------------------->");
+                        Log.e("TAG", "---------------------------------------------------------->");
+                    }
+
+                    @Override
+                    public void onLoadingCancelled(String imageUri, View view) {
+                        Log.e("TAG", "---------------------------------------------------------->");
+                        Log.e("TAG", "---------------------------------------------------------->");
+                    }
+                }, new ImageLoadingProgressListener() {
+                    @Override
+                    public void onProgressUpdate(String imageUri, View view, int current, int total) {
+
+                    }
+                });
+
         holder.title.setText(alarm.getTitle());
         holder.msg.setText(alarm.getMsg());
         holder.date.setText(alarm.getDate());
-        holder.icon.setImageResource(alarm.getIcon());
+        // holder.icon.setImageResource(alarm.getIcon());
 
         final Alarm a = alarm;
         final int p = position;
@@ -107,13 +167,92 @@ public class AlarmItemAdapter extends BaseAdapter {
             }
         }
 
-        /*holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                alarm.setStatus(isChecked);  // 记住选中状态
-                Log.i("TAG", "-----------p = " + p + "----------->" + isChecked);
-            }
-        });*/
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  int caid = alarm.getCaid();// 自己平台设备id
+                  RequestParams maps = new RequestParams();
+                  maps.put("ca_id", caid);
+                  HttpManager.sendHttpRequest(context, Constants.SINGLE_DEVICE, maps, "get", false, new HttpCallBackHandle() {
+                      @Override
+                      public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                          if (NetWorkUtil.IsNetWorkEnable(context)) {
+                              try {
+                                  if (responseBody != null) {
+                                      JSONObject result = new JSONObject(responseBody);
+                                      String rs = result.getString("result");
+                                      if(rs!=null && !"".equals(rs)){
+                                          JSONObject obj = new JSONObject(rs);
+                                          String uid = obj.getInt("uid") + "";
+                                          boolean ispublic = (obj.getInt("ispublic")==1) ? true : false;
+                                          boolean isEncrypt = obj.getInt("isEncrypt") == 1 ? true : false;
+                                          String cameraId = obj.getString("cameraId");
+                                          String deviceName = obj.getString("deviceName");
+                                          int defence = obj.getInt("defence");
+                                          int ca_id = obj.getInt("caId");
+                                          String deviceId = obj.getString("deviceId");
+                                          String picUrl = obj.getString("picUrl");
+                                          int cameraNo = obj.getInt("cameraNo");
+                                          boolean status = obj.getString("status").trim().equals("1") ? true : false;
+                                          String cameraName = obj.getString("cameraName");
+                                          boolean isShared = obj.getInt("isShared") == 1 ? true : false;
+                                          String deviceSerial = obj.getString("deviceSerial");
+                                          final MyDevice device = new MyDevice(ca_id, cameraId, cameraNo, defence, deviceName, deviceSerial, isEncrypt, ispublic, isShared, picUrl, status, uid, deviceId, cameraName);
+
+                                          RequestParams maps = new RequestParams();
+                                          maps.put("uid", uid);
+                                          HttpManager.sendHttpRequest(context, Constants.ACCESSTOKEN, maps, "get", false, new HttpCallBackHandle() {
+                                              @Override
+                                              public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                                                  if (NetWorkUtil.IsNetWorkEnable(context)) {
+                                                      if (responseBody != null && !"".equals(responseBody)) {
+                                                          // 解析AccessToken
+                                                          try {
+                                                              JSONObject respJosn = new JSONObject(responseBody);
+                                                              String code = respJosn.getString("errcode");
+                                                              if ("200".equals(code)) {
+                                                                  String result = respJosn.getString("result");
+                                                                  if (result != null) {
+                                                                      JSONObject resultJson = new JSONObject(result);
+                                                                      String token = resultJson.getString("accessToken");
+                                                                      EzvizAPI.getInstance().setAccessToken(token);
+                                                                  }
+                                                              }
+                                                          } catch (JSONException e) {
+                                                              e.printStackTrace();
+                                                          }
+                                                          startActivity(device);
+                                                      }
+                                                  }
+                                              }
+
+                                              @Override
+                                              public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                                                  // 什么也不做
+                                                  ToastUtil.showMessage(context, "您当前没有权限");
+                                              }
+                                          });
+                                      }
+                                  } else {
+                                      // 什么也不做
+                                      ToastUtil.showMessage(context, "您当前没有权限");
+                                  }
+                              } catch (JSONException e) {
+                                  e.printStackTrace();
+                              }
+
+                          }
+                      }
+
+                      @Override
+                      public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                          // 什么也不做
+                          ToastUtil.showMessage(context, "您当前没有权限");
+                      }
+                  });
+              }
+          });
 
         final CheckBox box = holder.checkbox;
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
@@ -143,12 +282,12 @@ public class AlarmItemAdapter extends BaseAdapter {
         }
     }
 
-    public void update(ArrayList<Alarm> iistItem) {
-        for (int i = 0; i < iistItem.size(); i++) {
-            Alarm obj = iistItem.get(i);
+    public void update(ArrayList<Alarm> array) {
+        for (int i = 0; i < array.size(); i++) {
+            Alarm obj = array.get(i);
             boolean exist = false;
             for (int j = 0; j < list.size(); j++) {
-                if (list.get(j).getTitle() == obj.getTitle()) {
+                if (list.get(j).getDate().equals(obj.getDate()) && (list.get(j).getSerial().equals(obj.getSerial()))) {
                     exist = true;
                     break;
                 }
@@ -156,7 +295,7 @@ public class AlarmItemAdapter extends BaseAdapter {
             if (exist) continue;
             list.add(0, obj);
         }
-        iistItem = list;
+        array = list;
 
         try {
             notifyDataSetChanged();
@@ -193,6 +332,8 @@ public class AlarmItemAdapter extends BaseAdapter {
         TextView msg;
         TextView date;
         ImageView icon;
+       // ImageView item_button;
+
 
         public ItemHolder(View view){
             checkbox = (CheckBox)view.findViewById(R.id.checkbox);
@@ -200,9 +341,22 @@ public class AlarmItemAdapter extends BaseAdapter {
             title = (TextView)view.findViewById(R.id.item_title);
             msg = (TextView)view.findViewById(R.id.item_msg);
             date = (TextView)view.findViewById(R.id.item_date);
-            icon = (ImageView)view.findViewById(R.id.item_icon);
+            // icon = (ImageView)view.findViewById(R.id.item_icon);
+           // item_button = (ImageView)view.findViewById(R.id.item_button);
         }
 
+    }
+
+
+    public void startActivity(MyDevice info){
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(IntentConsts.EXTRA_CAMERA_INFO, info);
+        intent.putExtras(bundle);
+
+        intent.putExtra(IntentConsts.EXTRA_CAMERA_INFO, info);
+        intent.setClass(context, RealPlayActivity.class);
+        context.startActivity(intent);
     }
 
 

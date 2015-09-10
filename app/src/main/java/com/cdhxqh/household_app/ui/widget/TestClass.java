@@ -3,8 +3,6 @@ package com.cdhxqh.household_app.ui.widget;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
-import com.cdhxqh.household_app.R;
-
 import java.util.regex.Pattern;
 
 /**
@@ -37,6 +35,7 @@ public class TestClass {
      */
     public static void loading(Activity activity, String message) {
         progressDialog = ProgressDialog.show(activity, null, message, true, true);
+        // progressDialog.setCancelable(false);// 设置模态对话框
     }
 
     /**

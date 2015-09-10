@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/title_linearlayout_id"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:orientation="vertical"
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.ClassActivity">
 
@@ -24,6 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:ellipsize="end"
             style="@style/ActionBarFont"
             android:text="标题"
             />

@@ -30,6 +30,9 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_gravity="center"
+                android:singleLine="true"
+                android:maxLength="8"
+                android:ellipsize="end"
                 android:textColor="@color/font_color"
                 android:textSize="25sp"
                 />

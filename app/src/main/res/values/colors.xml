@@ -74,7 +74,17 @@
     <color name="gray_text">#adadad</color>
     <color name="gray">#c8c8c8</color>
     <color name="black_text">#333333</color>
-
+    <color name="cameralist_gray">#e3e3e3</color>
+    <color name="play_translucent_bg">#c0000000</color>
     <!--  萤石云使用的颜色 -->
+
+    <!--回放列表-->
+    <color name="remotefile_timebar_color">#39a3ed</color>
+    <color name="remotefile_timebar_alarm_color">#ff8261</color>
+    <color name="remotefile_line_color">#fe2b2b</color>
+    <color name="common_bg">#f0f0f3</color>
+    <color name="black_bg">#000000</color>
+
+    <color name="clarity">@android:color/transparent</color>
 
 </resources>

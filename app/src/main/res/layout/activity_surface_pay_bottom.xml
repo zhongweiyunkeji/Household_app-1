@@ -1,40 +1,40 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/play_control_id"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_alignParentBottom="true"
-    android:background="@drawable/control_bar_bg"
-    android:orientation="horizontal"
-    >
+    android:layout_gravity="bottom"
+    android:visibility="gone"
+    android:background="@drawable/control_bar_bg">
     <!--  视频播放按钮  -->
     <ImageButton
         android:id="@+id/realplay_play_btn"
-        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:background="@drawable/playbtn_selector"
         android:visibility="gone" />
 
     <!--  视频暂停按钮  -->
     <ImageButton
         android:id="@+id/realplay_stop_btn"
-        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:background="@drawable/stopbtn_selector" />
 
     <ImageButton
-        android:id="@+id/realplay_stop_btn1"
-        android:layout_centerInParent="true"
+        android:id="@+id/voice_control_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:background="@drawable/ic_menu_song3" />
 
     <ImageButton
-        android:id="@+id/realplay_stop_btn2"
-        android:layout_alignParentRight="true"
+        android:id="@+id/set_full_screen_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:background="@drawable/ic_menu_fullscreen" />
 
 

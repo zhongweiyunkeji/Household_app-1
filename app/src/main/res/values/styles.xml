@@ -136,6 +136,9 @@
         <item name="android:layout_margin">30dp</item>
     </style>
 
-
+    <style name="popwindowUpAnim">
+        <item name="android:windowEnterAnimation">@anim/fade_up</item>
+        <item name="android:windowExitAnimation">@anim/fade_down</item>
+    </style>
 </resources>
 

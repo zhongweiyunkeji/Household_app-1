@@ -10,12 +10,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
-import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.adapter.EquipDelAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -110,13 +108,13 @@ public class Activity_Equip_delete extends BaseActivity {
     public ArrayList<MyDevice> getData(){
         ArrayList<MyDevice> list = new ArrayList<MyDevice>(0);
         for(int i=0; i<20; i++){
-            MyDevice divice = new MyDevice();
+          /*  MyDevice divice = new MyDevice();
             // divice.setStatus(true);                    // 设备状态
             divice.setName("海康DS-2CD2412F " + i);  // 设备名称
             divice.setNumber("2317635" + i);          // 设备编号
             divice.setSize(i);                         // 交表
             divice.setPlace("家里门口 "+i);           // 地点
-            list.add(divice);
+            list.add(divice);*/
         }
 
         return list;

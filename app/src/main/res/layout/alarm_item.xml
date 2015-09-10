@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -20,8 +19,9 @@
         android:id="@+id/item_img"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/img2"
+        android:src="@drawable/alarm_encrypt_image_mid"
         android:gravity="center"
+        android:layout_margin="8dp"
         android:layout_gravity="center"
         />
 
@@ -36,7 +36,7 @@
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="left"
             android:layout_gravity="left|center"
             android:paddingTop="5dp"
             android:textSize="20sp"
@@ -46,7 +46,7 @@
             android:id="@+id/item_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="left"
             android:layout_gravity="left|center"
             android:paddingTop="5dp"
             android:textSize="16sp"
@@ -64,11 +64,28 @@
             android:text="2015-08-17 18:51:22"/>
     </LinearLayout>
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="right|center">
     <ImageView
-        android:id="@+id/item_icon"
+    android:id="@+id/item_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/btn_dxz"
+    android:layout_marginRight="10dp"
+    android:gravity="top|right"/>
+
+    <!--<ImageView
+        android:id="@+id/item_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_alarm_orange"
-        android:gravity="top|right"/>
+        android:src="@drawable/btn_dxz"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:gravity="top|right"/>-->
+
+</LinearLayout>
 
 </LinearLayout>

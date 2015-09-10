@@ -24,6 +24,9 @@ public class Contacters implements Serializable {
      */
     private boolean flag;
 
+    // 用户唯一id
+    private int uid;
+
     public boolean isFlag() {
         return flag;
     }
@@ -54,5 +57,13 @@ public class Contacters implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 }

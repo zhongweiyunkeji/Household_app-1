@@ -1,25 +1,33 @@
 package com.cdhxqh.household_app.model;
 
-import android.widget.TextView;
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2015/8/14.
  */
-public class ProductModel {
-    /**
-     * 名称
-     */
+public class ProductModel implements Serializable{
+    // 安装位置
     private String product_id;
-
-    /**
-     *位置
-     */
+    // 家庭住址
     private String position_id;
+    // 设备序列号(萤石平台)
+    private String deviceSerial;
+    // 设备唯一标识(自己平台)
+    private int caid;
+    // 用户id(自己平台)
+    private String uid;
 
-    /**
-     *监控时间
-     */
-    private String monitor_time_id;
+    public ProductModel(){
+
+    }
+
+    public ProductModel(int caid, String deviceSerial, String position_id, String product_id, String uid) {
+        this.caid = caid;
+        this.deviceSerial = deviceSerial;
+        this.position_id = position_id;
+        this.product_id = product_id;
+        this.uid = uid;
+    }
 
     public String getProduct_id() {
         return product_id;
@@ -37,11 +45,27 @@ public class ProductModel {
         this.position_id = position_id;
     }
 
-    public String getMonitor_time_id() {
-        return monitor_time_id;
+    public String getDeviceSerial() {
+        return deviceSerial;
     }
 
-    public void setMonitor_time_id(String monitor_time_id) {
-        this.monitor_time_id = monitor_time_id;
+    public void setDeviceSerial(String deviceSerial) {
+        this.deviceSerial = deviceSerial;
+    }
+
+    public int getCaid() {
+        return caid;
+    }
+
+    public void setCaid(int caid) {
+        this.caid = caid;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/bodyBackground"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/activity_tittle"></include>
+
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/activity_deal_content"></include>
+
+    <TextView
+        style="@style/ListPadding.ListLevel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/isCheck" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/list_line_x"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@android:color/transparent"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textColorHint="@color/edit_color"
+            android:textSize="16sp"/>
+
+        <RelativeLayout
+            android:id="@+id/shot_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/font_color"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/time_tittle_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="14dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="20dp"
+                android:paddingTop="14dp"
+                android:text="@string/site_photo"
+                android:textColor="@color/list_title_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/site_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/time_tittle_a"
+                android:hint="@string/sele_site_photo"
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:textColor="@color/text_color"
+                android:textSize="16sp" />
+
+
+            <ImageView
+                android:id="@+id/view_photo"
+                android:layout_width="176dip"
+                android:layout_height="176dip"
+                android:layout_toRightOf="@+id/time_tittle_a"
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp"
+                android:visibility="gone" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_list_view" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/restart_passworld_id"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_lightblue"
+        android:text="@string/commit"
+        android:textColor="@color/font_color"
+        android:textSize="20sp" />
+
+
+</LinearLayout>

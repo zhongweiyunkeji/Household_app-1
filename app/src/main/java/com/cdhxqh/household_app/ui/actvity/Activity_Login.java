@@ -1,6 +1,5 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,19 +19,27 @@ import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.widget.SwitchButton;
 import com.cdhxqh.household_app.ui.widget.TestClass;
-import com.cdhxqh.household_app.ui.widget.TimeCountUtil;
 import com.cdhxqh.household_app.utils.MessageUtils;
 
 /**
- * Created by think on 2015/8/17.
+ * 登录界面
  */
 public class Activity_Login extends BaseActivity{
+    private static final String TAG="Activity_Login";
+
+    /**用户名**/
     private EditText username;
+    /**密码**/
     private EditText password;
+    /**记住密码**/
     private CheckBox isremenber;
+    /**登录按钮**/
     private Button login;
+
+    /**忘记密码**/
     private TextView TextViewPassWord;
-    Button regBtn;  // 注册按钮
+    /**注册按钮**/
+    Button regBtn;
     boolean close = true;
     SharedPreferences.Editor editor;
     SwitchButton switchButton;
@@ -83,6 +90,8 @@ public class Activity_Login extends BaseActivity{
         login.setOnClickListener(loginonclick);
         TextViewPassWord.setOnClickListener(passWordOnClickListener);
         switchButton.setOnChangeListener(switchOnClickListener);
+
+
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,10 +121,13 @@ public class Activity_Login extends BaseActivity{
                 password.setError(getString(R.string.password_null));
                 password.requestFocus();
             }else {
-                getHttpUtil();
-//                Intent intent = new Intent();
-//                intent.setClass(Activity_Login.this,MainActivity.class);
-//                startActivity(intent);
+                  getHttpUtil();
+                 /* Intent intent = new Intent();
+                  Bundle bundle = new Bundle();
+                  bundle.putString("username", username.getText().toString());
+                  intent.putExtras(bundle);
+                  intent.setClass(Activity_Login.this, MainActivity.class);
+                  startActivity(intent);*/
             }
         }
     };
@@ -142,8 +154,8 @@ public class Activity_Login extends BaseActivity{
         /**
          * 加载中
          */
-        TestClass.loading(this, getString(R.string.loading));
-        HttpManager.filterManager(null, this, true, handler, Message.LOGIN_URL, "loginName", "password", username.getText().toString(), password.getText().toString());
+        TestClass.loading(this, getString(R.string.login_hint_text));
+        HttpManager.filterManager(null, this, true, handler, Message.LOGIN_URL.trim(), "loginName", "password", username.getText().toString(), password.getText().toString());
     }
 
     /**
@@ -152,9 +164,14 @@ public class Activity_Login extends BaseActivity{
     HttpRequestHandler<Object[]> handler = new HttpRequestHandler<Object[]>() {
         @Override
         public void onSuccess(Object[] data) {
-            editor.putLong(Constants.SESSIONID, (Long)data[0]);
-            editor.putString(Constants.SESSIONIDTRUE, (String) data[1]);
+            Toast.makeText(Activity_Login.this,"登录成功",Toast.LENGTH_SHORT).show();
+            editor.putLong(Constants.SESSIONID, (Long) data[0]);  // 废弃不用
+            editor.putString(Constants.SESSIONIDTRUE, (String) data[1]);  // 这个是SESSIONID
+            editor.putInt(Constants.LOGINUSERID, ((Integer) data[3]).intValue());
+            editor.putString(Constants.TOKEN, (String) data[2]);  // 这个是SESSIONID
             editor.commit();
+            Constants.TOKEN_URL = (String)data[2];
+            Constants.LOGIN_SESSIONID = (String) data[1];
             TestClass.closeLoading();
             Intent intent = new Intent();
             intent.setClass(Activity_Login.this,MainActivity.class);

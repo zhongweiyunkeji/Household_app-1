@@ -1,6 +1,5 @@
 package com.cdhxqh.household_app.ui.action.impl;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.cdhxqh.household_app.ui.action.OnItemClickCallBack;
 import com.cdhxqh.household_app.ui.actvity.Activity_Registry_User;
 import com.cdhxqh.household_app.ui.actvity.Activity_User_Type;
 import com.cdhxqh.household_app.ui.actvity.AddContacterActivity;
-import com.cdhxqh.household_app.ui.actvity.TypeActivity;
-import com.cdhxqh.household_app.ui.actvity.TypeAddUser;
 import com.cdhxqh.household_app.ui.adapter.UserSelectAdapter;
 
 /**

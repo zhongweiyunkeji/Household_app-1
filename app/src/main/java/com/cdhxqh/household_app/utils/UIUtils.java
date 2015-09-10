@@ -1,6 +1,5 @@
 package com.cdhxqh.household_app.utils;
 
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.widget.TextView;
 

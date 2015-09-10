@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.model.Ec_user;
 import com.cdhxqh.household_app.ui.adapter.DrawerAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -68,6 +69,7 @@ public class NavigationDrawerFragment extends BaseFragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+
 
     public NavigationDrawerFragment() {
     }
@@ -115,12 +117,11 @@ public class NavigationDrawerFragment extends BaseFragment {
         mDrawerListView.setAdapter(new DrawerAdapter(getActivity()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
-        //如果已经登录,设置用户头像和信息
-//        if (mIsLogin) {
-//            Log.i(TAG,"displayname="+mLoginProfile.display_name);
-//            mUserTextView.setText(mLoginProfile.display_name);
+       // 如果已经登录,设置用户头像和信息
+        if (mIsLogin) {
+            mUserTextView.setText(ec_user.getUserName());
 //            ImageLoader.getInstance().displayImage(mLoginProfile.expires_in, mUserImgView);
-//        }
+        }
 
 //        //设置点击事件
 //        mProfileLayout.setOnClickListener(new View.OnClickListener() {

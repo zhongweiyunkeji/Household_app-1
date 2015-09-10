@@ -1,6 +1,5 @@
 package com.cdhxqh.household_app.ui.actvity;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
