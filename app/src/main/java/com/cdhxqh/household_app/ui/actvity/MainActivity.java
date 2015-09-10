@@ -405,8 +405,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         } else if (mSelectPos == 4) { // 帮助中心
             helpItem.setVisible(true);
         } else if (mSelectPos == 5) {// 常用联系人
-            linkItem01.setVisibility(View.VISIBLE);
-            linkItem02.setVisibility(View.VISIBLE);
+            // linkItem01.setVisibility(View.VISIBLE);
+            // linkItem02.setVisibility(View.VISIBLE);
         } else if (mSelectPos == 6) {// 关于我们
 
         } else if (mSelectPos == 7) {// 设置
