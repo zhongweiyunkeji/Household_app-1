@@ -190,16 +190,16 @@ public class AlarmFragment extends BaseFragment {
                                 alarm.setIcon(R.drawable.btn_dxz);  // 待协助
                             } else
                             if("已协助".equals(status)){
-                               // alarm.setIcon(R.drawable.);
+                               alarm.setIcon(R.drawable.ic_helped);
                             } else
                             if("已处理".equals(status)){
                                 alarm.setIcon(R.drawable.btn_ycl);
                             } else
                             if("已关闭".equals(status)){
-                               // alarm.setIcon(R.drawable.);
+                               alarm.setIcon(R.drawable.ic_stoped);
                             } else
                             if("已取消".equals(status)){
-                               // alarm.setIcon(R.drawable.);
+                               alarm.setIcon(R.drawable.ic_canceled);
                             }
 
                             list.add(alarm);
