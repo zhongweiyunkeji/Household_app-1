@@ -14,6 +14,8 @@ public class Constants {
     public static final String LOGINUSERID = "LOGINUSERID";
     public static final String TOKEN = "TOKEN";
 
+    public static String LOGIN_SESSIONID = "";
+
 
     /**设置Token**/
 //    public static final String TOKEN_URL = "at.akpf73cs0opka1vmbbve5iavcb107cwo-2o7upbvuw0-07pjh1e-vtzavaaih";
@@ -39,5 +41,8 @@ public class Constants {
 
     // 根据设备id获取单个设备
     public static final String SINGLE_DEVICE = BASE_URL + "/yscamera/getInfo";
+
+    // 获取联系人信息
+    public static final String CONTACT = BASE_URL + "/user/pagelist";
 
 }
