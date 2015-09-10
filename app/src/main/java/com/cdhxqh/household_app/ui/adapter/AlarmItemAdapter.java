@@ -25,6 +25,7 @@ import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.actvity.Activity_Write_Information;
+import com.cdhxqh.household_app.ui.actvity.DealInformationActivity;
 import com.cdhxqh.household_app.ui.actvity.RealPlayActivity;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
 import com.cdhxqh.household_app.utils.ToastUtil;
@@ -132,14 +133,22 @@ public class AlarmItemAdapter extends BaseAdapter {
                 }, new ImageLoadingProgressListener() {
                     @Override
                     public void onProgressUpdate(String imageUri, View view, int current, int total) {
-
                     }
                 });
 
         holder.title.setText(alarm.getTitle());
         holder.msg.setText(alarm.getMsg());
         holder.date.setText(alarm.getDate());
-        // holder.icon.setImageResource(alarm.getIcon());
+        holder.icon.setBackgroundResource(alarm.getIcon());
+        holder.icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Activity_Write_Information.class);
+                Bundle bundle = new Bundle();
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
 
         final Alarm a = alarm;
         final int p = position;
@@ -253,7 +262,6 @@ public class AlarmItemAdapter extends BaseAdapter {
             public void onClick(View v) {
                 boolean isChecked = box.isChecked();  // 注意：此处取得的状态是变化后的值！
                 alarm.setStatus(isChecked);  // 记住选中状态
-                Log.e("TAG", "-----------p = " + p + "----------->" + isChecked);
             }
         });
 
@@ -325,8 +333,6 @@ public class AlarmItemAdapter extends BaseAdapter {
         TextView msg;
         TextView date;
         ImageView icon;
-       // ImageView item_button;
-
 
         public ItemHolder(View view){
             checkbox = (CheckBox)view.findViewById(R.id.checkbox);
@@ -334,8 +340,7 @@ public class AlarmItemAdapter extends BaseAdapter {
             title = (TextView)view.findViewById(R.id.item_title);
             msg = (TextView)view.findViewById(R.id.item_msg);
             date = (TextView)view.findViewById(R.id.item_date);
-            // icon = (ImageView)view.findViewById(R.id.item_icon);
-           // item_button = (ImageView)view.findViewById(R.id.item_button);
+            icon = (ImageView)view.findViewById(R.id.item_icon);
         }
 
     }

@@ -184,14 +184,24 @@ public class AlarmFragment extends BaseFragment {
                             alarm.setCaid(caid);
                             alarm.setUid(uid);
                             if("新增".equals(status) && (Constants.USER_ID == uid)){
-                                alarm.setIcon(R.drawable.btn_dxz);
+                                alarm.setIcon(R.drawable.btn_dcl);// 待处理
                             } else
                             if("新增".equals(status) && (Constants.USER_ID != uid)){
-                                alarm.setIcon(R.drawable.btn_dcl);
+                                alarm.setIcon(R.drawable.btn_dxz);  // 待协助
+                            } else
+                            if("已协助".equals(status)){
+                               // alarm.setIcon(R.drawable.);
                             } else
                             if("已处理".equals(status)){
                                 alarm.setIcon(R.drawable.btn_ycl);
+                            } else
+                            if("已关闭".equals(status)){
+                               // alarm.setIcon(R.drawable.);
+                            } else
+                            if("已取消".equals(status)){
+                               // alarm.setIcon(R.drawable.);
                             }
+
                             list.add(alarm);
                         }
 
