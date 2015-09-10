@@ -39,21 +39,9 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
-        holder.contacts_name.setText(contacts.get(i).getName() + "\u3000(" + contacts.get(i).getType() + ")");
+        holder.contacts_name.setText(contacts.get(i).getName());
         holder.contacts_phone.setText("手机号:" + contacts.get(i).getPhone());
         final int item = i;
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(mContext, AddContacterActivity.class);
-                intent.putExtra("contactList", (Serializable) contacts.get(item));
-                intent.putExtra("edit", "edit");
-                contacts.remove(contacts.get(item));
-                ((Activity) mContext).startActivityForResult(intent, EDIT_CONTACT);
-
-            }
-        });
     }
 
 
@@ -74,21 +62,16 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
          */
         private TextView contacts_phone;
 
-        /**
-         *edit
-         */
-        private ImageView edit;
-
         public ViewHolder(View view) {
             super(view);
             contacts_name = (TextView) view.findViewById(R.id.contacts_name);
             contacts_phone = (TextView) view.findViewById(R.id.contacts_phone);
-            edit = (ImageView) view.findViewById(R.id.edit);
         }
     }
 
     public void updata(ArrayList<Contacters> contacters) {
          this.contacts = contacters;
+        notifyDataSetChanged();
     }
 
     // 刷新list
