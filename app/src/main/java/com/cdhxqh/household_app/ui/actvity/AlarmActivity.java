@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,12 +17,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Contacters;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.adapter.AlarmAdapter;
 import com.cdhxqh.household_app.ui.widget.ItemDivider;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -52,7 +63,12 @@ public class AlarmActivity extends Activity{
      * 联系人信息
      */
     private static ArrayList<Contacters> contactsMessage = new ArrayList<Contacters>();
-    static ArrayList<Contacters> contacts  = new ArrayList<Contacters>();
+    // 返回的联系人数据
+    static ArrayList<Contacters> contacts = new ArrayList<Contacters>();
+
+    ArrayList<Contacters> retContacts = new ArrayList<Contacters>();
+
+    ArrayList<Contacters> selectContacts = new ArrayList<Contacters>();
 
     /**
      * 返回按钮*
@@ -82,33 +98,23 @@ public class AlarmActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_of_alarm);
         findViewById();
-        getData();
         initView();
+        getData();
     }
 
     protected void findViewById() {
-        /**
-         * list相关id
-         */
+        // list相关id
         alarm_contacts = (RecyclerView) findViewById(R.id.alarm_contacts);
 
-        /**
-         * 全选
-         */
+        // 全选
         checkbox_all = (CheckBox) findViewById(R.id.checkbox_all);
 
-        /**
-         * 确认
-         */
+        // 确认
         edit = (TextView) findViewById(R.id.edit);
-        /**
-         * 添加联系人
-         */
+        // 添加联系人
         addContacts = (ImageView) findViewById(R.id.title_add_id);
 
-        /**
-         * 标题标签相关id
-         */
+        // 标题标签相关id
         back_imageview_id = (ImageView) findViewById(R.id.back_imageview_id);
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         title_add_id = (ImageView) findViewById(R.id.title_add_id);
@@ -119,7 +125,7 @@ public class AlarmActivity extends Activity{
         //设置标签页显示方式
         back_imageview_id.setVisibility(View.VISIBLE);
         title_add_id.setVisibility(View.GONE);
-        titleTextView.setText("忘记密码");
+        titleTextView.setText("联系人");
 
         checkbox_all.setOnCheckedChangeListener(checkOnClickListener);
 
@@ -130,8 +136,6 @@ public class AlarmActivity extends Activity{
 
         edit.setOnClickListener(itemOnClickListener);
 
-//        addContacts.setOnClickListener(addContactOnClickListener);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -139,20 +143,7 @@ public class AlarmActivity extends Activity{
         alarm_contacts.addItemDecoration(new ItemDivider(this, ItemDivider.VERTICAL_LIST));
         alarm_contacts.setLayoutManager(layoutManager);
         alarm_contacts.setItemAnimator(new DefaultItemAnimator());
-
-        if(contacts.size()<=0) {
-            for (int i = 0; i < 15; i++) {
-                Contacters c = new Contacters();
-                c.setName("张思");
-                c.setType("老师");
-                c.setPhone("15467656784");
-                c.setFlag(false);
-                contacts.add(c);
-            }
-        }
-
         alarmAdapter = new AlarmAdapter(this, contacts);
-
         alarm_contacts.setAdapter(alarmAdapter);
     }
 
@@ -201,12 +192,16 @@ public class AlarmActivity extends Activity{
     }
 
     public void getData() {
-        if(contacts == null) {
-            contacts = new ArrayList<Contacters>();
-        }
+        // 发送网络请求
+        RequestParams maps = new RequestParams();
+        maps.put("showCount", 10000);
+        maps.put("currentPage", 1);
+        HttpManager.sendHttpRequest(this, Constants.CONTACT, maps, "get", false, callback);
 
-        if(contacts.size() > 0) {
-            contacts = (ArrayList<Contacters>) getIntent().getSerializableExtra("contactList");
+        Intent intent = getIntent();
+        if(intent!=null){
+            Bundle bundle = intent.getExtras();
+            selectContacts = (ArrayList<Contacters>)bundle.getSerializable("contactList");
         }
     }
     /**
@@ -215,12 +210,18 @@ public class AlarmActivity extends Activity{
     private View.OnClickListener itemOnClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
-            if(contactsMessage.size() <= 0) {
+            if(contacts.size() <= 0) {
 //                new  AlertDialog.Builder(AlarmActivity.this).setTitle("标题").setMessage("请选择联系人").setPositiveButton("确定", null).show();
                 finish();
             }else {
+                retContacts.clear();
+                for(Contacters c : contactsMessage){
+                    if(c.isFlag()){
+                        retContacts.add(c);
+                    }
+                }
                 Intent intent=new Intent();
-                intent.putExtra("contactList", (Serializable) contactsMessage);
+                intent.putExtra("contactList", (Serializable) retContacts);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -273,4 +274,46 @@ public class AlarmActivity extends Activity{
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    HttpCallBackHandle callback = new HttpCallBackHandle() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+            if(responseBody!=null){
+                try {
+                    JSONObject jsonObject = new JSONObject(responseBody);
+                    String srrorcode = jsonObject.getString("errcode");
+                    if("SECURITY-GLOBAL-S-0".equals(srrorcode)){
+                        AlarmActivity.this.contacts.clear();
+                        JSONObject result = jsonObject.getJSONObject("result");
+                        if(result!=null){
+                            JSONArray array = result.getJSONArray("list");
+                            for(int index=0; index<array.length(); index++){
+                                JSONObject obj = array.getJSONObject(index);
+                                Contacters contacters = new Contacters();
+                                int uid =  obj.getInt("id");
+                                String username = obj.getString("username");
+                                String mobile = obj.getString("mobile");
+                                contacters.setUid(uid);
+                                contacters.setName(username);
+                                contacters.setPhone(mobile);
+                                contacts.add(contacters);
+                            }
+                            alarmAdapter.updata(contacts);
+                            alarmAdapter.setSelect(selectContacts);
+                            // alarmAdapter.dataChanged();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+            Log.i("TAG", "TAG");
+            Log.i("TAG", "TAG");
+        }
+    };
+
 }

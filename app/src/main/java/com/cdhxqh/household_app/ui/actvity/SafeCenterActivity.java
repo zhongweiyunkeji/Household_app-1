@@ -37,7 +37,7 @@ public class SafeCenterActivity extends BaseActivity {
     /**
      *已选择联系人
      */
-    ArrayList<Contacters> contactersList;
+    ArrayList<Contacters> contactersList = new ArrayList<Contacters>(0);
 
     // 接收人
     EditText selectUser;
@@ -99,13 +99,14 @@ public class SafeCenterActivity extends BaseActivity {
             }
         });
         titleView.setText("安全服务中心");
+        // selectUser.setHint("可选多人");
         settingImg.setVisibility(View.GONE);
         ctrImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(SafeCenterActivity.this, AlarmActivity.class);
-                intent.putExtra("contactList", (Serializable) contactersList);
+                intent.putExtra("contactList", (Serializable)contactersList);
                 startActivityForResult(intent, PICK_CONTACT);
             }
         });
@@ -150,22 +151,22 @@ public class SafeCenterActivity extends BaseActivity {
     @Override
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
         contactersList = (ArrayList<Contacters>) data.getSerializableExtra("contactList");
-        ArrayList<Contacters> contactersLists = new ArrayList<Contacters>();
-        for(int i = 0; i<contactersList.size(); i++) {
-            if(contactersList.get(i).isFlag() == true) {
-                Contacters context = new Contacters();
-                context = contactersList.get(i);
-                contactersLists.add(context);
-            }
-        }
         super.onActivityResult(reqCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            if(contactersLists.size() > 0) {
-                selectUser.setText("已选择" + contactersLists.size() + "人");
+            if(contactersList.size() > 0) {
+                selectUser.setText("已选择" + contactersList.size() + "人");
             }else {
                 selectUser.setText("可选择多人");
+                selectUser.setHint("");
             }
         }
     }
 
 }
+/*for(int i = 0; i<contactersList.size(); i++) {
+            if(contactersList.get(i).isFlag() == true) {
+                Contacters context = new Contacters();
+                context = contactersList.get(i);
+                contactersLists.add(context);
+            }
+        }*/
