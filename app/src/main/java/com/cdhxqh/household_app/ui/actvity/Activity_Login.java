@@ -171,6 +171,7 @@ public class Activity_Login extends BaseActivity{
             editor.putString(Constants.TOKEN, (String) data[2]);  // 这个是SESSIONID
             editor.commit();
             Constants.TOKEN_URL = (String)data[2];
+            Constants.LOGIN_SESSIONID = (String) data[1];
             TestClass.closeLoading();
             Intent intent = new Intent();
             intent.setClass(Activity_Login.this,MainActivity.class);

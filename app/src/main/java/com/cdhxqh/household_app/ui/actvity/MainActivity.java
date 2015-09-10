@@ -128,6 +128,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             username = bundle.getString("username");
         } else {
             SharedPreferences myshared = this.getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+            Constants.LOGIN_SESSIONID = myshared.getString(Constants.SESSIONIDTRUE, "");
             username = ec_user.getUserName();
         }
         Constants.USER_ID = myshared.getInt(Constants.LOGINUSERID, -10);
