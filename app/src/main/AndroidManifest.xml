@@ -124,6 +124,7 @@
         <activity android:name=".ui.actvity.Activity_Equip_edit" />
         <activity android:name=".zxing.activity.CaptureActivity" />
         <activity android:name=".ui.actvity.SafeCenterActivity" />
+        <activity android:name=".ui.actvity.Activity_Write_Information" />
 
         <!--
         <activity
