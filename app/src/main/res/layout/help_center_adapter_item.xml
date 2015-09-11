@@ -10,7 +10,7 @@
         android:layout_margin="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_setup"
+        android:src="@drawable/ic_menu_setup"
         android:visibility="invisible"
         android:layout_centerVertical="true"
         />

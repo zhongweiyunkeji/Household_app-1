@@ -2,16 +2,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
     <!--         android:background="@drawable/popmenu_item_center_background"            -->
     <ImageView
         android:id="@+id/popmenu_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
+        android:padding="10dp"
         android:singleLine="true"
         />
 
@@ -22,7 +20,9 @@
         android:gravity="left|center"
         android:layout_gravity="left|center"
         android:singleLine="true"
-        android:paddingRight="10dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

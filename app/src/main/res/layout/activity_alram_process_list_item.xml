@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <TableLayout
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0">
+        <TableRow android:layout_marginTop="10.0dip">
+            <TextView
+                android:textSize="18.0sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:text="处理人" />
+            <TextView
+                android:textSize="18.0sp"
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三" />
+        </TableRow>
+        <TableRow android:layout_marginTop="10.0dip">
+            <TextView
+                android:textSize="18.0sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:text="处理时间" />
+            <TextView
+                android:textSize="18.0sp"
+                android:id="@+id/alarmtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015-09-11 12:20:30" />
+        </TableRow>
+        <TableRow android:layout_marginTop="10.0dip">
+            <TextView
+                android:textSize="18.0sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:text="反馈信息" />
+            <TextView
+                android:id="@+id/alarmprocessmsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" android:lines="3" />
+        </TableRow>
+    </TableLayout>
+    <ImageView
+        android:gravity="center|right|top"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/item_icon"
+        android:background="@drawable/btn_dxz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:layout_weight="0.0" />
+</LinearLayout>
