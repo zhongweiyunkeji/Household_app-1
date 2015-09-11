@@ -260,12 +260,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 fragmentTransaction.commit();
                 break;
             }
-            case 3: {// 文件管理
+          /*  case 3: {// 文件管理
                 fragmentTransaction.replace(R.id.container, new FileManagementFragment());
                 fragmentTransaction.commit();
                 break;
-            }
-            case 4: {  // 帮助中心
+            }*/
+            case 3: {  // 帮助中心
                 try {
                     HelpCenterFragement fragement = new HelpCenterFragement();
                     fragmentTransaction.replace(R.id.container,fragement, "HelpCenterFragement" );
@@ -275,12 +275,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
                 }
                 break;
             }
-            case 5: {// 常用联系人
+            case 4: {// 常用联系人
                 fragmentTransaction.replace(R.id.container, commonContactFragment);
                 fragmentTransaction.commit();
                 break;
             }
-            case 6: {// 关于我们
+            case 5: {// 关于我们
                 Bundle bundle = new Bundle();
                 openActivity(ActivityAbout.class, bundle);
                 break;
