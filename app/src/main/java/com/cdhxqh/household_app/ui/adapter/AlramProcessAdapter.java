@@ -1,6 +1,8 @@
 package com.cdhxqh.household_app.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +13,21 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.AlramProcessMsg;
+import com.cdhxqh.household_app.ui.actvity.Activity_Write_Information;
+import com.cdhxqh.household_app.ui.actvity.DealInformationActivity;
 import com.cdhxqh.household_app.utils.ToastUtil;
+import com.cdhxqh.household_app.zxing.decoding.Intents;
 
 import java.util.ArrayList;
 /**
  * Created by hexian on 2015/9/11.
  */
-public class AlranProcessAdapter extends BaseAdapter {
+public class AlramProcessAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<AlramProcessMsg> list = new ArrayList<AlramProcessMsg>(0);
 
-    public AlranProcessAdapter(Context context){
+    public AlramProcessAdapter(Context context){
         this.context = context;
     }
 
@@ -56,7 +61,10 @@ public class AlranProcessAdapter extends BaseAdapter {
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showMessage(context, ""+msg.getAdid());
+                Intent intent = new Intent(context, Activity_Write_Information.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("MPROCESSMSG", msg);
+                context.startActivity(intent);
             }
         });
 
