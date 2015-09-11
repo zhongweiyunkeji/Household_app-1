@@ -78,8 +78,24 @@ public class Activity_Alarm_Process extends BaseActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(adapter!=null){
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        adapter.notifyDataSetChanged();
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1000 && resultCode==1000){
+            Bundle bundle = data.getExtras();
+            if(bundle!=null){
+                AlramProcessMsg msg = (AlramProcessMsg)bundle.getSerializable("result");
+                adapter.notifyDataSetChanged();
+                Log.i("TAG", "TAG");
+            }
+        }
     }
 
     HttpCallBackHandle callback = new HttpCallBackHandle(){
