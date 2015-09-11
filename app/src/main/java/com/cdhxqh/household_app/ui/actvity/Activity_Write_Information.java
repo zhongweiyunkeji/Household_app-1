@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
 import com.cdhxqh.household_app.ui.widget.Photo.PhotoUtil;
+import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
 
 /**
  * Created by Administrator on 2015/9/8.
@@ -69,6 +71,8 @@ public class Activity_Write_Information extends BaseActivity {
     private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
     private static final int PHOTO_REQUEST_CUT = 3;// 结果
 
+    Button submit; // 提交按钮
+
     /**
      * 返回按钮*
      */
@@ -82,10 +86,21 @@ public class Activity_Write_Information extends BaseActivity {
      */
     private ImageView title_add_id;
 
+    SwitchButtonIs wiperSwitch1;  // 是否已协助核查
+    SwitchButtonIs wiperSwitch2;  // 是否存在安全隐患
+    SwitchButtonIs wiperSwitch3; // 是否已处理
+    SwitchButtonIs wiperSwitch4; // 关闭
+
+    boolean switchFlag1 = false;
+    boolean switchFlag2 = false;
+    boolean switchFlag3 = false;
+    boolean switchFlag4 = false;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_information);
         findViewById();
+        getData();
         initView();
     }
 
@@ -98,12 +113,36 @@ public class Activity_Write_Information extends BaseActivity {
         view_photo = (ImageView) findViewById(R.id.view_photo);
         site_photo = (TextView) findViewById(R.id.site_photo);
 
-    /**
-     * 标题标签相关id
-     */
+        wiperSwitch1 = (SwitchButtonIs) findViewById(R.id.wiperSwitch1);
+        wiperSwitch2 = (SwitchButtonIs) findViewById(R.id.wiperSwitch2);
+        wiperSwitch3 = (SwitchButtonIs) findViewById(R.id.wiperSwitch3);
+        wiperSwitch4 = (SwitchButtonIs) findViewById(R.id.wiperSwitch4);
+
+        wiperSwitch1.setOnChangeListener(new SwitchButtonIs.OnChangeListener() {
+            @Override
+            public void onChange(SwitchButtonIs sb, boolean state) {
+                switchFlag1 =  state;
+            }
+        });
+
+        submit = (Button) findViewById(R.id.restart_passworld_id);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        /**
+         * 标题标签相关id
+         */
         back_imageview_id = (ImageView) findViewById(R.id.back_imageview_id);
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         title_add_id = (ImageView) findViewById(R.id.title_add_id);
+    }
+
+    public void getData(){
+
     }
 
     public void initView() {
