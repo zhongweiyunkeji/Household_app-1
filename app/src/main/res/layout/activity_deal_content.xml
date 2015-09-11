@@ -20,14 +20,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/isCheck" />
 
-            <!--<com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
                 android:id="@+id/wiperSwitch1"
                 style="@style/ListPadding"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />-->
+                android:layout_margin="6dp" />
 
         </RelativeLayout>
 
@@ -48,14 +48,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/isSafe" />
 
-            <!--<com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
                 android:id="@+id/wiperSwitch2"
                 style="@style/ListPadding"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />-->
+                android:layout_margin="6dp" />
 
         </RelativeLayout>
 
@@ -76,14 +76,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/isDeal" />
 
-            <!--<com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
                 android:id="@+id/wiperSwitch3"
                 style="@style/ListPadding"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />-->
+                android:layout_margin="6dp" />
         </RelativeLayout>
 
         <View
@@ -103,14 +103,14 @@
                 android:layout_height="wrap_content"
                 android:text="关闭" />
 
-            <!--<com.cdhxqh.household_app.ui.widget.SwitchButtonIs
-                android:id="@+id/wiperSwitch3"
+            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+                android:id="@+id/wiperSwitch4"
                 style="@style/ListPadding"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />-->
+                android:layout_margin="6dp" />
 
         </RelativeLayout>
 
