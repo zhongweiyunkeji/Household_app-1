@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
+import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.Contacters;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.adapter.AlarmAdapter;
@@ -308,6 +309,9 @@ public class AlarmActivity extends Activity{
                                 JSONObject obj = array.getJSONObject(index);
                                 Contacters contacters = new Contacters();
                                 int uid =  obj.getInt("id");
+                                if(uid == Constants.USER_ID){
+                                    continue;
+                                }
                                 String username = obj.getString("username");
                                 String mobile = obj.getString("mobile");
                                 contacters.setUid(uid);
