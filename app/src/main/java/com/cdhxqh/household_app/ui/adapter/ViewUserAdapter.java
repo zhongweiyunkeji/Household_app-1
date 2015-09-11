@@ -45,7 +45,7 @@ public class ViewUserAdapter extends RecyclerView.Adapter<ViewUserAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 contactersList.get(position).setFlag(h.check_id.isChecked());
-                AlarmActivity.update(contactersList);
+                ((AlarmActivity)mContext).update(contactersList);
             }
         });
 //        final int i = position;
