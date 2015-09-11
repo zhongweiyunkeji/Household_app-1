@@ -64,6 +64,7 @@ public class AlramProcessAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, Activity_Write_Information.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("MPROCESSMSG", msg);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
