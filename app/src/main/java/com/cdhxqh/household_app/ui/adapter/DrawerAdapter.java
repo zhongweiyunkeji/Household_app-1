@@ -18,14 +18,14 @@ public class DrawerAdapter extends BaseAdapter {
     private Context mContext;
     private String[] mTitles;
     private final int mIcons[] = new int[]{
-            R.drawable.ic_cameras,
-            R.drawable.ic_alarm,
-            R.drawable.ic_safe,
-            R.drawable.ic_file,
-            R.drawable.ic_help,
-            R.drawable.ic_users,
-            R.drawable.ic_zy,
-            R.drawable.ic_setup
+            R.drawable.ic_menu_cameras,
+            R.drawable.ic_menu_alarm,
+            R.drawable.ic_menu_safe2,
+//            R.drawable.ic_menu_file,
+            R.drawable.ic_menu_help,
+            R.drawable.ic_menu_users,
+            R.drawable.ic_menu_zy,
+            R.drawable.ic_menu_setup
     };
 
     public DrawerAdapter(Context context) {
