@@ -46,6 +46,7 @@
                         android:textCursorDrawable="@drawable/color_cursor"
                         android:editable="false"
                         android:text="短信报警"
+                        android:textColor="@color/gray"
                         />
                 </LinearLayout>
                 <View
@@ -68,6 +69,7 @@
                         android:gravity="left|center_vertical"
                         android:layout_gravity="left|center"
                         android:layout_weight="1"
+                        android:textColor="@color/gray"
                         android:textCursorDrawable="@drawable/color_cursor"
                         android:background="@null"/>
                     <ImageView
@@ -158,6 +160,7 @@
                         android:id="@+id/address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/gray"
                         android:textCursorDrawable="@drawable/color_cursor"
                         android:background="@null" />
                 </LinearLayout>
