@@ -149,6 +149,7 @@ public class AlarmItemAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, Activity_Alarm_Process.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("alarm_id", alarm.getAlramid());
+                bundle.putInt("uid", alarm.getUid());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

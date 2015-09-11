@@ -4,19 +4,33 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.app.HttpManager;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.AlramProcessMsg;
+import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
 import com.cdhxqh.household_app.ui.widget.Photo.PhotoUtil;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
+import com.cdhxqh.household_app.utils.ToastUtil;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/9/8.
@@ -90,14 +104,14 @@ public class Activity_Write_Information extends BaseActivity {
     SwitchButtonIs wiperSwitch1;  // 是否已协助核查
     SwitchButtonIs wiperSwitch2;  // 是否存在安全隐患
     SwitchButtonIs wiperSwitch3; // 是否已处理
-    SwitchButtonIs wiperSwitch4; // 关闭
+    // SwitchButtonIs wiperSwitch4; // 关闭
 
     AlramProcessMsg msg;
 
-    boolean switchFlag1 = false;
-    boolean switchFlag2 = false;
-    boolean switchFlag3 = false;
-    boolean switchFlag4 = false;
+    EditText  processmsg;
+    int alram_uid; // 报警记录的用户id
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,23 +133,10 @@ public class Activity_Write_Information extends BaseActivity {
         wiperSwitch1 = (SwitchButtonIs) findViewById(R.id.wiperSwitch1);
         wiperSwitch2 = (SwitchButtonIs) findViewById(R.id.wiperSwitch2);
         wiperSwitch3 = (SwitchButtonIs) findViewById(R.id.wiperSwitch3);
-        wiperSwitch4 = (SwitchButtonIs) findViewById(R.id.wiperSwitch4);
+        // wiperSwitch4 = (SwitchButtonIs) findViewById(R.id.wiperSwitch4);
 
-        wiperSwitch1.setOnChangeListener(new SwitchButtonIs.OnChangeListener() {
-            @Override
-            public void onChange(SwitchButtonIs sb, boolean state) {
-                switchFlag1 =  state;
-            }
-        });
-
+        processmsg = (EditText)findViewById(R.id.processmsg);
         submit = (Button) findViewById(R.id.restart_passworld_id);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         /**
          * 标题标签相关id
          */
@@ -149,6 +150,7 @@ public class Activity_Write_Information extends BaseActivity {
         Bundle bundle = intent.getExtras();
         if(bundle!=null){
             msg =  (AlramProcessMsg)bundle.getSerializable("MPROCESSMSG");
+            alram_uid = bundle.getInt("alram_uid");
         }
     }
 
@@ -192,8 +194,101 @@ public class Activity_Write_Information extends BaseActivity {
             wiperSwitch2.setState(msg.getHelpcheck() ==1 ? true : false);
             // 是否已处理
             wiperSwitch3.setState(msg.getIsprocess() ==1 ? true : false);
-
+            // 处理信息
+            processmsg.setText(msg.getProcessResult());
         }
+
+        wiperSwitch1.setOnChangeListener(new SwitchButtonIs.OnChangeListener() {
+            @Override
+            public void onChange(SwitchButtonIs sb, boolean state) {
+                if(alram_uid == msg.getUid() || Constants.USER_ID == msg.getUid()){  // 户主可以修改所有的报警记录, 同时其他协助人员只能修改自己的记录
+
+                } else { // 提示用户不能修改记录
+                    ToastUtil.showMessage(Activity_Write_Information.this, "您当前不能修改该记录");
+                }
+            }
+        });
+
+        wiperSwitch2.setOnChangeListener(new SwitchButtonIs.OnChangeListener() {
+            @Override
+            public void onChange(SwitchButtonIs sb, boolean state) {
+                if(alram_uid == msg.getUid() || Constants.USER_ID == msg.getUid()){  // 户主可以修改所有的报警记录, 同时其他协助人员只能修改自己的记录
+
+                } else { // 提示用户不能修改记录
+                    ToastUtil.showMessage(Activity_Write_Information.this, "您当前不能修改该记录");
+                }
+            }
+        });
+
+        wiperSwitch3.setOnChangeListener(new SwitchButtonIs.OnChangeListener() {
+            @Override
+            public void onChange(SwitchButtonIs sb, boolean state) {
+                if (alram_uid == msg.getUid() || Constants.USER_ID == msg.getUid()) {  // 户主可以修改所有的报警记录, 同时其他协助人员只能修改自己的记录
+
+                } else { // 提示用户不能修改记录
+                    ToastUtil.showMessage(Activity_Write_Information.this, "您当前不能修改该记录");
+                }
+            }
+        });
+
+        if(alram_uid == msg.getUid() || Constants.USER_ID == msg.getUid()){  // 户主可以修改所有的报警记录, 同时其他协助人员只能修改自己的记录
+
+        } else { // 提示用户不能修改记录
+            processmsg.setEnabled(false);
+        }
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(alram_uid == msg.getUid() || Constants.USER_ID == msg.getUid()){  // 户主可以修改所有的报警记录, 同时其他协助人员只能修改自己的记录
+                    String processResult = processmsg.getText().toString();
+                    if(processResult==null){
+                        processResult = "";
+                    }
+                    final String procResult = processResult;
+                    RequestParams maps = new RequestParams();
+                    maps.put("alarm_id", msg.getAlramid());
+                    maps.put("helpcheck", wiperSwitch1.getState() ? 1 : 0);
+                    maps.put("hasdanger", wiperSwitch2.getState() ? 1 : 0);
+                    maps.put("isprocess", wiperSwitch3.getState() ? 1 : 0);
+                    maps.put("processResult", processResult);
+                    HttpManager.sendHttpRequest(Activity_Write_Information.this, Constants.GET_ALARM_PROCESS, maps, "post", false, new HttpCallBackHandle() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String responseBody) {
+                            // {"errcode":"SECURITY-GLOBAL-S-0","errmsg":"请求成功","result":null}
+                            if(responseBody!=null){
+                                try {
+                                    JSONObject object = new JSONObject(responseBody);
+                                    String errcode = object.getString("errcode");
+                                    if("SECURITY-GLOBAL-S-0".equals(errcode)){
+                                        msg.setHasdanger(wiperSwitch1.getState() ? 1 : 0);
+                                        msg.setHasdanger(wiperSwitch2.getState() ? 1 : 0);
+                                        msg.setIsprocess(wiperSwitch3.getState() ? 1 : 0);
+                                        msg.setProcessResult(procResult);
+                                        msg.setProcesstimeStr(sdf.format(new Date()));
+                                        ToastUtil.showMessage(Activity_Write_Information.this, "更新成功");
+                                    } else {
+                                        ToastUtil.showMessage(Activity_Write_Information.this, "更新失败");
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
+                            Log.i("TAG", "TAG");
+                            Log.i("TAG", "TAG");
+                        }
+                    });
+                } else { // 提示用户不能修改记录
+                    ToastUtil.showMessage(Activity_Write_Information.this, "您当前不能修改该记录");
+                }
+            }
+        });
+
     }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
@@ -214,6 +309,11 @@ public class Activity_Write_Information extends BaseActivity {
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Intent intent = new Intent(Activity_Write_Information.this, Activity_Alarm_Process.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("result", msg);
+            //设置返回数据
+            Activity_Write_Information.this.setResult(1000, intent);
             finish();
         }
     };

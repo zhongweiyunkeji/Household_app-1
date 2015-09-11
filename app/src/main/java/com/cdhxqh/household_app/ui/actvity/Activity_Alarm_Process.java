@@ -36,6 +36,7 @@ public class Activity_Alarm_Process extends BaseActivity {
     TextView titleText; // 标题
     ImageView settingImg;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    int uid = -10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +72,15 @@ public class Activity_Alarm_Process extends BaseActivity {
         if(bundle!=null){
             RequestParams maps = new RequestParams();
             maps.put("alarm_id", bundle.getInt("alarm_id"));
+            uid = bundle.getInt("uid");
             HttpManager.sendHttpRequest(this, Constants.GET_ALARM_PROCESS_LIST, maps, "get", false, callback);
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        adapter.notifyDataSetChanged();
+    }
 
     HttpCallBackHandle callback = new HttpCallBackHandle(){
 
@@ -114,6 +120,7 @@ public class Activity_Alarm_Process extends BaseActivity {
                                 String starttime = sdf.format(time);
                                 AlramProcessMsg msg = new AlramProcessMsg(adid, alarmid, status, status, caid, description, hasdanger, helpcheck, isprocess, processResult, uid, username, starttime, processtimeStr);
                                 list.add(msg);
+                                adapter.setUid(uid);
                                 adapter.update(list);
                             }
                         }

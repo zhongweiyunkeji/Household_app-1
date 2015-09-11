@@ -185,4 +185,8 @@ public class SwitchButtonIs extends View implements View.OnClickListener{
         invalidate();
         mDeltX = 0;
     }
+
+    public boolean getState(){
+        return this.mFlag;
+    }
 }

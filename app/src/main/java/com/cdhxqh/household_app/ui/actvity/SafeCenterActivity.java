@@ -146,6 +146,18 @@ public class SafeCenterActivity extends BaseActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(assistModule.isSelected()){
+                    String addrText = address.getText().toString();
+                    if(addrText == null){
+                        addrText = "";
+                    }
+                    if("".equals(addrText.trim())){
+                        ToastUtil.showMessage(SafeCenterActivity.this, "请填写协助地址");
+                        return;
+                    }
+                }
+
                 RequestParams maps = new RequestParams();
                 maps.put("ca_id", model.getCaid());
                 maps.put("uids", users);

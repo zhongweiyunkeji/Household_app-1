@@ -1,5 +1,6 @@
 package com.cdhxqh.household_app.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.AlramProcessMsg;
 import com.cdhxqh.household_app.ui.actvity.Activity_Write_Information;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 public class AlramProcessAdapter extends BaseAdapter {
 
     Context context;
+    private int alram_uid;  // 记录报警信息的uid
     ArrayList<AlramProcessMsg> list = new ArrayList<AlramProcessMsg>(0);
 
     public AlramProcessAdapter(Context context){
@@ -58,14 +61,39 @@ public class AlramProcessAdapter extends BaseAdapter {
         holder.alarmprocessmsg.setText(msg.getProcessResult());
 
 
+        String status = msg.getAlrmstatus();
+        int uid = msg.getUid();
+        int icon = -1;
+        if("新增".equals(status) && (Constants.USER_ID == uid)){
+            icon = R.drawable.btn_dcl;// 待处理
+        } else
+        if("新增".equals(status) && (Constants.USER_ID != uid)){
+            icon = R.drawable.btn_dxz;  // 待协助
+        } else
+        if("已协助".equals(status)){
+            icon = R.drawable.ic_helped;
+        } else
+        if("已处理".equals(status)){
+            icon = R.drawable.btn_ycl;
+        } else
+        if("已关闭".equals(status)){
+            icon = R.drawable.ic_stoped;
+        } else
+        if("已取消".equals(status)){
+            icon = R.drawable.ic_canceled;
+        }
+        if(icon!=-1){
+            holder.item.setBackgroundResource(icon);
+        }
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Activity_Write_Information.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("MPROCESSMSG", msg);
+                bundle.putInt("alram_uid", alram_uid);
                 intent.putExtras(bundle);
-                context.startActivity(intent);
+                ((Activity)context).startActivityForResult(intent, 1000);
             }
         });
 
@@ -110,4 +138,11 @@ public class AlramProcessAdapter extends BaseAdapter {
 
     }
 
+    public int getUid() {
+        return alram_uid;
+    }
+
+    public void setUid(int uid) {
+        this.alram_uid = uid;
+    }
 }
