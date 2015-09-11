@@ -87,7 +87,7 @@ public class HelpCenterExpandableListViewAdapter extends BaseExpandableListAdapt
         }
 
         holder.textView.setText(group.get(groupPosition));
-        holder.imgView.setImageResource(R.drawable.ic_menu_camerasb);
+        holder.imgView.setImageResource(R.drawable.ic_cameras_blue);
         convertView.setClickable(true);  // 设置点击事件无效
         // ImageLoader.getInstance().displayImage("http://www.baidu.com/abc.png", holder.imgView);
 
@@ -105,7 +105,7 @@ public class HelpCenterExpandableListViewAdapter extends BaseExpandableListAdapt
             holder = (ViewHolderChild)convertView.getTag();
         }
 
-        holder.imgView.setImageResource(R.drawable.ic_menu_camerasb);
+        holder.imgView.setImageResource(R.drawable.ic_cameras_blue);
         holder.textView.setText(child.get(group.get(groupPosition)).get(childPosition));
 
         final View view = convertView;

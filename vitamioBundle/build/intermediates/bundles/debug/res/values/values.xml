@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/Android/app_project/Household_app-1/vitamioBundle/src/main/res/values/strings.xml -->
+    <!-- From: file:/E:/jiajuaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Household_app-1/vitamioBundle/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="mediacontroller_play_pause">Play/Pause</string>
     <string name="vitamio_init_decoders">Initializing decoders…</string>
@@ -10,7 +10,7 @@
 		this device.</string>
     <string name="vitamio_videoview_error_text_unknown">Sorry, this video cannot be played.</string>
     <string name="vitamio_videoview_error_title">Cannot play video</string>
-    <!-- From: file:/D:/Android/app_project/Household_app-1/vitamioBundle/src/main/res/values/styles.xml -->
+    <!-- From: file:/E:/jiajuaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Household_app-1/vitamioBundle/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="MediaController_SeekBar">
         <item name="android:minHeight">16dip</item>
