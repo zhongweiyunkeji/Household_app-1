@@ -147,7 +147,7 @@
             android:text=" 意见反馈"
             android:textSize="20sp"
             android:textColor="@color/list_title_color"
-            android:drawableLeft="@drawable/ic_menu_mail"
+            android:drawableLeft="@drawable/ic_menu_opinion"
             android:background="@color/font_color"
             android:gravity="left|center"
             android:padding="10dp"
