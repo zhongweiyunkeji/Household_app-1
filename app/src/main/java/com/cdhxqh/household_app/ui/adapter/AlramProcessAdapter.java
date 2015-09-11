@@ -54,7 +54,7 @@ public class AlramProcessAdapter extends BaseAdapter {
         }
 
         holder.username.setText(msg.getUsername());
-        holder.alarmtime.setText(msg.getStarttime());
+        holder.alarmtime.setText(msg.getProcesstimeStr());
         holder.alarmprocessmsg.setText(msg.getProcessResult());
 
 

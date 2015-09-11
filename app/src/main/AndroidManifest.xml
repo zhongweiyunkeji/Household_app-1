@@ -125,6 +125,7 @@
         <activity android:name=".zxing.activity.CaptureActivity" />
         <activity android:name=".ui.actvity.SafeCenterActivity" />
         <activity android:name=".ui.actvity.Activity_Write_Information" />
+        <activity android:name=".ui.actvity.Activity_Alarm_Process" />
 
         <!--
         <activity

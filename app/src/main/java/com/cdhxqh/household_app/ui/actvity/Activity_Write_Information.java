@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.model.AlramProcessMsg;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
 import com.cdhxqh.household_app.ui.widget.Photo.PhotoUtil;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
@@ -91,6 +92,8 @@ public class Activity_Write_Information extends BaseActivity {
     SwitchButtonIs wiperSwitch3; // 是否已处理
     SwitchButtonIs wiperSwitch4; // 关闭
 
+    AlramProcessMsg msg;
+
     boolean switchFlag1 = false;
     boolean switchFlag2 = false;
     boolean switchFlag3 = false;
@@ -142,7 +145,11 @@ public class Activity_Write_Information extends BaseActivity {
     }
 
     public void getData(){
-
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle!=null){
+            msg =  (AlramProcessMsg)bundle.getSerializable("MPROCESSMSG");
+        }
     }
 
     public void initView() {
@@ -177,6 +184,16 @@ public class Activity_Write_Information extends BaseActivity {
         back_imageview_id.setVisibility(View.VISIBLE);
         title_add_id.setVisibility(View.GONE);
         titleTextView.setText("填写反馈信息");
+
+        if(msg!=null){
+            // 是否已协助核查
+            wiperSwitch1.setState(msg.getHelpcheck()==1 ? true : false);
+            // 是否存在安全隐患
+            wiperSwitch2.setState(msg.getHelpcheck() ==1 ? true : false);
+            // 是否已处理
+            wiperSwitch3.setState(msg.getIsprocess() ==1 ? true : false);
+
+        }
     }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {

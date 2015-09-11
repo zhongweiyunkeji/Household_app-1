@@ -23,8 +23,6 @@
             android:text="@string/install_flow_title"
             android:textSize="16sp" />
 
-
-
         <TextView
             android:id="@+id/install_flow_describute"
             android:layout_width="wrap_content"
@@ -43,11 +41,6 @@
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/list_line_x"/>
 
     <RelativeLayout
         android:id="@+id/catchs"
