@@ -41,7 +41,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
         for(int i = 0; i<contacts.size(); i++) {
             contacts.get(i).setFlag(true);
         }
-        AlarmActivity.update(contacts);
+        ((AlarmActivity)mContext).update(contacts);
         dataChanged();
     }
 
@@ -49,17 +49,22 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
         for(int i = 0; i<contacts.size(); i++) {
             contacts.get(i).setFlag(false);
         }
-        AlarmActivity.update(contacts);
+        ((AlarmActivity)mContext).update(contacts);
         dataChanged();
     }
 
     public void setSelect(int[] ids){
+        int count = 0;
         for(Contacters c : contacts){
             for(int i=0; i<ids.length; i++){
                 if(c.getUid() == ids[i]){
                     c.setFlag(true);
+                    count = count +1;
                 }
             }
+        }
+        if(count == contacts.size()){
+            ((AlarmActivity)mContext).checkbox_all.setChecked(true);
         }
     }
 
@@ -80,7 +85,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 contacts.get(item).setFlag(h.checkbox_single.isChecked());
-                AlarmActivity.update(contacts);
+                ((AlarmActivity) mContext).update(contacts);
             }
         });
     }
