@@ -48,7 +48,7 @@ public class AlarmActivity extends Activity{
     /**
      * 全选
      */
-    private CheckBox checkbox_all;
+    public CheckBox checkbox_all;
 
     /**
      * 适配器
@@ -96,6 +96,8 @@ public class AlarmActivity extends Activity{
     private int[] usersid = new int[0];
 
     private static final int EDIT_CONTACT = 3;
+
+    private static final ThreadLocal<Integer> local  = new ThreadLocal<Integer>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,16 +184,62 @@ public class AlarmActivity extends Activity{
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if(isChecked) {
-                alarmAdapter.setIsSelected();
-            }else {
-                alarmAdapter.inverseSelected();
+            Integer flag = local.get();
+            if(flag == null){
+                if(isChecked) {
+                    alarmAdapter.setIsSelected();
+                }else {
+                    alarmAdapter.inverseSelected();
+                }
+            } else {
+                int val = flag.intValue();
+                if(val>0){
+                    if(isChecked) {
+                        alarmAdapter.setIsSelected();
+                    }else {
+                        alarmAdapter.inverseSelected();
+                    }
+                } else
+                if(val<0){
+                    if(isChecked){
+                        alarmAdapter.setIsSelected();
+                    }
+                }
             }
+            local.remove();
         }
     };
 
-    public static void update(ArrayList<Contacters> contactersList_a) {
+    public void update(ArrayList<Contacters> contactersList_a) {
         contactsMessage = contactersList_a;
+        if(contactsMessage!=null){
+            int flag = 1;
+            boolean[] array = new boolean[contactsMessage.size()];
+            if(!contactersList_a.isEmpty()){
+                boolean b1 = false, b2=false;
+                for(int i=0; i<contactsMessage.size(); i++){
+                    Contacters c = contactsMessage.get(i);
+                    if(i==0){
+                        b1 = c.isFlag();
+                    }
+                    b2 = c.isFlag();
+                    if(b1!=b2){
+                        flag = 0;
+                        break;
+                    }
+                }
+                if(flag!=0){
+                    flag = 1;
+                    local.set(new Integer(flag));
+                    checkbox_all.setChecked(b1);
+                } else {
+                    flag = -1;
+                    local.set(new Integer(flag));
+                    checkbox_all.setChecked(false);
+                }
+
+            }
+        }
     }
 
     public void getData() {
