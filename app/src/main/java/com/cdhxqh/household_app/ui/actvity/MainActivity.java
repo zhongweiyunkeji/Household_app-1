@@ -400,16 +400,16 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             // alarmIte.setVisible(true);
         } else if (mSelectPos == 2) { // 安全服务中心
 
-        } else if (mSelectPos == 3) { // 文件管理
+        } /*else if (mSelectPos == 3) { // 文件管理
             servicesItem.setVisible(true);
-        } else if (mSelectPos == 4) { // 帮助中心
+        }*/ else if (mSelectPos == 3) { // 帮助中心
             helpItem.setVisible(true);
-        } else if (mSelectPos == 5) {// 常用联系人
+        } else if (mSelectPos == 4) {// 常用联系人
             // linkItem01.setVisibility(View.VISIBLE);
             // linkItem02.setVisibility(View.VISIBLE);
-        } else if (mSelectPos == 6) {// 关于我们
+        } else if (mSelectPos == 5) {// 关于我们
 
-        } else if (mSelectPos == 7) {// 设置
+        } else if (mSelectPos == 6) {// 设置
 
         }
         //}
