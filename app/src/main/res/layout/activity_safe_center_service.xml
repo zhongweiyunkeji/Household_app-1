@@ -60,7 +60,7 @@
                     <TextView
                         style="@style/ListPadding.ListLevel2"
                         android:layout_gravity="center"
-                        android:text="接收人" />
+                        android:text="接收人    " />
                     <EditText
                         android:id="@+id/selectuser"
                         android:layout_width="match_parent"
