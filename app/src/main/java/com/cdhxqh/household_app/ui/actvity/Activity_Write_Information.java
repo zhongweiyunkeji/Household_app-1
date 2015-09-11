@@ -309,9 +309,11 @@ public class Activity_Write_Information extends BaseActivity {
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Activity_Write_Information.this, Activity_Alarm_Process.class);
+            Intent intent = new Intent();
             Bundle bundle = new Bundle();
             bundle.putSerializable("result", msg);
+            intent.putExtras(bundle);
+            intent.setClass(Activity_Write_Information.this, Activity_Alarm_Process.class);
             //设置返回数据
             Activity_Write_Information.this.setResult(1000, intent);
             finish();
