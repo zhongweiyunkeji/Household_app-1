@@ -20,6 +20,7 @@ public class Alarm implements Serializable {
     private String checkSum;
     private int caid;  // 自己平台设备id
     private int uid;   // 自己平台用户id
+    private int alramid; // 自己平台报警记录id
 
     public boolean isBack() {
         return back;
@@ -134,5 +135,13 @@ public class Alarm implements Serializable {
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public int getAlramid() {
+        return alramid;
+    }
+
+    public void setAlramid(int alramid) {
+        this.alramid = alramid;
     }
 }
