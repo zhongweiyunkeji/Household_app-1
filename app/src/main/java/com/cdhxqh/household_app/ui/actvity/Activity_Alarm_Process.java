@@ -103,11 +103,16 @@ public class Activity_Alarm_Process extends BaseActivity {
                                 if(processResult == null || "null".equals(processResult)){
                                     processResult = "";
                                 }
+                                int processtime = obj.getInt("processtime"); // 报警信息主键
+                                String processtimeStr = "";
+                                if(processtime != 0){
+                                    processtimeStr = sdf.format(new Date(processtime*1000));
+                                }
                                 int uid = obj.getInt("uid");// 报警记录所属用户id
                                 String username = obj.getString("username");  // 处理人
                                 Date time = new Date(alramtime);
                                 String starttime = sdf.format(time);
-                                AlramProcessMsg msg = new AlramProcessMsg(adid, alarmid, status, status, caid, description, hasdanger, helpcheck, isprocess, processResult, uid, username, starttime);
+                                AlramProcessMsg msg = new AlramProcessMsg(adid, alarmid, status, status, caid, description, hasdanger, helpcheck, isprocess, processResult, uid, username, starttime, processtimeStr);
                                 list.add(msg);
                                 adapter.update(list);
                             }
