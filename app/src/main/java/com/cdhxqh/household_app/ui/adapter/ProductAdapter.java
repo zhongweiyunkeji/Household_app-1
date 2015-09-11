@@ -54,7 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         viewHolder.position_id.setText(model.getPosition_id());
         viewHolder.product_id.setText(model.getProduct_id());
         // 设置监控
-        viewHolder.safe_manage.setOnClickListener(new View.OnClickListener() {
+        viewHolder.safe_line.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 发送网络请求
@@ -141,8 +141,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         //进入箭头
         private ImageView safe_manage;
 
+        private LinearLayout safe_line;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            safe_line = (LinearLayout) itemView.findViewById(R.id.ssfe_line);
             icon_id = (ImageView) itemView.findViewById(R.id.icon_id);
             product_id = (TextView) itemView.findViewById(R.id.product_id);
             position_id = (TextView) itemView.findViewById(R.id.position_id);
