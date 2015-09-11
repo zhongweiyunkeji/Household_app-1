@@ -2,7 +2,6 @@ package com.cdhxqh.household_app.ui.actvity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +13,7 @@ import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.AlramProcessMsg;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
-import com.cdhxqh.household_app.ui.adapter.AlranProcessAdapter;
+import com.cdhxqh.household_app.ui.adapter.AlramProcessAdapter;
 import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
@@ -32,7 +31,7 @@ import java.util.Date;
 public class Activity_Alarm_Process extends BaseActivity {
 
     ListView listView;
-    AlranProcessAdapter adapter = new AlranProcessAdapter(this);
+    AlramProcessAdapter adapter = new AlramProcessAdapter(this);
     ImageView backImg; // 退回按钮
     TextView titleText; // 标题
     ImageView settingImg;
