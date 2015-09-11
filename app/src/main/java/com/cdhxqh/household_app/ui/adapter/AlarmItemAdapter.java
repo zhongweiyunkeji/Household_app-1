@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
@@ -24,8 +23,6 @@ import com.cdhxqh.household_app.model.Alarm;
 import com.cdhxqh.household_app.model.MyDevice;
 import com.cdhxqh.household_app.ui.action.AlarmOnClickCallBack;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
-import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_List;
-import com.cdhxqh.household_app.ui.actvity.Activity_Alarm_Process;
 import com.cdhxqh.household_app.ui.actvity.Activity_Video_Control;
 import com.cdhxqh.household_app.ui.actvity.Activity_Write_Information;
 import com.cdhxqh.household_app.ui.actvity.DealInformationActivity;
@@ -142,18 +139,7 @@ public class AlarmItemAdapter extends BaseAdapter {
         holder.title.setText(alarm.getTitle());
         holder.msg.setText(alarm.getMsg());
         holder.date.setText(alarm.getDate());
-        holder.process_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 查询网络后转到界面
-                Intent intent = new Intent(context, Activity_Alarm_Process.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("alarm_id", alarm.getAlramid());
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
-        });
-        /*holder.icon.setBackgroundResource(alarm.getIcon());
+        holder.icon.setBackgroundResource(alarm.getIcon());
         holder.icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,7 +148,7 @@ public class AlarmItemAdapter extends BaseAdapter {
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
-        });*/
+        });
 
         final Alarm a = alarm;
         final int p = position;
@@ -346,9 +332,7 @@ public class AlarmItemAdapter extends BaseAdapter {
         TextView title;
         TextView msg;
         TextView date;
-        // ImageView icon;
-        LinearLayout process_list;
-
+        ImageView icon;
 
         public ItemHolder(View view){
             checkbox = (CheckBox)view.findViewById(R.id.checkbox);
@@ -356,8 +340,7 @@ public class AlarmItemAdapter extends BaseAdapter {
             title = (TextView)view.findViewById(R.id.item_title);
             msg = (TextView)view.findViewById(R.id.item_msg);
             date = (TextView)view.findViewById(R.id.item_date);
-            // icon = (ImageView)view.findViewById(R.id.item_icon);
-            process_list = (LinearLayout)view.findViewById(R.id.process_list);
+            icon = (ImageView)view.findViewById(R.id.item_icon);
         }
 
     }

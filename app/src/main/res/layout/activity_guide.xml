@@ -4,9 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@color/bgcolor">
+    android:background="@color/bgcolor"
+    >
 
-    <include layout="@layout/activity_tittle"  />
+    <include layout="@layout/activity_tittle"  />.
 
     <WebView
         android:id="@+id/webview"

@@ -51,16 +51,11 @@ public class Constants {
     // 获取单个安全服务中心设置信息
     public static final String GET_SAFE_SETTING = BASE_URL + "/ysalarm/getconfig";
 
-    // 获取报警处理列表信息
-    public static final String GET_ALARM_PROCESS_LIST = BASE_URL + "/ysalarm/getDetailLines";
-
-    // 获取单个报警处理信息
+    // 获取报警处理信息
     public static final String GET_ALARM_PROCESS = BASE_URL + "/ysalarm/process";
 
     // 更新报警处理信息
-    public static final String UPDATE_ALARM_PROCESS = BASE_URL + "/ysalarm/cancelorclose";
-
-
+    public static final String UPDATE_ALARM_PROCESS = BASE_URL + "/ysalarm/process";
 
 
 }
