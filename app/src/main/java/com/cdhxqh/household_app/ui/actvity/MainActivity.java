@@ -365,7 +365,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
         actionBar.setDisplayShowCustomEnabled(true);
         // actionBar.setTitle(mTitle);
         if (atnrTitle != null) {
-            atnrTitle.setText(mTitle);
+            if(mSelectPos!=5){// mSelectPos==5 表示点击的是关于我们这个选项,这个地方可能会发生变化
+                atnrTitle.setText(mTitle);
+            }
         }
     }
 
