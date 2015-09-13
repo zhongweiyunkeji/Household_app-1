@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
  * Created by hexian on 2015/9/11.
  */
 public class AlramProcessAdapter extends BaseAdapter {
+
+    public static final ThreadLocal<AlramProcessMsg> sedMsgLocal = new ThreadLocal<AlramProcessMsg>();
 
     Context context;
     private int alram_uid;  // 记录报警信息的uid
@@ -85,19 +88,32 @@ public class AlramProcessAdapter extends BaseAdapter {
         if(icon!=-1){
             holder.item.setBackgroundResource(icon);
         }
-        holder.item.setOnClickListener(new View.OnClickListener() {
+
+        holder.item.setOnClickListener(new View.OnClickListener() {  // 从图标转过去
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Activity_Write_Information.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("MPROCESSMSG", msg);
-                bundle.putInt("alram_uid", alram_uid);
-                intent.putExtras(bundle);
-                ((Activity)context).startActivityForResult(intent, 1000);
+                startActivity(msg);
+            }
+        });
+        holder.alram_item.setOnClickListener(new View.OnClickListener() {  // 从线性布局转过去
+            @Override
+            public void onClick(View v) {
+                startActivity(msg);
             }
         });
 
         return convertView;
+    }
+
+    public void startActivity(AlramProcessMsg msg){
+        Intent intent = new Intent(context, Activity_Write_Information.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MPROCESSMSG", msg);
+        AlramProcessAdapter.sedMsgLocal.remove();  // 每次设置值前先移除上一次设置的值
+        sedMsgLocal.set(msg);
+        bundle.putInt("alram_uid", alram_uid);
+        intent.putExtras(bundle);
+        ((Activity)context).startActivityForResult(intent, 1000);
     }
 
     @Override
@@ -128,8 +144,10 @@ public class AlramProcessAdapter extends BaseAdapter {
         TextView alarmtime;
         TextView alarmprocessmsg;
         ImageView item;
+        LinearLayout alram_item;
 
         public ItemHolder(View view){
+            alram_item = (LinearLayout)view.findViewById(R.id.alram_item);
             username = (TextView)view.findViewById(R.id.username);
             alarmtime = (TextView)view.findViewById(R.id.alarmtime);
             alarmprocessmsg = (TextView)view.findViewById(R.id.alarmprocessmsg);
