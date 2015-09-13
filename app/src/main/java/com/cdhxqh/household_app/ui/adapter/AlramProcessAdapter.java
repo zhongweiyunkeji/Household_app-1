@@ -26,6 +26,8 @@ import java.util.ArrayList;
  */
 public class AlramProcessAdapter extends BaseAdapter {
 
+    public static final ThreadLocal<AlramProcessMsg> sedMsgLocal = new ThreadLocal<AlramProcessMsg>();
+
     Context context;
     private int alram_uid;  // 记录报警信息的uid
     ArrayList<AlramProcessMsg> list = new ArrayList<AlramProcessMsg>(0);
@@ -91,6 +93,8 @@ public class AlramProcessAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, Activity_Write_Information.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("MPROCESSMSG", msg);
+                AlramProcessAdapter.sedMsgLocal.remove();  // 每次设置值前先移除上一次设置的值
+                sedMsgLocal.set(msg);
                 bundle.putInt("alram_uid", alram_uid);
                 intent.putExtras(bundle);
                 ((Activity)context).startActivityForResult(intent, 1000);
