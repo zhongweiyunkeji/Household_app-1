@@ -122,12 +122,11 @@ public class HelpCenterFragement extends BaseFragment {
         });
         listView.setAdapter(adapter);
 
-        for (int i = 0; i < 2; i++) {
-            group.add("AAAA" + i);
+        for (int i = 0; i < 1; i++) {
+            group.add("海康摄像头");
             ArrayList<String> temp = new ArrayList<String>(0);
-            for (int k = 0; k < 2; k++) {
-                temp.add("AAAAAAAA" + i + k);
-            }
+            temp.add("CS-C6-21WFR");
+            temp.add("CS-C2C-31WFR");
             child.put(group.get(i), temp);
         }
 
@@ -140,14 +139,14 @@ public class HelpCenterFragement extends BaseFragment {
                 if(msg.what == 1000){
                     ArrayList<String> group = new ArrayList<String>(0);
                     Map<String, List<String>> child = new HashMap<String, List<String>>(0);
-                    for (int i = 2; i < 8; i++) {
-                        group.add("BBB" + i);
-                        ArrayList<String> temp = new ArrayList<String>(0);
-                        for (int k = 0; k < 2; k++) {
-                            temp.add("BBBBBBBB" + i + k);
-                        }
-                        child.put("BBB" + i, temp);
-                    }
+//                    for (int i = 2; i < 8; i++) {
+//                        group.add("BBB" + i);
+//                        ArrayList<String> temp = new ArrayList<String>(0);
+//                        for (int k = 0; k < 2; k++) {
+//                            temp.add("BBBBBBBB" + i + k);
+//                        }
+//                        child.put("BBB" + i, temp);
+//                    }
                     updateExpandList(group, child);
                     timer.cancel(); // 停止调度
                 }

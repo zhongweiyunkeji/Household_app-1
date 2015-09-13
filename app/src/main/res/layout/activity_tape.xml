@@ -47,7 +47,7 @@
         android:lineSpacingExtra="5dp"
         android:textColor="@color/text_color"
         android:textSize="16sp"
-        android:text="升级为智能家居会员，摄像头即可将指定时间段的录像保存到云端，方便您随时查看及下载。"/>
+        android:text="升级为智能安全会员，摄像头即可将指定时间段的录像保存到云端，方便您随时查看及下载。"/>
 
     <LinearLayout
         android:id="@+id/set_up_tape"

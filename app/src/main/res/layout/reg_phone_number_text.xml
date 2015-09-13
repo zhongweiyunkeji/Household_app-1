@@ -30,7 +30,7 @@
         android:paddingTop="15dp"
         android:textSize="14sp"
         android:gravity="left|center"
-        android:text="已同意《智慧家居云服务条款》，点击“下一步”"
+        android:text="已同意《智慧安全云服务条款》，点击“下一步”"
         android:textColor="@color/text_color" />
 
     <Button
