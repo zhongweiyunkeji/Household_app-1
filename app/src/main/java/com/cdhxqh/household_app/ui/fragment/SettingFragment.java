@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.cdhxqh.household_app.R;
+import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.actvity.Activity_Login;
 import com.cdhxqh.household_app.ui.widget.DataCleanManager;
 import com.cdhxqh.household_app.ui.widget.NetWorkUtil;
@@ -33,11 +35,10 @@ public class SettingFragment extends BaseFragment {
     private RelativeLayout catchs;
 
     Activity activity;
-
-    /**
-     * 是否的滑动开关
-     */
-    SwitchButtonIs wiperSwitch;
+//    /**
+//     * 是否的滑动开关
+//     */
+//    SwitchButtonIs wiperSwitch;
 
 //    /**
 //     *
@@ -45,9 +46,16 @@ public class SettingFragment extends BaseFragment {
 //    DataCleanManager dataCleanManager;
 
     /**
-     *回退
+     * 回退
      */
     Button back_id;
+
+    /**
+     * 开关按钮
+     */
+    ImageButton tab_devicedefence_s;
+
+    private boolean showSwitch = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,22 +69,37 @@ public class SettingFragment extends BaseFragment {
     protected void findViewById(View view) {
         install_flow = (RelativeLayout) view.findViewById(R.id.install_flow);
         catchs = (RelativeLayout) view.findViewById(R.id.catchs);
-        wiperSwitch = (SwitchButtonIs) view.findViewById(R.id.wiperSwitch);
+//        wiperSwitch = (SwitchButtonIs) view.findViewById(R.id.wiperSwitch);
         back_id = (Button) view.findViewById(R.id.back_id);
+        tab_devicedefence_s = (ImageButton) view.findViewById(R.id.tab_devicedefence_s);
     }
 
     protected void initView() {
         catchs.setOnClickListener(catchsOnClickListener);
         back_id.setOnClickListener(backOnClickListener);
-        wiperSwitch.setOnClickListener(new SwitchButtonIs.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Dialog();
-            }
-        });
+//        wiperSwitch.setOnClickListener(new SwitchButtonIs.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Dialog();
+//            }
+//        });
 
         activity = this.getActivity();
+
+        if (showSwitch) {
+            tab_devicedefence_s.setSelected(false);
+
+        } else {
+            tab_devicedefence_s.setSelected(true);
+        }
+        tab_devicedefence_s.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tab_devicedefence_s.setSelected(!showSwitch);
+                showSwitch = !showSwitch;
+            }
+        });
     }
 
     /**
@@ -99,7 +122,7 @@ public class SettingFragment extends BaseFragment {
     public void getNetWork() {
         String type = NetWorkUtil.getCurrentNetworkType(activity);
         if (type.equals("2G") || type.equals("3G")) {
-            Dialog();
+//            Dialog();
         }
     }
 
@@ -121,22 +144,22 @@ public class SettingFragment extends BaseFragment {
     /**
      * 确认或取消框
      */
-    private void Dialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("打开后非wife网络环境下将不显示图片喔，确定打开吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //这里添加点击确定后的逻辑
-//                showDialog("你选择了确定");
-                wiperSwitch.setState(true);
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                wiperSwitch.setState(false);
-            }
-        });
-        builder.create().show();
-    }
+//    private void Dialog() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//        builder.setTitle("打开后非wife网络环境下将不显示图片喔，确定打开吗？");
+//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                //这里添加点击确定后的逻辑
+////                showDialog("你选择了确定");
+//                wiperSwitch.setState(true);
+//            }
+//        });
+//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                wiperSwitch.setState(false);
+//            }
+//        });
+//        builder.create().show();
+//    }
 
 }
