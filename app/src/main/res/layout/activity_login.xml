@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="智慧家居安全云"
+        android:text="智慧安全云"
         android:textColor="@color/list_title_color"
         android:textSize="24sp" />
 

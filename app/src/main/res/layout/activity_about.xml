@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:paddingTop="15dp"
-            android:text="智慧家居云客户端Android版"
+            android:text="智慧安全云客户端Android版"
             android:lineSpacingExtra="5dp"
             android:textColor="@color/list_title_color"
             />
