@@ -45,6 +45,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
@@ -128,6 +129,14 @@ public class AlarmItemAdapter extends BaseAdapter {
 
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        // 将图片裁剪成正方形
+                        int width = loadedImage.getWidth();
+                        int height = loadedImage.getHeight();
+                        int bulk = (width-height) < 0 ? width : height;
+                        Matrix matrix = new Matrix();
+                        matrix.postScale(1.0F, 1.0F);
+                        loadedImage = Bitmap.createBitmap(loadedImage, 0, 0, bulk, bulk, matrix, true);
+                        ((ImageView)view).setImageBitmap(loadedImage);
                     }
 
                     @Override
