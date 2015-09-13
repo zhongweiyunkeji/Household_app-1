@@ -34,11 +34,16 @@
             android:text="@string/install_flow_describute"
             android:layout_toRightOf="@+id/install_flow_title" />
 
-        <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
-            android:id="@+id/wiperSwitch"
+        <!--此处有两种状态，一个是开启，一个是关闭，根据用户是否开启摄像头来显示不同状态-->
+        <ImageButton
+            android:id="@+id/tab_devicedefence_s"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"/>
+            android:background="@drawable/cameralist_button_selector"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/my_switch_selector"/>
 
     </RelativeLayout>
 
