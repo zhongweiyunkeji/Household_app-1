@@ -37,6 +37,7 @@ public class Activity_Alarm_Process extends BaseActivity {
     ImageView settingImg;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     int uid = -10;
+    int alramid = -10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +71,16 @@ public class Activity_Alarm_Process extends BaseActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle!=null){
-            RequestParams maps = new RequestParams();
-            maps.put("alarm_id", bundle.getInt("alarm_id"));
+            alramid = bundle.getInt("alarm_id");
             uid = bundle.getInt("uid");
-            HttpManager.sendHttpRequest(this, Constants.GET_ALARM_PROCESS_LIST, maps, "get", false, callback);
+            senHttpRequest();
         }
+    }
+
+    private void senHttpRequest(){
+        RequestParams maps = new RequestParams();
+        maps.put("alarm_id", alramid);
+        HttpManager.sendHttpRequest(this, Constants.GET_ALARM_PROCESS_LIST, maps, "get", false, callback);
     }
 
     @Override
