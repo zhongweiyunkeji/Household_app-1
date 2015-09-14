@@ -36,6 +36,7 @@ import com.videogo.util.Utils;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by think on 2015/8/15.
@@ -203,7 +204,10 @@ public class MyDevicelistAdapter extends RecyclerView.Adapter<MyDevicelistAdapte
                 list.add(0, device);
             }
         }
-       data = list;
+        data = list;
+
+        // 反转设备信息
+        Collections.reverse(list);
 
         notifyDataSetChanged();
     }

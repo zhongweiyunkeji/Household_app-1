@@ -19,6 +19,7 @@ import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.model.AlramProcessMsg;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
+import com.cdhxqh.household_app.ui.adapter.AlramProcessAdapter;
 import com.cdhxqh.household_app.ui.widget.CartoonDisplay;
 import com.cdhxqh.household_app.ui.widget.Photo.PhotoUtil;
 import com.cdhxqh.household_app.ui.widget.SwitchButtonIs;
@@ -149,8 +150,11 @@ public class Activity_Write_Information extends BaseActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle!=null){
-            msg =  (AlramProcessMsg)bundle.getSerializable("MPROCESSMSG");
             alram_uid = bundle.getInt("alram_uid");
+            msg = AlramProcessAdapter.sedMsgLocal.get();
+            if(msg == null){
+                msg =  (AlramProcessMsg)bundle.getSerializable("MPROCESSMSG");
+            }
         }
     }
 
