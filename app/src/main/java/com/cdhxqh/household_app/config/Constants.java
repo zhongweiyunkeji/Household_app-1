@@ -60,7 +60,8 @@ public class Constants {
     // 更新报警处理信息
     public static final String UPDATE_ALARM_PROCESS = BASE_URL + "/ysalarm/cancelorclose";
 
-
+    // 检查软件更新
+    public static final String SOFT_UPDATE_PATH = BASE_URL + "/soft/update";
 
 
 }
