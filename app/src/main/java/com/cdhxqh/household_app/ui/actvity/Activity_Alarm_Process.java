@@ -98,9 +98,11 @@ public class Activity_Alarm_Process extends BaseActivity {
             Bundle bundle = data.getExtras();
             if(bundle!=null){
                 AlramProcessMsg msg = (AlramProcessMsg)bundle.getSerializable("result");
-                adapter.notifyDataSetChanged();
                 Log.i("TAG", "TAG");
             }
+        }
+        if(adapter!=null){
+            adapter.notifyDataSetChanged();
         }
     }
 
