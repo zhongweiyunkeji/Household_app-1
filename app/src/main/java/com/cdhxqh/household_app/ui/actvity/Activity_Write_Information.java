@@ -106,6 +106,10 @@ public class Activity_Write_Information extends BaseActivity {
     ImageButton wiperSwitch1;  // 是否已协助核查
     ImageButton wiperSwitch2;  // 是否存在安全隐患
     ImageButton wiperSwitch3; // 是否已处理
+    boolean switchFlag1 = false;
+    boolean switchFlag2 = false;
+    boolean switchFlag3 = false;
+
     // SwitchButtonIs wiperSwitch4; // 关闭
 
     AlramProcessMsg msg;
@@ -193,12 +197,15 @@ public class Activity_Write_Information extends BaseActivity {
         titleTextView.setText("填写反馈信息");
 
         if(msg!=null){
+            switchFlag1 = msg.getHelpcheck() == 1 ? true : false;
+            switchFlag2 = msg.getHasdanger() == 1 ? true : false;
+            switchFlag3 = msg.getIsprocess() == 1 ? true : false;
             // 是否已协助核查
-            wiperSwitch1.setSelected(msg.getHelpcheck() == 1 ? true : false);
+            wiperSwitch1.setSelected(switchFlag1);
             // 是否存在安全隐患
-            wiperSwitch2.setSelected(msg.getHelpcheck() == 1 ? true : false);
+            wiperSwitch2.setSelected(switchFlag2);
             // 是否已处理
-            wiperSwitch3.setSelected(msg.getIsprocess() == 1 ? true : false);
+            wiperSwitch3.setSelected(switchFlag3);
             // 处理信息
             processmsg.setText(msg.getProcessResult());
         }
@@ -207,7 +214,8 @@ public class Activity_Write_Information extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (alram_uid == msg.getUid() || Constants.USER_ID == msg.getUid()) {  // 户主可以修改所有的报警记录, 同时其他协助人员只能修改自己的记录
-                    v.setSelected(!v.isSelected());
+                    switchFlag1 = !v.isSelected();
+                    v.setSelected(switchFlag1);
                 } else { // 提示用户不能修改记录
                     ToastUtil.showMessage(Activity_Write_Information.this, "您当前不能修改该记录");
                 }
@@ -218,7 +226,8 @@ public class Activity_Write_Information extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (alram_uid == msg.getUid() || Constants.USER_ID == msg.getUid()) {  // 户主可以修改所有的报警记录, 同时其他协助人员只能修改自己的记录
-                    v.setSelected(!v.isSelected());
+                    switchFlag2 = !v.isSelected();
+                    v.setSelected(switchFlag2);
                 } else { // 提示用户不能修改记录
                     ToastUtil.showMessage(Activity_Write_Information.this, "您当前不能修改该记录");
                 }
@@ -229,7 +238,8 @@ public class Activity_Write_Information extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (alram_uid == msg.getUid() || Constants.USER_ID == msg.getUid()) {  // 户主可以修改所有的报警记录, 同时其他协助人员只能修改自己的记录
-                    v.setSelected(!v.isSelected());
+                    switchFlag3 = !v.isSelected();
+                    v.setSelected(switchFlag3);
                 } else { // 提示用户不能修改记录
                     ToastUtil.showMessage(Activity_Write_Information.this, "您当前不能修改该记录");
                 }
@@ -253,9 +263,9 @@ public class Activity_Write_Information extends BaseActivity {
                     final String procResult = processResult;
                     RequestParams maps = new RequestParams();
                     maps.put("alarm_id", msg.getAlramid());
-                    maps.put("helpcheck", wiperSwitch1.isSelected() ? 1 : 0);
-                    maps.put("hasdanger", wiperSwitch2.isSelected() ? 1 : 0);
-                    maps.put("isprocess", wiperSwitch3.isSelected() ? 1 : 0);
+                    maps.put("helpcheck", switchFlag1 ? 1 : 0);
+                    maps.put("hasdanger", switchFlag2 ? 1 : 0);
+                    maps.put("isprocess", switchFlag3 ? 1 : 0);
                     maps.put("processResult", processResult);
                     HttpManager.sendHttpRequest(Activity_Write_Information.this, Constants.GET_ALARM_PROCESS, maps, "post", false, new HttpCallBackHandle() {
                         @Override
@@ -266,9 +276,9 @@ public class Activity_Write_Information extends BaseActivity {
                                     JSONObject object = new JSONObject(responseBody);
                                     String errcode = object.getString("errcode");
                                     if("SECURITY-GLOBAL-S-0".equals(errcode)){
-                                        msg.setHasdanger(wiperSwitch1.isSelected() ? 1 : 0);
-                                        msg.setHasdanger(wiperSwitch2.isSelected() ? 1 : 0);
-                                        msg.setIsprocess(wiperSwitch3.isSelected() ? 1 : 0);
+                                        msg.setHelpcheck(switchFlag1 ? 1 : 0);
+                                        msg.setHasdanger(switchFlag2 ? 1 : 0);
+                                        msg.setIsprocess(switchFlag3 ? 1 : 0);
                                         msg.setProcessResult(procResult);
                                         msg.setProcesstimeStr(sdf.format(new Date()));
                                         ToastUtil.showMessage(Activity_Write_Information.this, "更新成功");
@@ -284,7 +294,7 @@ public class Activity_Write_Information extends BaseActivity {
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
-                            Log.i("TAG", "TAG");
+                            ToastUtil.showMessage(Activity_Write_Information.this, "更新失败");
                             Log.i("TAG", "TAG");
                         }
                     });
