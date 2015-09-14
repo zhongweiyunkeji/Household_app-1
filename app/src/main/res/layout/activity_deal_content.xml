@@ -20,14 +20,25 @@
                 android:layout_height="wrap_content"
                 android:text="@string/isCheck" />
 
-            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+            <!--<com.cdhxqh.household_app.ui.widget.SwitchButtonIs
                 android:id="@+id/wiperSwitch1"
                 style="@style/ListPadding"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />
+                android:layout_margin="6dp" />-->
+            <ImageButton
+                android:id="@+id/wiperSwitch1"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_margin="6dp"
+                android:background="@drawable/cameralist_button_selector"
+                android:src="@drawable/my_switch_selector"
+                />
 
         </RelativeLayout>
 
@@ -48,14 +59,26 @@
                 android:layout_height="wrap_content"
                 android:text="@string/isSafe" />
 
-            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+           <!-- <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
                 android:id="@+id/wiperSwitch2"
                 style="@style/ListPadding"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />
+                android:layout_margin="6dp" />-->
+
+            <ImageButton
+                android:id="@+id/wiperSwitch2"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_margin="6dp"
+                android:background="@drawable/cameralist_button_selector"
+                android:src="@drawable/my_switch_selector"
+                />
 
         </RelativeLayout>
 
@@ -76,14 +99,26 @@
                 android:layout_height="wrap_content"
                 android:text="@string/isDeal" />
 
-            <com.cdhxqh.household_app.ui.widget.SwitchButtonIs
+            <!--<com.cdhxqh.household_app.ui.widget.SwitchButtonIs
                 android:id="@+id/wiperSwitch3"
                 style="@style/ListPadding"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="6dp" />
+                android:layout_margin="6dp" />-->
+
+            <ImageButton
+                android:id="@+id/wiperSwitch3"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_margin="6dp"
+                android:background="@drawable/cameralist_button_selector"
+                android:src="@drawable/my_switch_selector"
+                />
         </RelativeLayout>
 
         <View
