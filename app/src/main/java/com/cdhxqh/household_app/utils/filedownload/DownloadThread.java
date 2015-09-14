@@ -8,7 +8,7 @@ import java.net.URL;
 import android.util.Log;
 
 /**
- * ÎÄ¼şÏÂÔØÏß³Ì
+ * æ–‡ä»¶ä¸‹è½½çº¿ç¨‹
  */
 public class DownloadThread extends Thread {
     private static final String TAG = "DownloadThread";
@@ -16,7 +16,7 @@ public class DownloadThread extends Thread {
     private URL downUrl;
     private int block;
     
-    /* ÏÂÔØ¿ªÊ¼Î»ÖÃ  */
+    /* ä¸‹è½½å¼€å§‹ä½ç½®  */
     private int threadId = -1;    
     private int downLength;
     private boolean finish = false;
@@ -35,7 +35,7 @@ public class DownloadThread extends Thread {
     
     @Override
     public void run() {
-        /*// ¿ªÊ¼ÏÂÔØÇ°±ØĞë±£Ö¤ÔÚfiledownlog±íÖĞÒÑ¾­´æÔÚ¼ÇÂ¼
+        /*// å¼€å§‹ä¸‹è½½å‰å¿…é¡»ä¿è¯åœ¨filedownlogè¡¨ä¸­å·²ç»å­˜åœ¨è®°å½•
         Map<Integer, Integer> map = null;
         boolean flag = true;
         try {
@@ -53,7 +53,7 @@ public class DownloadThread extends Thread {
             e.printStackTrace();
         }*/
 
-        if(downLength < block){//Î´ÏÂÔØÍê³É
+        if(downLength < block){//æœªä¸‹è½½å®Œæˆ
             try {
                 HttpURLConnection http = (HttpURLConnection) downUrl.openConnection();
                 http.setConnectTimeout(5 * 1000);
@@ -62,9 +62,9 @@ public class DownloadThread extends Thread {
                 http.setRequestProperty("Accept-Language", "zh-CN");
                 http.setRequestProperty("Referer", downUrl.toString()); 
                 http.setRequestProperty("Charset", "UTF-8");
-                int startPos = block * (threadId - 1) + downLength;//¿ªÊ¼Î»ÖÃ
-                int endPos = block * threadId -1;//½áÊøÎ»ÖÃ
-                http.setRequestProperty("Range", "bytes=" + startPos + "-"+ endPos);//ÉèÖÃ»ñÈ¡ÊµÌåÊı¾İµÄ·¶Î§
+                int startPos = block * (threadId - 1) + downLength;//å¼€å§‹ä½ç½®
+                int endPos = block * threadId -1;//ç»“æŸä½ç½®
+                http.setRequestProperty("Range", "bytes=" + startPos + "-"+ endPos);//è®¾ç½®è·å–å®ä½“æ•°æ®çš„èŒƒå›´
                 http.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.2; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
                 http.setRequestProperty("Connection", "Keep-Alive");
                 
@@ -98,7 +98,7 @@ public class DownloadThread extends Thread {
     }
     
     /**
-     * ÏÂÔØÊÇ·ñÍê³É
+     * ä¸‹è½½æ˜¯å¦å®Œæˆ
      * @return
      */
     public boolean isFinish() {
@@ -106,8 +106,8 @@ public class DownloadThread extends Thread {
     }
     
     /**
-     * ÒÑ¾­ÏÂÔØµÄÄÚÈİ´óĞ¡
-     * @return Èç¹û·µ»ØÖµÎª-1,´ú±íÏÂÔØÊ§°Ü
+     * å·²ç»ä¸‹è½½çš„å†…å®¹å¤§å°
+     * @return å¦‚æœè¿”å›å€¼ä¸º-1,ä»£è¡¨ä¸‹è½½å¤±è´¥
      */
     public long getDownLength() {
         return downLength;

@@ -14,7 +14,7 @@ import android.content.Context;
 import android.util.Log;
 
 /**
- * ÎÄ¼şÏÂÔØ¹¤¾ßÀà
+ * æ–‡ä»¶ä¸‹è½½å·¥å…·ç±»
  */
 public class FileDownloader {
 
@@ -22,38 +22,38 @@ public class FileDownloader {
     private Context context;
     private FileService fileService;
 
-    /* ÒÑÏÂÔØÎÄ¼ş³¤¶È */
+    /* å·²ä¸‹è½½æ–‡ä»¶é•¿åº¦ */
     private int downloadSize = 0;
 
-    /* Ô­Ê¼ÎÄ¼ş³¤¶È */
+    /* åŸå§‹æ–‡ä»¶é•¿åº¦ */
     private int fileSize = 0;
 
-    /* Ïß³ÌÊı */
+    /* çº¿ç¨‹æ•° */
     private DownloadThread[] threads;
 
-    /* ±¾µØ±£´æÎÄ¼ş */
+    /* æœ¬åœ°ä¿å­˜æ–‡ä»¶ */
     private File saveFile;
 
-    /* »º´æ¸÷Ïß³ÌÏÂÔØµÄ³¤¶È*/
+    /* ç¼“å­˜å„çº¿ç¨‹ä¸‹è½½çš„é•¿åº¦*/
     private Map<Integer, Integer> data = new ConcurrentHashMap<Integer, Integer>();
 
-    /* Ã¿ÌõÏß³ÌÏÂÔØµÄ³¤¶È */
+    /* æ¯æ¡çº¿ç¨‹ä¸‹è½½çš„é•¿åº¦ */
     private int block;
 
-    /* ÏÂÔØÂ·¾¶  */
+    /* ä¸‹è½½è·¯å¾„  */
     private String downloadUrl;
 
     private String apkname = "";
 
     /**
-     * »ñÈ¡Ïß³ÌÊı
+     * è·å–çº¿ç¨‹æ•°
      */
     public int getThreadSize() {
         return threads.length;
     }
 
     /**
-     * »ñÈ¡ÎÄ¼ş´óĞ¡
+     * è·å–æ–‡ä»¶å¤§å°
      * @return
      */
     public int getFileSize() {
@@ -61,7 +61,7 @@ public class FileDownloader {
     }
 
     /**
-     * ÀÛ¼ÆÒÑÏÂÔØ´óĞ¡
+     * ç´¯è®¡å·²ä¸‹è½½å¤§å°
      * @param size
      */
     protected synchronized void append(int size) {
@@ -69,9 +69,9 @@ public class FileDownloader {
     }
 
     /**
-     * ¸üĞÂÖ¸¶¨Ïß³Ì×îºóÏÂÔØµÄÎ»ÖÃ
-     * @param threadId Ïß³Ìid
-     * @param pos ×îºóÏÂÔØµÄÎ»ÖÃ
+     * æ›´æ–°æŒ‡å®šçº¿ç¨‹æœ€åä¸‹è½½çš„ä½ç½®
+     * @param threadId çº¿ç¨‹id
+     * @param pos æœ€åä¸‹è½½çš„ä½ç½®
      */
     protected synchronized void update(int threadId, int pos) {
         this.data.put(threadId, pos);
@@ -79,10 +79,10 @@ public class FileDownloader {
     }
 
     /**
-     * ¹¹½¨ÎÄ¼şÏÂÔØÆ÷
-     * @param downloadUrl ÏÂÔØÂ·¾¶
-     * @param fileSaveDir ÎÄ¼ş±£´æÄ¿Â¼
-     * @param threadNum ÏÂÔØÏß³ÌÊı
+     * æ„å»ºæ–‡ä»¶ä¸‹è½½å™¨
+     * @param downloadUrl ä¸‹è½½è·¯å¾„
+     * @param fileSaveDir æ–‡ä»¶ä¿å­˜ç›®å½•
+     * @param threadNum ä¸‹è½½çº¿ç¨‹æ•°
      */
     public FileDownloader(Context context, String downloadUrl, File fileSaveDir, int threadNum) {
         try {
@@ -97,8 +97,8 @@ public class FileDownloader {
             this.threads = new DownloadThread[threadNum];
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5*1000);  // ÉèÖÃ³¬Ê±Ê±¼ä
-            conn.setRequestMethod("GET");   // ÉèÖÃÇëÇó·½·¨
+            conn.setConnectTimeout(5*1000);  // è®¾ç½®è¶…æ—¶æ—¶é—´
+            conn.setRequestMethod("GET");   // è®¾ç½®è¯·æ±‚æ–¹æ³•
             conn.setRequestProperty("Accept", "image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, application/xaml+xml, application/vnd.ms-xpsdocument, application/x-ms-xbap, application/x-ms-application, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*");
             conn.setRequestProperty("Accept-Language", "zh-CN");
             conn.setRequestProperty("Referer", downloadUrl);
@@ -108,48 +108,48 @@ public class FileDownloader {
             conn.connect();
             // printResponseHeader(conn);
 
-            if (conn.getResponseCode()==200) {// ÇëÇó³É¹¦
-                this.fileSize = conn.getContentLength();//¸ù¾İÏìÓ¦»ñÈ¡ÎÄ¼ş´óĞ¡
+            if (conn.getResponseCode()==200) {// è¯·æ±‚æˆåŠŸ
+                this.fileSize = conn.getContentLength();//æ ¹æ®å“åº”è·å–æ–‡ä»¶å¤§å°
                 if (this.fileSize <= 0) {
-                    throw new RuntimeException("ÎŞ·¨»ñÈ¡ÎÄ¼ş´óĞ¡");
+                    throw new RuntimeException("æ— æ³•è·å–æ–‡ä»¶å¤§å°");
                 }
-                String filename = getFileName(conn);//»ñÈ¡ÎÄ¼şÃû³Æ
+                String filename = getFileName(conn);//è·å–æ–‡ä»¶åç§°
                 this.apkname = filename;
-                this.saveFile = new File(fileSaveDir, filename);//¹¹½¨±£´æÎÄ¼ş
-                Map<Integer, Integer> logdata = fileService.getData(downloadUrl);//»ñÈ¡ÏÂÔØ¼ÇÂ¼
+                this.saveFile = new File(fileSaveDir, filename);//æ„å»ºä¿å­˜æ–‡ä»¶
+                Map<Integer, Integer> logdata = fileService.getData(downloadUrl);//è·å–ä¸‹è½½è®°å½•
 
-                if(logdata.size()>0){//Èç¹û´æÔÚÏÂÔØ¼ÇÂ¼
+                if(logdata.size()>0){//å¦‚æœå­˜åœ¨ä¸‹è½½è®°å½•
                     for(Map.Entry<Integer, Integer> entry : logdata.entrySet()){
-                        data.put(entry.getKey(), entry.getValue());//°Ñ¸÷ÌõÏß³ÌÒÑ¾­ÏÂÔØµÄÊı¾İ³¤¶È·ÅÈëdataÖĞ
+                        data.put(entry.getKey(), entry.getValue());//æŠŠå„æ¡çº¿ç¨‹å·²ç»ä¸‹è½½çš„æ•°æ®é•¿åº¦æ”¾å…¥dataä¸­
                     }
                 }
 
-                if(this.data.size()==this.threads.length){//ÏÂÃæ¼ÆËãËùÓĞÏß³ÌÒÑ¾­ÏÂÔØµÄÊı¾İ³¤¶È
+                if(this.data.size()==this.threads.length){//ä¸‹é¢è®¡ç®—æ‰€æœ‰çº¿ç¨‹å·²ç»ä¸‹è½½çš„æ•°æ®é•¿åº¦
                     for (int i = 0; i < this.threads.length; i++) {
                         this.downloadSize += this.data.get(i+1);
                     }
-                    print("ÒÑ¾­ÏÂÔØµÄ³¤¶È: "+ this.downloadSize);
+                    print("å·²ç»ä¸‹è½½çš„é•¿åº¦: "+ this.downloadSize);
                 }
 
-                // ¼ÆËãÃ¿ÌõÏß³ÌÏÂÔØµÄÊı¾İ³¤¶È
+                // è®¡ç®—æ¯æ¡çº¿ç¨‹ä¸‹è½½çš„æ•°æ®é•¿åº¦
                 this.block = (this.fileSize % this.threads.length)==0? this.fileSize / this.threads.length : this.fileSize / this.threads.length + 1;
             }else{
-                throw new RuntimeException("·şÎñÆ÷ÎŞÏìÓ¦");
+                throw new RuntimeException("æœåŠ¡å™¨æ— å“åº”");
             }
         } catch (Exception e) {
             print(e.toString());
-            throw new RuntimeException("ÎŞ·¨Á¬½Óµ½Ö¸¶¨µÄurl");
+            throw new RuntimeException("æ— æ³•è¿æ¥åˆ°æŒ‡å®šçš„url");
         }
     }
 
     /**
-     * »ñÈ¡ÎÄ¼şÃû
+     * è·å–æ–‡ä»¶å
      * @param conn
      * @return
      */
     private String getFileName(HttpURLConnection conn) {
-        String filename = this.downloadUrl.substring(this.downloadUrl.lastIndexOf('/') + 1);  // Ê×ÏÈ³¢ÊÔ´ÓÊäÈëµÄÏÂÔØÎÄ¼şÂ·¾¶ÖĞ»ñÈ¡
-        if(filename==null || "".equals(filename.trim())){//Èç¹û»ñÈ¡²»µ½ÎÄ¼şÃû³Æ,Ôò´ÓhttpÏìÓ¦ÖĞ»ñÈ¡
+        String filename = this.downloadUrl.substring(this.downloadUrl.lastIndexOf('/') + 1);  // é¦–å…ˆå°è¯•ä»è¾“å…¥çš„ä¸‹è½½æ–‡ä»¶è·¯å¾„ä¸­è·å–
+        if(filename==null || "".equals(filename.trim())){//å¦‚æœè·å–ä¸åˆ°æ–‡ä»¶åç§°,åˆ™ä»httpå“åº”ä¸­è·å–
             for (int i = 0;; i++) {
                 String mine = conn.getHeaderField(i);
                 if (mine == null) {
@@ -162,15 +162,15 @@ public class FileDownloader {
                     }
                 }
             }
-            filename = UUID.randomUUID()+ ".tmp";//Ä¬ÈÏÈ¡Ò»¸öÎÄ¼şÃû
+            filename = UUID.randomUUID()+ ".tmp";//é»˜è®¤å–ä¸€ä¸ªæ–‡ä»¶å
         }
         return filename;
     }
 
     /**
-     *  ¿ªÊ¼ÏÂÔØÎÄ¼ş
-     * @param listener ¼àÌıÏÂÔØÊıÁ¿µÄ±ä»¯,Èç¹û²»ĞèÒªÁË½âÊµÊ±ÏÂÔØµÄÊıÁ¿,¿ÉÒÔÉèÖÃÎªnull
-     * @return ÒÑÏÂÔØÎÄ¼ş´óĞ¡
+     *  å¼€å§‹ä¸‹è½½æ–‡ä»¶
+     * @param listener ç›‘å¬ä¸‹è½½æ•°é‡çš„å˜åŒ–,å¦‚æœä¸éœ€è¦äº†è§£å®æ—¶ä¸‹è½½çš„æ•°é‡,å¯ä»¥è®¾ç½®ä¸ºnull
+     * @return å·²ä¸‹è½½æ–‡ä»¶å¤§å°
      * @throws Exception
      */
     public int download(DownloadProgressListener listener) throws Exception{
@@ -184,13 +184,13 @@ public class FileDownloader {
             if(this.data.size() != this.threads.length){
                 this.data.clear();
                 for (int i = 0; i < this.threads.length; i++) {
-                    this.data.put(i+1, 0);//³õÊ¼»¯Ã¿ÌõÏß³ÌÒÑ¾­ÏÂÔØµÄÊı¾İ³¤¶ÈÎª0
+                    this.data.put(i+1, 0);//åˆå§‹åŒ–æ¯æ¡çº¿ç¨‹å·²ç»ä¸‹è½½çš„æ•°æ®é•¿åº¦ä¸º0
                 }
             }
 
-            for (int i = 0; i < this.threads.length; i++) {//¿ªÆôÏß³Ì½øĞĞÏÂÔØ
+            for (int i = 0; i < this.threads.length; i++) {//å¼€å¯çº¿ç¨‹è¿›è¡Œä¸‹è½½
                 int downLength = this.data.get(i+1);
-                if(downLength < this.block && this.downloadSize<this.fileSize){//ÅĞ¶ÏÏß³ÌÊÇ·ñÒÑ¾­Íê³ÉÏÂÔØ,·ñÔò¼ÌĞøÏÂÔØ
+                if(downLength < this.block && this.downloadSize<this.fileSize){//åˆ¤æ–­çº¿ç¨‹æ˜¯å¦å·²ç»å®Œæˆä¸‹è½½,å¦åˆ™ç»§ç»­ä¸‹è½½
                     this.threads[i] = new DownloadThread(this, url, this.saveFile, this.block, this.data.get(i+1), i+1);
                     this.threads[i].setPriority(7);
                     this.threads[i].start();
@@ -198,16 +198,16 @@ public class FileDownloader {
                     this.threads[i] = null;
                 }
             }
-            this.fileService.save(this.downloadUrl, this.data);  // saveÄÚ²¿ÒÑ¾­´¦ÀíÖ÷¼ü³åÍ»µÄÎÊÌâ
-            boolean notFinish = true;//ÏÂÔØÎ´Íê³É
+            this.fileService.save(this.downloadUrl, this.data);  // saveå†…éƒ¨å·²ç»å¤„ç†ä¸»é”®å†²çªçš„é—®é¢˜
+            boolean notFinish = true;//ä¸‹è½½æœªå®Œæˆ
 
-            while (notFinish) {// Ñ­»·ÅĞ¶ÏËùÓĞÏß³ÌÊÇ·ñÍê³ÉÏÂÔØ
+            while (notFinish) {// å¾ªç¯åˆ¤æ–­æ‰€æœ‰çº¿ç¨‹æ˜¯å¦å®Œæˆä¸‹è½½
                 Thread.sleep(900);
-                notFinish = false;//¼Ù¶¨È«²¿Ïß³ÌÏÂÔØÍê³É
+                notFinish = false;//å‡å®šå…¨éƒ¨çº¿ç¨‹ä¸‹è½½å®Œæˆ
                 for (int i = 0; i < this.threads.length; i++){
-                    if (this.threads[i] != null && !this.threads[i].isFinish()) {//Èç¹û·¢ÏÖÏß³ÌÎ´Íê³ÉÏÂÔØ
-                        notFinish = true;//ÉèÖÃ±êÖ¾ÎªÏÂÔØÃ»ÓĞÍê³É
-                        if(this.threads[i].getDownLength() == -1){//Èç¹ûÏÂÔØÊ§°Ü,ÔÙÖØĞÂÏÂÔØ
+                    if (this.threads[i] != null && !this.threads[i].isFinish()) {//å¦‚æœå‘ç°çº¿ç¨‹æœªå®Œæˆä¸‹è½½
+                        notFinish = true;//è®¾ç½®æ ‡å¿—ä¸ºä¸‹è½½æ²¡æœ‰å®Œæˆ
+                        if(this.threads[i].getDownLength() == -1){//å¦‚æœä¸‹è½½å¤±è´¥,å†é‡æ–°ä¸‹è½½
                             this.threads[i] = new DownloadThread(this, url, this.saveFile, this.block, this.data.get(i+1), i+1);
                             this.threads[i].setPriority(7);
                             this.threads[i].start();
@@ -215,13 +215,13 @@ public class FileDownloader {
                     }
                 }
                 if(listener!=null) {
-                    listener.onDownloadSize(this.downloadSize, this.fileSize);//Í¨ÖªÄ¿Ç°ÒÑ¾­ÏÂÔØÍê³ÉµÄÊı¾İ³¤¶È
+                    listener.onDownloadSize(this.downloadSize, this.fileSize);//é€šçŸ¥ç›®å‰å·²ç»ä¸‹è½½å®Œæˆçš„æ•°æ®é•¿åº¦
                 }
             }
             fileService.delete(this.downloadUrl);
         } catch (Exception e) {
             print(e.toString());
-            throw new Exception("ÏÂÔØÎÄ¼şÊ§°Ü");
+            throw new Exception("ä¸‹è½½æ–‡ä»¶å¤±è´¥");
         }
 
         return this.downloadSize;
@@ -230,7 +230,7 @@ public class FileDownloader {
     
 
     /**
-     * »ñÈ¡HttpÏìÓ¦Í·×Ö¶Î
+     * è·å–Httpå“åº”å¤´å­—æ®µ
      * @param http
      * @return
      */
@@ -246,7 +246,7 @@ public class FileDownloader {
     }
 
     /**
-     * ´òÓ¡HttpÍ·×Ö¶Î
+     * æ‰“å°Httpå¤´å­—æ®µ
      * @param http
      */
     public static void printResponseHeader(HttpURLConnection http){

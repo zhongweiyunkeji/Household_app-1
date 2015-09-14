@@ -2,8 +2,8 @@ package com.cdhxqh.household_app.utils.filedownload;
 
 public interface DownloadProgressListener {
      /**
-      * @param downloadsize  ÒÑÏÂÔØÎÄ¼ş´óĞ¡
-      * @param filesize       ÎÄ¼ş×Ü´óĞ¡
+      * @param downloadsize  å·²ä¸‹è½½æ–‡ä»¶å¤§å°
+      * @param filesize       æ–‡ä»¶æ€»å¤§å°
       */
      public void onDownloadSize(int downloadsize, int filesize);
 }  
