@@ -43,19 +43,19 @@ public class Load_Activity extends BaseActivity {
 
     private static final int ANIMATION_DURATION = 2000;
     private static final float SCALE_END = 1.13F;
-    // ¸üĞÂÎÄ¼şµÄ´óĞ¡
+    // æ›´æ–°æ–‡ä»¶çš„å¤§å°
     public  int filesize = -10;
 
     public int threadSize = 5;
-    // ÎÄ¼ş±£´æÎ»ÖÃ(²»°üÀ¨ÎÄ¼şÃû)
+    // æ–‡ä»¶ä¿å­˜ä½ç½®(ä¸åŒ…æ‹¬æ–‡ä»¶å)
     public String savePath = "";
 
-    public long startTime = 0;  // ÏÂÔØ¿ªÊ¼Ê±¼ä
-    public long endTime = 0;    // ÏÂÔØ½áÊøÊ±¼ä
+    public long startTime = 0;  // ä¸‹è½½å¼€å§‹æ—¶é—´
+    public long endTime = 0;    // ä¸‹è½½ç»“æŸæ—¶é—´
 
     /**
-     * µ±Handler±»´´½¨»á¹ØÁªµ½´´½¨ËüµÄµ±Ç°Ïß³ÌµÄÏûÏ¢¶ÓÁĞ£¬¸ÃÀàÓÃÓÚÍùÏûÏ¢¶ÓÁĞ·¢ËÍÏûÏ¢
-     * ÏûÏ¢¶ÓÁĞÖĞµÄÏûÏ¢ÓÉµ±Ç°Ïß³ÌÄÚ²¿½øĞĞ´¦Àí
+     * å½“Handlerè¢«åˆ›å»ºä¼šå…³è”åˆ°åˆ›å»ºå®ƒçš„å½“å‰çº¿ç¨‹çš„æ¶ˆæ¯é˜Ÿåˆ—ï¼Œè¯¥ç±»ç”¨äºå¾€æ¶ˆæ¯é˜Ÿåˆ—å‘é€æ¶ˆæ¯
+     * æ¶ˆæ¯é˜Ÿåˆ—ä¸­çš„æ¶ˆæ¯ç”±å½“å‰çº¿ç¨‹å†…éƒ¨è¿›è¡Œå¤„ç†
      */
     private Handler handler = new Handler(){
 
@@ -74,7 +74,7 @@ public class Load_Activity extends BaseActivity {
                     break;
                 case 2:
                     endTime = System.currentTimeMillis();
-                    Toast.makeText(Load_Activity.this, "ÏÂÔØÎÄ¼ş·ÑÊ± "+(endTime-startTime)/1000+"Ãë", Toast.LENGTH_LONG).show();;
+                    Toast.makeText(Load_Activity.this, "ä¸‹è½½æ–‡ä»¶è´¹æ—¶ "+(endTime-startTime)/1000+"ç§’", Toast.LENGTH_LONG).show();;
                     String apkname = msg.getData().getString("apkname");
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
@@ -117,7 +117,7 @@ public class Load_Activity extends BaseActivity {
         set.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                // µÚ1²½£º¼ì²éÈí¼ş¸üĞÂ
+                // ç¬¬1æ­¥ï¼šæ£€æŸ¥è½¯ä»¶æ›´æ–°
                 // checkSoftVersion();
                 startMainActivity();
             }
@@ -147,13 +147,13 @@ public class Load_Activity extends BaseActivity {
                                 int curVersionCode = info.versionCode;
                                 String curVersionName = info.versionName;
                                 if (curVersionCode > versionCode) {
-                                    // µÚ2²½£º¸üĞÂÈí¼ş
+                                    // ç¬¬2æ­¥ï¼šæ›´æ–°è½¯ä»¶
                                     String path = "";
-                                    if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){ // SD¿¨´æÔÚÇÒÒÑ¹ÒÔØ³É¹¦
+                                    if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){ // SDå¡å­˜åœ¨ä¸”å·²æŒ‚è½½æˆåŠŸ
                                         // --->  mnt/sdcord/household_app/
                                         path = Environment.getExternalStorageDirectory().getAbsolutePath() +File.separator+"household_app"+File.separator;
                                     } else {
-                                        // »ñÈ¡ÎÄ¼ş°²×°°üÎ»ÖÃ
+                                        // è·å–æ–‡ä»¶å®‰è£…åŒ…ä½ç½®
                                         path = getApplicationContext().getPackageResourcePath();
                                         path = path.substring(0, path.lastIndexOf('/') + 1);
                                     }
@@ -172,7 +172,7 @@ public class Load_Activity extends BaseActivity {
                         e.printStackTrace();
                     }
 
-                    // ´ò¿ªÓ¦ÓÃ³ÌĞòÖ÷½çÃæ
+                    // æ‰“å¼€åº”ç”¨ç¨‹åºä¸»ç•Œé¢
                     startMainActivity();
                 }
             }
@@ -180,11 +180,11 @@ public class Load_Activity extends BaseActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseBody, Throwable error) {
                 String path = "";
-                if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){ // SD¿¨´æÔÚÇÒÒÑ¹ÒÔØ³É¹¦
+                if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){ // SDå¡å­˜åœ¨ä¸”å·²æŒ‚è½½æˆåŠŸ
                     // --->  mnt/sdcord/household_app/
                     path = Environment.getExternalStorageDirectory().getAbsolutePath() +File.separator+"household_app"+File.separator;
                 } else {
-                    // »ñÈ¡ÎÄ¼ş°²×°°üÎ»ÖÃ
+                    // è·å–æ–‡ä»¶å®‰è£…åŒ…ä½ç½®
                     path = getApplicationContext().getPackageResourcePath();
                     path = path.substring(0, path.lastIndexOf('/') + 1);
                 }
@@ -198,10 +198,10 @@ public class Load_Activity extends BaseActivity {
 
 
     /**
-     * Ö÷Ïß³Ì(UIÏß³Ì)
-     * ¶ÔÓÚÏÔÊ¾¿Ø¼şµÄ½çÃæ¸üĞÂÖ»ÊÇÓÉUIÏß³Ì¸ºÔğ£¬Èç¹ûÊÇÔÚ·ÇUIÏß³Ì¸üĞÂ¿Ø¼şµÄÊôĞÔÖµ£¬¸üĞÂºóµÄÏÔÊ¾½çÃæ²»»á·´Ó³µ½ÆÁÄ»ÉÏ
-     * @param path     ÎÄ¼şÏÂÔØÍøÖ·
-     * @param savedir  ±£´æÔÚ±¾µØµÄÎÄ¼şÂ·¾¶(²»°üÀ¨ÎÄ¼şÃû)
+     * ä¸»çº¿ç¨‹(UIçº¿ç¨‹)
+     * å¯¹äºæ˜¾ç¤ºæ§ä»¶çš„ç•Œé¢æ›´æ–°åªæ˜¯ç”±UIçº¿ç¨‹è´Ÿè´£ï¼Œå¦‚æœæ˜¯åœ¨éUIçº¿ç¨‹æ›´æ–°æ§ä»¶çš„å±æ€§å€¼ï¼Œæ›´æ–°åçš„æ˜¾ç¤ºç•Œé¢ä¸ä¼šåæ˜ åˆ°å±å¹•ä¸Š
+     * @param path     æ–‡ä»¶ä¸‹è½½ç½‘å€
+     * @param savedir  ä¿å­˜åœ¨æœ¬åœ°çš„æ–‡ä»¶è·¯å¾„(ä¸åŒ…æ‹¬æ–‡ä»¶å)
      */
     private void download(final String path, final File savedir) {
         new Thread(new Runnable() {
@@ -209,20 +209,20 @@ public class Load_Activity extends BaseActivity {
             public void run() {
                 startTime = System.currentTimeMillis();
                 final FileDownloader loader = new FileDownloader(Load_Activity.this, path, savedir, threadSize);
-                // progressBar.setMax(loader.getFileSize());//ÉèÖÃ½ø¶ÈÌõµÄ×î´ó¿Ì¶ÈÎªÎÄ¼şµÄ³¤¶È
+                // progressBar.setMax(loader.getFileSize());//è®¾ç½®è¿›åº¦æ¡çš„æœ€å¤§åˆ»åº¦ä¸ºæ–‡ä»¶çš„é•¿åº¦
                 try {
                     loader.download(new DownloadProgressListener() {
                         @Override
-                        public void onDownloadSize(int downloadsize, int filesize) {//ÊµÊ±»ñÖªÎÄ¼şÒÑ¾­ÏÂÔØµÄÊı¾İ³¤¶È
+                        public void onDownloadSize(int downloadsize, int filesize) {//å®æ—¶è·çŸ¥æ–‡ä»¶å·²ç»ä¸‹è½½çš„æ•°æ®é•¿åº¦
                             Message msg = new Message();
                             if(downloadsize!=filesize){
                                 msg.what = 1;
                                 msg.getData().putInt("size", downloadsize);
-                                handler.sendMessage(msg);//·¢ËÍÏûÏ¢
-                            } else { // ÎÄ¼şÏÂÔØÍê³É
+                                handler.sendMessage(msg);//å‘é€æ¶ˆæ¯
+                            } else { // æ–‡ä»¶ä¸‹è½½å®Œæˆ
                                 msg.what = 2;
                                 msg.getData().putString("apkname", loader.getApkname());
-                                handler.sendMessage(msg);//·¢ËÍÏûÏ¢
+                                handler.sendMessage(msg);//å‘é€æ¶ˆæ¯
                             }
                         }
                     });
