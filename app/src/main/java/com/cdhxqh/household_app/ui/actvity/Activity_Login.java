@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,8 @@ public class Activity_Login extends BaseActivity{
     Button regBtn;
     boolean close = true;
     SharedPreferences.Editor editor;
-    SwitchButton switchButton;
+    // SwitchButton switchButton;
+    ImageButton switchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class Activity_Login extends BaseActivity{
         TextViewPassWord = (TextView) findViewById(R.id.TextViewPassWord);
 
         regBtn = (Button)findViewById(R.id.registered_btn_id);
-        switchButton = (SwitchButton) findViewById(R.id.wiperSwitch1);
+        switchButton = (ImageButton) findViewById(R.id.wiperSwitch1);
     }
 
     protected void initView() {
@@ -89,7 +91,19 @@ public class Activity_Login extends BaseActivity{
         isremenber.setChecked(myshared.getBoolean(Constants.ISREMENBER, false));
         login.setOnClickListener(loginonclick);
         TextViewPassWord.setOnClickListener(passWordOnClickListener);
-        switchButton.setOnChangeListener(switchOnClickListener);
+        // switchButton.setOnChangeListener(switchOnClickListener);
+        switchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean state = v.isSelected();
+                if(state) {
+                    password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }else {
+                    password.setInputType(View.GONE);
+                }
+                v.setSelected(!state);
+            }
+        });
 
 
         regBtn.setOnClickListener(new View.OnClickListener() {

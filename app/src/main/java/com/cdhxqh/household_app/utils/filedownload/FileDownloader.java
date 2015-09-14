@@ -43,6 +43,8 @@ public class FileDownloader {
     /* 下载路径  */
     private String downloadUrl;
 
+    private String apkname = "";
+
     /**
      * 获取线程数
      */
@@ -112,6 +114,7 @@ public class FileDownloader {
                     throw new RuntimeException("无法获取文件大小");
                 }
                 String filename = getFileName(conn);//获取文件名称
+                this.apkname = filename;
                 this.saveFile = new File(fileSaveDir, filename);//构建保存文件
                 Map<Integer, Integer> logdata = fileService.getData(downloadUrl);//获取下载记录
 
@@ -212,7 +215,7 @@ public class FileDownloader {
                     }
                 }
                 if(listener!=null) {
-                    listener.onDownloadSize(this.downloadSize);//通知目前已经下载完成的数据长度
+                    listener.onDownloadSize(this.downloadSize, this.fileSize);//通知目前已经下载完成的数据长度
                 }
             }
             fileService.delete(this.downloadUrl);
@@ -260,5 +263,9 @@ public class FileDownloader {
 
     public String getDownloadUrl() {
         return downloadUrl;
+    }
+
+    public String getApkname() {
+        return apkname;
     }
 }
