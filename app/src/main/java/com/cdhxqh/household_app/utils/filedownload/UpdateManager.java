@@ -9,8 +9,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
-import java.text.NumberFormat;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -36,7 +34,10 @@ import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.app.HttpManager;
 import com.cdhxqh.household_app.config.Constants;
 import com.cdhxqh.household_app.ui.action.HttpCallBackHandle;
+import com.cdhxqh.household_app.ui.actvity.ActivityAbout;
+import com.cdhxqh.household_app.ui.actvity.BaseActivity;
 import com.cdhxqh.household_app.ui.actvity.Load_Activity;
+import com.cdhxqh.household_app.ui.actvity.MainActivity;
 import com.cdhxqh.household_app.ui.widget.dialog.CustomDialog;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
@@ -99,24 +100,38 @@ public class UpdateManager {
                 }
                 DecimalFormat df = new DecimalFormat("0.00");
                 String speedStr =  df.format(speed);
-                String tip =  MessageFormat.format("已完成{0}%，当前网络下载速度{1}k/s", new String[]{""+progress, speedStr});
+                String tip =  MessageFormat.format("已完成{0}%，当前网络下载速度{1}k/s", new Object[]{""+progress, speedStr});
                 tipMsg.setText(tip);
                 break;
             case DOWNLOAD_FINISH:
+                cancelUpdate = true;
                 endTime = System.currentTimeMillis();
                 tipMsg.setText("下载文件共费时"+((endTime-startTime)/1000)+"秒");
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                // 安装文件
-                installApk();
-                mContext.finish();
+                if(mContext instanceof Load_Activity){
+                    // 安装文件
+                    installApk();
+                    mContext.finish();
+                } else
+                if(mContext instanceof ActivityAbout){
+                    installApk();
+                    MainActivity mainActivity = ((ActivityAbout) mContext).mainActivity;
+                    mContext.finish();
+                    if(mainActivity!=null){
+                        mainActivity.finish();
+                    }
+                }
                 break;
             case NETWORK_EXCEPTION :
                 Toast.makeText(mContext, "软件更新失败,请检查您的网络连接!", Toast.LENGTH_LONG).show();
-                startActivity();
+                mDownloadDialog.dismiss();
+                if(mContext instanceof Load_Activity){
+                    startActivity();
+                }
                 break;
             default:
                 break;
@@ -230,6 +245,9 @@ public class UpdateManager {
                 mDownloadDialog.dismiss();
                 // 设置取消状态
                 cancelUpdate = true;
+                if(mContext instanceof Load_Activity){
+                    ((Load_Activity)mContext).startMainActivity();
+                }
             }
         });
         mDownloadDialog = builder.create();
@@ -285,7 +303,7 @@ public class UpdateManager {
                     // 缓存
                     startDownloadTime = System.currentTimeMillis();  // 记录本次下载开始时间
                     startDownloadSize = count;                       // 记录本次下载开始字节数
-                    byte buf[] = new byte[1024*2];
+                    byte buf[] = new byte[1024];
                     // 写入到文件中
                     do {
                         int numread = is.read(buf);

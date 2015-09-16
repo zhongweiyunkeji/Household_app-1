@@ -1,6 +1,9 @@
 package com.cdhxqh.household_app.ui.actvity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -8,6 +11,7 @@ import android.widget.TextView;
 
 import com.cdhxqh.household_app.R;
 import com.cdhxqh.household_app.ui.widget.dialog.CustomDialog;
+import com.cdhxqh.household_app.utils.filedownload.UpdateManager;
 
 /**
  * Created by hexian on 2015/8/19.
@@ -20,16 +24,20 @@ public class ActivityAbout extends BaseActivity {
     TextView companyIntrodution;
     TextView welcomePage;
     TextView softFeedback;
+    TextView softVertsion;
+    public MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainActivity = (MainActivity)MainActivity.THREAD_LOCAL.get();
         setContentView(R.layout.activity_about);
         findViewById();
         initView();
     }
 
     public void findViewById(){
+         softVertsion = (TextView)findViewById(R.id.softVertsion);                  // 软件版本
          softUpdate = (TextView)findViewById(R.id.soft_update);                     // 版本更新
          softGuide = (TextView)findViewById(R.id.soft_guide);                       // 功能介绍
          softCriticism = (TextView)findViewById(R.id.soft_criticism);              // 给我评分
@@ -39,13 +47,16 @@ public class ActivityAbout extends BaseActivity {
     }
 
     public void initView(){
+        softVertsion.setText(getVersionName());
         softUpdate.setOnClickListener(new View.OnClickListener() {// 版本更新
             @Override
             public void onClick(View v) {
-                CustomDialog dialog = new CustomDialog(ActivityAbout.this);
+                UpdateManager manager = new UpdateManager(ActivityAbout.this);
+                manager.checkSoftVersion();
+                /*CustomDialog dialog = new CustomDialog(ActivityAbout.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 去掉标题
                 dialog.setCancelable(false);// 设置模态对话框
-                dialog.show();  // 显示对话框
+                dialog.show();  // 显示对话框*/
             }
         });
 
@@ -98,6 +109,19 @@ public class ActivityAbout extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private String getVersionName() {
+        String versionName = "1.0.0";
+        try {
+            // 获取软件版本号，对应AndroidManifest.xml下android:versionCode
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_CONFIGURATIONS);
+            versionName = packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return "版本号"+versionName;
     }
 
 }

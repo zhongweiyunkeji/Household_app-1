@@ -107,6 +107,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
 
     CommonContactFragment commonContactFragment = new CommonContactFragment();
 
+    public static final ThreadLocal<Activity> THREAD_LOCAL = new ThreadLocal<Activity>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -282,6 +284,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerFragme
             }
             case 5: {// 关于我们
                 Bundle bundle = new Bundle();
+                THREAD_LOCAL.remove();
+                THREAD_LOCAL.set(MainActivity.this);
                 openActivity(ActivityAbout.class, bundle);
                 break;
             }

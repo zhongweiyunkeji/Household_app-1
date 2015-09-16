@@ -73,7 +73,7 @@ public class Load_Activity extends BaseActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
     }
 
