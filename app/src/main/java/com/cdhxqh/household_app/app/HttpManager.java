@@ -303,7 +303,6 @@ public class HttpManager {
 
     public static void sendHttpRequest(final Context context, final String url, final RequestParams maps, String method, final boolean showDialog, final HttpCallBackHandle callback){
         SharedPreferences myShared = context.getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
-        String  sessionid = myShared.getString(Constants.SESSIONIDTRUE, "");
         if(method == null){
             method = "post";
         }
@@ -311,8 +310,14 @@ public class HttpManager {
         final String m = method;
         if (NetWorkUtil.IsNetWorkEnable(context)) { // 检查网络是否开启
             final AsyncHttpClient client = new AsyncHttpClient();
-            if(!"".equals(sessionid)){
-                client.addHeader("Cookie", "JSESSIONID=" + sessionid);
+            client.setConnectTimeout(15000);
+            client.setTimeout(10000);
+            client.setResponseTimeout(35000);
+            if(myShared!=null){
+                String  sessionid = myShared.getString(Constants.SESSIONIDTRUE, "");
+                if(!"".equals(sessionid)){
+                    client.addHeader("Cookie", "JSESSIONID=" + sessionid);
+                }
             }
 
             if(showDialog){
