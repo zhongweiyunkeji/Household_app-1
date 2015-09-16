@@ -29,6 +29,7 @@
             android:textColor="@color/list_title_color"
             />
         <TextView
+            android:id="@+id/softVertsion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
