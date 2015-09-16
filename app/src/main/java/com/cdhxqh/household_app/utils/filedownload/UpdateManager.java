@@ -128,6 +128,7 @@ public class UpdateManager {
                 break;
             case NETWORK_EXCEPTION :
                 Toast.makeText(mContext, "软件更新失败,请检查您的网络连接!", Toast.LENGTH_LONG).show();
+                cancelUpdate = true;
                 mDownloadDialog.dismiss();
                 if(mContext instanceof Load_Activity){
                     startActivity();
